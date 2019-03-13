@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import{Router} from '@angular/router'
 import { GlobalServiceService } from '../global-service.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginserviceService } from '../loginservice.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers:[LoginserviceService]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
  registerForm: FormGroup;
@@ -17,10 +14,9 @@ export class LoginComponent implements OnInit {
     isDisabled: boolean = true;
     validEmail:boolean = false;
     msg;
-  constructor(private globalServiceService: GlobalServiceService, private flashMessage: FlashMessagesService, private loginserviceService: LoginserviceService, private formBuilder: FormBuilder,  private router: Router) { }
+  constructor(private globalServiceService: GlobalServiceService, private formBuilder: FormBuilder,private flashMessage: FlashMessagesService,  private routes: Router) { }
   
   ngOnInit() {
-   
      this.registerForm = this.formBuilder.group({
             // firstName: ['', Validators.required],
             // lastName: ['', Validators.required],
@@ -61,22 +57,23 @@ export class LoginComponent implements OnInit {
 
 // }
   loginvalidation(emailvalue, pwdvalue) {
-	  if(emailvalue=="admin" && pwdvalue=="admin"){
-		  this.router.navigate(['/dashboard']);
-	  }else{
-		  
+    //this.routes.navigate(['/dashboard']);
+if(emailvalue=='admin' && pwdvalue=='admin'){
+  this.routes.navigate(['/dashboard']);
+}
+ else{
   this.globalServiceService.loginservice(emailvalue, pwdvalue)
   .subscribe(result => {
     console.log(result);
-    this.router.navigate(['/dashboard']);
+    localStorage.setItem('username',emailvalue);
+    this.routes.navigate(['/dashboard']);
   }, err => {
     console.log(err);
     let msg=err.error.error;
       this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
-    }
+  }
   );
-	  }
 }
 }
-  
+}
 

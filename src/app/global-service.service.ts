@@ -17,6 +17,7 @@ export class GlobalServiceService {
   searchData;
   newProductData;
   subscriptionData;
+  searchProductData;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -144,10 +145,10 @@ export class GlobalServiceService {
     }));
   }
 
+  
+  usermanagementCalling(pageNumber) {
 
-  usermanagementCalling() {
-
-    return this.http.get(this.url + '/getProducts', {
+    return this.http.get(this.url + '/getProducts/'+pageNumber, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -337,7 +338,28 @@ export class GlobalServiceService {
       return response;
     }));
   }
-
+productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain,filterPage){
+  this.searchProductData = JSON.stringify(
+    {
+       
+  "productDispName": nameMain,
+  "productExpDate": endDateMain,
+  "productStartDate": startDateMain,
+  "productTypeCode": codeMain,
+  "sku": skuMain,
+  "status": status_valMain,
+  "pageNo":filterPage
+    });
+   
+  return this.http.post(this.url + '/searchProducts', this.searchProductData, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
 
 }
 
