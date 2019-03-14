@@ -417,6 +417,27 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
   }));
 }
 
+// report search start
+reportSearch(startDateMain,endDateMain,status_valMain,filterPage){
+  this.searchProductData = JSON.stringify(
+    {
+  "productExpDate": endDateMain,
+  "productStartDate": startDateMain,
+  "status": status_valMain,
+  "pageNo":filterPage
+    });
+   
+  return this.http.post(this.url + '/searchProducts', this.searchProductData, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+//report search end
+
 }
 
 

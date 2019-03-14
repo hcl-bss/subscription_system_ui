@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalServiceService } from '../global-service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
+import {NgbDatepickerConfig,NgbDateParserFormatter}from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateFRParserFormatter} from "../ngb-date-fr-parser-formatter";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 @Component({
   selector: 'app-subscriptionreport',
   templateUrl: './subscriptionreport.component.html',
-  styleUrls: ['./subscriptionreport.component.css']
+  styleUrls: ['./subscriptionreport.component.css'],
+  providers: [{ provide: NgbDateParserFormatter,useClass: NgbDateFRParserFormatter}]
 })
 export class SubscriptionreportComponent implements OnInit {
 
@@ -16,7 +22,26 @@ export class SubscriptionreportComponent implements OnInit {
   private defaultColDef;
   private rowData;
 
-  constructor(private router : Router,private globalServiceService: GlobalServiceService,private http: HttpClient) { 
+  closeResult:string;
+  producttype;
+  name;
+  description;
+  sku;
+  startDate;
+  endDate;
+  DrodownArray;
+  code;
+  P_code_Type;
+
+page=0;
+filterPage=0
+sDate;
+eDate;
+filterSearchFlag=false;
+
+
+  constructor(private spinnerService: Ng4LoadingSpinnerService, private router: Router,
+    private flashMessage: FlashMessagesService,private globalServiceService: GlobalServiceService) { 
    
     this.columnDefs = [
       {
@@ -79,5 +104,40 @@ export class SubscriptionreportComponent implements OnInit {
     //     this.rowData = data;
     //   });
   }
+
+
+
+  filterSearch(startDateMain,endDateMain,status_valMain){
+    this.filterSearchFlag=true;
+  if(startDateMain!=undefined){
+    this.sDate =startDateMain.day +'/' + startDateMain.month + '/' + startDateMain.year; 
+
+  }
+  if(endDateMain!=undefined){
+    this.eDate =endDateMain.day +'/' + endDateMain.month +'/' + endDateMain.year;      
+    
+  }
+  
+  this.globalServiceService.reportSearch(this.sDate,this.eDate,this.filterPage,status_valMain).subscribe(
+    data => {
+      this.rowData = data;
+           
+      if(this.rowData.lastPage==true){
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        }else{
+            (document.getElementById("next") as HTMLInputElement).disabled = false;
+        }
+        this.rowData=this.rowData.productList;
+    });
+}
+
+
+
+
+
+
+
+
+
 
 }
