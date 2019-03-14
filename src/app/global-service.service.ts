@@ -125,6 +125,18 @@ sidebarsubmenu() {
     }));
   }
 
+  subreport() {
+
+    return this.http.get('/assets/report.json', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+  }
+
 
   SubscriptionCalling() {
     this.subscriptionData = JSON.stringify({

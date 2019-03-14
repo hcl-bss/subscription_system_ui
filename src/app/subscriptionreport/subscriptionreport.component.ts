@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalServiceService } from '../global-service.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { ChildMessageRenderer } from "../child-message-renderer.component";
-import { ModalsService } from '../modal.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-
+import { HttpClient } from "@angular/common/http";
 @Component({
   selector: 'app-subscriptionreport',
   templateUrl: './subscriptionreport.component.html',
@@ -15,70 +11,73 @@ export class SubscriptionreportComponent implements OnInit {
 
   private gridApi;
   private gridColumnApi;
-  private columnDefs;
-  private rowSelection;
-  private rowGroupPanelShow;
-  private pivotPanelShow;
-  private paginationPageSize;
-  private paginationStartPage;
-  private paginationNumberFormatter;
-  private rowData;
-  private context;
-  private frameworkComponents;
-  closeResult: string;
 
-  constructor(private router : Router,private modalService: NgbModal,private flashMessage: FlashMessagesService,private globalServiceService: GlobalServiceService) { 
+  private columnDefs;
+  private defaultColDef;
+  private rowData;
+
+  constructor(private router : Router,private globalServiceService: GlobalServiceService,private http: HttpClient) { 
+   
     this.columnDefs = [
-      { headerName: 'SUBSCRIPTION ID', field: 'subscriptionid' },
-      { headerName: 'CUSTOMBER NAME', field: 'customberemail' },
-      { headerName: 'STATUS', field: 'status' },
-      { headerName: 'CREATED ON', field: 'create' },
-      { headerName: 'ACTIVATED ON', field: 'activated' },
-      { headerName: 'CUSTOMER NAME', field: 'customer' },
-      { headerName: 'PLAN NAME', field: 'plan', width:200},
-      { headerName: 'AMOUNT', field: 'amount' },
-      // { headerName: 'AMOUNT', field: 'amount',cellRenderer: "childMessageRenderer",
-      // colId: "params" },
-      { headerName: 'LAST BILLED ON', field: 'lastbilled' },
-      { headerName: 'NEXT', field: 'next', editable: true }
+      {
+        field: "athlete",
+        rowSpan: function(params) {
+          var athlete = params.data.athlete;
+          if (athlete === "Aleksey Nemov") {
+            return 2;
+          } else if (athlete === "Ryan Lochte") {
+            return 4;
+          } else {
+            return 1;
+          }
+        },
+        cellClassRules: { "cell-span": "value==='Aleksey Nemov' || value==='Ryan Lochte'" },
+        width: 200
+      },
+      { field: "age",
+      rowSpan: function(params) {
+        if (params.data.age) {
+          return 2;
+        } else {
+          return 1;
+        }
+      },
+    },
+      { field: "country",
+      rowSpan: function(params) {
+        return params.data.country==='United States' ? 2 : 1;
+    }
+    },
+      { field: "year" },
+      { field: "date" },
+      { field: "sport" },
+      { field: "gold" },
+      { field: "silver" },
+      { field: "bronze" },
+      { field: "total" }
     ];
-    // this.rowData = this.createRowData();
-    this.context = { componentParent: this };
-    this.frameworkComponents = {
-      childMessageRenderer: ChildMessageRenderer
-    };
-    this.rowSelection = "multiple";
-    this.rowGroupPanelShow = "always";
-    this.pivotPanelShow = "always";
-    this.paginationPageSize = 10;
-    // this.paginationStartPage =  0;
-    this.paginationNumberFormatter = function (params) {
-      return "[" + params.value.toLocaleString() + "]";
+    this.defaultColDef = {
+      width: 100,
+      resizable: true
     };
   }
 
   ngOnInit() {
   }
-  onBtExport() {
-    // var inputElements= <HTMLInputElement>document.getElementById("#fileName");
-    var params = {
-      fileName: "Subscriptionreport",
-      // fileName: inputElements.value,
-    };
-    this.gridApi.exportDataAsCsv(params);
-  }
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.globalServiceService.SubscriptionreportCalling().subscribe(
+    this.globalServiceService.subreport().subscribe(
       data => {
-        this.rowData = data;
-        params.api.paginationGoToPage(1);
+      this.rowData = data;
       });
-    // this.globalServiceService.getUserData().subscribe(
-    //   data => {
+    // this.http
+    //   .get(
+    //     "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinnersSmall.json"
+    //   )
+    //   .subscribe(data => {
     //     this.rowData = data;
-    //     params.api.paginationGoToPage(1);
     //   });
   }
+
 }
