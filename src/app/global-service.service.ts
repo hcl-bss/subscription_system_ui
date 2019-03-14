@@ -61,6 +61,8 @@ export class GlobalServiceService {
         }
       });
 
+    
+
       $("#close-sidebar").click(function () {
         $(".page-wrapper").removeClass("toggled");
       });
@@ -68,7 +70,49 @@ export class GlobalServiceService {
         $(".page-wrapper").addClass("toggled");
       });
     });
+    
   }
+
+// sidebard sub menu start
+sidebarsubmenu() {
+  jQuery(function ($) {
+    $(".sidebar-submenu-list > a").click(function () {
+     // $(".sidebar-submenu").slideUp(200);
+      if (
+        $(this)
+          .parent()
+          .hasClass("active")
+      ) {
+        $(".sidebar-submenu-list").removeClass("active");
+        $(this)
+          .parent()
+          .removeClass("active");
+      } else {
+        $(".sidebar-submenu-list").removeClass("active");
+        $(this)
+          .next(".sidebar-submenu-list")
+          .slideDown(200);
+        $(this)
+          .parent()
+          .addClass("active");
+      }
+    });
+
+  
+
+    
+  });
+  
+}
+//sidebard sub menu end
+
+
+
+
+
+
+
+
   jsonCalling() {
 
     return this.http.get('/assets/dummy.json', {

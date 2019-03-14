@@ -44,20 +44,20 @@
         <li class="header-menu">
           <span>Quick Links</span>
         </li>
-        <li class="sidebar-dropdown" >
+        <li class="sidebar-dropdown active" >
           <a  href="javascript:void(0)" routerLink='/dashboard'>
             <i class="fa fa-tachometer" aria-hidden="true"></i>
           <span>Dashboard</span>
         </a>
-          <div class="sidebar-submenu">
+          <div class="sidebar-submenu" style="display: block;">
             <ul>
-              <li>
+              <li class="sidebar-submenu-list">
                 <a>Dashboard sub menu</a>
               </li>
-              <li>
+              <li class="sidebar-submenu-list">
                 <a>Dashboard sub menu</a>
               </li>
-              <li>
+              <li class="sidebar-submenu-list">
                 <a>Dashboard sub menu</a>
               </li>
             </ul>
@@ -70,9 +70,9 @@
         </a>
       <div class="sidebar-submenu">
         <ul>
-          <li>
+          <li class="sidebar-submenu-list">
             <a href="javascript:void(0)" routerLink='/product/import'>
-              <i aria-hidden="true" class="fa fa-download fa-2"></i>
+              <!-- <i aria-hidden="true" class="fa fa-download fa-2"></i> -->
               <span>Import product</span></a>
           </li>
         </ul>
@@ -86,7 +86,7 @@
         </a>
           <div class="sidebar-submenu" routerLink='/subscriptions/report'>
             <ul>
-              <li>
+              <li class="sidebar-submenu-list">
                 <a href="javascript:void(0)">Batch Report</a>
               </li>
             </ul>

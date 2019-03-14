@@ -12,6 +12,7 @@ export class SidebarnavigationComponent implements OnInit {
 
   constructor(private globalServiceService: GlobalServiceService) { 
     this.globalServiceService.sidebar();
+    this.globalServiceService.sidebarsubmenu();
   }
 
   ngOnInit() {
