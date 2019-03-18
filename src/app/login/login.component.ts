@@ -9,23 +9,24 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
- registerForm: FormGroup;
+ 
     submitted = false;
     isDisabled: boolean = true;
     validEmail:boolean = false;
     msg;
   constructor(private globalServiceService: GlobalServiceService, private formBuilder: FormBuilder,private flashMessage: FlashMessagesService,  private routes: Router) { }
-  
+  registerForm = this.formBuilder.group({
+    // firstName: ['', Validators.required],
+    // lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(0)]]
+});
   ngOnInit() {
-     this.registerForm = this.formBuilder.group({
-            // firstName: ['', Validators.required],
-            // lastName: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(0)]]
-        });
+ 
         
 
   }
+
   // check(uname: string, p: string)
   // {
   //   var output = this.loginserviceService.checkusernameandpassword(uname,p);
@@ -38,10 +39,27 @@ export class LoginComponent implements OnInit {
   //   }
   // }
   get f() { return this.registerForm.controls; }
-  onSubmit() {
+  onSubmit(formBuilders) {
     this.submitted = true;
-    if (this.registerForm.invalid) {
-        return;
+    if(formBuilders.controls.email.value=='admin@hcl.com' && formBuilders.controls.password.value=='admin'){
+      this.routes.navigate(['/dashboard']);
+    }
+  
+    else {
+    if (!formBuilders.invalid) {
+     
+        this.globalServiceService.loginservice(formBuilders.controls.email.value, formBuilders.controls.password.value)
+        .subscribe(result => {
+          console.log(result);
+          localStorage.setItem('username',formBuilders.controls.email.value);
+          this.routes.navigate(['/dashboard']);
+        }, err => {
+          console.log(err);
+          let msg=err.error.error;
+            this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
+        }
+        );
+      }
     }
 
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
@@ -56,24 +74,6 @@ export class LoginComponent implements OnInit {
 //   }
 
 // }
-  loginvalidation(emailvalue, pwdvalue) {
-    //this.routes.navigate(['/dashboard']);
-if(emailvalue=='admin' && pwdvalue=='admin'){
-  this.routes.navigate(['/dashboard']);
-}
- else{
-  this.globalServiceService.loginservice(emailvalue, pwdvalue)
-  .subscribe(result => {
-    console.log(result);
-    localStorage.setItem('username',emailvalue);
-    this.routes.navigate(['/dashboard']);
-  }, err => {
-    console.log(err);
-    let msg=err.error.error;
-      this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
-  }
-  );
-}
-}
+
 }
 

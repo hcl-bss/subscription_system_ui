@@ -126,8 +126,10 @@ sidebarsubmenu() {
   }
 
   subreport() {
-
-    return this.http.get('/assets/report.json', {
+    
+   // return this.http.get('/assets/report.json', {
+    return this.http.get('/assets/report_sub.json', {
+      
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -418,11 +420,11 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
 }
 
 // report search start
-reportSearch(startDateMain,endDateMain,status_valMain,filterPage){
+reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
   this.searchProductData = JSON.stringify(
     {
-  "productExpDate": endDateMain,
-  "productStartDate": startDateMain,
+  "ReportStartDate": startDateMain,    
+  "ReportExpDate": endDateMain,
   "status": status_valMain,
   "pageNo":filterPage
     });

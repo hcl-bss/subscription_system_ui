@@ -65,7 +65,7 @@ export class ImportPlanComponent implements OnInit {
 
     this.defaultColDef = {
       resizable: true,
-      width: 110
+     
     };
     this.rowSelection = "multiple";
   }
