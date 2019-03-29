@@ -27,7 +27,7 @@ export class ContactListComponent implements OnInit {
   private context;
   private frameworkComponents;
   private fileName;
-
+planName;
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
@@ -75,19 +75,24 @@ export class ContactListComponent implements OnInit {
   }
 
 
-  searchSubcription(subscriptionNo,customerName,email,planName,status,price,createdDate,activatedDate,lastBillDate,nextBillDate){
+  searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr){
     // if(subscriptionNo==undefined&&customerName==undefined&&email==undefined&&planName==undefined&&status==undefined&&price==undefined&&createdDate==undefined&&activatedDate==undefined&&lastBillDate==undefined&&nextBillDate==undefined){
     //   this.flashMessage.show('Please enter filter criteria', { cssClass: 'alert-danger', timeout: 10000 });
     // }
     // else{
       this.spinnerService.show();
-      this.globalServiceService.searchSubcription(subscriptionNo,customerName,email,planName,status,price,createdDate,activatedDate,lastBillDate,nextBillDate).subscribe(
+      this.globalServiceService.searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr).subscribe(
         data => {
         this.spinnerService.hide();
         this.rowData=[];
         console.log(data);
         this.rowData = data;
         this.rowData=this.rowData.subscriptionList;
+        for(let i=0;i<this.rowData.length;i++){
+          this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+          this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+        }
+
       //  this.flashMessage.show('Search successfully!!', { cssClass: 'alert-success', timeout: 10000 });
         
         },
@@ -107,6 +112,7 @@ export class ContactListComponent implements OnInit {
   }
 
   onGridReady(params) {
+    let x=[]
     this.rowData = [];
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -114,7 +120,12 @@ export class ContactListComponent implements OnInit {
       data => {
         this.rowData = data;
         this.rowData=this.rowData.subscriptionList;
-        params.api.paginationGoToPage(1);
+        for(let i=0;i<this.rowData.length;i++){
+          this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+          this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+        }
+       console.log(this.rowData);
+       // params.api.paginationGoToPage(1);
       });
   }
   onQuickFilterChanged() {

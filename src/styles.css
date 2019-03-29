@@ -1197,9 +1197,9 @@ body {
 main{ width: 100%;}
 .form-group label{line-height: 16px !important; font-size: 12px;}
 .btn-outline-secondary{ border-color: #ced4da !important;}
-.ag-theme-balham .ag-row-even {
+/* .ag-theme-balham .ag-row-even {
   background-color: #FDFCE7 !important;
-}
+} */
 .input-group input::placeholder,.input-group input{ font-size: 12px;}
 .col-lg-12 .form-group{ line-height: 26px !important;}
 h4.modal-title{color:#117a8b !important; text-transform: uppercase; font-size: 20px;}
@@ -1268,3 +1268,77 @@ h4.modal-title{color:#117a8b !important; text-transform: uppercase; font-size: 2
 .ag-theme-balham .ag-row-odd {
   background-color: unset !important;
 }
+.btn-info.disabled, .btn-info:disabled {
+  color: #fff;
+  background-color: #bababa !important;
+  cursor: no-drop;
+  border-color: #bababa !important;
+}
+strong.total_page{ font-size: 12px; color: #bababa; margin-right: 10px;}
+
+
+.chiller-theme .sidebar-wrapper .sidebar-menu ul li .sidebar-submenu ul li.sidebar-submenu-list.active >a{ color: #b8bfce;}
+.volume_box .table td, .table th{padding: 5px .75rem !important;}
+.ag-theme-balham .ag-row-selected {
+border-color: #b7e4ff !important;
+  } 
+  .ag-center-cols-container .ag-theme-balham .ag-row-selected {
+  background-color: #b7e4ff !important;
+    } 
+    .ag-theme-balham .ag-row-selected {
+      background-color: #b7e4ff !important;
+  }
+
+  /* checkbox start */
+  /* .onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 1px solid #17a2b8; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 18px; padding: 0; line-height: 20px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Active";
+    padding-left: 4px;
+    background-color: #17a2b8; color: #FFFFFF; font-size:9px;
+}
+.onoffswitch-inner:after {
+    content: "Deactive";
+    padding-right: 4px;
+    background-color: #EEEEEE; color: #999999;font-size:9px;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 9px; height:9px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 30px;
+    border: 1px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+} 
+  
+#cnfmpwd{
+  border-color:"red"
+}
+.onoffswitch-switch {
+right: 37px;
+}
+.onoffswitch {
+width: 55px;
+} */
+  /* checkbox end */

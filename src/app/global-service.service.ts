@@ -18,6 +18,9 @@ export class GlobalServiceService {
   newProductData;
   subscriptionData;
   searchProductData;
+  newPlanData;
+  associationPlans: any;
+  editProductData: string;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -125,11 +128,10 @@ sidebarsubmenu() {
     }));
   }
 
-  subreport() {
-    
-   // return this.http.get('/assets/report.json', {
-    return this.http.get('/assets/report_sub.json', {
-      
+  subreport(page) {
+   
+    //return this.http.get('/assets/report_sub.json', {
+      return this.http.get(this.url + '/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -246,20 +248,57 @@ sidebarsubmenu() {
       return response;
     }));
   }
+  //edit product
+  editProduct(uidpk,name, description, sku, startDate, endDate, pCode){
+    if(name==undefined){
+      name="";
+    }
+    if(description==undefined){
+      description="";
+    }
+    if(sku==undefined){
+      sku="";
+    }
+    if(startDate==undefined){
+      startDate="";
+    }
+    if(endDate==undefined){
+      endDate="";
+    }
+    if(pCode==undefined){
+      pCode="";
+    }
+    this.editProductData = JSON.stringify(
+      {
+        "productDescription": description,
+        "productDispName": name,
+        "productExpDate": endDate,
+        "productStartDate": startDate,
+        "productTypeCode": pCode,
+        "sku": sku,
+        "uidpk":uidpk
+      });
+
+    return this.http.post(this.url + '/product', this.editProductData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+  }
   //search Subcription
-  searchSubcription(subscriptionNo, customerName, email, planName, status, price, createdDate, activatedDate, lastBillDate, nextBillDate) {
+  searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr) {
     this.searchSubcriptionData = JSON.stringify(
       {
-        "subscriptionId": subscriptionNo,
+        "subscriptionId": subscriptionId,
         "customerName": customerName,
-        "email": email,
         "planName": planName,
         "status": status,
-        "price": price,
-        "createdDate": createdDate,
-        "activatedDate": activatedDate,
-        "lastBillDate": lastBillDate,
-        "nextBillDate": nextBillDate
+        "fromDateStr": fromDateStr,
+        "toDateStr": toDateStr,
+        
       });
 
     return this.http.put(this.url + '/subscriptions', this.searchSubcriptionData, {
@@ -407,7 +446,7 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
   "sku": skuMain,
   "status": status_valMain,
   "pageNo":filterPage
-    });
+  });
    
   return this.http.post(this.url + '/searchProducts', this.searchProductData, {
     headers: new HttpHeaders({
@@ -423,13 +462,14 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
 reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
   this.searchProductData = JSON.stringify(
     {
-  "ReportStartDate": startDateMain,    
-  "ReportExpDate": endDateMain,
+  "startDate": startDateMain,    
+  "endDate": endDateMain,
   "status": status_valMain,
   "pageNo":filterPage
     });
-   
-  return this.http.post(this.url + '/searchProducts', this.searchProductData, {
+
+    
+  return this.http.post(this.url + '/batchRunLog', this.searchProductData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
@@ -439,7 +479,120 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
   }));
 }
 //report search end
+//add plan start
+addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArray, currencyType, price, radioParam, billingCyclesInput, freeTrial, setupFee, planDescription) {
 
+  // this.resultVolume = { "name1": "", "description1": "", "qty1": "" };
+  // for (var i = 0; i < volumevalue.length; i++) {
+  //   this.resultVolume.name1 = volumevalue[i].name;
+  //   this.resultVolume.description1 = volumevalue[i].description;
+  //   this.resultVolume.qty1 = volumevalue[i].qty;
+  // }
+  // console.log(volumevalue1.unshift(this.resultVolume));
+
+
+
+  // let uniqueArray = this.removeDuplicates(volumevalue1, "name1");
+
+  // for (let i =0 ; i< uniqueArray.length;i++) {
+  //   if(uniqueArray[i].name1  < uniqueArray[i].description1){
+  //       console.log("Going good !!");
+  //       if (uniqueArray[i].description1 == uniqueArray[i + 1].name1 - 1) {
+  //         console.log("yes");
+  //         this.showErrorMsg=true;           
+  //       }
+  //       else {
+  //         console.log("false")
+  //         this.showErrorMsg=false;          
+         
+  //       }
+  //   }   
+   
+
+  // }
+
+  this.newPlanData = JSON.stringify(
+    {
+      "planName": planName,
+      "planCode": planCode,
+      "billEveryFrequency": billEvery,
+      "billEveryPeriod": billingTime,
+      "pricingScheme": {
+        "type": pricingSchemePlan,
+        "details": uniqueArray,
+        "unitPrice": ""
+      },
+      "priceCurrency": currencyType,
+      "price": price,
+      "billingCycles": radioParam,
+      "expiresAfterCount": billingCyclesInput,
+      "freeTrial": freeTrial,
+      "setupFee": setupFee,
+      "planDescription": planDescription
+
+
+    });
+ // volumevalue1 = [];
+
+return this.http.post(this.url + '/product', this.newPlanData, {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+}).pipe(map((response: Response) => {
+  console.log(response);
+  return response;
+
+}));
+
+
+}
+//add plan end
+
+
+
+getProducts() {
+
+  return this.http.get(this.url + '/getProducts/0', {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+
+    return response;
+  }));
+}
+
+getPlans() {
+
+  return this.http.get(this.url + '/getRatePlan', {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+
+    return response;
+  }));
+}
+
+associatePlans(updatePlans, uidpk) {
+  console.log(updatePlans);
+  this.associationPlans = JSON.stringify(
+    {
+      "product": {
+        "uidpk": uidpk
+      },
+      "ratePlan": updatePlans
+    });
+
+  return this.http.post(this.url + '/associatePlan', this.associationPlans, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+
+    return response;
+  }));
+}
 }
 
 

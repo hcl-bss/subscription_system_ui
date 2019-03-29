@@ -31,6 +31,9 @@ import { ProductComponent } from './products/product.component';
 import { SubscriptionreportComponent } from './subscriptionreport/subscriptionreport.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { NgbDateFRParserFormatter } from "./ngb-date-fr-parser-formatter"; 
+import { ChildMessageRendereredit } from './products/child-message-renderer_btn.component';
+import { AssociatePlanComponent } from './associate-plan/associate-plan.component';
+import { AssociateMappingComponent } from './associate-mapping.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,18 +51,22 @@ import { NgbDateFRParserFormatter } from "./ngb-date-fr-parser-formatter";
     SidebarnavigationComponent,
     ImportPlanComponent,
     ProductComponent,
-    SubscriptionreportComponent
+    SubscriptionreportComponent,
+    ChildMessageRendereredit,
+    AssociatePlanComponent,
+    AssociateMappingComponent
+
   ],
 
   imports: [
     BrowserModule,FormsModule,HttpClientModule,HttpModule,GridModule,ReactiveFormsModule,
     AppRoutingModule,NgbModule.forRoot(),FlashMessagesModule.forRoot(),  
-    AgGridModule.withComponents([ChildMessageRenderer]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
-    AgGridModule.withComponents([FileDownloadComponent]) ,
+    AgGridModule.withComponents([ChildMessageRenderer,AssociateMappingComponent]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
+    AgGridModule.withComponents([FileDownloadComponent,ChildMessageRendereredit]) ,
     [ Ng4LoadingSpinnerModule.forRoot() ] 
   ],
  
-  providers: [ NgbDateFRParserFormatter, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard],
+  providers: [ NgbDateFRParserFormatter, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

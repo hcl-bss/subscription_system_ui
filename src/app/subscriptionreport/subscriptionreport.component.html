@@ -1,148 +1,71 @@
-  <div class="container-fluid custom_search" style="padding: 0px;">
-
-    <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
-
-      <h5>Subscription Batch Report </h5>
-
-      <div  class="col-lg-12" style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
-        <flash-messages></flash-messages>
-        <form action="#">
-
-          <div class="row">
-
-
-            <div class="col-lg-3">
-
-              <div class="form-group">
-
-                <label for="dateOfBirth">Start Date:</label>
-
-                <div class="input-group">
-
-                  <input id="startDateId" readonly class="form-control form-control-sm" placeholder="DD/MM/YYYY" name="startDate" [(ngModel)]="startDateMain"
-                    ngbDatepicker (click)="startdate.toggle()" #startdate="ngbDatepicker">
-
-                  <div class="input-group-append">
-
-                    <button class="btn btn-outline-secondary calendar" (click)="startdate.toggle()" type="button">
-
-                      <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-
-                    </button>
-
-                  </div>
-
+<div class="container-fluid custom_search" style="padding: 0px;">
+  <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
+    <h5>Subscription Batch Report </h5>
+    <div class="col-lg-12" style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
+      <flash-messages></flash-messages>
+      <form action="#">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="dateOfBirth">Start Date:</label>
+              <div class="input-group">
+                <input id="startDateId" readonly class="form-control form-control-sm" placeholder="DD/MM/YYYY" name="startDate"
+                  [(ngModel)]="startDateMain" ngbDatepicker (click)="startdate.toggle()" #startdate="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="startdate.toggle()" type="button">
+                    <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                  </button>
                 </div>
-
               </div>
-
-            </div>
-
-            <div class="col-lg-3">
-
-              <div class="form-group">
-
-                <label for="dateOfBirth"> End Date:</label>
-
-                <div class="input-group">
-
-                  <input id="endDateId" readonly class="form-control form-control-sm" placeholder="DD/MM/YYYY" name="endDate" [(ngModel)]="endDateMain" ngbDatepicker
-                    (click)="enddate.toggle()" #enddate="ngbDatepicker">
-
-                  <div class="input-group-append">
-
-                    <button class="btn btn-outline-secondary calendar" (click)="enddate.toggle()" type="button">
-
-                      <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-
-                    </button>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="col-lg-3">
-
-              <div class="form-group">
-
-                <label for="status">Status:</label>
-
-                <select class="form-control form-control-sm" id="status_product" name="status_val" [(ngModel)]="status_valMain">
-
-                  <option>Success</option>
-
-                  <option>Failure</option>
-
-                </select>
-
-              </div>
-
-            </div>
-            <div class="col-lg-3">
-
-              <label style="width: 100%;"></label>
-
-              <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;">
-
-                Export to Csv
-                <i class="fa fa-cloud-download" aria-hidden="true"></i>
-
-              </button>
-
-              <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;" (click)="filterSearch(startDateMain,endDateMain,status_valMain)">
-
-                Search
-
-                <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
-
-              </button>
-
-              <!-- <button class="btn btn-info" style="margin-top: 41px;">Search <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
-
-</button> -->
             </div>
           </div>
-        </form>
-
-      </div>
-
-    </div>
-
-
-
-    <div  id="productGrid" style="position: relative;">
-
-      <div style="height: 100%; padding-top: 63px; box-sizing: border-box; width: auto;">
-
-        <!-- <button class="btn btn-info" (click)="openModal('addUser')">Add User</button> -->
-
-        <ag-grid-angular
-        #agGrid
-        style="width: 100%; height: 100%;"
-        id="myGrid"
-        class="ag-theme-balham"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-        [suppressRowTransform]="true"
-        [rowData]="rowData"
-        (gridReady)="onGridReady($event)"
-      ></ag-grid-angular>
-
-        <div style="float:right; margin-top: 10px;">
-          <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality()" >Prev</button>
-
-          <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()" >Next</button>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="dateOfBirth"> End Date:</label>
+              <div class="input-group">
+                <input id="endDateId" readonly class="form-control form-control-sm" placeholder="DD/MM/YYYY" name="endDate"
+                  [(ngModel)]="endDateMain" ngbDatepicker (click)="enddate.toggle()" #enddate="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="enddate.toggle()" type="button">
+                    <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="status">Status:</label>
+              <select class="form-control form-control-sm" id="status_product" name="status_val" [(ngModel)]="status_valMain">
+                <option>Success</option>
+                <option>Fail</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <label style="width: 100%;"></label>
+            <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;">
+              Export to Csv <i class="fa fa-cloud-download" aria-hidden="true"></i>
+            </button>
+            <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;"
+              (click)="filterSearch(startDateMain,endDateMain,status_valMain)">
+              Search <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
+            </button>
+          </div>
         </div>
-     
-
-
-      </div>
-
+      </form>
     </div>
-
   </div>
+  <div id="productGrid" style="position: relative;">
+    <div style="height: 100%; padding-top: 63px; box-sizing: border-box; width: auto;">
+      <!-- <button class="btn btn-info" (click)="openModal('addUser')">Add User</button> -->
+      <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham" [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef" [suppressRowTransform]="true" [rowData]="rowData" (gridReady)="onGridReady($event)"></ag-grid-angular>
+      <div style="float:right; margin-top: 10px;">
+        <!-- <strong class="total_page">Page {{page+1}} of {{totalpage}}</strong> -->
+        <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality(startDateMain,endDateMain,status_valMain)">Prev</button>
+        <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality(startDateMain,endDateMain,status_valMain)">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

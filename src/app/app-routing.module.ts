@@ -11,11 +11,13 @@ import { AuthGuard } from './auth.guard';
 import { ImportPlanComponent } from './import-plan/import-plan.component';
 import { ProductComponent } from './products/product.component';
 import { SubscriptionreportComponent } from './subscriptionreport/subscriptionreport.component';
+import { AssociatePlanComponent } from './associate-plan/associate-plan.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'header', component: HeaderComponent, canActivate :[AuthGuard] },
+  { path: 'associateplan', component: AssociatePlanComponent , canActivate :[AuthGuard] },
   { path: 'product', component: ProductComponent,
   children: [
     {
