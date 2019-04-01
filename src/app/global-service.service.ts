@@ -142,20 +142,12 @@ sidebarsubmenu() {
   }
 
 
-  SubscriptionCalling() {
+  SubscriptionCalling(page) {
+
     this.subscriptionData = JSON.stringify({
-      // "subscriptionId": "",
-      // "customerName": "",
-      // "email": "",
-      // "planName": "",
-      // "status": "",
-      // "price": "",
-      // "createdDate": "",
-      // "activatedDate": "",
-      // "lastBillDate": "",
-      // "nextBillDate": ""
+     "pageNo": page
     })
-    
+   // return this.http.get('/assets/Subscription.json', {
     return this.http.put(this.url + '/subscriptions', this.subscriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -289,7 +281,7 @@ sidebarsubmenu() {
     }));
   }
   //search Subcription
-  searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr) {
+  searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr,pageno) {
     this.searchSubcriptionData = JSON.stringify(
       {
         "subscriptionId": subscriptionId,
@@ -298,7 +290,7 @@ sidebarsubmenu() {
         "status": status,
         "fromDateStr": fromDateStr,
         "toDateStr": toDateStr,
-        
+        "pageNo": pageno
       });
 
     return this.http.put(this.url + '/subscriptions', this.searchSubcriptionData, {
@@ -593,6 +585,29 @@ associatePlans(updatePlans, uidpk) {
     return response;
   }));
 }
+
+//date validation start
+
+dateValidation(startDate, endDate){
+  if(startDate!=undefined && endDate!=undefined){
+    let sDatevalidate =  startDate.month + "/" + startDate.day + "/" + startDate.year;
+    let eDatevalidate =  endDate.month + "/" + endDate.day + "/" + endDate.year;
+    
+    let startDateValue = Date.parse(sDatevalidate);
+    let endDateValue = Date.parse(eDatevalidate);
+    
+    if (startDateValue > endDateValue){
+    return false;
+    }else{
+    return true;
+    }
+  }else{
+    return true;
+  }
+
+}
+
+//date validation end
 }
 
 

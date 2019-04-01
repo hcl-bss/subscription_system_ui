@@ -61,11 +61,28 @@
       <!-- <button class="btn btn-info" (click)="openModal('addUser')">Add User</button> -->
       <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham" [columnDefs]="columnDefs"
         [defaultColDef]="defaultColDef" [suppressRowTransform]="true" [rowData]="rowData" (gridReady)="onGridReady($event)"></ag-grid-angular>
-      <div style="float:right; margin-top: 10px;">
-        <!-- <strong class="total_page">Page {{page+1}} of {{totalpage}}</strong> -->
+
+        
+        <div style="float:right; margin-top: 10px;">
+          <span class="total_page" *ngIf="!filterSearchFlag">
+            {{this.page+1}} of {{totalPages}}
+          </span>
+
+          <span class="total_page" *ngIf="filterSearchFlag">
+            {{this.filterPage+1}} of {{totalPages}}
+          </span>
+
+          <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
+            (click)="previousFuntionality()">Prev</button>
+
+          <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()">Next</button>
+        </div>
+
+      <!-- <div style="float:right; margin-top: 10px;">
+        <strong class="total_page">Page {{page+1}} of {{totalpage}}</strong> 
         <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality(startDateMain,endDateMain,status_valMain)">Prev</button>
         <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality(startDateMain,endDateMain,status_valMain)">Next</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

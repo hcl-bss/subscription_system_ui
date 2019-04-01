@@ -23,6 +23,10 @@ const routes: Routes = [
     {
       path: 'import',
       component: ImportPlanComponent
+    },
+    {
+      path: 'associateplan',
+      component: AssociatePlanComponent
     }],
   
   canActivate :[AuthGuard] },

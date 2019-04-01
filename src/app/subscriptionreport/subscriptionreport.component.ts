@@ -121,9 +121,8 @@ export class SubscriptionreportComponent implements OnInit {
       });
   }
 
-  previousFuntionality(startDateMain, endDateMain, status_valMain) {
+  previousFuntionality(startDateMain, endDateMain, status_valMainn) {
     this.page = this.page - 1;
-
     if (this.page == 0) {
       (document.getElementById("prev") as HTMLInputElement).disabled = true;
     }
@@ -136,7 +135,7 @@ export class SubscriptionreportComponent implements OnInit {
       this.globalServiceService.reportSearch(this.sDate, this.eDate, this.filterPage, this.status_valMain).subscribe(
         data => {
           this.rowData = data;
-          
+          this.totalpage = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById("next") as HTMLInputElement).disabled = true;
           } else {
@@ -149,13 +148,13 @@ export class SubscriptionreportComponent implements OnInit {
       this.globalServiceService.subreport(this.page).subscribe(
         data => {
           this.rowData = data;
-          
+          this.totalpage = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById("next") as HTMLInputElement).disabled = true;
           } else {
             (document.getElementById("next") as HTMLInputElement).disabled = false;
           }
-          this.totalpage = this.rowData.totalPages;
+        
           this.rowData = this.rowData.batchRunLogDtoList;
         });
     }
@@ -174,7 +173,7 @@ export class SubscriptionreportComponent implements OnInit {
       this.globalServiceService.reportSearch(this.sDate, this.eDate, this.filterPage, this.status_valMain).subscribe(
         data => {
           this.rowData = data;
-       
+          this.totalpage = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById("next") as HTMLInputElement).disabled = true;
           } else {
@@ -188,13 +187,13 @@ export class SubscriptionreportComponent implements OnInit {
       this.globalServiceService.subreport(this.page).subscribe(
         data => {
           this.rowData = data;
-         
+          this.totalpage = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById("next") as HTMLInputElement).disabled = true;
           } else {
             (document.getElementById("next") as HTMLInputElement).disabled = false;
           }
-          this.totalpage = this.rowData.totalPages;
+         
           this.rowData = this.rowData.batchRunLogDtoList;
         });
     }
@@ -239,6 +238,7 @@ export class SubscriptionreportComponent implements OnInit {
       this.globalServiceService.reportSearch(this.sDate, this.eDate, this.filterPage, this.status_valMain).subscribe(
         data => {
           this.rowData = data;
+          this.totalpage = this.rowData.totalPages;
           this.rowData = this.rowData.batchRunLogDtoList;
           if (this.rowData.lastPage == true) {
             (document.getElementById("next") as HTMLInputElement).disabled = true;

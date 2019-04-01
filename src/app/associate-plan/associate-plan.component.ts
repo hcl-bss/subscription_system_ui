@@ -102,8 +102,6 @@ export class AssociatePlanComponent implements OnInit {
 
 
   onRowClicked(event: any) {
-    // console.log(this.productList);
-    // console.log(this.associatedPlan);
     this.selecteddata = event.data;
     console.log(this.selecteddata);
     this.gridApi.forEachNode((node) => {

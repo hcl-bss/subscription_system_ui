@@ -27,7 +27,13 @@ export class ContactListComponent implements OnInit {
   private context;
   private frameworkComponents;
   private fileName;
-planName;
+  planName;
+  filterSearchFlag: boolean = false;
+  page = 0;
+  filterPage = 0;
+  totalPages;
+  sDate;
+  eDate;
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
@@ -76,30 +82,71 @@ planName;
 
 
   searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr){
+  
+      (document.getElementById("prev") as HTMLInputElement).disabled = true;
+    
+    let sDate;
+    let eDate;
+    this.filterSearchFlag = true;
     // if(subscriptionNo==undefined&&customerName==undefined&&email==undefined&&planName==undefined&&status==undefined&&price==undefined&&createdDate==undefined&&activatedDate==undefined&&lastBillDate==undefined&&nextBillDate==undefined){
     //   this.flashMessage.show('Please enter filter criteria', { cssClass: 'alert-danger', timeout: 10000 });
     // }
     // else{
+      let date=this.globalServiceService.dateValidation(fromDateStr,toDateStr);
+      console.log("********",date);
+      if(date==true){
+        if(fromDateStr!=undefined){
+           sDate = fromDateStr.day + "/" + fromDateStr.month + "/" + fromDateStr.year;
+        }
+      if(toDateStr!=undefined){
+         eDate = toDateStr.day + "/" + toDateStr.month + "/" + toDateStr.year;
+      }
+       
+  
       this.spinnerService.show();
-      this.globalServiceService.searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr).subscribe(
+      this.globalServiceService.searchSubcription(subscriptionId,customerName,planName,status,sDate,eDate,this.filterPage).subscribe(
         data => {
         this.spinnerService.hide();
-        this.rowData=[];
-        console.log(data);
+        this.rowData=[];    
         this.rowData = data;
+        this.totalPages=this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+           (document.getElementById("next") as HTMLInputElement).disabled = false;
+         }
         this.rowData=this.rowData.subscriptionList;
+        
         for(let i=0;i<this.rowData.length;i++){
+        //  console.log("********",this.rowData[i].ratePlanList);
+         if(this.rowData[i].ratePlanList!=undefined){
           this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
           this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
-        }
-
+         }
+         else{
+          this.rowData[i].planName="-";
+          this.rowData[i].price="-";
+         }         
+       
+      }
       //  this.flashMessage.show('Search successfully!!', { cssClass: 'alert-success', timeout: 10000 });
         
         },
       error=>{
         this.spinnerService.hide();
+        this.rowData=[];  
         this.flashMessage.show('No data found!!', { cssClass: 'alert-danger', timeout: 10000 });
       });
+      }else{
+        this.flashMessage.show(
+          "Start date should be less than end date!!",
+          {
+            cssClass: "alert-danger",
+            timeout: 10000
+          }
+        );
+      }
+
     // }
    
   }
@@ -116,15 +163,30 @@ planName;
     this.rowData = [];
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.globalServiceService.SubscriptionCalling().subscribe(
+    this.globalServiceService.SubscriptionCalling(this.page).subscribe(
       data => {
         this.rowData = data;
-        this.rowData=this.rowData.subscriptionList;
+        this.totalPages=this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+           (document.getElementById("next") as HTMLInputElement).disabled = false;
+         }
+         this.rowData=this.rowData.subscriptionList;
         for(let i=0;i<this.rowData.length;i++){
+        //  console.log("********",this.rowData[i].ratePlanList);
+         if(this.rowData[i].ratePlanList!=undefined){
           this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
           this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
-        }
-       console.log(this.rowData);
+         }
+         else{
+          this.rowData[i].planName="-";
+          this.rowData[i].price="-";
+         }
+      
+       
+      }
+      // console.log(this.rowData);
        // params.api.paginationGoToPage(1);
       });
   }
@@ -146,5 +208,163 @@ planName;
     this.gridApi.exportDataAsCsv(params);
   }
 // export to Csv code end
+
+
+
+previousFuntionality(subscriptionId,customerName,planName,status,fromDateStr,toDateStr) {
+  let sDate;
+  let eDate;
+  this.page = this.page - 1;
+  if (this.page == 0) {
+    (document.getElementById("prev") as HTMLInputElement).disabled = true;
+  }
+
+  if (this.filterSearchFlag == true) {
+    this.filterPage = this.filterPage - 1;
+    if (this.filterPage == 0) {
+      (document.getElementById("prev") as HTMLInputElement).disabled = true;
+    }
+    if (fromDateStr != undefined) {
+      sDate = fromDateStr.day + "/" + fromDateStr.month + "/" + fromDateStr.year;
+    }
+    if (toDateStr != undefined) {
+      eDate = toDateStr.day + "/" + toDateStr.month + "/" + toDateStr.year;
+    }
+
+    
+
+  this.spinnerService.show();
+  this.globalServiceService.searchSubcription(subscriptionId,customerName,planName,status,sDate,eDate,this.filterPage).subscribe(
+    data => {
+    this.spinnerService.hide();
+    this.rowData=[];    
+    this.rowData = data;
+    this.totalPages=this.rowData.totalPages;
+    this.rowData=this.rowData.subscriptionList;
+    
+    for(let i=0;i<this.rowData.length;i++){  
+     if(this.rowData[i].ratePlanList!=undefined){
+      this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+      this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+     }
+     else{
+      this.rowData[i].planName="-";
+      this.rowData[i].price="-";
+     }         
+     if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+           (document.getElementById("next") as HTMLInputElement).disabled = false;
+         }
+  }
+  //  this.flashMessage.show('Search successfully!!', { cssClass: 'alert-success', timeout: 10000 });
+    
+    },
+  error=>{
+    this.spinnerService.hide();
+    this.rowData=[];  
+    this.flashMessage.show('No data found!!', { cssClass: 'alert-danger', timeout: 10000 });
+  });
+  } else {
+   
+    this.globalServiceService.SubscriptionCalling(this.page).subscribe(
+      data => {
+        this.rowData = data;
+        this.totalPages=this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+           (document.getElementById("next") as HTMLInputElement).disabled = false;
+         }
+        this.rowData=this.rowData.subscriptionList;
+        
+        for(let i=0;i<this.rowData.length;i++){
+         if(this.rowData[i].ratePlanList!=undefined){
+          this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+          this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+         }
+         else{
+          this.rowData[i].planName="-";
+          this.rowData[i].price="-";
+         }    
+         }
+    
+      });
+  }
+}
+nextFuntionality(subscriptionId,customerName,planName,status,fromDateStr,toDateStr) {
+  let sDate;
+  let eDate;
+  (document.getElementById("prev") as HTMLInputElement).disabled = false;
+  this.page = this.page + 1;
+
+  if (this.filterSearchFlag == true) {
+    this.filterPage = this.filterPage + 1;
+    if (fromDateStr != undefined) {
+      sDate = fromDateStr.day + "/" + fromDateStr.month + "/" + fromDateStr.year;
+    }
+    if (toDateStr != undefined) {
+      eDate = toDateStr.day + "/" + toDateStr.month + "/" + toDateStr.year;
+    }
+    // let sDate = fromDateStr.day + "/" + fromDateStr.month + "/" + fromDateStr.year;
+    // let eDate = toDateStr.day + "/" + toDateStr.month + "/" + toDateStr.year;
+
+  this.spinnerService.show();
+  this.globalServiceService.searchSubcription(subscriptionId,customerName,planName,status,sDate,eDate,this.filterPage).subscribe(
+    data => {
+    this.spinnerService.hide();
+    this.rowData=[];    
+    this.rowData = data;
+    if (this.rowData.lastPage == true) {
+      (document.getElementById("next") as HTMLInputElement).disabled = true;
+    } else {
+       (document.getElementById("next") as HTMLInputElement).disabled = false;
+     }
+    this.totalPages=this.rowData.totalPages;
+    this.rowData=this.rowData.subscriptionList;
+    
+    for(let i=0;i<this.rowData.length;i++){  
+     if(this.rowData[i].ratePlanList!=undefined){
+      this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+      this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+     }
+     else{
+      this.rowData[i].planName="-";
+      this.rowData[i].price="-";
+     }         
+  
+  }
+    },
+  error=>{
+    this.spinnerService.hide();
+    this.rowData=[];  
+    this.flashMessage.show('No data found!!', { cssClass: 'alert-danger', timeout: 10000 });
+  });
+  } else {
+    this.globalServiceService.SubscriptionCalling(this.page).subscribe(
+      data => {
+        this.rowData = data;
+        this.totalPages=this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+           (document.getElementById("next") as HTMLInputElement).disabled = false;
+         }
+        this.rowData=this.rowData.subscriptionList;
+        
+        for(let i=0;i<this.rowData.length;i++){
+         if(this.rowData[i].ratePlanList!=undefined){
+          this.rowData[i].planName=(this.rowData[i].ratePlanList[0].planName);
+          this.rowData[i].price=(this.rowData[i].ratePlanList[0].price);
+         }
+         else{
+          this.rowData[i].planName="-";
+          this.rowData[i].price="-";
+         }    
+         }
+    
+      });
+  }
+}
 } 
 

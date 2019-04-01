@@ -2,7 +2,7 @@
 
   <div class="ContentBox">
 
-    <main>
+    <main >
 
       <!-- Main Content 
 
@@ -35,13 +35,13 @@ Page Size:
               <i class="fa fa-user-plus" aria-hidden="true"></i>
             </button>
 
-            <button class="btn btn-outline-danger float-right" style="margin:-12px 0 0 5px">Associate Plans
+            <button class="btn btn-outline-danger float-right" style="margin:-12px 0 0 5px" routerLink='/product/associateplan'>Associate Plans
               <i class="fa fa-sellsy" aria-hidden="true"></i>
             </button>
           </h5>
 
           <router-outlet></router-outlet>
-
+     
           <!-- <div class="row headerStrip" *ngIf="isValid()">
 
 <button class="btn btn-info" style="margin:3px" (click)="open(addUser)">Add</button>
@@ -229,6 +229,16 @@ Page Size:
             </ag-grid-angular>
 
             <div style="float:right; margin-top: 10px;">
+              <span *ngIf="!filterSearchFlag">
+                  {{this.page+1}} of {{totalPages}}
+              </span>
+
+              <span *ngIf="filterSearchFlag">
+                  {{this.filterPage+1}} of {{totalPages}}
+              </span>
+             
+
+              
               <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality()">Prev</button>
 
               <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()" >Next</button>
@@ -409,6 +419,26 @@ Page Size:
 
       
     </main>
+
+
+
+    <!-- <main *ngIf="flagMapping">
+
+        <div class="container-fluid custom_search" style="padding: 0px;">
+
+            <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
+    
+              <h5>Associate Product Plan Mapping
+                  <button type="button" class="btn btn-info" (click)="backToProduct()">Back</button>
+              </h5>
+              </div>
+              </div>
+
+              <router-outlet></router-outlet>
+      
+      <app-associate-plan></app-associate-plan>
+    
+    </main> -->
 
   </div>
 

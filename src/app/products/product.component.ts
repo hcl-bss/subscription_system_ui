@@ -7,11 +7,8 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 
 import { ModalsService } from "../modal.service";
-
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-
 import { Router } from "@angular/router";
-
 import { Ng4LoadingSpinnerService } from "ng4-loading-spinner";
 
 import {
@@ -48,7 +45,7 @@ export class ProductComponent implements OnInit {
   private rowData;
   private context;
   private frameworkComponents;
-
+  totalPages;
   closeResult: string;
   producttype;
   name;
@@ -64,6 +61,8 @@ export class ProductComponent implements OnInit {
   sDate;
   eDate;
   filterSearchFlag = false;
+  // flagMapping=false;
+  // productMainPage: boolean=true;
 
   constructor(
     private spinnerService: Ng4LoadingSpinnerService,
@@ -73,6 +72,7 @@ export class ProductComponent implements OnInit {
     private childMessageRenderer: ChildMessageRenderer,
     private globalServiceService: GlobalServiceService
   ) {
+    
     this.columnDefs = [
       {
         headerName: "Name",
@@ -130,7 +130,8 @@ export class ProductComponent implements OnInit {
         cellRenderer: "ChildMessageRendereredit",
         editable: true,
         colId: "params",
-        width: 150
+        width: 150,
+        checked: false
       }
     ];
 
@@ -218,6 +219,7 @@ ${reason}`;
       .usermanagementCalling(this.page)
       .subscribe(data => {
         this.rowData = data;
+        this.totalPages=this.rowData.totalPages;
 
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
@@ -269,10 +271,18 @@ ${reason}`;
     if (this.router.url != "/product/import") {
       return true;
     }
-
     return false;
   }
-
+  isValid1(): boolean {
+    if (this.router.url != "/product/associateplan") {
+      return true;
+    }
+    return false;
+  }
+  callall(){
+    this.isValid()
+    this.isValid1()
+  }
   addProductData(name, description, sku, startDate, endDate) {
     if (
       name == undefined ||
@@ -457,6 +467,7 @@ ${reason}`;
         )
         .subscribe(data => {
           this.rowData = data;
+          this.totalPages=this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -473,6 +484,7 @@ ${reason}`;
         .usermanagementCalling(this.page)
         .subscribe(data => {
           this.rowData = data;
+          this.totalPages=this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -523,6 +535,7 @@ ${reason}`;
         )
         .subscribe(data => {
           this.rowData = data;
+          this.totalPages=this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -539,7 +552,7 @@ ${reason}`;
         .usermanagementCalling(this.page)
         .subscribe(data => {
           this.rowData = data;
-
+          this.totalPages=this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -553,14 +566,7 @@ ${reason}`;
         });
     }
   }
-  filterSearch(
-    nameMain,
-    codeMain,
-    skuMain,
-    status_valMain,
-    startDateMain,
-    endDateMain
-  ) {
+  filterSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain) {
     this.filterSearchFlag = true;
     if (startDateMain != undefined) {
       this.sDate =
@@ -587,7 +593,7 @@ ${reason}`;
       )
       .subscribe(data => {
         this.rowData = data;
-
+        this.totalPages=this.rowData.totalPages;
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
         } else {
@@ -598,8 +604,12 @@ ${reason}`;
         this.rowData = this.rowData.productList;
       });
   }
-
-  editValue() {
-      
-  }
+  // openMapping(){
+  //   this.flagMapping=true;
+  //   this.productMainPage=false;
+  // }
+  // backToProduct(){
+  //   this.flagMapping=false;
+  //   this.productMainPage=true;
+  // }
 }

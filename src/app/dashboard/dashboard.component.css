@@ -6,6 +6,49 @@ ul.dashboard_list li{ display: inline-block;width:31%; margin-left:1%; }
 ul.dashboard_list li a{width:100%; display: inline-block; box-sizing: border-box; padding: 7%; color: #117a8b; text-transform: uppercase; box-shadow: 0 0 13px #ced4da; 
     transition: all 0.3s ease;
 }
+.progress-bar {
+	width: 0;
+	-webkit-animation: progress 1.5s ease-in-out forwards;
+	animation: progress 1.5s ease-in-out forwards;
+  }
+  .progress-bar .title {
+	opacity: 0;
+	-webkit-animation: show 0.35s forwards ease-in-out 0.5s;
+	animation: show 0.35s forwards ease-in-out 0.5s;
+  }
+  @-webkit-keyframes progress {
+	from {
+	  width: 0;
+	}
+	to {
+	  width: 100%;
+	}
+  }
+  @keyframes progress {
+	from {
+	  width: 0;
+	}
+	to {
+	  width: 100%;
+	}
+  }
+  @-webkit-keyframes show {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+  @keyframes show {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+  
 ul.dashboard_list li a span{    font-size: 20px;
     width: 100%;
     display: inline-block;}

@@ -7,8 +7,16 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'child-cell',
-  template: `<span><button style="height: 20px; line-height: 0.5" (click)="open(editProduct)" class="btn btn-info">Edit</button></span>
-  
+  template: `<!--<span><button style="height: 20px; line-height: 0.5" (click)="open(editProduct)" class="btn btn-info">Edit</button></span>-->
+  <span style="float:left;margin-right: 3px;margin-top: 4px;">
+    <div class="onoffswitch">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="{{params.data.userProfile}}" (change)="FieldsChange($event)">
+      <label class="onoffswitch-label" for="{{params.data.userProfile}}" (click)="ActivateDeactivate(params.data.userId)">
+          <span class="onoffswitch-inner"></span>
+          <span class="onoffswitch-switch"></span>
+      </label>
+    </div>
+  </span>
   <ng-template #editProduct let-modal>
 
         <div class="modal-header">
@@ -117,7 +125,12 @@ export class ChildMessageRendereredit implements ICellRendererAngularComp {
       this.DrodownArray = data;
       console.log(this.DrodownArray);
     });
+    
   }
+  FieldsChange(values:any){
+    
+    console.log(values.currentTarget.checked);
+    }
   refresh(): boolean {
     return false;
   }

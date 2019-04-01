@@ -1,7 +1,7 @@
 <div id="rightSideWrapper">
   <div class="ContentBox" style="display: block;">
     <main>
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
       <!-- Main Content  -->
       <!-- <div class="test-header">
               Page Size:
@@ -17,14 +17,16 @@
           <h5>Subscription</h5>
 
           <flash-messages style="top:-16px;"></flash-messages>
-          <div class="col-lg-12 search_box" style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
+          <div class="col-lg-12 search_box"
+            style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
             <form action="#">
               <div class="row">
                 <div class="col-lg-2">
                   <div class="form-group">
                     <label for="sel1">Subscription No:</label>
-                    <input type="text" class="form-control form-control-sm" id=" " name="subscriptionId" [(ngModel)]="subscriptionId" >
-                   
+                    <input type="text" class="form-control form-control-sm" id=" " name="subscriptionId"
+                      [(ngModel)]="subscriptionId">
+
                   </div>
                 </div>
                 <!-- <div class="col-lg-2">
@@ -41,47 +43,53 @@
                 </div> -->
 
 
-               
+
                 <div class="col-lg-2">
-                    <div class="form-group">
-                      <label for=" ">Customber Name:</label>
-                      <input type="text" class="form-control form-control-sm" id=" " name="customerName" [(ngModel)]="customerName">
-                    </div>
+                  <div class="form-group">
+                    <label for=" ">Customber Name:</label>
+                    <input type="text" class="form-control form-control-sm" id=" " name="customerName"
+                      [(ngModel)]="customerName">
                   </div>
-  
-                  <div class="col-lg-2">
-                    <div class="form-group">
-                      <label for=" ">Plan Name:</label>
-                      <input type="text" class="form-control form-control-sm" id="" name="planName" [(ngModel)]="planName">
-                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label for=" ">Plan Name:</label>
+                    <input type="text" class="form-control form-control-sm" id="" name="planName"
+                      [(ngModel)]="planName">
                   </div>
-                  <div class="col-lg-2">
-                    <div class="form-group">
-                      <label for=" ">Status:</label>
-                      <select class="form-control form-control-sm" placeholder="select" id=" " name="sellist1" name="status" [(ngModel)]="status">
-                          <option>Active</option>
-                          <option>Inactive</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label for=" ">Status:</label>
+                    <select class="form-control form-control-sm" placeholder="select" id=" " name="sellist1"
+                      name="status" [(ngModel)]="status">
+                      <option>Active</option>
+                      <option>Inactive</option>
+                    </select>
                   </div>
-                  <!-- <div class="col-lg-2">
+                </div>
+                <!-- <div class="col-lg-2">
                     <div class="form-group">
                       <label for="">Amount:</label>
                       <input type="text" class="form-control form-control-sm" id="" name="price" [(ngModel)]="price">
                     </div>
                   </div> -->
-                  <div class="col-lg-2">
-                    <div class="form-group">
-                      <label for=" ">From Date:</label>
-                      <div class="input-group">
-                          <input  class="form-control form-control-sm" readonly placeholder="DD/MM/YYYY" (click)="activedatethis.toggle()"  name="fromDateStr"  [(ngModel)]="fromDateStr" ngbDatepicker #activedatethis="ngbDatepicker">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="activedatethis.toggle()" type="button">
-                            <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                            </button>
-                          </div>
-                        </div>
-                      <!-- <div class="input-group">
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label for=" ">From Date:</label>
+                    <div class="input-group">
+                      <input class="form-control form-control-sm" readonly placeholder="DD/MM/YYYY"
+                        (click)="activedatethis.toggle()" name="fromDateStr" [(ngModel)]="fromDateStr" ngbDatepicker
+                        #activedatethis="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="activedatethis.toggle()"
+                          type="button">
+                          <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <!-- <div class="input-group">
                           <input id="" class="form-control" placeholder="YYYY-MM-DD"  name="createdDate"  [(ngModel)]="createdDate" ngbDatepicker #enddate="createdDate1">
                           <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" (click)="enddate.toggle()" type="button">
@@ -89,29 +97,31 @@
                             </button>
                           </div>
                         </div> -->
-                      <!-- <input type="text" class="form-control form-control-sm" id=" " name="Created_on" [(ngModel)]="Created_on"> -->
+                    <!-- <input type="text" class="form-control form-control-sm" id=" " name="Created_on" [(ngModel)]="Created_on"> -->
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label for="sel1">To Date:</label>
+
+                    <div class="input-group">
+                      <input class="form-control form-control-sm" readonly placeholder="DD/MM/YYYY"
+                        (click)="activedate.toggle()" name="toDateStr" [(ngModel)]="toDateStr" ngbDatepicker
+                        #activedate="ngbDatepicker">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="activedate.toggle()" type="button">
+                          <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-2">
-                    <div class="form-group">
-                      <label for="sel1">To Date:</label>
-                     
-                      <div class="input-group">
-                          <input  class="form-control form-control-sm" readonly placeholder="DD/MM/YYYY" (click)="activedate.toggle()"  name="toDateStr"  [(ngModel)]="toDateStr" ngbDatepicker #activedate="ngbDatepicker">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="activedate.toggle()" type="button">
-                            <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                            </button>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
+                </div>
 
 
-                
+
               </div>
               <div class="row">
-                 
+
                 <!-- <div class="col-lg-2">
                   <div class="form-group">
                     <label for="">Last Billed On:</label>
@@ -141,13 +151,17 @@
                   </div>
                 </div> -->
                 <div class="col-lg-12" style="margin:5px 0;">
-                    
-                    <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px; margin-top:-2px;">
-                        Export to Csv <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                    </button>
-                  <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px; margin-top:-2px;" (click)="searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr)">
+
+                  <button type="button" id="searchBtn" class="btn btn-info float-right"
+                    style=" margin-left: 5px; line-height:17px; margin-top:-2px;">
+                    Export to Csv <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" id="searchBtn" class="btn btn-info float-right"
+                    style=" margin-left: 5px; line-height:17px; margin-top:-2px;"
+                    (click)="searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr)">
                     Search
-                    <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
+                    <i class="fa fa-search" aria-hidden="true"
+                      style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
                   </button>
                 </div>
               </div>
@@ -171,6 +185,22 @@
                 to CSV <i class="fa fa-cloud-download" aria-hidden="true"></i></button> </label>
           </div> -->
         </div>
+
+        <div style="float:right; margin-top: 10px;">
+          <span *ngIf="!filterSearchFlag">
+            {{this.page+1}} of {{totalPages}}
+          </span>
+
+          <span *ngIf="filterSearchFlag">
+            {{this.filterPage+1}} of {{totalPages}}
+          </span>
+
+          <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
+            (click)="previousFuntionality()">Prev</button>
+
+          <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()">Next</button>
+        </div>
+
 
       </div>
     </main>
