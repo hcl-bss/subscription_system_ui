@@ -6,6 +6,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClient } from "@angular/common/http";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-usermanagement',
   templateUrl: './usermanagement.component.html',
@@ -25,13 +26,14 @@ export class UsermanagementComponent implements OnInit {
   private context;
   private frameworkComponents;
   closeResult: string;
-  constructor(private flashMessage: FlashMessagesService,private modalService: NgbModal,private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
+  dropdownArray;
+  constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
     this.columnDefs = [
-      { headerName: 'User Profile', field: 'userProfile' , width: 125},
-      { headerName: 'First Name', field: 'userFirstName' , width: 145},
-      { headerName: 'Middle Name', field: 'userMiddleName' , width: 145},
+      { headerName: 'User Profile', field: 'userProfile', width: 125 },
+      { headerName: 'First Name', field: 'userFirstName', width: 145 },
+      { headerName: 'Middle Name', field: 'userMiddleName', width: 145 },
       { headerName: 'Last Name', field: 'userLastName', width: 145 },
-      { headerName: 'User Id', field: 'userId' , width: 145},
+      { headerName: 'User Id', field: 'userId', width: 145 },
       { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params", width: 250 }
     ];
     // this.rowData = this.createRowData();
@@ -43,24 +45,22 @@ export class UsermanagementComponent implements OnInit {
     this.rowGroupPanelShow = "always";
     this.pivotPanelShow = "always";
     this.paginationPageSize = 10;
-    // this.paginationStartPage =  0;
     this.paginationNumberFormatter = function (params) {
       return "[" + params.value.toLocaleString() + "]";
     };
   }
-  // //open popup code start
-  // openModal(id: string) {
-  //   this.modalService.open(id);
-  // }
-  // //open popup code end
 
-  // //close popup code start
-  // closeModal(id: string) {
-  //   this.modalService.close(id);
-  // }
-  // //close popup code end
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.globalServiceService.getStatusdropDown().subscribe(
+      data => {
+        this.dropdownArray = data;
+        this.dropdownArray = this.dropdownArray.dropDownList;
+      },
+      error => {
+        // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
+      });
+  }
   onPageSizeChanged(newPageSize) {
     var inputElement = <HTMLInputElement>document.getElementById("page-size");
     var value = inputElement.value;
@@ -70,19 +70,15 @@ export class UsermanagementComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    /* this.globalServiceService.usermanagementCalling().subscribe(
+    this.globalServiceService.getUserData().subscribe(
       data => {
         this.rowData = data;
+        this.rowData = this.rowData.userList;
         params.api.paginationGoToPage(1);
-      }); */
-    this.globalServiceService.getUserData().subscribe(
-		data => {
-			 this.rowData = data;
-			 params.api.paginationGoToPage(1);
-        },
-    error=>{
-     // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
-    });
+      },
+      error => {
+        // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
+      });
   }
   onQuickFilterChanged() {
     var inputElement = <HTMLInputElement>document.getElementById("quickFilter");
@@ -118,29 +114,40 @@ export class UsermanagementComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  addUserData(firstName,middleName,lastName,email,userProfile,password){
-    this.globalServiceService.addUser(email,userProfile,firstName,middleName,lastName,password).subscribe(
+  addUserData(firstName, middleName, lastName, email, userProfile, password) {
+    if(firstName == undefined || middleName == undefined || lastName == undefined || email == undefined || userProfile == undefined || password == undefined ){
+      this.flashMessage.show('All fiels are mandatory', { cssClass: 'alert-danger', timeout: 10000 });
+    }else{
+    this.globalServiceService.addUser(email, userProfile, firstName, middleName, lastName, password).subscribe(
       result => {
-      console.log(result);
-      this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 3000 });
+        let msg;
+        console.log(result);
+        msg = result;
+        msg = msg.message;
+        this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
+      //  window.location.reload();
       },
-		error=>{
-			console.log(error.status );
-			if(error.status===200){
-				this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 3000 });
-			}
-			else{
-			
-      this.flashMessage.show('User creation  failed !!', { cssClass: 'alert-danger', timeout: 3000 });
-			}
-    });
-  }
-  searchUser(user_profile,user_name,first_name,status_val){
+      error => {
+        console.log(error.status );
+        if (error.status === 200) {
+          this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
+        }
+        else {
 
-    console.log(user_profile,user_name,first_name,status_val);
-    this.globalServiceService.searchUserData(user_profile,user_name,first_name,status_val).subscribe(
+          this.flashMessage.show('User creation  failed !!', { cssClass: 'alert-danger', timeout: 10000 });
+        }
+      });
+  }
+}
+  searchUser(user_profile, user_name, first_name, status_val) {
+
+    console.log(user_profile, user_name, first_name, status_val);
+    this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val).subscribe(
       data => {
-      console.log(data);
+        this.rowData=[];
+        this.rowData=data;
+        this.rowData=this.rowData.userList;
+        console.log(data);
       });
   }
 }

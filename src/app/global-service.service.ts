@@ -21,6 +21,7 @@ export class GlobalServiceService {
   newPlanData;
   associationPlans: any;
   editProductData: string;
+  userData: any;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -325,7 +326,7 @@ sidebarsubmenu() {
     }));
   }
 
-  //edit user
+  //edit user of usermgmt
   editUser(userId, profile, firstName, middleName, lastName) {
     this.editdata = JSON.stringify(
       {
@@ -354,7 +355,7 @@ sidebarsubmenu() {
         "userId": userId
       });
 
-    return this.http.post(this.url + '/activate', this.activeDeactiveDta, {
+    return this.http.put(this.url + '/activate', this.activeDeactiveDta, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -384,8 +385,11 @@ sidebarsubmenu() {
 
   //All user data
   getUserData() {
-
-    return this.http.get(this.url + '/users', {
+    this.userData = JSON.stringify(
+      {
+       
+      });
+    return this.http.put(this.url + '/users',this.userData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -401,13 +405,13 @@ sidebarsubmenu() {
     this.searchData = JSON.stringify(
       {
         "userProfile": user_profile,
-        "username": user_name,
-        "firstname": first_name,
+        "userId": user_name,
+        "userFirstName": first_name,
         "status": status_val,
 
       });
 
-    return this.http.post(this.url + '/search', this.searchData, {
+    return this.http.put(this.url + '/users', this.searchData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -608,6 +612,19 @@ dateValidation(startDate, endDate){
 }
 
 //date validation end
+
+//get usermgmt status dropdown
+getStatusdropDown(){
+  return this.http.get(this.url + '/getDropDownList?dropDownCode=usrstatus',{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
 }
 
 

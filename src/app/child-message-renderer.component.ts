@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from './_helpers/must-match.validator';
 import { GlobalServiceService } from './global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'child-cell',
   template: `<ng-template #content let-modal>
@@ -54,19 +56,19 @@ import { FlashMessagesService } from 'angular2-flash-messages';
         <input type="text" class="form-control"  placeholder={{params.data.userProfile}} name="userProfile" [(ngModel)]="params.data.userProfile">
       </div> 
       </div>
-      <div class="col-lg-6">
-        <div class="form-group">
-          <label for="dateOfBirth"> Date:</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder={{params.data.isLocked}} name="dp" [(ngModel)]="params.data.isLocked" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
-              <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-              </button>
+     <!--     <div class="col-lg-6">
+            <div class="form-group">
+              <label for="dateOfBirth"> Date:</label>
+              <div class="input-group">
+                <input id="dateOfBirth" class="form-control" placeholder={{params.data.isLocked}} name="dp" [(ngModel)]="params.data.isLocked" ngbDatepicker #dp="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
+                  <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>  
+          </div>  -->
       
       </div>
       </form>
@@ -120,7 +122,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   <span><button title="Reset Password" style="height: 20px; font-size:12px;padding: 0 10px; margin-left:3px;" (click)="open(reset)" class="btn btn-info">Reset Password</button></span>
   <span style="float:left;margin-right: 3px;margin-top: 4px;">
     <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="{{params.data.userProfile}}" checked>
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" [checked]="chekedFlag" id="{{params.data.userProfile}}" checked>
       <label class="onoffswitch-label" for="{{params.data.userProfile}}" (click)="ActivateDeactivate(params.data.userId)">
           <span class="onoffswitch-inner"></span>
           <span class="onoffswitch-switch"></span>
@@ -201,7 +203,8 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
   closeResult: string;
   registerForm: FormGroup;
   submitted = false;
-  constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { }
+  chekedFlag;
+  constructor(private router:Router,private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -233,11 +236,19 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
 
   agInit(params: any): void {
     this.params = params;
+   
+    if(this.params.data.status=="Active"){
+      this.chekedFlag=true;
+    }
+    if(this.params.data.status=="Inactive"){
+      this.chekedFlag=false;
+    }
     this.data = this.params.data.userId;
+    console.log(this.data);
   }
-  public invokeParentMethod() {
-    console.log(this.params.data);
-  }
+  // public invokeParentMethod() {
+  //   console.log(this.params.data);
+  // }
 
   refresh(): boolean {
     return false;
@@ -251,11 +262,14 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     this.submitted = true;
     if (this.registerForm.valid) {
       let email=this.data;
-      console.log(this.registerForm.value.confirmPassword,email);
-      console.log(this.registerForm.value.password);
+      // console.log(this.registerForm.value.confirmPassword,email);
+      // console.log(this.registerForm.value.password);
       this.globalServiceService.resetPwd(email,this.registerForm.value.confirmPassword).subscribe(
         result => {
-          console.log(result);
+          let msg;
+          msg=result;
+          msg=msg.message;
+          this.flashMessage.show(msg, { cssClass: 'alert-success', timeout: 3000 });
         },
 		error=>{
 			
@@ -278,11 +292,15 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     //do APi calling 
 
   }
-  editData(firstName,middleName,lastName,userId,profile,date){
+  editData(firstName,middleName,lastName,userId,profile){
      this.globalServiceService.editUser(userId,profile,firstName,middleName,lastName).subscribe(
       result => {
+        let msg;
         console.log(result);
-        this.flashMessage.show('User updated successfully!', { cssClass: 'alert-danger', timeout: 3000 });
+        msg=result;
+        msg=msg.message;
+        this.flashMessage.show(msg, { cssClass: 'alert-success', timeout: 10000 });  
+        this.router.navigate(['/usermanagement']);
       },
       error=>{
 		  if(error.status==200){
@@ -295,9 +313,17 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
      );
   }
   ActivateDeactivate(id){
-    console.log(id)
+    console.log("*****",id);
     this.globalServiceService.activeDeactive(id).subscribe(
       result => {
+        let msg;
+        msg=result;
+        if(msg.message=="User activated successfully!"){
+          this.chekedFlag=true;
+        }
+        if(msg.message=="User deactivated successfully!"){
+          this.chekedFlag=false;
+        }
         console.log(result);
       }
      );

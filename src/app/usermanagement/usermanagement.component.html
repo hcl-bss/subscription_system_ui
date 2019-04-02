@@ -9,17 +9,7 @@
           
           <div class="ContentBox" style="display: block;">
             <main> 
-              <!-- Main Content 
-  
-              <div class="test-header">
-                Page Size:
-                <select (change)="onPageSizeChanged()" id="page-size">
-                  <option value="10" selected="">10</option>
-                  <option value="100">100</option>
-                  <option value="500">500</option>
-                  <option value="1000">1000</option>
-                </select>
-              </div> -->
+         
               <div class="container-fluid custom_search" style="padding: 0px;">
                 <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
                   <h5>User Management</h5>
@@ -31,11 +21,10 @@
                           <div class="form-group">
                             <label for="sel1">User Profile:</label>
                             <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="user_profile">
-							<option  [ngValue]="Select" hidden>Select</option> 
+							                <option  [ngValue]="Select" >Select</option> 
                               <option>Admin</option>
                               <option>Normal</option>
-                              <!-- <option>3</option>
-                              <option>4</option> -->
+                           
                             </select>
                           </div>
                         </div>
@@ -55,11 +44,8 @@
                           <div class="form-group">
                             <label for="sel1">Status:</label>
                             <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="status_val">
-							<option  [ngValue]="Select" hidden>Select</option> 
-                              <option>Active</option>
-                              <option>Deactive</option>
-                              <!-- <option>3</option>
-                              <option>4</option> -->
+							                <option  [ngValue]="Select" >Select</option> 
+                              <option *ngFor="let values of dropdownArray" >{{values}}</option>                             
                             </select>
                           </div>
                         </div>
@@ -89,14 +75,14 @@
               [rowGroupPanelShow]="rowGroupPanelShow"
               [pivotPanelShow]="pivotPanelShow"
               [enableRangeSelection]="true"
-              [pagination]="true"
+           
               [defaultColDef]="defaultColDef"
               [suppressRowClickSelection]="true"
               [rowSelection]="rowSelection"
-              [paginationPageSize]="paginationPageSize"              
+                     
               [enableSorting]="true" 
               [enableFilter]="true"
-              [pagination]="true" 
+           
               [rowData]="rowData"
               [columnDefs]="columnDefs"
               (gridReady)="onGridReady($event)"
@@ -104,11 +90,11 @@
             ></ag-grid-angular>
 
           </div>
-            <div style="position: absolute; top: 10px; left: auto; width: 100%;">
+            <!-- <div style="position: absolute; top: 10px; left: auto; width: 100%;">
                 <input type="text" class="form-control" (input)="onQuickFilterChanged()" style="width: 30%; display: inline-block;" id="quickFilter" placeholder="quick filter..." />
-                <!-- <label> File Name: <input type="text" id="fileName" /> </label> -->
+                !-- <label> File Name: <input type="text" id="fileName" /> </label> 
                 <label style="margin-left: 20px;"> <button (click)="onBtExport()" class="btn btn-info" style="margin-top: -7px;">Export to CSV <i aria-hidden="true" class="fa fa-cloud-download"></i></button> </label>
-              </div>
+              </div> -->
               
   </div>
   </div>

@@ -7,8 +7,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'child-cell',
-  template: `<!--<span><button style="height: 20px; line-height: 0.5" (click)="open(editProduct)" class="btn btn-info">Edit</button></span>-->
-  <span style="float:left;margin-right: 3px;margin-top: 4px;">
+  template: `<span><i (click)="open(editProduct)" class="fa fa-pencil-square-o fa-2" aria-hidden="true" style="cursor:pointer;"></i></span>
+  <!-- <span style="float:left;margin-right: 3px;margin-top: 4px;">
     <div class="onoffswitch">
       <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="{{params.data.userProfile}}" (change)="FieldsChange($event)">
       <label class="onoffswitch-label" for="{{params.data.userProfile}}" (click)="ActivateDeactivate(params.data.userId)">
@@ -16,7 +16,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
           <span class="onoffswitch-switch"></span>
       </label>
     </div>
-  </span>
+  </span>-->
   <ng-template #editProduct let-modal>
 
         <div class="modal-header">
@@ -40,7 +40,14 @@ import { FlashMessagesService } from 'angular2-flash-messages';
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="name"> Name:</label>
-                  <input type="text" class="form-control" placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="nameEditProd">
+                  <span  *ngIf="!filterSearchFlag">
+                  <input type="text" class="form-control"  placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="nameEditProd">
+                </span>
+      
+                <span  *ngIf="filterSearchFlag">
+                <input type="text" class="form-control" disabled placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="nameEditProd">
+                </span>
+                 
                 </div>
               </div>
               <div class="col-lg-4">
@@ -52,7 +59,17 @@ import { FlashMessagesService } from 'angular2-flash-messages';
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="sku">SKU:</label>
+
+
+                  <span  *ngIf="!filterSearchFlag">
                   <input type="text" class="form-control" placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="skuEditProd">
+                </span>
+      
+                <span  *ngIf="filterSearchFlag">
+                <input type="text" class="form-control" disabled placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="skuEditProd">
+                </span>
+
+                  
                 </div>
               </div>
             </div>
@@ -60,38 +77,81 @@ import { FlashMessagesService } from 'angular2-flash-messages';
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="startdate">Start Date:</label>
+                  
+                  <span  *ngIf="!filterSearchFlag">
                   <div class="input-group">
-                    <input id="startDateId" readonly class="form-control" placeholder={{params.data.productStartDate}} name="startDateEditProd" [(ngModel)]="startDateEditProd" ngbDatepicker
-                      (click)="startDateEdit.toggle()" #startDateEdit="ngbDatepicker">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="startDateEdit.toggle()" type="button">
-                        <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                      </button>
-                    </div>
+                  <input id="startDateId"  readonly class="form-control" placeholder={{params.data.productStartDate}} name="startDateEditProd" [(ngModel)]="startDateEditProd" ngbDatepicker
+                    (click)="startDateEdit.toggle()" #startDateEdit="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="startDateEdit.toggle()" type="button">
+                      <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                    </button>
                   </div>
+                  
+</div>
+                </span>
+      
+                <span  *ngIf="filterSearchFlag">
+                <div class="input-group">
+                <input id="startDateId" disabled readonly class="form-control" placeholder={{params.data.productStartDate}} name="startDateEditProd" [(ngModel)]="startDateEditProd" ngbDatepicker
+                  (click)="startDateEdit.toggle()" #startDateEdit="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="startDateEdit.toggle()" type="button">
+                    <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                  </button>
+                </div>
+                
+</div>
+                </span>
+                 
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="enddate"> End Date:</label>
+                  <span  *ngIf="!filterSearchFlag">
                   <div class="input-group">
-                    <input id="endDateId" readonly class="form-control" placeholder={{params.data.productExpDate}} name="endDateEditProd" [(ngModel)]="endDateEditProd" ngbDatepicker
-                      (click)="endDateEdit.toggle()" #endDateEdit="ngbDatepicker">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="endDateEdit.toggle()" type="button">
-                        <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                      </button>
-                    </div>
+                  <input id="endDateId" readonly class="form-control" placeholder={{params.data.productExpDate}} name="endDateEditProd" [(ngModel)]="endDateEditProd" ngbDatepicker
+                    (click)="endDateEdit.toggle()" #endDateEdit="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="endDateEdit.toggle()" type="button">
+                      <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                    </button>
                   </div>
+                </div>
+                </span>
+      
+                <span  *ngIf="filterSearchFlag">
+                <div class="input-group">
+                <input id="endDateId" disabled readonly class="form-control" placeholder={{params.data.productExpDate}} name="endDateEditProd" [(ngModel)]="endDateEditProd" ngbDatepicker
+                  (click)="endDateEdit.toggle()" #endDateEdit="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="endDateEdit.toggle()" type="button">
+                    <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+                </span>
+                
                 </div>
               </div>
                   <div class="col-lg-4">
                     <div class="form-group">
                       <label for="producttype"> Product Type:</label>
+                      <span  *ngIf="!filterSearchFlag">
                       <select class="form-control" id="sel1"  name="producttypeEditProd" [(ngModel)]="producttypeEditProd" (change)="dropDown(producttypeEditProd)">
-                        <option [ngValue]="Select" hidden>{{params.data.productTypeCode}}</option>
-                        <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
-                      </select>
+                      <option [ngValue]="Select" hidden>{{params.data.productTypeCode}}</option>
+                      <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
+                    </select>
+                    </span>
+          
+                    <span  *ngIf="filterSearchFlag">
+                    <select disabled class="form-control" id="sel1"  name="producttypeEditProd" [(ngModel)]="producttypeEditProd" (change)="dropDown(producttypeEditProd)">
+                    <option [ngValue]="Select" hidden>{{params.data.productTypeCode}}</option>
+                    <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
+                    </select>
+                    </span>
+                   
                     </div>
                   </div>
             </div>
@@ -115,22 +175,25 @@ export class ChildMessageRendereredit implements ICellRendererAngularComp {
   closeResult: string;
   DrodownArray;
   P_code_Type;
+  filterSearchFlag;
   constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService, private formBuilder: FormBuilder, private globalServiceService: GlobalServiceService) { }
   agInit(params: any): void {
     this.params = params;
+    this.filterSearchFlag = this.params.data.transactionFlag;
+
   }
 
   ngOnInit() {
     this.globalServiceService.fetchdropdownvalues().subscribe(data => {
       this.DrodownArray = data;
-      console.log(this.DrodownArray);
+      //  console.log(this.DrodownArray);
     });
-    
+
   }
-  FieldsChange(values:any){
-    
-    console.log(values.currentTarget.checked);
-    }
+  FieldsChange(values: any) {
+
+    //  console.log(values.currentTarget.checked);
+  }
   refresh(): boolean {
     return false;
   }
@@ -184,12 +247,13 @@ ${reason}`;
         }
       }
     }
-    this.globalServiceService.editProduct(this.params.data.uidpk,nameEditProd,descriptionEditProd,skuEditProd,startDateEditProd,endDateEditProd,this.P_code_Type).subscribe(
-      result=>{
-      
-      },
-      error=>{
+    this.globalServiceService.editProduct(this.params.data.uidpk, nameEditProd, descriptionEditProd, skuEditProd, startDateEditProd, endDateEditProd, this.P_code_Type).subscribe(
+      result => {
 
+      },
+      error => {
+        console.log(error.error.message);
+        this.flashMessage.show(error.error.message, { cssClass: 'alert-danger', timeout: 5000 });
       }
     )
   }
