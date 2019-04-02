@@ -604,12 +604,7 @@ ${reason}`;
         this.rowData = this.rowData.productList;
       });
   }
-  // openMapping(){
-  //   this.flagMapping=true;
-  //   this.productMainPage=false;
-  // }
-  // backToProduct(){
-  //   this.flagMapping=false;
-  //   this.productMainPage=true;
-  // }
+  moveToAssociatePlan(){    
+    this.router.navigate(['/associateplan']);
+  }
 }

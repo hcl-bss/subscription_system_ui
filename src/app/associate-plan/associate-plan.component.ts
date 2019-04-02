@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AssociateMappingComponent } from '../associate-mapping.component';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-associate-plan',
   templateUrl: './associate-plan.component.html',
@@ -34,7 +35,7 @@ export class AssociatePlanComponent implements OnInit {
   associatedPlan;
   plans = [];
   updatePlans = [];
-  constructor(private flashMessage: FlashMessagesService, private associateMappingComponent: AssociateMappingComponent, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
+  constructor( private router: Router,private flashMessage: FlashMessagesService, private associateMappingComponent: AssociateMappingComponent, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
       { headerName: 'Plan ID', field: 'ratePlanId' },
@@ -194,5 +195,8 @@ export class AssociatePlanComponent implements OnInit {
   }
   onSelectionChanged1(event: any) {
   
+  }
+  backToProduct(){
+    this.router.navigate(['/product']);
   }
 }

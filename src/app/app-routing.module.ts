@@ -23,14 +23,12 @@ const routes: Routes = [
     {
       path: 'import',
       component: ImportPlanComponent
-    },
-    {
-      path: 'associateplan',
-      component: AssociatePlanComponent
-    }],
+    }
+   ],
   
   canActivate :[AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate :[AuthGuard] },
+  { path: 'associateplan',component: AssociatePlanComponent, canActivate :[AuthGuard] },  
   { path: 'subscriptions', component: ContactListComponent,
   children: [
     {
