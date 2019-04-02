@@ -3,6 +3,8 @@ import { ModalsService } from '../modal.service';
 import { GlobalServiceService } from '../global-service.service';
 
 import { HttpClient } from "@angular/common/http";
+import { ChartType, ChartOptions } from 'chart.js';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +14,28 @@ import { HttpClient } from "@angular/common/http";
 export class DashboardComponent implements OnInit {
   page =0;
   private rowData: any;
+  sucess;
+  failed;
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  public pieChartLabels: Label[] = [['Failed Result'], ['Sucess Result']];
+  public pieChartData: SingleDataSet = [this.failed, this.sucess];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartPlugins = [];
+  public chartColors: Array<any> = [
+    { // all colors in order
+      backgroundColor: ['#f7464a', '#97bbcd']
+    }
+]
+
+
+
+  
   constructor(private http: HttpClient, private globalServiceService: GlobalServiceService) { 
-    
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
   }
 
 
@@ -22,19 +44,27 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() { 
     this.page =1;
+
+    
     this.globalServiceService.subreport(this.page).subscribe(
       data => {
-        this.rowData = data;
-        
+        this.rowData = data; 
         data = this.rowData.success;
-       
        console.log(this.rowData.success+ "*******");
        console.log(this.rowData.failed+ "*******");
-        this.rowData = this.rowData.batchRunLogDtoList;
+        this.sucess = this.rowData.success;
+        this.failed = this.rowData.failed;
+        this.pieChartData= [this.failed, this.sucess];
+        //console.log(this.pieChartData);
       });
+      
+  
+  }
+
+    
   }
   
 
  
-}
+
 

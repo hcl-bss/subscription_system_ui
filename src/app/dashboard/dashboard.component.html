@@ -1,28 +1,42 @@
-
-      <div id="rightSideWrapper">
-        <div class="ContentBox">
-          <main>
-              <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5>
-              <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4">
-                      <div style="width: 100%; border:2px solid #bababa; border-radius: 10px; padding: 5px; box-sizing: border-box;">
-                          <label>success = 235</label>
-                        <div class="progress" style="margin-bottom: 10px;">
-                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.max-width]="'80%'" ></div>
+<div id="rightSideWrapper">
+  <div class="ContentBox">
+    <main>
+      <!-- <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5> -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- <div class="col-lg-4">
+            <div style="width: 100%; border:2px solid #bababa; border-radius: 10px; padding: 5px; box-sizing: border-box;">
+              <label>success = 235</label>
+              <div class="progress" style="margin-bottom: 10px;">
+                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="60"
+                  aria-valuemin="0" aria-valuemax="100" [style.max-width]="'80%'"></div>
               </div>
               <label>failed = 23</label>
               <div class="progress">
-                  
-                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style.max-width]="'20%'"></div>
+
+                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" aria-valuenow="60"
+                  aria-valuemin="0" aria-valuemax="100" [style.max-width]="'20%'"></div>
               </div>
-              <label style="width: 100%; display: inline-block;"><a  style="float: right; text-decoration: underline; color:blue; cursor: pointer;" routerLink='/subscriptions'> More Info..</a></label>
-              </div>
-              </div>
-              </div>
-              </div>
-              
-              <!-- <div class="container-fluid">
+              <label style="width: 100%; display: inline-block;"><a
+                  style="float: right; text-decoration: underline; color:blue; cursor: pointer;"
+                  routerLink='/subscriptions'> More Info..</a></label>
+            </div>
+          </div> -->
+          <div class="col-lg-4">
+            <h6>Last Day Result</h6>
+              <a  href="javascript:void(0)" class="widget_one" routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." >
+            <div style="display: block;">
+              <canvas baseChart [class]="chart" [colors]="chartColors" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+              </canvas>
+            </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="dashboard_list">
@@ -72,7 +86,7 @@
 
 
 
-            <!-- <div class="test-header" style="margin-bottom: 10px;">
+      <!-- <div class="test-header" style="margin-bottom: 10px;">
               Page Size:
               <select (change)="onPageSizeChanged()" id="page-size">
                 <option value="10" selected="">10</option>
@@ -87,11 +101,11 @@
               [pagination]="true" [paginationPageSize]="paginationPageSize" [paginationNumberFormatter]="paginationNumberFormatter"
               [enableSorting]="true" [enableFilter]="true" [pagination]="true" [rowData]="rowData" [columnDefs]="columnDefs"
               (gridReady)="onGridReady($event)"></ag-grid-angular> -->
-          </main>
-         
-        </div>
-      </div>
-     
+    </main>
+
+  </div>
+</div>
+
 
 
 <!-- <app-header></app-header>

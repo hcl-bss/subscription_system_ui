@@ -34,6 +34,7 @@ import { NgbDateFRParserFormatter } from "./ngb-date-fr-parser-formatter";
 import { ChildMessageRendereredit } from './products/child-message-renderer_btn.component';
 import { AssociatePlanComponent } from './associate-plan/associate-plan.component';
 import { AssociateMappingComponent } from './associate-mapping.component';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,7 @@ import { AssociateMappingComponent } from './associate-mapping.component';
   ],
 
   imports: [
-    BrowserModule,FormsModule,HttpClientModule,HttpModule,GridModule,ReactiveFormsModule,
+    BrowserModule,FormsModule,HttpClientModule,HttpModule,GridModule,ReactiveFormsModule,ChartsModule,
     AppRoutingModule,NgbModule.forRoot(),FlashMessagesModule.forRoot(),  
     AgGridModule.withComponents([ChildMessageRenderer,AssociateMappingComponent]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
     AgGridModule.withComponents([FileDownloadComponent,ChildMessageRendereredit]) ,
