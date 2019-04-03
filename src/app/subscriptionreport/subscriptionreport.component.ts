@@ -116,6 +116,11 @@ export class SubscriptionreportComponent implements OnInit {
       data => {
         this.rowData = data;
         this.totalpage = this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+          (document.getElementById("next") as HTMLInputElement).disabled = false;
+        }
         this.rowData = this.rowData.batchRunLogDtoList;
 
       });

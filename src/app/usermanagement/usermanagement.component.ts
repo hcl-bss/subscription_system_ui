@@ -27,6 +27,17 @@ export class UsermanagementComponent implements OnInit {
   private frameworkComponents;
   closeResult: string;
   dropdownArray;
+  page = 0;
+  filterPage = 0;
+  status_valMain;
+  filterSearchFlag = false;
+  totalpage;
+  firstName;
+  middleName;
+  lastName;
+  email;
+  userProfile;
+  password;
   constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
     this.columnDefs = [
       { headerName: 'User Profile', field: 'userProfile', width: 125 },
@@ -70,11 +81,27 @@ export class UsermanagementComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.globalServiceService.getUserData().subscribe(
+    this.dataOnLoad();
+    params.api.paginationGoToPage(1);
+  }
+  dataOnLoad(){
+   
+    this.globalServiceService.getUserData(this.page).subscribe(
       data => {
         this.rowData = data;
+        this.totalpage = this.rowData.totalPages;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+          (document.getElementById("next") as HTMLInputElement).disabled = false;
+        }
         this.rowData = this.rowData.userList;
-        params.api.paginationGoToPage(1);
+      //  params.api.paginationGoToPage(1);
+
+
+        // this.rowData = data;
+        // this.totalpage = this.rowData.totalPages;
+        // this.rowData = this.rowData.batchRunLogDtoList;
       },
       error => {
         // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
@@ -125,6 +152,8 @@ export class UsermanagementComponent implements OnInit {
         msg = result;
         msg = msg.message;
         this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
+        this.firstName="", this.middleName="", this.lastName="", this.email="", this.userProfile="", this.password="";
+        this.dataOnLoad();
       //  window.location.reload();
       },
       error => {
@@ -140,15 +169,103 @@ export class UsermanagementComponent implements OnInit {
   }
 }
   searchUser(user_profile, user_name, first_name, status_val) {
-
-    console.log(user_profile, user_name, first_name, status_val);
-    this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val).subscribe(
+    this.filterPage=0; 
+    (document.getElementById("prev") as HTMLInputElement).disabled = true;
+    this.filterSearchFlag = true;
+    this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
       data => {
         this.rowData=[];
         this.rowData=data;
+        if (this.rowData.lastPage == true) {
+          (document.getElementById("next") as HTMLInputElement).disabled = true;
+        } else {
+          (document.getElementById("next") as HTMLInputElement).disabled = false;
+        }
         this.rowData=this.rowData.userList;
-        console.log(data);
       });
+  }
+
+  previousFuntionality(user_profile, user_name, first_name, status_val) {
+    this.page = this.page - 1;
+    if (this.page == 0) {
+      (document.getElementById("prev") as HTMLInputElement).disabled = true;
+    }
+
+    if (this.filterSearchFlag == true) {
+      this.filterPage = this.filterPage - 1;
+      if (this.filterPage == 0) {
+        (document.getElementById("prev") as HTMLInputElement).disabled = true;
+      }
+     
+
+        this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
+          data => {
+            this.rowData=[];
+            this.rowData=data;
+            this.totalpage = this.rowData.totalPages;
+            if (this.rowData.lastPage == true) {
+              (document.getElementById("next") as HTMLInputElement).disabled = true;
+            } else {
+              (document.getElementById("next") as HTMLInputElement).disabled = false;
+            }
+            this.rowData=this.rowData.userList;
+          });
+    }
+    else {
+      this.globalServiceService.getUserData(this.page).subscribe(
+        data => {
+          this.rowData = data;
+          this.totalpage = this.rowData.totalPages;
+          if (this.rowData.lastPage == true) {
+            (document.getElementById("next") as HTMLInputElement).disabled = true;
+          } else {
+            (document.getElementById("next") as HTMLInputElement).disabled = false;
+          }
+          this.rowData = this.rowData.userList;
+          
+        },
+        error => {
+        });
+
+    }
+  }
+  nextFuntionality(user_profile, user_name, first_name, status_val) {
+    (document.getElementById("prev") as HTMLInputElement).disabled = false;
+    this.page = this.page + 1;
+    if (this.filterSearchFlag == true) {
+      this.filterPage = this.filterPage + 1;
+
+        this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
+          data => {
+            this.rowData=[];
+            this.rowData=data;
+            this.totalpage = this.rowData.totalPages;
+            if (this.rowData.lastPage == true) {
+              (document.getElementById("next") as HTMLInputElement).disabled = true;
+            } else {
+              (document.getElementById("next") as HTMLInputElement).disabled = false;
+            }
+            this.rowData=this.rowData.userList;
+          });
+    }
+    else {   
+        this.globalServiceService.getUserData(this.page).subscribe(
+          data => {
+            this.rowData = data;
+            this.totalpage = this.rowData.totalPages;
+            if (this.rowData.lastPage == true) {
+              (document.getElementById("next") as HTMLInputElement).disabled = true;
+            } else {
+              (document.getElementById("next") as HTMLInputElement).disabled = false;
+            }
+            this.rowData = this.rowData.userList;
+            
+          },
+          error => {
+           
+          });
+    }
+
   }
 }
 

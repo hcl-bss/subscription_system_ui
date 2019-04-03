@@ -53,7 +53,17 @@ import { Router } from "@angular/router";
       <div class="col-lg-6">     
         <div class="form-group">
         <label for="userProfile">userProfile:</label>
-        <input type="text" class="form-control"  placeholder={{params.data.userProfile}} name="userProfile" [(ngModel)]="params.data.userProfile">
+        <!--<input type="text" class="form-control"  placeholder={{params.data.userProfile}} name="userProfile" [(ngModel)]="params.data.userProfile">-->
+
+        <select class="form-control form-control-sm"  name="userProfile" [(ngModel)]="params.data.userProfile">
+        <option  [ngValue]="Select" hidden>Select</option> 
+        <option>Admin</option>
+        <option>Normal</option>             
+      </select>
+
+
+
+
       </div> 
       </div>
      <!--     <div class="col-lg-6">
@@ -122,8 +132,9 @@ import { Router } from "@angular/router";
   <span><button title="Reset Password" style="height: 20px; font-size:12px;padding: 0 10px; margin-left:3px;" (click)="open(reset)" class="btn btn-info">Reset Password</button></span>
   <span style="float:left;margin-right: 3px;margin-top: 4px;">
     <div class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" [checked]="chekedFlag" id="{{params.data.userProfile}}" checked>
-      <label class="onoffswitch-label" for="{{params.data.userProfile}}" (click)="ActivateDeactivate(params.data.userId)">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" [checked]="chekedFlag" id="{{params.data.userProfile}}">
+    <!--  <label class="onoffswitch-label" for="{{params.data.userProfile}}" (click)="ActivateDeactivate(params.data.userId)"> -->
+    <label class="onoffswitch-label" (click)="ActivateDeactivate(params.data.userId)">
           <span class="onoffswitch-inner"></span>
           <span class="onoffswitch-switch"></span>
       </label>
@@ -204,6 +215,7 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
   registerForm: FormGroup;
   submitted = false;
   chekedFlag;
+  editrowData;
   constructor(private router:Router,private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { }
 
   ngOnInit() {
@@ -305,6 +317,7 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
       error=>{
 		  if(error.status==200){
           this.flashMessage.show('User updated successfully!', { cssClass: 'alert-success', timeout: 3000 });
+
 		  }
 		  else{
 			  this.flashMessage.show('User updation failed!', { cssClass: 'alert-danger', timeout: 3000 });

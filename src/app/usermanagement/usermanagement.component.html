@@ -89,6 +89,21 @@
               [frameworkComponents]="frameworkComponents"
             ></ag-grid-angular>
 
+            <div style="float:right; margin-top: 10px;">
+                <span class="total_page" *ngIf="!filterSearchFlag">
+                  {{this.page+1}} of {{this.totalpage}}
+                </span>
+      
+                <span class="total_page" *ngIf="filterSearchFlag">
+                  {{this.filterPage+1}} of {{this.totalpage}}
+                </span>
+      
+                <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
+                  (click)="previousFuntionality(user_profile,user_name,first_name,status_val)">Prev</button>
+      
+                <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality(user_profile,user_name,first_name,status_val)">Next</button>
+              </div>
+
           </div>
             <!-- <div style="position: absolute; top: 10px; left: auto; width: 100%;">
                 <input type="text" class="form-control" (input)="onQuickFilterChanged()" style="width: 30%; display: inline-block;" id="quickFilter" placeholder="quick filter..." />
@@ -147,14 +162,19 @@
         <div class="col-lg-6">
           <div class="form-group">
             <label for="userProfile">User Profile:</label>
-            <input type="text" class="form-control"  name="userProfile" [(ngModel)]="userProfile"
-             >
+            <!-- <input type="text" class="form-control"  name="userProfile" [(ngModel)]="userProfile"
+             > -->
+             <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="user_profile">
+                <option  [ngValue]="Select" hidden>Select</option> 
+                <option>Admin</option>
+                <option>Normal</option>             
+              </select>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="userProfile">Password:</label>
-            <input type="text" class="form-control"  name="password" [(ngModel)]="password"
+            <input type="password" class="form-control"  name="password" [(ngModel)]="password"
              >
           </div>
         </div>

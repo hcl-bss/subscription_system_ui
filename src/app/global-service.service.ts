@@ -384,10 +384,11 @@ sidebarsubmenu() {
   }
 
   //All user data
-  getUserData() {
+  getUserData(page) {
     this.userData = JSON.stringify(
       {
-       
+        "pageNo": page,
+
       });
     return this.http.put(this.url + '/users',this.userData, {
       headers: new HttpHeaders({
@@ -400,7 +401,7 @@ sidebarsubmenu() {
   }
 
   //search user data
-  searchUserData(user_profile, user_name, first_name, status_val) {
+  searchUserData(user_profile, user_name, first_name, status_val,page) {
 
     this.searchData = JSON.stringify(
       {
@@ -408,6 +409,7 @@ sidebarsubmenu() {
         "userId": user_name,
         "userFirstName": first_name,
         "status": status_val,
+        "pageNo": page
 
       });
 
