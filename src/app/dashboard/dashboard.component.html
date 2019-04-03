@@ -3,25 +3,8 @@
     <main>
       <!-- <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5> -->
       <div class="container-fluid">
-        <div class="row">
-          <!-- <div class="col-lg-4">
-            <div style="width: 100%; border:2px solid #bababa; border-radius: 10px; padding: 5px; box-sizing: border-box;">
-              <label>success = 235</label>
-              <div class="progress" style="margin-bottom: 10px;">
-                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="60"
-                  aria-valuemin="0" aria-valuemax="100" [style.max-width]="'80%'"></div>
-              </div>
-              <label>failed = 23</label>
-              <div class="progress">
-
-                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" aria-valuenow="60"
-                  aria-valuemin="0" aria-valuemax="100" [style.max-width]="'20%'"></div>
-              </div>
-              <label style="width: 100%; display: inline-block;"><a
-                  style="float: right; text-decoration: underline; color:blue; cursor: pointer;"
-                  routerLink='/subscriptions'> More Info..</a></label>
-            </div>
-          </div> -->
+        <!-- <div class="row">
+         
           <div class="col-lg-4">
             <h6>Last Day Result</h6>
               <a  href="javascript:void(0)" class="widget_one" routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." >
@@ -33,19 +16,120 @@
             </a>
           </div>
 
-          <!-- <div class="col-lg-4">
-              <h6>Last Day Result</h6>
-              <div class="row">
-                <div class="col-lg-10">jhwehef</div>
-                <div class="col-lg-2">212</div>
-              </div>
-              <div class="row">
-                  <div class="col-lg-10">jhwehef</div>
-                  <div class="col-lg-2">212</div>
-                </div>
-          </div> -->
+         
 
+        </div> -->
+
+
+        <div class="row">
+            <!-- <div class="col-lg-3 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="nc-icon nc-chart text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="card-category">Number</p>
+                                    <h4 class="card-title">150GB</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-refresh"></i> Update Now
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-lg-3 col-sm-6">
+                <div class="card card-stats" class="widget_one" routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                    <div class="card-body ">
+                        <div class="row">
+                            <!-- <div class="col-2">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="fa fa-lightbulb-o fa-5" aria-hidden="true"></i>
+                                </div>
+                            </div> -->
+                            <div class="col-12">
+                                <div class="numbers" >
+                                    <p class="card-category">Sucess subscriptions - <strong>{{this.rowData.success}}</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>{{this.rowData.failed}}</strong> </p>
+                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-calendar-o"></i> Last day
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-3 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="nc-icon nc-vector text-danger"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="card-category">Errors</p>
+                                    <h4 class="card-title">23</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-clock-o"></i> In the last hour
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-3 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="numbers">
+                                    <p class="card-category">Followers</p>
+                                    <h4 class="card-title">+45K</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-refresh"></i> Update now
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
+        <!-- dashboard end -->
+        
+        
+
+
       </div>
 
       <!-- <div class="container-fluid">

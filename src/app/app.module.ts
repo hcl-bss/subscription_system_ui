@@ -35,6 +35,7 @@ import { ChildMessageRendereredit } from './products/child-message-renderer_btn.
 import { AssociatePlanComponent } from './associate-plan/associate-plan.component';
 import { AssociateMappingComponent } from './associate-mapping.component';
 import { ChartsModule } from 'ng2-charts';
+import {GlobalPropertiesService} from './global-properties.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,7 @@ import { ChartsModule } from 'ng2-charts';
     [ Ng4LoadingSpinnerModule.forRoot() ] 
   ],
  
-  providers: [ NgbDateFRParserFormatter, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent],
+  providers: [ NgbDateFRParserFormatter,GlobalPropertiesService, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

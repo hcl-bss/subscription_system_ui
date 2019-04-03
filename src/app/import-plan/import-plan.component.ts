@@ -128,8 +128,8 @@ export class ImportPlanComponent implements OnInit {
 
   }
   reload(){
-    //window.location.reload();
-    this.router.navigate(['/product/import']);
+    window.location.reload();
+    //this.router.navigate(['/product/import']);
   }
   fileChange() {
 

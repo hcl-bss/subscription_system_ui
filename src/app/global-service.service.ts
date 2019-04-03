@@ -267,12 +267,12 @@ sidebarsubmenu() {
         "productDispName": name,
         "productExpDate": endDate,
         "productStartDate": startDate,
-        "productTypeCode": pCode,
+        "productType": pCode,
         "sku": sku,
         "uidpk":uidpk
       });
 
-    return this.http.post(this.url + '/product', this.editProductData, {
+    return this.http.post(this.url + '/updateProduct', this.editProductData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -480,56 +480,63 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
 //add plan start
 addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArray, currencyType, price, radioParam, billingCyclesInput, freeTrial, setupFee, planDescription) {
 
-  // this.resultVolume = { "name1": "", "description1": "", "qty1": "" };
-  // for (var i = 0; i < volumevalue.length; i++) {
-  //   this.resultVolume.name1 = volumevalue[i].name;
-  //   this.resultVolume.description1 = volumevalue[i].description;
-  //   this.resultVolume.qty1 = volumevalue[i].qty;
-  // }
-  // console.log(volumevalue1.unshift(this.resultVolume));
-
-
-
-  // let uniqueArray = this.removeDuplicates(volumevalue1, "name1");
-
-  // for (let i =0 ; i< uniqueArray.length;i++) {
-  //   if(uniqueArray[i].name1  < uniqueArray[i].description1){
-  //       console.log("Going good !!");
-  //       if (uniqueArray[i].description1 == uniqueArray[i + 1].name1 - 1) {
-  //         console.log("yes");
-  //         this.showErrorMsg=true;           
-  //       }
-  //       else {
-  //         console.log("false")
-  //         this.showErrorMsg=false;          
-         
-  //       }
-  //   }   
-   
-
-  // }
 
   this.newPlanData = JSON.stringify(
     {
-      "planName": planName,
-      "planCode": planCode,
-      "billEveryFrequency": billEvery,
-      "billEveryPeriod": billingTime,
-      "pricingScheme": {
-        "type": pricingSchemePlan,
-        "details": uniqueArray,
-        "unitPrice": ""
-      },
-      "priceCurrency": currencyType,
-      "price": price,
-      "billingCycles": radioParam,
-      "expiresAfterCount": billingCyclesInput,
-      "freeTrial": freeTrial,
-      "setupFee": setupFee,
-      "planDescription": planDescription
+          "name": planName,
+          "ratePlanId": planCode,
+          "billingCycleTerm": billEvery,
+          "billEvery": billingTime,
+          "pricingScheme": pricingSchemePlan,
+          "currencyCode": currencyType,
+          "ratePlanVolumeDtoList":uniqueArray,
+          "expireAfter": billingCyclesInput,
+          "setUpFee": setupFee,
+          "freeTrail": freeTrial,
+          "type": "DEVICE",// 
+          "isActive": "INACTIVE"//
 
+      
+               
+      // "price": price,
+      // "billingCycleTerm": radioParam,
+     
+     
+      
+      //"planDescription": planDescription,
 
-    });
+    },
+    // {
+    //         "billingCycleTerm": 2,
+    //         "billEvery": "WEEKLY",
+    //         "ratePlanId": "TST05",
+    //         "name": "TESTING05",
+    //         "currencyCode": "USD",            
+    //         "pricingScheme": pricingSchemePlan,
+    //         "ratePlanVolumeDtoList": [
+    //           {
+    //             "endQty": 25,
+    //             "price": 10.50,
+    //             "startQty": 1
+    //           },
+    //         {
+    //             "endQty": 50,
+    //             "price": 9.50,
+    //             "startQty": 26
+    //           },
+    //         {
+    //             "endQty": 1000,
+    //             "price": 9.00,
+    //             "startQty": 51
+    //           }
+    //         ],
+    //         "expireAfter": 999,
+    //         "setUpFee": 0,
+    //         "freeTrail": 0,
+
+      
+    // }
+  );
  // volumevalue1 = [];
 
 return this.http.post(this.url + '/product', this.newPlanData, {

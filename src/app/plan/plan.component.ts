@@ -9,6 +9,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NgbDatepickerConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateFRParserFormatter } from "../ngb-date-fr-parser-formatter";
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, NgForm, MaxLengthValidator } from '@angular/forms';
+import {GlobalPropertiesService} from "../global-properties.service";
 
 @Component({
   selector: 'app-plan',
@@ -57,11 +58,12 @@ export class PlanComponent implements OnInit {
   validQty: boolean;
   volumeArr=[];
   hello;
+  fetchValues;
 
   public invoiceForm: FormGroup;
 
 
-  constructor(private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) 
+  constructor(private globalPropertiesService:GlobalPropertiesService,private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) 
     {
       this.columnDefs = [
         { headerName: 'Plan ID', field: 'planID', editable: true },
@@ -94,6 +96,10 @@ export class PlanComponent implements OnInit {
   }
 
   ngOnInit(){
+
+
+    this.fetchValues=this.globalPropertiesService.getPropertyValues();
+
     this.globalServiceService.fetchdropdownvalues().subscribe(
       data => {
         this.DrodownArray = data;
@@ -204,7 +210,7 @@ export class PlanComponent implements OnInit {
     this.gridApi.paginationSetPageSize(Number(value));
   }
 
-  // onGridReady(params) {
+   onGridReady(params) {
   //   this.gridApi = params.api;
   //   this.gridColumnApi = params.columnApi;
   //   this.globalServiceService.usermanagementCalling().subscribe(
@@ -214,7 +220,7 @@ export class PlanComponent implements OnInit {
   //       params.api.paginationGoToPage(1);
   //     });
     
-  // }
+  }
   onQuickFilterChanged() {
     var inputElement = <HTMLInputElement>document.getElementById("quickFilter");
     this.gridApi.setQuickFilter(inputElement.value);
@@ -241,9 +247,11 @@ export class PlanComponent implements OnInit {
     console.log(x);
     if (x === "Volume") {
       this.volumePricingScheme = true;
+      (document.getElementById("price_unit") as HTMLInputElement).disabled = true;
     }
     else {
       this.volumePricingScheme = false;
+      (document.getElementById("price_unit") as HTMLInputElement).disabled = false;
     }
 
 

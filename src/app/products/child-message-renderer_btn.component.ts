@@ -249,7 +249,9 @@ ${reason}`;
     }
     this.globalServiceService.editProduct(this.params.data.uidpk, nameEditProd, descriptionEditProd, skuEditProd, startDateEditProd, endDateEditProd, this.P_code_Type).subscribe(
       result => {
-
+        let msg;
+        msg=result;
+        this.flashMessage.show(msg.message, { cssClass: 'alert-success', timeout: 5000 });
       },
       error => {
         console.log(error.error.message);
