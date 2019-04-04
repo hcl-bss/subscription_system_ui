@@ -34,6 +34,12 @@ export class ContactListComponent implements OnInit {
   totalPages;
   sDate;
   eDate;
+  subscriptionId: string;
+  customerName: string;
+  status: string;
+  fromDateStr: string;
+  toDateStr: string;
+  DrodownArraystatus: any;
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
@@ -73,7 +79,14 @@ export class ContactListComponent implements OnInit {
   }
   //close popup code end
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.globalServiceService.getStatusdropDown().subscribe(data => {
+      this.DrodownArraystatus = data;
+      this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
+      console.log(this.DrodownArraystatus);
+
+    });
+   }
   onPageSizeChanged(newPageSize) {
     var inputElement = <HTMLInputElement>document.getElementById("page-size");
     var value = inputElement.value;
@@ -135,7 +148,7 @@ export class ContactListComponent implements OnInit {
       error=>{
         this.spinnerService.hide();
         this.rowData=[];  
-        this.flashMessage.show('No data found!!', { cssClass: 'alert-danger', timeout: 10000 });
+        this.flashMessage.show(error.error.message, { cssClass: 'alert-danger', timeout: 10000 });
       });
       }else{
         this.flashMessage.show(
@@ -365,6 +378,14 @@ nextFuntionality(subscriptionId,customerName,planName,status,fromDateStr,toDateS
     
       });
   }
+}
+Reset(subscriptionId,customerName,planName,status,fromDateStr,toDateStr){
+  this.subscriptionId="";
+  this.customerName=""
+  this.planName="";
+  this.status="";
+  this.fromDateStr="";
+  this.toDateStr="";
 }
 } 
 

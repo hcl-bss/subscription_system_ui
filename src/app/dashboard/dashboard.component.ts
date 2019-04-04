@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   private rowData: any;
   sucess;
   failed;
+  date;
   public pieChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
        console.log(this.rowData.failed+ "*******");
         this.sucess = this.rowData.success;
         this.failed = this.rowData.failed;
+        this.date = this.rowData.date;
         this.pieChartData= [this.failed, this.sucess];
         //console.log(this.pieChartData);
       });

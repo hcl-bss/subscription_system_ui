@@ -1353,4 +1353,10 @@ width: 55px;
 }
 .ag-theme-balham .ag-header-cell-label .ag-header-cell-text{text-transform: uppercase; font-weight: bold;}
 
+.card-footer { padding-top: 0px !important;}
+.modal-content .alert-success {
 
+  top: 0;
+  position: absolute;
+  width: 100%;
+}

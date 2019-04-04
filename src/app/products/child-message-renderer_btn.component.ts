@@ -41,11 +41,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
                 <div class="form-group">
                   <label for="name"> Name:</label>
                   <span  *ngIf="!filterSearchFlag">
-                  <input type="text" class="form-control"  placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="nameEditProd">
+                  <input type="text" class="form-control"  placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="params.data.productDispName">
                 </span>
       
                 <span  *ngIf="filterSearchFlag">
-                <input type="text" class="form-control" disabled placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="nameEditProd">
+                <input type="text" class="form-control" disabled placeholder={{params.data.productDispName}} name="nameEditProd" [(ngModel)]="params.data.productDispName">
                 </span>
                  
                 </div>
@@ -53,7 +53,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="description">Description:</label>
-                  <input type="text" class="form-control" placeholder={{params.data.productDescription}} name="descriptionEditProd" [(ngModel)]="descriptionEditProd">
+                  <input type="text" class="form-control" placeholder={{params.data.productDescription}} name="descriptionEditProd" [(ngModel)]="params.data.productDescription">
               </div>
               </div>
               <div class="col-lg-4">
@@ -62,11 +62,11 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 
                   <span  *ngIf="!filterSearchFlag">
-                  <input type="text" class="form-control" placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="skuEditProd">
+                  <input type="text" class="form-control" placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="params.data.sku">
                 </span>
       
                 <span  *ngIf="filterSearchFlag">
-                <input type="text" class="form-control" disabled placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="skuEditProd">
+                <input type="text" class="form-control" disabled placeholder={{params.data.sku}}  name="skuEditProd" [(ngModel)]="params.data.sku">
                 </span>
 
                   
@@ -159,7 +159,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
           </form>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="editProductData(endDateEditProd,startDateEditProd,skuEditProd,descriptionEditProd,nameEditProd)">Save </button>
+        <button type="button" class="btn btn-info" (click)="editProductData(endDateEditProd,startDateEditProd,params.data.sku,params.data.productDescription,params.data.productDispName)">Save </button>
         <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button>
         </div>
       </ng-template>
@@ -224,12 +224,31 @@ ${reason}`;
       }
     }
   }
-  editProductData(endDateEditProd, startDateEditProd, skuEditProd, descriptionEditProd, nameEditProd) {
+  editProductData(endDateEditProd, startDateEditProd, skuEditProd, descriptionEditProd, nameEditProd) {    
+ 
+    let edate;
+    let datearray,newenddate,newsdatedate,datearraysadte;
+
     if (endDateEditProd == undefined) {
-      endDateEditProd = this.params.data.productExpDate;
+        endDateEditProd = this.params.data.productExpDate;
+        edate = endDateEditProd;
+         datearray = edate.split("/");
+         newenddate = datearray[1] + '/' + datearray[0] + '/' + datearray[2];       
+    }else{
+      newenddate = endDateEditProd.month + "/" + endDateEditProd.day + "/" + endDateEditProd.year;
+      endDateEditProd = endDateEditProd.day + "/" + endDateEditProd.month + "/" + endDateEditProd.year;
+     
     }
     if (startDateEditProd == undefined) {
       startDateEditProd = this.params.data.productStartDate;
+
+      datearraysadte = startDateEditProd.split("/");
+      newsdatedate = datearraysadte[1] + '/' + datearraysadte[0] + '/' + datearraysadte[2];   
+    }else{
+      newsdatedate = startDateEditProd.month + "/" + startDateEditProd.day + "/" + startDateEditProd.year;
+      startDateEditProd = startDateEditProd.day + "/" + startDateEditProd.month + "/" + startDateEditProd.year;
+      
+     
     }
     if (skuEditProd == undefined) {
       skuEditProd = this.params.data.sku;
@@ -246,17 +265,45 @@ ${reason}`;
           this.P_code_Type = this.DrodownArray[i].productTypeCode;
         }
       }
+    }   
+ newsdatedate = Date.parse(newsdatedate);
+ newenddate = Date.parse(newenddate);
+ if(newenddate<newsdatedate){
+  this.flashMessage.show("Start date should be less than End date.", { cssClass: 'alert-danger', timeout: 5000 });
+ }else if(nameEditProd.length > 100) {
+  this.flashMessage.show("Name should be less than 100 characters!!", {
+    cssClass: "alert-danger",
+    timeout: 10000
+  });
+}else if(descriptionEditProd.length > 100) {
+  this.flashMessage.show(
+    "description should be less than 100 characters!!",
+    {
+      cssClass: "alert-danger",
+      timeout: 10000
     }
-    this.globalServiceService.editProduct(this.params.data.uidpk, nameEditProd, descriptionEditProd, skuEditProd, startDateEditProd, endDateEditProd, this.P_code_Type).subscribe(
-      result => {
-        let msg;
-        msg=result;
-        this.flashMessage.show(msg.message, { cssClass: 'alert-success', timeout: 5000 });
-      },
-      error => {
-        console.log(error.error.message);
-        this.flashMessage.show(error.error.message, { cssClass: 'alert-danger', timeout: 5000 });
-      }
-    )
-  }
+  );
+}else if (skuEditProd.length > 20) {
+  this.flashMessage.show("sku should be less than 20 characters!!", {
+    cssClass: "alert-danger",
+    timeout: 10000
+  });
+}else{
+  this.globalServiceService.editProduct(this.params.data.uidpk, nameEditProd, descriptionEditProd, skuEditProd, startDateEditProd, endDateEditProd, this.P_code_Type).subscribe(
+    result => {
+      let msg;
+      msg=result;
+      this.flashMessage.show(msg.message, { cssClass: 'alert-success', timeout: 5000 });
+    },
+    error => {
+      this.flashMessage.show(error.error.message, { cssClass: 'alert-danger', timeout: 5000 });
+    }
+  )
 }
+ 
+
+ }
+
+  
+  }
+

@@ -4,27 +4,7 @@
 
     <main >
 
-      <!-- Main Content 
-
-
-
-<div class="test-header">
-
-Page Size:
-
-<select (change)="onPageSizeChanged()" id="page-size">
-
-<option value="10" selected="">10</option>
-
-<option value="100">100</option>
-
-<option value="500">500</option>
-
-<option value="1000">1000</option>
-
-</select>
-
-</div> -->
+     
 
       <div class="container-fluid custom_search" style="padding: 0px;">
 
@@ -72,9 +52,18 @@ Page Size:
 
                   <div class="form-group">
 
-                    <label for="code">Code:</label>
+                    <label for="code">Product Type:</label>
 
-                    <input type="text" class="form-control form-control-sm" id="code_product" name="code" [(ngModel)]="codeMain">
+                    <select class="form-control"  id="code_product" name="code"  [(ngModel)]="codeMain" (change)="dropDownsearchProduct(codeMain)">
+
+                        <option [ngValue]="Select" >Select</option>
+    
+                        <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
+    
+    
+                      </select>
+
+                    
 
                   </div>
 
@@ -98,11 +87,11 @@ Page Size:
 
                     <label for="status">Status:</label>
 
-                    <select class="form-control form-control-sm" id="status_product" name="status_val" [(ngModel)]="status_valMain">
+                    <select class="form-control form-control-sm" id="status_product" name="status_val"
+                      [(ngModel)]="status_valMain">
+                      <option [selected]="Select == 'Select'" [ngValue]="select" selected>select</option>
+                      <option *ngFor="let values of DrodownArraystatus">{{values}}</option>
 
-                      <option>Active</option>
-
-                      <option>Inactive</option>
 
                     </select>
 
@@ -172,12 +161,9 @@ Page Size:
 
                 </div>
 
-                <div class="col-lg-3">
+                
 
-
-                </div>
-
-                <div class="col-lg-3">
+                <div class="col-lg-6">
 
                   <label style="width: 100%;"></label>
 
@@ -188,13 +174,21 @@ Page Size:
 
                   </button>
 
-                  <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;" (click)="filterSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain)">
+                  <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;" (click)="filterSearch(nameMain,skuMain,status_valMain,startDateMain,endDateMain)">
 
                     Search
 
                     <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
 
                   </button>
+
+                  <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;" (click)="resetValues(nameMain,skuMain,status_valMain,startDateMain,endDateMain,codeMain)">
+                      
+                      Reset 
+                      <i class="fa fa-refresh " aria-hidden="true"></i>
+                      <!-- <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i> -->
+  
+                    </button>
 
                   <!-- <button class="btn btn-info" style="margin-top: 41px;">Search <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
 
@@ -421,24 +415,6 @@ Page Size:
     </main>
 
 
-
-    <!-- <main *ngIf="flagMapping">
-
-        <div class="container-fluid custom_search" style="padding: 0px;">
-
-            <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
-    
-              <h5>Associate Product Plan Mapping
-                  <button type="button" class="btn btn-info" (click)="backToProduct()">Back</button>
-              </h5>
-              </div>
-              </div>
-
-              <router-outlet></router-outlet>
-      
-      <app-associate-plan></app-associate-plan>
-    
-    </main> -->
 
   </div>
 

@@ -61,6 +61,14 @@ export class ProductComponent implements OnInit {
   sDate;
   eDate;
   filterSearchFlag = false;
+  DrodownArraystatus: any;
+  nameMain: string;
+  skuMain: string;
+  status_valMain: string;
+  startDateMain: string;
+  endDateMain: string;
+  codeMain: string;
+  P_code_Typesearch: any;
   // flagMapping=false;
   // productMainPage: boolean=true;
 
@@ -72,7 +80,7 @@ export class ProductComponent implements OnInit {
     private childMessageRenderer: ChildMessageRenderer,
     private globalServiceService: GlobalServiceService
   ) {
-    
+
     this.columnDefs = [
       {
         headerName: "Name",
@@ -81,7 +89,7 @@ export class ProductComponent implements OnInit {
       },
 
       {
-        headerName: "Code",
+        headerName: "Product Type",
         field: "productTypeCode",
         editable: true
       },
@@ -110,10 +118,6 @@ export class ProductComponent implements OnInit {
         editable: true
       },
 
-      // { headerName: 'Start Date', field: 'startdate',editable:true },
-
-      //{ headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params",editable:true },
-
       {
         headerName: "Status",
         field: "status",
@@ -123,12 +127,13 @@ export class ProductComponent implements OnInit {
       {
         headerName: "Plans",
         field: "plans",
-        editable: true
+        editable: true,
+        width: 350
       },
       {
         headerName: "Edit",
         cellRenderer: "ChildMessageRendereredit",
-        editable: true,
+
         colId: "params",
         width: 150,
         checked: false
@@ -155,7 +160,7 @@ export class ProductComponent implements OnInit {
 
     // this.paginationStartPage = 0;
 
-    this.paginationNumberFormatter = function(params) {
+    this.paginationNumberFormatter = function (params) {
       return "[" + params.value.toLocaleString() + "]";
     };
   }
@@ -163,7 +168,14 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.globalServiceService.fetchdropdownvalues().subscribe(data => {
       this.DrodownArray = data;
-      console.log(this.DrodownArray);
+
+    });
+
+    this.globalServiceService.getStatusdropDown().subscribe(data => {
+      this.DrodownArraystatus = data;
+      this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
+      console.log(this.DrodownArraystatus);
+
     });
   }
 
@@ -172,6 +184,13 @@ export class ProductComponent implements OnInit {
     for (let i = 0; i < this.DrodownArray.length; i++) {
       if (this.DrodownArray[i].productType == producttype) {
         this.P_code_Type = this.DrodownArray[i].productTypeCode;
+      }
+    }
+  }
+  dropDownsearchProduct(codeMain){
+    for (let i = 0; i < this.DrodownArray.length; i++) {
+      if (this.DrodownArray[i].productType == codeMain) {
+        this.P_code_Typesearch = this.DrodownArray[i].productTypeCode;
       }
     }
   }
@@ -219,7 +238,7 @@ ${reason}`;
       .usermanagementCalling(this.page)
       .subscribe(data => {
         this.rowData = data;
-        this.totalPages=this.rowData.totalPages;
+        this.totalPages = this.rowData.totalPages;
 
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
@@ -229,6 +248,16 @@ ${reason}`;
           ) as HTMLInputElement).disabled = false;
         }
         this.rowData = this.rowData.productList;
+        let arr;
+
+        for (let i = 0; i < this.rowData.length; i++) {
+          arr = this.rowData[i].ratePlans;
+          let arr1 = [];
+          for (let k = 0; k < arr.length; k++) {
+            arr1.push(arr[k].name)
+            this.rowData[i].plans = arr1;
+          }
+        }
         params.api.paginationGoToPage(1);
       });
 
@@ -279,38 +308,23 @@ ${reason}`;
     }
     return false;
   }
-  callall(){
+  callall() {
     this.isValid()
     this.isValid1()
   }
   addProductData(name, description, sku, startDate, endDate) {
-    if (
-      name == undefined ||
-      description == undefined ||
-      sku == undefined ||
-      startDate == undefined ||
-      endDate == undefined
-    ) {
+    if (name == undefined || description == undefined || sku == undefined || startDate == undefined || endDate == undefined || this.P_code_Type==undefined) {
       this.flashMessage.show("All fiels are mandatory to add new product!!", {
         cssClass: "alert-danger",
         timeout: 10000
       });
     } else {
-      let sDatevalidate =
-        startDate.month + "/" + startDate.day + "/" + startDate.year;
-      let eDatevalidate =
-        endDate.month + "/" + endDate.day + "/" + endDate.year;
+      let sDatevalidate = startDate.month + "/" + startDate.day + "/" + startDate.year;
+      let eDatevalidate = endDate.month + "/" + endDate.day + "/" + endDate.year;
       let sDate = startDate.day + "/" + startDate.month + "/" + startDate.year;
       let eDate = endDate.day + "/" + endDate.month + "/" + endDate.year;
-
       let startDateValue = Date.parse(sDatevalidate);
-
-      // var d1 = new Date(msec1);
-
       let endDateValue = Date.parse(eDatevalidate);
-
-      //var d2 = new Date(msec);
-
       if (name.length > 100) {
         this.flashMessage.show("Name should be less than 100 characters!!", {
           cssClass: "alert-danger",
@@ -343,37 +357,31 @@ ${reason}`;
             this.spinnerService.show();
 
             this.globalServiceService
-              .addProduct(
-                name,
-                description,
-                sku,
-                sDate,
-                eDate,
-                this.P_code_Type
-              )
+              .addProduct(name,description,sku,sDate,eDate,this.P_code_Type)
               .subscribe(
                 data => {
                   console.log(data);
 
                   this.rowData = [];
 
-                  this.globalServiceService
-                    .usermanagementCalling(this.page)
-                    .subscribe(data => {
+                  this.globalServiceService.usermanagementCalling(this.page).subscribe(data => {
                       this.spinnerService.hide();
-
                       this.rowData = data;
-
-                      if (this.rowData.lastPage == true) {
-                        (document.getElementById(
-                          "next"
-                        ) as HTMLInputElement).disabled = true;
+                      if (this.rowData.lastPage == true) {(document.getElementById("next") as HTMLInputElement).disabled = true;
                       } else {
-                        (document.getElementById(
-                          "next"
-                        ) as HTMLInputElement).disabled = false;
+                        (document.getElementById("next") as HTMLInputElement).disabled = false;
                       }
                       this.rowData = this.rowData.productList;
+                      let arr;
+
+                      for (let i = 0; i < this.rowData.length; i++) {
+                        arr = this.rowData[i].ratePlans;
+                        let arr1 = [];
+                        for (let k = 0; k < arr.length; k++) {
+                          arr1.push(arr[k].name)
+                          this.rowData[i].plans = arr1;
+                        }
+                      }
                       this.producttype = "";
 
                       this.name = "";
@@ -386,16 +394,17 @@ ${reason}`;
 
                       this.endDate = "";
                     });
-
+                    this.P_code_Type="";
                   this.flashMessage.show("New Product added successfully!!", {
                     cssClass: "alert-success",
                     timeout: 10000
                   });
+                
                 },
 
                 error => {
                   this.spinnerService.hide();
-
+                  this.P_code_Type="";
                   if (error.error.errorCode == 1062) {
                     let msg = error.error.message;
 
@@ -416,7 +425,17 @@ ${reason}`;
       }
     }
   }
-
+  resetValues(nameMain,skuMain,status_valMain,startDateMain,endDateMain,codeMain){
+    this.nameMain="";
+    this.skuMain="";
+    this.status_valMain="";
+    this.startDateMain="";
+    this.endDateMain="";
+    this.codeMain="";
+    this.P_code_Type="";
+    this.sDate="";
+    this.eDate="";
+  }
   emptyValues() {
     this.producttype = "";
     this.name = "";
@@ -467,7 +486,7 @@ ${reason}`;
         )
         .subscribe(data => {
           this.rowData = data;
-          this.totalPages=this.rowData.totalPages;
+          this.totalPages = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -478,13 +497,23 @@ ${reason}`;
             ) as HTMLInputElement).disabled = false;
           }
           this.rowData = this.rowData.productList;
+          let arr;
+
+          for (let i = 0; i < this.rowData.length; i++) {
+            arr = this.rowData[i].ratePlans;
+            let arr1 = [];
+            for (let k = 0; k < arr.length; k++) {
+              arr1.push(arr[k].name)
+              this.rowData[i].plans = arr1;
+            }
+          }
         });
     } else {
       this.globalServiceService
         .usermanagementCalling(this.page)
         .subscribe(data => {
           this.rowData = data;
-          this.totalPages=this.rowData.totalPages;
+          this.totalPages = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -494,7 +523,17 @@ ${reason}`;
               "next"
             ) as HTMLInputElement).disabled = false;
           }
-          this.rowData = this.rowData.productList;
+          
+          let arr;
+
+          for (let i = 0; i < this.rowData.length; i++) {
+            arr = this.rowData[i].ratePlans;
+            let arr1 = [];
+            for (let k = 0; k < arr.length; k++) {
+              arr1.push(arr[k].name)
+              this.rowData[i].plans = arr1;
+            }
+          }
         });
     }
   }
@@ -535,7 +574,7 @@ ${reason}`;
         )
         .subscribe(data => {
           this.rowData = data;
-          this.totalPages=this.rowData.totalPages;
+          this.totalPages = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -546,13 +585,22 @@ ${reason}`;
             ) as HTMLInputElement).disabled = false;
           }
           this.rowData = this.rowData.productList;
+          let arr;
+          for (let i = 0; i < this.rowData.length; i++) {
+            arr = this.rowData[i].ratePlans;
+            let arr1 = [];
+            for (let k = 0; k < arr.length; k++) {
+              arr1.push(arr[k].name)
+              this.rowData[i].plans = arr1;
+            }
+          }
         });
     } else {
       this.globalServiceService
         .usermanagementCalling(this.page)
         .subscribe(data => {
           this.rowData = data;
-          this.totalPages=this.rowData.totalPages;
+          this.totalPages = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
             (document.getElementById(
               "next"
@@ -562,13 +610,25 @@ ${reason}`;
               "next"
             ) as HTMLInputElement).disabled = false;
           }
-          this.rowData = this.rowData.productList;
+          
+          let arr;
+
+          for (let i = 0; i < this.rowData.length; i++) {
+            arr = this.rowData[i].ratePlans;
+            let arr1 = [];
+            for (let k = 0; k < arr.length; k++) {
+              arr1.push(arr[k].name)
+              this.rowData[i].plans = arr1;
+            }
+          }
         });
     }
   }
-  filterSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain) {
+  filterSearch(nameMain, skuMain, status_valMain, startDateMain, endDateMain) {
     this.filterSearchFlag = true;
-    if (startDateMain != undefined) {
+    if (startDateMain == undefined || startDateMain == "") {
+      this.sDate = ""       
+    }else{
       this.sDate =
         startDateMain.day +
         "/" +
@@ -576,7 +636,9 @@ ${reason}`;
         "/" +
         startDateMain.year;
     }
-    if (endDateMain != undefined) {
+    if (endDateMain == undefined || endDateMain == "") {
+      this.eDate ="";
+    }else{
       this.eDate =
         endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
     }
@@ -584,7 +646,7 @@ ${reason}`;
     this.globalServiceService
       .productSearch(
         nameMain,
-        codeMain,
+        this.P_code_Typesearch,
         skuMain,
         status_valMain,
         this.sDate,
@@ -593,7 +655,7 @@ ${reason}`;
       )
       .subscribe(data => {
         this.rowData = data;
-        this.totalPages=this.rowData.totalPages;
+        this.totalPages = this.rowData.totalPages;
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
         } else {
@@ -602,9 +664,22 @@ ${reason}`;
           ) as HTMLInputElement).disabled = false;
         }
         this.rowData = this.rowData.productList;
+        let arr;
+
+        for (let i = 0; i < this.rowData.length; i++) {
+          arr = this.rowData[i].ratePlans;
+          let arr1 = [];
+          for (let k = 0; k < arr.length; k++) {
+            arr1.push(arr[k].name)
+            this.rowData[i].plans = arr1;
+          }
+        }
+        this.P_code_Typesearch="";
+      },error=>{
+        this.P_code_Typesearch="";
       });
   }
-  moveToAssociatePlan(){    
+  moveToAssociatePlan() {
     this.router.navigate(['/associateplan']);
   }
 }

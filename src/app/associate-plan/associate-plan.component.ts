@@ -41,7 +41,7 @@ export class AssociatePlanComponent implements OnInit {
       { headerName: 'Plan ID', field: 'ratePlanId' },
       { headerName: 'Name', field: 'name' },
       { headerName: 'Bill Every', field: 'billEvery' },
-      { headerName: 'Type', field: 'type' },
+      { headerName: 'Pricing Scheme', field: 'type' },
       { headerName: 'Status', field: 'isActive' },
       { headerName: 'Details', cellRenderer: "associateMappingComponent", colId: "params", width: 250 }
     ];
@@ -183,10 +183,11 @@ export class AssociatePlanComponent implements OnInit {
     } else {
       this.globalServiceService.associatePlans(this.updatePlans, this.selecteddata.uidpk).subscribe
         (data => {
-          this.flashMessage.show('Successfully Associated product with Plan', { cssClass: 'alert-success', timeout: 5000 });
           (<HTMLInputElement>document.getElementById("updateAsso")).disabled = true;
           this.selecteddata='';
           this.onLoadData();
+          this.flashMessage.show('Successfully Associated product with Plan', { cssClass: 'alert-success', timeout: 5000 });
+      
         },
           error => {
             this.flashMessage.show('Product Association with plan is unsuccessful', { cssClass: 'alert-danger', timeout: 5000 });

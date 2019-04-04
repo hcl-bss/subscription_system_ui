@@ -40,12 +40,12 @@ export class UsermanagementComponent implements OnInit {
   password;
   constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
     this.columnDefs = [
-      { headerName: 'User Profile', field: 'userProfile', width: 125 },
-      { headerName: 'First Name', field: 'userFirstName', width: 145 },
-      { headerName: 'Middle Name', field: 'userMiddleName', width: 145 },
-      { headerName: 'Last Name', field: 'userLastName', width: 145 },
-      { headerName: 'User Id', field: 'userId', width: 145 },
-      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params", width: 250 }
+      { headerName: 'User Profile', field: 'userProfile' },
+      { headerName: 'First Name', field: 'userFirstName' },
+      { headerName: 'Middle Name', field: 'userMiddleName'},
+      { headerName: 'Last Name', field: 'userLastName' },
+      { headerName: 'User Id', field: 'userId' },
+      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params" }
     ];
     // this.rowData = this.createRowData();
     this.context = { componentParent: this };
@@ -104,7 +104,8 @@ export class UsermanagementComponent implements OnInit {
         // this.rowData = this.rowData.batchRunLogDtoList;
       },
       error => {
-        // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
+        this.rowData=[];
+        this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
       });
   }
   onQuickFilterChanged() {
@@ -176,13 +177,18 @@ export class UsermanagementComponent implements OnInit {
       data => {
         this.rowData=[];
         this.rowData=data;
+        this.totalpage = this.rowData.totalPages;
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
         } else {
           (document.getElementById("next") as HTMLInputElement).disabled = false;
         }
         this.rowData=this.rowData.userList;
-      });
+      },
+    error=>{
+      this.rowData=[];
+      this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 10000 });
+    });
   }
 
   previousFuntionality(user_profile, user_name, first_name, status_val) {
