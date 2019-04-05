@@ -56,7 +56,7 @@
 
                     <select class="form-control"  id="code_product" name="code"  [(ngModel)]="codeMain" (change)="dropDownsearchProduct(codeMain)">
 
-                        <option [ngValue]="Select" >Select</option>
+                        <option [ngValue]="Select" selected>Select</option>
     
                         <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
     
@@ -378,7 +378,7 @@
 
                   <select class="form-control" id="sel1" name="producttype" [(ngModel)]="producttype" (change)="dropDown(producttype)">
 
-                    <option [ngValue]="Select" hidden>Select</option>
+                    <option [ngValue]="Select" hidden selected>Select</option>
 
                     <option *ngFor="let values of DrodownArray">{{values.productType}}</option>
 

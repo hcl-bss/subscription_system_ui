@@ -14,29 +14,28 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 export class DashboardComponent implements OnInit {
   page =0;
   private rowData: any;
-  sucess;
+  success;
   failed;
   date;
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public pieChartLabels: Label[] = [['Failed Result'], ['Sucess Result']];
-  public pieChartData: SingleDataSet = [this.failed, this.sucess];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
-  public chartColors: Array<any> = [
-    { // all colors in order
-      backgroundColor: ['#f7464a', '#97bbcd']
-    }
-]
+//   public pieChartOptions: ChartOptions = {
+//     responsive: true,
+//   };
+//   public pieChartLabels: Label[] = [['Failed Result'], ['Sucess Result']];
+//   public pieChartData: SingleDataSet = [this.failed, this.sucess];
+//   public pieChartType: ChartType = 'pie';
+//   public pieChartLegend = true;
+//   public pieChartPlugins = [];
+//   public chartColors: Array<any> = [
+//     { 
+//       backgroundColor: ['#f7464a', '#97bbcd']
+//     }
+// ]
 
 
 
   
   constructor(private http: HttpClient, private globalServiceService: GlobalServiceService) { 
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
+   
   }
 
 
@@ -45,18 +44,18 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() { 
     this.page =1;
-
+   
     
     this.globalServiceService.subreport(this.page).subscribe(
       data => {
         this.rowData = data; 
-        data = this.rowData.success;
+       // data = this.rowData.success;
        console.log(this.rowData.success+ "*******");
        console.log(this.rowData.failed+ "*******");
-        this.sucess = this.rowData.success;
+        this.success = this.rowData.success;
         this.failed = this.rowData.failed;
         this.date = this.rowData.date;
-        this.pieChartData= [this.failed, this.sucess];
+       // this.pieChartData= [this.failed, this.sucess];
         //console.log(this.pieChartData);
       });
      }

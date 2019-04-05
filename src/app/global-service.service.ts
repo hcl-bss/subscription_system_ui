@@ -144,7 +144,6 @@ sidebarsubmenu() {
   
   
 executeBatch(batchId) {
-   
       return this.http.get(this.url + '/executeSchedulers?schedulerId='+batchId , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -157,7 +156,6 @@ executeBatch(batchId) {
 
 
   SubscriptionCalling(page) {
-
     this.subscriptionData = JSON.stringify({
      "pageNo": page
     })

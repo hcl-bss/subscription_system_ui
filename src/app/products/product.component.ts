@@ -187,7 +187,7 @@ export class ProductComponent implements OnInit {
       }
     }
   }
-  dropDownsearchProduct(codeMain){
+  dropDownsearchProduct(codeMain) {
     for (let i = 0; i < this.DrodownArray.length; i++) {
       if (this.DrodownArray[i].productType == codeMain) {
         this.P_code_Typesearch = this.DrodownArray[i].productTypeCode;
@@ -249,14 +249,18 @@ ${reason}`;
         }
         this.rowData = this.rowData.productList;
         let arr;
-
         for (let i = 0; i < this.rowData.length; i++) {
           arr = this.rowData[i].ratePlans;
-          let arr1 = [];
-          for (let k = 0; k < arr.length; k++) {
-            arr1.push(arr[k].name)
-            this.rowData[i].plans = arr1;
+          if (arr.length == 0) {
+            this.rowData[i].plans = "-";
+          } else {
+            let arr1 = [];
+            for (let k = 0; k < arr.length; k++) {
+              arr1.push(arr[k].name)
+              this.rowData[i].plans = arr1;
+            }
           }
+
         }
         params.api.paginationGoToPage(1);
       });
@@ -313,7 +317,7 @@ ${reason}`;
     this.isValid1()
   }
   addProductData(name, description, sku, startDate, endDate) {
-    if (name == undefined || description == undefined || sku == undefined || startDate == undefined || endDate == undefined || this.P_code_Type==undefined) {
+    if (name == undefined || name == "" || description == undefined || description == "" || sku == undefined || sku == "" || startDate == undefined || startDate == "" || endDate == undefined || endDate == "" || this.P_code_Type == undefined || this.P_code_Type == "") {
       this.flashMessage.show("All fiels are mandatory to add new product!!", {
         cssClass: "alert-danger",
         timeout: 10000
@@ -357,7 +361,7 @@ ${reason}`;
             this.spinnerService.show();
 
             this.globalServiceService
-              .addProduct(name,description,sku,sDate,eDate,this.P_code_Type)
+              .addProduct(name, description, sku, sDate, eDate, this.P_code_Type)
               .subscribe(
                 data => {
                   console.log(data);
@@ -365,46 +369,52 @@ ${reason}`;
                   this.rowData = [];
 
                   this.globalServiceService.usermanagementCalling(this.page).subscribe(data => {
-                      this.spinnerService.hide();
-                      this.rowData = data;
-                      if (this.rowData.lastPage == true) {(document.getElementById("next") as HTMLInputElement).disabled = true;
-                      } else {
-                        (document.getElementById("next") as HTMLInputElement).disabled = false;
-                      }
-                      this.rowData = this.rowData.productList;
-                      let arr;
+                    this.spinnerService.hide();
+                    this.rowData = data;
+                    if (this.rowData.lastPage == true) {
+                      (document.getElementById("next") as HTMLInputElement).disabled = true;
+                    } else {
+                      (document.getElementById("next") as HTMLInputElement).disabled = false;
+                    }
+                    this.rowData = this.rowData.productList;
+                    let arr;
 
-                      for (let i = 0; i < this.rowData.length; i++) {
-                        arr = this.rowData[i].ratePlans;
+                    for (let i = 0; i < this.rowData.length; i++) {
+                      arr = this.rowData[i].ratePlans;
+                      if (arr.length == 0) {
+                        this.rowData[i].plans = "-";
+                      } else {
                         let arr1 = [];
                         for (let k = 0; k < arr.length; k++) {
                           arr1.push(arr[k].name)
                           this.rowData[i].plans = arr1;
                         }
                       }
-                      this.producttype = "";
 
-                      this.name = "";
+                    }
+                    this.producttype = "";
 
-                      this.description = "";
+                    this.name = "";
 
-                      this.sku = "";
+                    this.description = "";
 
-                      this.startDate = "";
+                    this.sku = "";
 
-                      this.endDate = "";
-                    });
-                    this.P_code_Type="";
+                    this.startDate = "";
+
+                    this.endDate = "";
+                  });
+                  this.P_code_Type = "";
                   this.flashMessage.show("New Product added successfully!!", {
                     cssClass: "alert-success",
                     timeout: 10000
                   });
-                
+
                 },
 
                 error => {
                   this.spinnerService.hide();
-                  this.P_code_Type="";
+                  this.P_code_Type = "";
                   if (error.error.errorCode == 1062) {
                     let msg = error.error.message;
 
@@ -413,7 +423,7 @@ ${reason}`;
                       timeout: 10000
                     });
                   } else {
-                    this.flashMessage.show("Product not added !!", {
+                    this.flashMessage.show(error.error.message, {
                       cssClass: "alert-danger",
                       timeout: 10000
                     });
@@ -425,16 +435,16 @@ ${reason}`;
       }
     }
   }
-  resetValues(nameMain,skuMain,status_valMain,startDateMain,endDateMain,codeMain){
-    this.nameMain="";
-    this.skuMain="";
-    this.status_valMain="";
-    this.startDateMain="";
-    this.endDateMain="";
-    this.codeMain="";
-    this.P_code_Type="";
-    this.sDate="";
-    this.eDate="";
+  resetValues(nameMain, skuMain, status_valMain, startDateMain, endDateMain, codeMain) {
+    this.nameMain = "";
+    this.skuMain = "";
+    this.status_valMain = "";
+    this.startDateMain = "";
+    this.endDateMain = "";
+    this.codeMain = "";
+    this.P_code_Type = "";
+    this.sDate = "";
+    this.eDate = "";
   }
   emptyValues() {
     this.producttype = "";
@@ -444,14 +454,7 @@ ${reason}`;
     this.startDate = "";
     this.endDate = "";
   }
-  previousFuntionality(
-    nameMain,
-    codeMain,
-    skuMain,
-    status_valMain,
-    startDateMain,
-    endDateMain
-  ) {
+  previousFuntionality(nameMain, codeMain, skuMain, status_valMain, startDateMain, endDateMain) {
     this.page = this.page - 1;
 
     if (this.page == 0) {
@@ -475,15 +478,7 @@ ${reason}`;
         (document.getElementById("prev") as HTMLInputElement).disabled = true;
       }
       this.globalServiceService
-        .productSearch(
-          nameMain,
-          codeMain,
-          skuMain,
-          status_valMain,
-          this.sDate,
-          this.eDate,
-          this.filterPage
-        )
+        .productSearch(nameMain, codeMain, skuMain, status_valMain, this.sDate, this.eDate, this.filterPage)
         .subscribe(data => {
           this.rowData = data;
           this.totalPages = this.rowData.totalPages;
@@ -501,11 +496,16 @@ ${reason}`;
 
           for (let i = 0; i < this.rowData.length; i++) {
             arr = this.rowData[i].ratePlans;
-            let arr1 = [];
-            for (let k = 0; k < arr.length; k++) {
-              arr1.push(arr[k].name)
-              this.rowData[i].plans = arr1;
+            if (arr.length == 0) {
+              this.rowData[i].plans = "-";
+            } else {
+              let arr1 = [];
+              for (let k = 0; k < arr.length; k++) {
+                arr1.push(arr[k].name)
+                this.rowData[i].plans = arr1;
+              }
             }
+
           }
         });
     } else {
@@ -523,28 +523,26 @@ ${reason}`;
               "next"
             ) as HTMLInputElement).disabled = false;
           }
-          
+          this.rowData = this.rowData.productList;
           let arr;
 
           for (let i = 0; i < this.rowData.length; i++) {
             arr = this.rowData[i].ratePlans;
-            let arr1 = [];
-            for (let k = 0; k < arr.length; k++) {
-              arr1.push(arr[k].name)
-              this.rowData[i].plans = arr1;
+            if (arr.length == 0) {
+              this.rowData[i].plans = "-";
+            } else {
+              let arr1 = [];
+              for (let k = 0; k < arr.length; k++) {
+                arr1.push(arr[k].name)
+                this.rowData[i].plans = arr1;
+              }
             }
+
           }
         });
     }
   }
-  nextFuntionality(
-    nameMain,
-    codeMain,
-    skuMain,
-    status_valMain,
-    startDateMain,
-    endDateMain
-  ) {
+  nextFuntionality(nameMain, codeMain, skuMain, status_valMain, startDateMain, endDateMain) {
     (document.getElementById("prev") as HTMLInputElement).disabled = false;
     this.page = this.page + 1;
 
@@ -588,11 +586,16 @@ ${reason}`;
           let arr;
           for (let i = 0; i < this.rowData.length; i++) {
             arr = this.rowData[i].ratePlans;
-            let arr1 = [];
-            for (let k = 0; k < arr.length; k++) {
-              arr1.push(arr[k].name)
-              this.rowData[i].plans = arr1;
+            if (arr.length == 0) {
+              this.rowData[i].plans = "-";
+            } else {
+              let arr1 = [];
+              for (let k = 0; k < arr.length; k++) {
+                arr1.push(arr[k].name)
+                this.rowData[i].plans = arr1;
+              }
             }
+
           }
         });
     } else {
@@ -610,74 +613,101 @@ ${reason}`;
               "next"
             ) as HTMLInputElement).disabled = false;
           }
-          
-          let arr;
 
+          this.rowData = this.rowData.productList;
+          let arr;
           for (let i = 0; i < this.rowData.length; i++) {
             arr = this.rowData[i].ratePlans;
-            let arr1 = [];
-            for (let k = 0; k < arr.length; k++) {
-              arr1.push(arr[k].name)
-              this.rowData[i].plans = arr1;
+            if (arr.length == 0) {
+              this.rowData[i].plans = "-";
+            } else {
+              let arr1 = [];
+              for (let k = 0; k < arr.length; k++) {
+                arr1.push(arr[k].name)
+                this.rowData[i].plans = arr1;
+              }
             }
+
           }
         });
     }
   }
   filterSearch(nameMain, skuMain, status_valMain, startDateMain, endDateMain) {
+    // let sDate;
+    // let eDate;
+    // this.filterSearchFlag = true;
+    // if((startDateMain != undefined && endDateMain == undefined) || (startDateMain != "" && endDateMain == "")){
+    //   sDate = startDateMain.day + "/" + startDateMain.month + "/" + startDateMain.year;
+    //   eDate = "31/12/9999";
+    // }else if((startDateMain == undefined && endDateMain != undefined) || (startDateMain == "" && endDateMain != "")){
+    //   eDate = endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
+    //   sDate = "31/1/1990"
+    // }
+
+    let sDate;
+    let eDate, datearray, newenddate, newestartdate;
     this.filterSearchFlag = true;
-    if (startDateMain == undefined || startDateMain == "") {
-      this.sDate = ""       
-    }else{
-      this.sDate =
-        startDateMain.day +
-        "/" +
-        startDateMain.month +
-        "/" +
-        startDateMain.year;
-    }
-    if (endDateMain == undefined || endDateMain == "") {
-      this.eDate ="";
-    }else{
-      this.eDate =
-        endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
-    }
+    if ((startDateMain != undefined && endDateMain == undefined) || (startDateMain != "" && endDateMain == "")) {
 
-    this.globalServiceService
-      .productSearch(
-        nameMain,
-        this.P_code_Typesearch,
-        skuMain,
-        status_valMain,
-        this.sDate,
-        this.eDate,
-        this.filterPage
-      )
-      .subscribe(data => {
-        this.rowData = data;
-        this.totalPages = this.rowData.totalPages;
-        if (this.rowData.lastPage == true) {
-          (document.getElementById("next") as HTMLInputElement).disabled = true;
-        } else {
-          (document.getElementById(
-            "next"
-          ) as HTMLInputElement).disabled = false;
-        }
-        this.rowData = this.rowData.productList;
-        let arr;
+      sDate = startDateMain.day + "/" + startDateMain.month + "/" + startDateMain.year;
+      eDate = "31/12/9999";
+      datearray = eDate.split("/");
+      newenddate = datearray[1] + '/' + datearray[0] + '/' + datearray[2];
+      newestartdate = startDateMain.month + "/" + startDateMain.day + "/" + startDateMain.year;
 
-        for (let i = 0; i < this.rowData.length; i++) {
-          arr = this.rowData[i].ratePlans;
-          let arr1 = [];
-          for (let k = 0; k < arr.length; k++) {
-            arr1.push(arr[k].name)
-            this.rowData[i].plans = arr1;
+    } else if ((startDateMain == undefined && endDateMain != undefined) || (startDateMain == "" && endDateMain != "")) {
+      eDate = endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
+      sDate = "31/1/1990"
+      datearray = sDate.split("/");
+      newestartdate = datearray[1] + '/' + datearray[0] + '/' + datearray[2];
+      newenddate = endDateMain.month + "/" + endDateMain.day + "/" + endDateMain.year;
+    }else if((startDateMain != undefined  && endDateMain != undefined && startDateMain != "" && endDateMain != "") ){
+      sDate = startDateMain.day + "/" + startDateMain.month + "/" + startDateMain.year;
+      eDate = endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
+      newestartdate = startDateMain.month + "/" + startDateMain.day + "/" + startDateMain.year;
+      newenddate = endDateMain.month + "/" + endDateMain.day + "/" + endDateMain.year;
+    }
+//|| (startDateMain != "" && endDateMain != "")
+
+    let startDateValue = Date.parse(newestartdate);
+    let endDateValue = Date.parse(newenddate);
+
+    if (endDateValue < startDateValue) {
+      this.flashMessage.show("Start date should be less than End date.", { cssClass: 'alert-danger', timeout: 5000 });
+    }
+    else {
+      this.globalServiceService.productSearch(nameMain, this.P_code_Typesearch, skuMain, status_valMain, sDate, eDate, this.filterPage)
+        .subscribe(data => {
+          this.rowData = data;
+          this.totalPages = this.rowData.totalPages;
+          if (this.rowData.lastPage == true) {
+            (document.getElementById("next") as HTMLInputElement).disabled = true;
+          } else {
+            (document.getElementById(
+              "next"
+            ) as HTMLInputElement).disabled = false;
           }
-        }
-        this.P_code_Typesearch="";
-      },error=>{
-        this.P_code_Typesearch="";
-      });
+          this.rowData = this.rowData.productList;
+          let arr;
+          for (let i = 0; i < this.rowData.length; i++) {
+            arr = this.rowData[i].ratePlans;
+            if (arr.length == 0) {
+              this.rowData[i].plans = "-";
+            } else {
+              let arr1 = [];
+              for (let k = 0; k < arr.length; k++) {
+                arr1.push(arr[k].name)
+                this.rowData[i].plans = arr1;
+              }
+            }
+
+          }
+          this.P_code_Typesearch = "";
+        }, error => {
+          this.P_code_Typesearch = "";
+        });
+    }
+
   }
   moveToAssociatePlan() {
     this.router.navigate(['/associateplan']);

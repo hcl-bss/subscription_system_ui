@@ -58,8 +58,8 @@
                             </div> -->
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>{{this.rowData.success}}</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>{{this.rowData.failed}}</strong> </p>
+                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
                                     <!-- <h4 class="card-title">$ 1,345</h4> -->
                                 </div>
                                 
@@ -69,7 +69,7 @@
                     <div class="card-footer ">
                        
                         <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{this.rowData.date}}</strong>
+                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,6 @@
                 <div class="card card-stats" class="widget_one">
                     <div class="card-body ">
                         <div class="row">
-                           
                             <div class="col-12">
                                 <div class="numbers" >
                                     
@@ -93,11 +92,10 @@
                                     <p class="card-category">
                                         <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px"
                                         (click)="executeScheduler(1)">Subscription Batch</button>
-                                    </p>
-                                    <p class="card-category">
                                         <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;float:left"
                                         (click)="executeScheduler(2)">Renewal Batch</button>
                                     </p>
+                                   
                                   
                                     <!-- <h4 class="card-title">$ 1,345</h4> -->
                                 </div>

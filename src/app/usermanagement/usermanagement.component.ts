@@ -45,7 +45,7 @@ export class UsermanagementComponent implements OnInit {
       { headerName: 'Middle Name', field: 'userMiddleName'},
       { headerName: 'Last Name', field: 'userLastName' },
       { headerName: 'User Id', field: 'userId' },
-      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params" }
+      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params",width:250 }
     ];
     // this.rowData = this.createRowData();
     this.context = { componentParent: this };

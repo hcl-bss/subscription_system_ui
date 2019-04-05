@@ -140,9 +140,7 @@ import { Router } from "@angular/router";
       </label>
     </div>
   </span>
-  <hr>
-  
-  <pre>{{closeResult}}</pre>`,
+ `,
   styles: [
     `
         .modal-body {
@@ -250,9 +248,11 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     this.params = params;
    
     if(this.params.data.status=="Active"){
+      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=true;
     }
     if(this.params.data.status=="Inactive"){
+      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=false;
     }
     this.data = this.params.data.userId;
