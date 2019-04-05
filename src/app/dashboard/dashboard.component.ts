@@ -59,11 +59,13 @@ export class DashboardComponent implements OnInit {
         this.pieChartData= [this.failed, this.sucess];
         //console.log(this.pieChartData);
       });
-      
-  
-  }
-
-    
+     }
+  executeScheduler(batchId){
+        this.globalServiceService.executeBatch(batchId).subscribe(
+          data => {
+            this.rowData = data; 
+          });
+      }
   }
 
 
