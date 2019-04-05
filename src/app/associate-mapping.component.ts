@@ -22,78 +22,87 @@ import { FlashMessagesService } from 'angular2-flash-messages';
           <div class="col-lg-3">
           <label>Plan Name: </label>
           </div>
-          <div class="col-lg-9">{{this.params.data.name}}</div>
-       </div>
-       <div class="row">
+          <div class="col-lg-3">{{this.params.data.name}}</div>
           <div class="col-lg-3">
           <label>Plan Code: </label>
           </div>
-          <div class="col-lg-9">{{this.params.data.ratePlanId}}</div>
+          <div class="col-lg-3">{{this.params.data.ratePlanId}}</div>
        </div>
+       
        <div class="row">
           <div class="col-lg-3">
           <label>Bill Every: </label>
           </div>
-          <div class="col-lg-9">{{this.params.data.billEvery}}</div>
-       </div>
-       <div class="row">
+          <div class="col-lg-3">{{this.params.data.billEvery}}</div>
           <div class="col-lg-3">
           <label>Pricing Scheme: </label>
           </div>
-          <div class="col-lg-9">{{this.params.data.pricingScheme}}</div>
+          <div class="col-lg-3">{{this.params.data.pricingScheme}}</div>
+       </div>
+       <div class="row">
+         
        </div>  
 
 
-       <div class="row">
-       <div class="col-lg-3">
-       <label>Start Qty: </label>
-       </div>
-       <div class="col-lg-3">
-       <label>End Qty: </label>
-       </div>
-       <div class="col-lg-3">
-       <label>Price: </label>
-       </div>       
-      </div>  
+       
 
-      <div class="row">
-      <div class="col-lg-3">
-      
-      </div>
-      <div class="col-lg-3">
-      
-      </div>
-      <div class="col-lg-3">
-      {{this.params.data.price}}
-      </div>       
-     </div>  
+    
 
 
      <div class="row">
      <div class="col-lg-3">
      <label>Billing Cycle: </label>
      </div>
-     <div class="col-lg-9">{{this.params.data.billingCycleTerm}}</div>
-  </div>
-  <div class="row">
+     <div class="col-lg-3">{{this.params.data.billingCycleTerm}}</div>
+
      <div class="col-lg-3">
      <label>Free Trial: </label>
      </div>
-     <div class="col-lg-9">{{this.params.data.freeTrail}}</div>
+     <div class="col-lg-3">{{this.params.data.freeTrail}}</div>
   </div>
+ 
   <div class="row">
      <div class="col-lg-3">
      <label>Setup Fees: </label>
      </div>
-     <div class="col-lg-9">{{this.params.data.setUpFee}}</div>
-  </div>
-  <div class="row">
+     <div class="col-lg-3">{{this.params.data.setUpFee}}</div>
+
      <div class="col-lg-3">
      <label>Plan Description: </label>
      </div>
-     <div class="col-lg-9">{{this.params.data.name}}</div>
-  </div>  
+     <div class="col-lg-3">{{this.params.data.name}}</div>
+  </div>
 
+
+  <div class="row">
+  <div class="col-lg-12">
+  <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
+  </div>
+ 
+
+    
+</div>  
+
+
+
+  <div class="row" style="background: lightblue;">
+  <div class="col-lg-2">
+  <label>Start Qty: </label>
+  </div>
+  <div class="col-lg-2">12</div>
+  <div class="col-lg-2">
+  <label>End Qty: </label>
+  </div>
+  <div class="col-lg-2">12</div>
+  <div class="col-lg-2">
+  <label>Price: </label>
+  </div>  
+ <div class="col-lg-2">
+ {{this.params.data.price}}
+ </div>
+
+    
+</div>  
 
      </form>
   </div>
@@ -104,6 +113,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 <span><button style="height: 20px; font-size:12px;padding: 0 10px;" (click)="open(content)" (click)="invokeParentMethod()" class="btn btn-info">More Details</button></span>`,
   styles: [
     `
+    .modal-body .row .col-lg-3 label, .modal-body .row .col-lg-2 label{ font-weight:bold;}
         .modal-body {
           background: #fff;
           margin: 0px auto;
