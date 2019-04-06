@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {HeaderComponent} from './header/header.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {ContactListComponent} from './contact-list/contact-list.component';
+import {ContactListComponent} from './subscription/contact-list.component';
 import{UsermanagementComponent} from './usermanagement/usermanagement.component';
 import{TransactionsComponent} from './transactions/transactions.component';
 import{PlanComponent} from './plan/plan.component';

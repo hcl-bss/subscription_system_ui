@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ICellRendererAngularComp } from "ag-grid-angular";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalServiceService } from '../global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -176,7 +176,10 @@ export class ChildMessageRendereredit implements ICellRendererAngularComp {
   DrodownArray;
   P_code_Type;
   filterSearchFlag;
-  constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService, private formBuilder: FormBuilder, private globalServiceService: GlobalServiceService) { }
+  constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService, private formBuilder: FormBuilder, private globalServiceService: GlobalServiceService,config: NgbModalConfig) {
+    config.backdrop = 'static';
+      config.keyboard = false;
+   }
   agInit(params: any): void {
     this.params = params;
     this.filterSearchFlag = this.params.data.transactionFlag;

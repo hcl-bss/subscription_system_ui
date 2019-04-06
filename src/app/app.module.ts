@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import {NgbModule,NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-import { ContactListComponent } from './contact-list/contact-list.component';
+import { ContactListComponent } from './subscription/contact-list.component';
 import { GlobalServiceService} from './global-service.service'
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';

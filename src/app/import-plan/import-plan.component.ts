@@ -6,7 +6,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { GlobalServiceService } from '../global-service.service';
 import { ErrorDownloadComponent } from "../error-download.component";
 import { FileDownloadComponent } from '../file-download.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 @Component({
@@ -46,8 +46,9 @@ export class ImportPlanComponent implements OnInit {
     this.flashMessage.show('Choose a file', { cssClass: 'alert-danger', timeout: 10000 });
   }
 
-  constructor( private spinnerService: Ng4LoadingSpinnerService,private router: Router,private modalService: NgbModal, private globalServiceService: GlobalServiceService, private http: HttpClient, private flashMessage: FlashMessagesService) {
-
+  constructor( private spinnerService: Ng4LoadingSpinnerService,private router: Router,private modalService: NgbModal, private globalServiceService: GlobalServiceService, private http: HttpClient, private flashMessage: FlashMessagesService,config: NgbModalConfig) {
+    config.backdrop = 'static';
+    config.keyboard = false;
     this.columnDefs = [
       { headerName: 'Date Added', field: 'dateAdded' },
       { headerName: 'File Name', field: 'uploadFileName', cellRenderer: "FileDownloadComponent", colId: "params" },

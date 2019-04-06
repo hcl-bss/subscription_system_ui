@@ -7,7 +7,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 
 import { ModalsService } from "../modal.service";
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import { Ng4LoadingSpinnerService } from "ng4-loading-spinner";
 
@@ -78,9 +78,11 @@ export class ProductComponent implements OnInit {
     private modalService: NgbModal,
     private flashMessage: FlashMessagesService,
     private childMessageRenderer: ChildMessageRenderer,
-    private globalServiceService: GlobalServiceService
+    private globalServiceService: GlobalServiceService,
+    config: NgbModalConfig
   ) {
-
+    config.backdrop = 'static';
+    config.keyboard = false;
     this.columnDefs = [
       {
         headerName: "Name",

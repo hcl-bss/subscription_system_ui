@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ICellRendererAngularComp } from "ag-grid-angular";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from './_helpers/must-match.validator';
 import { GlobalServiceService } from './global-service.service';
@@ -74,7 +74,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   </div>
 
 
-  <div class="row">
+  <div class="row" style="border-top:2px solid #117a8b !important; margin-top:10px;">
   <div class="col-lg-12">
   <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
   </div>
@@ -185,7 +185,10 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
   closeResult: string;
   registerForm: FormGroup;
   submitted = false;
-  constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { }
+  constructor(private modalService: NgbModal,config: NgbModalConfig, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
   }

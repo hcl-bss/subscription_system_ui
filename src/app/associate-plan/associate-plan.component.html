@@ -2,27 +2,21 @@
   <div class="ContentBox" style="display: block;">
     <main>
       <flash-messages style="text-transform: capitalize;"></flash-messages>
-
       <div class="row">
         <div class="col-lg-12">
           <div style="height: 100%; padding-top: 10px; box-sizing: border-box; width: 100%;">
-              <h5 class="border_btm">Associate Plan
-                  <button type="button" class="btn btn-info float-right" style="line-height:17px; margin-bottom: 5px;" (click)="backToProduct()"> Back
-                      To Product
-                      <i class="fa fa-user-o" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px;"></i>
-                    </button>
-
-              </h5>
-            
+            <h5 class="border_btm">Associate Plan
+              <button type="button" class="btn btn-info float-right" style="line-height:17px; margin-bottom: 5px;"
+                (click)="backToProduct()"> Back
+                To Product
+                <i class="fa fa-user-o" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px;"></i>
+              </button>
+            </h5>
           </div>
         </div>
       </div>
-
-
-
       <div id="productGrid" style="position: relative;">
         <div style="height: 100%; padding-top: 10px; box-sizing: border-box; width: auto;">
-
           <div class="row">
             <div class="col-lg-3">
               <ag-grid-angular #agGrid style="width: 100%;height: 100%;" id="myGrid" class="ag-theme-balham mng"
@@ -33,7 +27,7 @@
               </ag-grid-angular>
             </div>
             <div class="col-lg-9">
-              <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+              <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham mng1"
                 [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [suppressRowTransform]="true"
                 [rowData]="rowData" [rowSelection]="rowSelection" [rowMultiSelectWithClick]="true"
                 (rowClicked)='onRowClicked1($event)' (cellClicked)='onCellClicked1($event)'
@@ -42,18 +36,12 @@
               </ag-grid-angular>
             </div>
           </div>
-
-          <!-- <button type="button" class="btn btn-info float-right" style="line-height:17px;"(click)="updateAssociation()" > Cancel
-            <i class="fa fa-user-o" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px;"></i>
-          </button> -->
           <button type="button" id="updateAsso" disabled class="btn btn-info float-right"
             style="line-height:17px; margin-top: 5px;" (click)="updateAssociation()"> Update Association
             <i class="fa fa-user-o" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px;"></i>
           </button>
-
         </div>
       </div>
-
     </main>
   </div>
 </div>

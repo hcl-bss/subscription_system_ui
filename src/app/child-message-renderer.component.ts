@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ICellRendererAngularComp } from "ag-grid-angular";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from './_helpers/must-match.validator';
 import { GlobalServiceService } from './global-service.service';
@@ -214,7 +214,10 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
   submitted = false;
   chekedFlag;
   editrowData;
-  constructor(private router:Router,private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { }
+  constructor(private router:Router,private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService,config: NgbModalConfig) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

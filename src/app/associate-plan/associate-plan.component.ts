@@ -5,7 +5,7 @@ import { GlobalServiceService } from '../global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClient } from "@angular/common/http";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AssociateMappingComponent } from '../associate-mapping.component';
 import { Router } from "@angular/router";
 @Component({
@@ -35,8 +35,9 @@ export class AssociatePlanComponent implements OnInit {
   associatedPlan;
   plans = [];
   updatePlans = [];
-  constructor( private router: Router,private flashMessage: FlashMessagesService, private associateMappingComponent: AssociateMappingComponent, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
-
+  constructor(  config: NgbModalConfig,private router: Router,private flashMessage: FlashMessagesService, private associateMappingComponent: AssociateMappingComponent, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
+    config.backdrop = 'static';
+    config.keyboard = false;
     this.columnDefs = [
       { headerName: 'Plan ID', field: 'ratePlanId' },
       { headerName: 'Name', field: 'name' },

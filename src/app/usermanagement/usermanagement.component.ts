@@ -5,7 +5,7 @@ import { GlobalServiceService } from '../global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClient } from "@angular/common/http";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from "@angular/router";
 @Component({
   selector: 'app-usermanagement',
@@ -38,7 +38,10 @@ export class UsermanagementComponent implements OnInit {
   email;
   userProfile;
   password;
-  constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
+  constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer,config: NgbModalConfig) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+
     this.columnDefs = [
       { headerName: 'User Profile', field: 'userProfile' },
       { headerName: 'First Name', field: 'userFirstName' },

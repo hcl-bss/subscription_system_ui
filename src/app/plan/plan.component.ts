@@ -3,7 +3,7 @@ import { GlobalServiceService } from '../global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 import { ModalsService } from '../modal.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { NgbDatepickerConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
@@ -63,8 +63,10 @@ export class PlanComponent implements OnInit {
   public invoiceForm: FormGroup;
 
 
-  constructor(private globalPropertiesService:GlobalPropertiesService,private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) 
+  constructor(private globalPropertiesService:GlobalPropertiesService,private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService,config: NgbModalConfig) 
     {
+      config.backdrop = 'static';
+      config.keyboard = false;
       this.columnDefs = [
         { headerName: 'Plan ID', field: 'planID', editable: true },
         { headerName: 'Name', field: 'planName', editable: true },
