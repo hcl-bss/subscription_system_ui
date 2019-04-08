@@ -87,57 +87,57 @@ export class ProductComponent implements OnInit {
       {
         headerName: "Name",
         field: "productDispName",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "Product Type",
         field: "productTypeCode",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "Description",
         field: "productDescription",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "SKU",
         field: "sku",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "Start Date",
         field: "productStartDate",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "End Date",
         field: "productExpDate",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "Status",
         field: "status",
-        editable: true
+        editable: true,unSortIcon: true
       },
 
       {
         headerName: "Plans",
         field: "plans",
         editable: true,
-        width: 350
+        width: 350,unSortIcon: true
       },
       {
         headerName: "Edit",
         cellRenderer: "ChildMessageRendereredit",
 
         colId: "params",
-        width: 150,
+        width: 150,unSortIcon: true,
         checked: false
       }
     ];

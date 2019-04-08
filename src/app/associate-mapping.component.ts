@@ -16,7 +16,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
      </button>
   </div>
   <flash-messages></flash-messages>
-  <div class="modal-body">
+  <div class="modal-body" style="font-size:12px;">
      <form>
        <div class="row">
           <div class="col-lg-3">
@@ -76,8 +76,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
   <div class="row" style="border-top:2px solid #117a8b !important; margin-top:10px;">
   <div class="col-lg-12">
-  <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
-  </div>
+  <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; font-size:13px; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
+ </div>
  
 
     
@@ -85,24 +85,38 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 
 
-  <div class="row" style="background: lightblue;">
-  <div class="col-lg-2">
-  <label>Start Qty: </label>
-  </div>
-  <div class="col-lg-2">12</div>
-  <div class="col-lg-2">
-  <label>End Qty: </label>
-  </div>
-  <div class="col-lg-2">12</div>
-  <div class="col-lg-2">
-  <label>Price: </label>
-  </div>  
- <div class="col-lg-2">
- {{this.params.data.price}}
- </div>
+<!--<div class="row" style="background: lightblue;">
+    <div class="col-lg-2"><label>Start Qty: </label></div>
+    <div class="col-lg-2">12</div>
 
-    
-</div>  
+    <div class="col-lg-2"> <label>End Qty: </label> </div>
+    <div class="col-lg-2">12</div>
+    <div class="col-lg-2"><label>Price: </label></div>  
+    <div class="col-lg-2">{{this.params.data.price}}</div>
+</div>  -->
+
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Start Qty:</th>
+            <th>End Qty:</th>
+            <th>Price:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>123</td>
+            <td>234</td>
+            <td>{{this.params.data.price}}</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
 
      </form>
   </div>

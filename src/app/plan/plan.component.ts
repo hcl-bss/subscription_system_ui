@@ -68,13 +68,13 @@ export class PlanComponent implements OnInit {
       config.backdrop = 'static';
       config.keyboard = false;
       this.columnDefs = [
-        { headerName: 'Plan ID', field: 'planID', editable: true },
-        { headerName: 'Name', field: 'planName', editable: true },
-        { headerName: 'Plan Code', field: 'planCode', editable: true },
-        { headerName: 'Bill Every', field: 'billEvery', editable: true },
-        { headerName: 'Type', field: 'planType', editable: true },
-        { headerName: 'Status', field: 'planStatus', editable: true },
-        { headerName: 'Details', field: 'planDetails', editable: true },
+        { headerName: 'Plan ID', field: 'planID', editable: true,unSortIcon: true },
+        { headerName: 'Name', field: 'planName', editable: true,unSortIcon: true },
+        { headerName: 'Plan Code', field: 'planCode', editable: true,unSortIcon: true },
+        { headerName: 'Bill Every', field: 'billEvery', editable: true ,unSortIcon: true},
+        { headerName: 'Type', field: 'planType', editable: true ,unSortIcon: true},
+        { headerName: 'Status', field: 'planStatus', editable: true,unSortIcon: true },
+        { headerName: 'Details', field: 'planDetails', editable: true,unSortIcon: true },
         
       ];
       // this.rowData = this.createRowData();

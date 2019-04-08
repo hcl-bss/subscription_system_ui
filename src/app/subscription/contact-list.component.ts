@@ -43,16 +43,16 @@ export class ContactListComponent implements OnInit {
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
-      { headerName: 'SUBSCRIPTION NO', field: 'subscriptionId' },
-      { headerName: 'CUSTOMBER NAME', field: 'customerName' },
-      { headerName: 'EMAIL', field: 'email' },
-      { headerName: 'PLAN NAME', field: 'planName' },
-      { headerName: 'STATUS', field: 'status' },
-      { headerName: 'PRICE', field: 'price' },
-      { headerName: 'CREATED ON', field: 'createdDate' },
-      { headerName: 'ACTIVATED ON', field: 'activatedDate' },
-      { headerName: 'LAST BILLED ON', field: 'lastBillDate' },
-      { headerName: 'NEXT BILL DATE', field: 'nextBillDate', width:200},
+      { headerName: 'SUBSCRIPTION NO', field: 'subscriptionId', unSortIcon: true },
+      { headerName: 'CUSTOMBER NAME', field: 'customerName',unSortIcon: true },
+      { headerName: 'EMAIL', field: 'email',unSortIcon: true },
+      { headerName: 'PLAN NAME', field: 'planName',unSortIcon: true },
+      { headerName: 'STATUS', field: 'status',unSortIcon: true },
+      { headerName: 'PRICE', field: 'price',unSortIcon: true },
+      { headerName: 'CREATED ON', field: 'createdDate',unSortIcon: true },
+      { headerName: 'ACTIVATED ON', field: 'activatedDate',unSortIcon: true },
+      { headerName: 'LAST BILLED ON', field: 'lastBillDate',unSortIcon: true },
+      { headerName: 'NEXT BILL DATE', field: 'nextBillDate',unSortIcon: true, width:200},
     ];
    // this.rowData = this.createRowData();
     this.context = { componentParent: this };

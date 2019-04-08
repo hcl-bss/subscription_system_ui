@@ -64,13 +64,13 @@
 
         
         <div style="float:right; margin-top: 10px;">
-          <span class="total_page" *ngIf="!filterSearchFlag">
-            {{this.page+1}} of {{this.totalpage}}
-          </span>
+          <strong class="total_page" *ngIf="!filterSearchFlag">
+            Page {{this.page+1}} of {{this.totalpage}}
+          </strong>
 
-          <span class="total_page" *ngIf="filterSearchFlag">
-            {{this.filterPage+1}} of {{this.totalpage}}
-          </span>
+          <strong class="total_page" *ngIf="filterSearchFlag">
+            Page {{this.filterPage+1}} of {{this.totalpage}}
+          </strong>
 
           <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
             (click)="previousFuntionality(startDateMain,endDateMain,status_valMain)">Prev</button>

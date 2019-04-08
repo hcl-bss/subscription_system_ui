@@ -57,6 +57,12 @@
                           <button type="button" class="btn btn-info float-right" style="line-height:17px;" (click)="open(addUser)"> Add User
                             <i class="fa fa-user-o" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px;"></i>
                           </button>
+
+                          <button type="button" id="searchBtn" class="btn btn-info float-right" style=" margin-left: 5px; line-height:17px;" (click)="resetValues(user_profile,user_name,first_name,status_val)">
+                      
+                            Reset 
+                            <i class="fa fa-refresh " aria-hidden="true"></i>
+                          </button>
                         </div>
                       </div>
                     </form>
@@ -75,7 +81,7 @@
               [rowGroupPanelShow]="rowGroupPanelShow"
               [pivotPanelShow]="pivotPanelShow"
               [enableRangeSelection]="true"
-           
+              [animateRows]="true"
               [defaultColDef]="defaultColDef"
               [suppressRowClickSelection]="true"
               [rowSelection]="rowSelection"
@@ -90,13 +96,13 @@
             ></ag-grid-angular>
 
             <div style="float:right; margin-top: 10px;">
-                <span class="total_page" *ngIf="!filterSearchFlag">
-                  {{this.page+1}} of {{this.totalpage}}
-                </span>
+                <strong class="total_page" *ngIf="!filterSearchFlag">
+                 Page {{this.page+1}} of {{this.totalpage}}
+                </strong>
       
-                <span class="total_page" *ngIf="filterSearchFlag">
-                  {{this.filterPage+1}} of {{this.totalpage}}
-                </span>
+                <strong class="total_page" *ngIf="filterSearchFlag">
+                  Page {{this.filterPage+1}} of {{this.totalpage}}
+                </strong>
       
                 <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
                   (click)="previousFuntionality(user_profile,user_name,first_name,status_val)">Prev</button>

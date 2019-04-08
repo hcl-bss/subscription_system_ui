@@ -43,12 +43,12 @@ export class UsermanagementComponent implements OnInit {
     config.keyboard = false;
 
     this.columnDefs = [
-      { headerName: 'User Profile', field: 'userProfile' },
-      { headerName: 'First Name', field: 'userFirstName' },
-      { headerName: 'Middle Name', field: 'userMiddleName'},
-      { headerName: 'Last Name', field: 'userLastName' },
-      { headerName: 'User Id', field: 'userId' },
-      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params",width:250 }
+      { headerName: 'User Profile', field: 'userProfile',unSortIcon: true },
+      { headerName: 'First Name', field: 'userFirstName',unSortIcon: true },
+      { headerName: 'Middle Name', field: 'userMiddleName',unSortIcon: true},
+      { headerName: 'Last Name', field: 'userLastName',unSortIcon: true },
+      { headerName: 'User Id', field: 'userId',unSortIcon: true },
+      { headerName: 'Status', cellRenderer: "childMessageRenderer", colId: "params",width:250,unSortIcon: true }
     ];
     // this.rowData = this.createRowData();
     this.context = { componentParent: this };
@@ -172,6 +172,7 @@ export class UsermanagementComponent implements OnInit {
       });
   }
 }
+
   searchUser(user_profile, user_name, first_name, status_val) {
     this.filterPage=0; 
     (document.getElementById("prev") as HTMLInputElement).disabled = true;
@@ -193,7 +194,14 @@ export class UsermanagementComponent implements OnInit {
       this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 10000 });
     });
   }
-
+  // resetValues(user_profile, user_name, first_name, status_val){
+ 
+  //   this.user_profile = "";
+  //   this.user_name = "";
+  //   this.first_name= "";
+  //   this.status_val= "";
+  
+  // }
   previousFuntionality(user_profile, user_name, first_name, status_val) {
     this.page = this.page - 1;
     if (this.page == 0) {

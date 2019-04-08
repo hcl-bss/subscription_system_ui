@@ -218,18 +218,18 @@
               [rowGroupPanelShow]="rowGroupPanelShow" [pivotPanelShow]="pivotPanelShow" [enableRangeSelection]="true"
               [defaultColDef]="defaultColDef" [suppressRowClickSelection]="true" [rowSelection]="rowSelection" 
               [enableSorting]="true" [enableFilter]="true" [rowData]="rowData" [columnDefs]="columnDefs"
-              (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents">
+              (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents" [animateRows]="true">
 
             </ag-grid-angular>
 
             <div style="float:right; margin-top: 10px;">
-              <span *ngIf="!filterSearchFlag">
-                  {{this.page+1}} of {{totalPages}}
-              </span>
+              <strong *ngIf="!filterSearchFlag" class="total_page">
+                 Page {{this.page+1}} of {{totalPages}}
+              </strong>
 
-              <span *ngIf="filterSearchFlag">
-                  {{this.filterPage+1}} of {{totalPages}}
-              </span>
+              <strong *ngIf="filterSearchFlag" class="total_page">
+                Page  {{this.filterPage+1}} of {{totalPages}}
+              </strong>
              
 
               

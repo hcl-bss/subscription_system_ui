@@ -139,7 +139,7 @@
               [enableRangeSelection]="true" [pagination]="false" [defaultColDef]="defaultColDef"
               [suppressRowClickSelection]="true" [rowSelection]="rowSelection" [paginationPageSize]="paginationPageSize"
               [enableSorting]="true" [enableFilter]="true" [rowData]="rowData" [columnDefs]="columnDefs"
-              (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents"></ag-grid-angular>
+              (gridReady)="onGridReady($event)" [animateRows]="true" [frameworkComponents]="frameworkComponents"></ag-grid-angular>
           </div>
           <!-- <div style="position: absolute; top: 10px; left: auto; width: 100%;">
             <input type="text" class="form-control" (input)="onQuickFilterChanged()" style="width: 30%; display: inline-block;"
@@ -150,13 +150,13 @@
         </div>
 
         <div style="float:right; margin-top: 10px;">
-          <span *ngIf="!filterSearchFlag">
-            {{this.page+1}} of {{totalPages}}
-          </span>
+          <strong *ngIf="!filterSearchFlag" class="total_page">
+           Page {{this.page+1}} of {{totalPages}}
+          </strong>
 
-          <span *ngIf="filterSearchFlag">
-            {{this.filterPage+1}} of {{totalPages}}
-          </span>
+          <strong *ngIf="filterSearchFlag" class="total_page">
+            Page  {{this.filterPage+1}} of {{totalPages}}
+          </strong>
 
           <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;"
             (click)="previousFuntionality()">Prev</button>
