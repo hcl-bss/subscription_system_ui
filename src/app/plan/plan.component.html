@@ -129,7 +129,7 @@
                 [enableRangeSelection]="true" [pagination]="true" [defaultColDef]="defaultColDef"
                 [suppressRowClickSelection]="true" [rowSelection]="rowSelection" [paginationPageSize]="paginationPageSize"
                 [enableSorting]="true" [enableFilter]="true" [pagination]="flase" [rowData]="rowData"
-                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [animateRows]="true" [frameworkComponents]="frameworkComponents">
+                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents">
   
               </ag-grid-angular>
   
@@ -144,8 +144,8 @@
           <div class="modal-header" style="position: relative;">
               <flash-messages style="position:absolute;top:0;left:0;width:100%;"></flash-messages>
             <h4 class="modal-title" id="modal-basic-title">Add Plan</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" (click)="emptyRatePlanValues()">
+              <span aria-hidden="true" >&times;</span>
             </button>
           </div>
           
@@ -158,13 +158,13 @@
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="text" class="form-control form-control-sm col-lg-8" name="planName"
-                      [(ngModel)]="planName">
+                      [(ngModel)]="planName" autocomplete="off"   (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
                   </div>
                   <div class="col-lg-2 float-left">
                     <label for="pcode">Code*:</label>
                   </div>
                   <div class="col-lg-4 float-left">
-                    <input type="text" class="form-control form-control-sm" name="planCode" [(ngModel)]="planCode">
+                    <input type="text" class="form-control form-control-sm" name="planCode" [(ngModel)]="planCode" autocomplete="off" (input)="setupFeeCheck()">
                   </div>
                 </div>
               </div>
@@ -176,13 +176,15 @@
                   <div class="col-lg-4 float-left">
                     <input type="text" maxlength="2" min="1" class="form-control form-control-sm dropselect float-left"
                       onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
-                      [(ngModel)]="billEvery">
+                      [(ngModel)]="billEvery" autocomplete="off">
                     <select class="form-control form-control-sm dropSelectTime float-left" style="margin-left:5px;"
                       id="billingTime" name="billingTime" [(ngModel)]="billingTime">
-                      <option [selected]="billingTime == 'Month(s)'" [ngValue]="Month" selected>Month(s)</option>
-                      <!-- <option [ngValue]="Month">Month(s)</option> -->
+                      <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
+                      <!-- <option [ngValue]="Month">Month(s)</option>
                       <option>Week(s)</option>
-                      <option>Year(s)</option>
+                      <option>Year(s)</option> -->
+                      <!-- <option [selected]="pricingSchemePlan == 'Unit'" [ngValue]="Unit" selected>Unit</option> -->
+                      <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
                     </select>
                   </div>
                   <div class="col-lg-2 float-left">
@@ -190,7 +192,7 @@
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="number" min="0" value="0" class="form-control form-control-sm" name="freeTrial"
-                      [(ngModel)]="freeTrial">
+                      [(ngModel)]="freeTrial" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
                   </div>
                 </div>
               </div>
@@ -200,8 +202,8 @@
                     <label for="setupFee">Setup Fee:</label>
                   </div>
                   <div class="col-lg-4 float-left">
-                    <input type="text" class="form-control form-control-sm col-lg-8" name="setupFee"
-                      [(ngModel)]="setupFee">
+                    <input type="number" class="form-control form-control-sm col-lg-8" name="setupFee"
+                      [(ngModel)]="setupFee" autocomplete="off" (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
                   </div>
                   <div class="col-lg-2 float-left">
                     <label for="price">Price*:</label>
@@ -209,14 +211,15 @@
                   <div class="col-lg-4 float-left">
   
   
-                    <!-- <input type="text" class="form-control form-control-sm dropselect" name="currencyType" [(ngModel)]="currencyType"> -->
+                   
                     <select class="form-control form-control-sm dropselectCurrency float-left" id="pricingScheme"
                       name="currencyType" [(ngModel)]="currencyType">
-                      <option [selected]="currencyType == 'INR'" [ngValue]="inr" selected>INR</option>
-                      <option>DOLLAR($)</option>
+                      <!-- <option [ngValue]="Select">Select</option>  -->
+                    <option [selected]="currencyType == 'INR'" [ngValue]="INR" selected hidden>INR</option>
+                    <option *ngFor="let values of dropdownCurrencyValues">{{values}}</option>  
                     </select>
                     <input type="number"  id="price_unit" class="form-control form-control-sm float-left"
-                      style="width:55%; margin-left:5px;" name="price" [(ngModel)]="price">
+                      style="width:55%; margin-left:5px;" name="price" [(ngModel)]="price" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
   
                   </div>
                 </div>
@@ -229,27 +232,30 @@
                   <div class="col-lg-4 float-left">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="autoRenew" value="AR" [(ngModel)]='AR' (change)="radio(AR)">Autorenews
+                        <input type="radio" name="autoRenew" value="AR" [(ngModel)]='AR' (change)="radio(999)">Autorenews
                         until cancelled.
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="autoRenew" value="EC" [(ngModel)]='EC' (change)="radio(EC)"
+                        <input type="radio" name="autoRenew" value="EC" [(ngModel)]='EC' 
                           (click)="radioinputboxfun()" checked=”checked”>Expires after specified no of billing cycles.
                       </label>
                       <div *ngIf="radioinputbox">
-                        <input type="number" class="form-control" name="billingCyclesInput"
-                          [(ngModel)]='billingCyclesInput' min="0">
+                        <input type="number"  (input)="radio(billingCyclesInput)" class="form-control form-control-sm " name="billingCyclesInput"
+                          [(ngModel)]='billingCyclesInput' min="0" (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-2 float-left">
-                    <label for="planDescription">Plan Description*:</label>
+                    <label for="unitOfMeasureId">UOM*:</label>
                   </div>
                   <div class="col-lg-4 float-left">
-                    <textarea class="form-control form-control-sm" style="height:86px;white-space:nowwrap;resize:none;"
-                      maxlength="150" name="planDescription" [(ngModel)]="planDescription"></textarea>
+                    <select class="form-control form-control-sm" id="pricingScheme" name="unitOfMeasureId"
+                    [(ngModel)]="unitOfMeasureId" style="width:40%">
+                     <option [ngValue]="Select">Select</option> 
+                    <option *ngFor="let values of dropdownUomValues">{{values.unitOfMeasure}}</option>  
+                  </select>
                   </div>
                 </div>
               </div>
@@ -263,12 +269,13 @@
                   <div class="col-lg-4 float-left">
                     <select class="form-control form-control-sm" id="pricingScheme" name="pricingSchemePlan"
                       [(ngModel)]="pricingSchemePlan" (change)="pricingSchemeBox(pricingSchemePlan)" style="width:46%">
-                      <!-- <option value="unit" selected >Unit</option> -->
+                      
   
-                      <option [selected]="pricingSchemePlan == 'Unit'" [ngValue]="Unit" selected>Unit</option>
-                      <option>Volume</option>
+                      <option [selected]="pricingSchemePlan == 'UNIT'" [ngValue]="UNIT" selected hidden>UNIT</option>
+                      <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  
+                      <!-- <option>Volume</option>
                       <option>Tier</option>
-                      <option>Package</option>
+                      <option>Package</option> -->
                     </select>
                   </div>
                   <div class="col-lg-2 float-left">
@@ -280,94 +287,7 @@
                 </div>
               </div>
   
-              <!-- <div class="row">
-                  <div class="form-group">
-                      <div class="col-lg-12 float-left">
-                          
-                      </div>
-                </div>
-              </div> -->
-  
-  
-  
-  
-  
-  
-  
-              <!-- <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    
-                    
-                  </div>
-                </div>
-                </div> -->
-              <!-- <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group bill "> -->
-  
-  
-              <!-- <select class="form-control form-control-sm dropselect" id="billing" name="billing" [(ngModel)]="billing">
-    <option *ngFor="let data of numericArray">{{data}}</option>
-    
-    </select> -->
-  
-  
-              <!-- </div>
-                </div>
-              </div> -->
-              <!-- <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    
-                    
-                  </div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    
-                   
-                  </div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                      <div class="col-lg-6">
-                    
-                      </div>
-                      <div class="col-lg-6">
-                   
-  
-  
-  
-                  </div>
-                  </div>
-                </div>
-  
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    
-                    
-                  </div>
-                </div>
-                
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    
-                    
-                  </div>
-                </div>
-              </div> -->
+              
               <div class="row">
                 <div class="col-lg-12">
                   <div *ngIf="volumePricingScheme" class="volume_box" style="padding:2% 2% 0 2%;">
@@ -405,11 +325,6 @@
                                 </div></div></div>
   
   
-                            
-  
-  
-  
-  
   
                           <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">    
                           <div class="row" style="text-align:center">              
@@ -431,97 +346,7 @@
                         </div></div></div>
                       </div>
                     </form>
-                    <!-- <pre>{{invoiceForm.value | json}}</pre> -->
-  
-      
-                        <!-- <div class="srtQ">
-                          <label>Starting Qty:</label>
-                          <input type="number" class="form-control " name="startingQuantity" min="0"
-                            [(ngModel)]="startingQuantity">
-                        </div>
-                        <div class="endQ" style="position: absolute;left: 108%;bottom: 11%;width: 74%;">
-                          <label>Ending Qty:</label>
-                          <input type="number" class="form-control " name="xyz" min="0" name="" [(ngModel)]="xyz">
-                        </div>
-                        <div class="prcVol" style="position:absolute;left:200%;bottom:10%;width:79%">
-                          <label>Price:</label>
-                          <input type="number" class="form-control " name="priceVol" min="0" [(ngModel)]="pricevol">
-                        </div> -->
-  
-                        <!-- <div class="col-md-12" [formGroup]="addForm" style=" text-align: center; padding: 0px;">
-                          <div class="form-group">
-                            <button class=" btn btn-info add-new" (click)="onAddRow1()" *ngIf="addForm.get('rows1')"
-                              style="cursor: pointer; margin:-30px 0px 5px 0;"><i class="fa fa-plus"></i> Add New
-                              Row</button>
-                            <table class="table margin_btm_0" style="margin-bottom: -20px; text-align: left; ">
-                              <tbody>
-                                <tr>
-                                  <th>
-                                    Starting Quantity
-                                  </th>
-                                  <th>
-                                    Ending Quantity
-                                  </th>
-                                  <th>
-                                    Price
-                                  </th>
-                                  <th>
-  
-                                  </th>
-                                </tr>
-                                <tr *ngFor="let row of addForm.get('rows')?.controls;let index = index;">
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('startingQty')">
-                                  </td>
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('endingQty')">
-                                  </td>
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('price')">
-                                  </td>
-                                  <td>
-                                    <a href="javascript:void(0)"><i class="fa fa-trash fa-2" aria-hidden="true"
-                                        style="color:#fff;"></i></a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-  
-                        </div> -->
-  
-                        <!-- <div class="col-md-12" [formGroup]="addForm"
-                          style=" text-align: center; padding: 5px 0px 0px 0px;">
-                          <div class="form-group">
-                            <table class="table margin_btm_0" style="text-align:left; margin-bottom: 0px;">
-                              <tbody>
-                                <tr *ngFor="let row of addForm.get('rows1')?.controls;let index = index;">
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('startingQty1')">
-                                  </td>
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('endingQty1')">
-                                  </td>
-                                  <td>
-                                    <input type="number" class="form-control form-control-sm" min="0" placeholder="0"
-                                      [formControl]="row.get('price1')">
-                                  </td>
-                                  <td>
-                                    <a href="javascript:void(0)" (click)="onRemoveRow1(index)"><i class="fa fa-trash fa-2"
-                                        aria-hidden="true"
-                                        style="color: #E34724;margin-top: 8px;font-size: 17px;"></i></a>
-                                  </td>
-                                </tr>
-                              </tbody>
-  
-                            </table>
-                          </div>
-                        </div> -->
+                  
                       </div>
                     </div>
                   </div>
@@ -530,9 +355,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info"
-              (click)="addPlanData(planName,planCode,billEvery,billingTime,billingCyclesInput,planDescription,currencyType,price,pricingSchemePlan,freeTrial,setupFee)">Save</button>
-            <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button>
+            <button type="button" class="btn btn-info" disabled id="saveAddPlan"
+              (click)="addPlanData(planName,planCode,billEvery,billingTime,unitOfMeasureId,currencyType,price,pricingSchemePlan,freeTrial,setupFee)">Save</button>
+            <button type="button" class="btn btn-info" (click)="removeValues();modal.close('Save click')">Close</button>
   
           </div>
         </ng-template>

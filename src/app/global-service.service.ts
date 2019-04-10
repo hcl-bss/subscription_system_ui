@@ -491,81 +491,7 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
   }));
 }
 //report search end
-//add plan start
-addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArray, currencyType, price, radioParam, billingCyclesInput, freeTrial, setupFee, planDescription) {
 
-
-  this.newPlanData = JSON.stringify(
-    {
-          "name": planName,
-          "ratePlanId": planCode,
-          "billingCycleTerm": billEvery,
-          "billEvery": billingTime,
-          "pricingScheme": pricingSchemePlan,
-          "currencyCode": currencyType,
-          "ratePlanVolumeDtoList":uniqueArray,
-          "expireAfter": billingCyclesInput,
-          "setUpFee": setupFee,
-          "freeTrail": freeTrial,
-          "type": "DEVICE",// 
-          "isActive": "INACTIVE"//
-
-      
-               
-      // "price": price,
-      // "billingCycleTerm": radioParam,
-     
-     
-      
-      //"planDescription": planDescription,
-
-    },
-    // {
-    //         "billingCycleTerm": 2,
-    //         "billEvery": "WEEKLY",
-    //         "ratePlanId": "TST05",
-    //         "name": "TESTING05",
-    //         "currencyCode": "USD",            
-    //         "pricingScheme": pricingSchemePlan,
-    //         "ratePlanVolumeDtoList": [
-    //           {
-    //             "endQty": 25,
-    //             "price": 10.50,
-    //             "startQty": 1
-    //           },
-    //         {
-    //             "endQty": 50,
-    //             "price": 9.50,
-    //             "startQty": 26
-    //           },
-    //         {
-    //             "endQty": 1000,
-    //             "price": 9.00,
-    //             "startQty": 51
-    //           }
-    //         ],
-    //         "expireAfter": 999,
-    //         "setUpFee": 0,
-    //         "freeTrail": 0,
-
-      
-    // }
-  );
- // volumevalue1 = [];
-
-return this.http.post(this.url + '/product', this.newPlanData, {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  })
-}).pipe(map((response: Response) => {
-  console.log(response);
-  return response;
-
-}));
-
-
-}
-//add plan end
 
 
 
@@ -651,6 +577,81 @@ subscriptionDetailsData(subsData,email,cname){
 this.subsData=subsData;
 this.emailsubscription=email;
 this.cnamesubscription=cname;
+}
+
+fetchCurrencyValues(){
+  return this.http.get(this.url + '/getCurrency',{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+fetchPricingSchemeValues(){
+  return this.http.get(this.url + '/getRateplanDropDown?statusId=pricscheme',{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+fetchBillEveryValues(){
+  return this.http.get(this.url + '/getRateplanDropDown?statusId=billfreq',{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+fetchUomValues(){
+  
+    return this.http.get(this.url + '/getUOM', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+  }
+
+addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArray, currencyType, price, radioParam, freeTrial, setupFee, unitOfMeasureId) {
+
+
+  this.newPlanData = JSON.stringify(
+    {
+          "name": planName,
+          "ratePlanId": planCode,
+          "billingCycleTerm": billEvery,
+          "billEvery": billingTime,
+          "freeTrail": freeTrial,
+          "setUpFee": setupFee,
+          "pricingScheme": pricingSchemePlan,
+          "currencyCode": currencyType,
+          "ratePlanVolumeDtoList":uniqueArray,
+          "expireAfter": radioParam,
+          "type":unitOfMeasureId,
+          "price": price,
+          "isActive": "INACTIVE"
+    }
+  );
+return this.http.post(this.url + '/ratePlan', this.newPlanData, {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+}).pipe(map((response: Response) => {
+  console.log(response);
+  return response;
+}));
 }
 }
 
