@@ -87,10 +87,10 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 <!--<div class="row" style="background: lightblue;">
     <div class="col-lg-2"><label>Start Qty: </label></div>
-    <div class="col-lg-2">12</div>
+    <div class="col-lg-2">{{this.params.data.price}}</div>
 
     <div class="col-lg-2"> <label>End Qty: </label> </div>
-    <div class="col-lg-2">12</div>
+    <div class="col-lg-2">{{this.params.data.price}}</div>
     <div class="col-lg-2"><label>Price: </label></div>  
     <div class="col-lg-2">{{this.params.data.price}}</div>
 </div>  -->
@@ -109,8 +109,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
         </thead>
         <tbody>
           <tr>
-            <td>123</td>
-            <td>234</td>
+            <td></td>
+            <td></td>
             <td>{{this.params.data.price}}</td>
           </tr>
         </tbody>

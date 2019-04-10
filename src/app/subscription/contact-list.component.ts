@@ -40,6 +40,9 @@ export class ContactListComponent implements OnInit {
   fromDateStr: string;
   toDateStr: string;
   DrodownArraystatus: any;
+  subscriptionNumber: any;
+  emailDetail: any;
+  cust_name: any;
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
@@ -387,5 +390,17 @@ Reset(subscriptionId,customerName,planName,status,fromDateStr,toDateStr){
   this.fromDateStr="";
   this.toDateStr="";
 }
+onCellClicked1(event: any) {
+   
+  this.subscriptionNumber=event.data.subscriptionId;
+  this.emailDetail=event.data.email;
+  this.cust_name=event.data.customerName;  
+  this.globalServiceService.subscriptionDetailsData(this.subscriptionNumber,this.emailDetail,this.cust_name);
+  if (event.colDef.headerName == "SUBSCRIPTION NO") {   
+    this.router.navigate(['/subscriptionDetail']);
+  } 
+
+}
+
 } 
 

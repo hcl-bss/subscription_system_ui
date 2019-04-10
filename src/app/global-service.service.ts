@@ -22,6 +22,9 @@ export class GlobalServiceService {
   associationPlans: any;
   editProductData: string;
   userData: any;
+  subsData: any;
+  emailsubscription: any;
+  cnamesubscription: any;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -644,7 +647,11 @@ getStatusdropDown(){
     return response;
   }));
 }
-
+subscriptionDetailsData(subsData,email,cname){
+this.subsData=subsData;
+this.emailsubscription=email;
+this.cnamesubscription=cname;
+}
 }
 
 

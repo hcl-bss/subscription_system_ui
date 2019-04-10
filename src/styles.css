@@ -1361,7 +1361,13 @@ width: 55px;
   width: 100%;
 }
 .ag-theme-balham.mng .ag-row,.ag-theme-balham.mng1 .ag-row{ cursor: pointer;}
-
+.detail_list{ list-style: none; width: 100%; display: inline-block; padding-bottom: 10px;}
+.detail_list li{  width: 100%; display: inline-block;}
+h5.detail_list_heading{ padding: 10px 0px; background: lightblue; border-bottom: 1px solid #bababa;border-top: 1px solid #bababa; margin: 0 -15px; padding:0 15px;}
+.upper_content strong, .upper_content span{ width: 100%; display: inline-block;}
+.brd{border-right: 1px solid #bababa;}
+.upper_content{ margin-bottom: 30px;}
+.row.mng{ min-height: auto; height: auto; }
 
 
 

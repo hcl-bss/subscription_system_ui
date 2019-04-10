@@ -36,6 +36,7 @@ import { AssociatePlanComponent } from './associate-plan/associate-plan.componen
 import { AssociateMappingComponent } from './associate-mapping.component';
 import { ChartsModule } from 'ng2-charts';
 import {GlobalPropertiesService} from './global-properties.service';
+import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import {GlobalPropertiesService} from './global-properties.service';
     SubscriptionreportComponent,
     ChildMessageRendereredit,
     AssociatePlanComponent,
-    AssociateMappingComponent
+    AssociateMappingComponent,
+    SubscriptionDetailComponent
 
   ],
 

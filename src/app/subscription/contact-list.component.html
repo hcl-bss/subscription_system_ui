@@ -139,7 +139,7 @@
               [enableRangeSelection]="true" [pagination]="false" [defaultColDef]="defaultColDef"
               [suppressRowClickSelection]="true" [rowSelection]="rowSelection" [paginationPageSize]="paginationPageSize"
               [enableSorting]="true" [enableFilter]="true" [rowData]="rowData" [columnDefs]="columnDefs"
-              (gridReady)="onGridReady($event)" [animateRows]="true" [frameworkComponents]="frameworkComponents"></ag-grid-angular>
+              (gridReady)="onGridReady($event)" [animateRows]="true" [frameworkComponents]="frameworkComponents" (cellClicked)='onCellClicked1($event)'></ag-grid-angular>
           </div>
           <!-- <div style="position: absolute; top: 10px; left: auto; width: 100%;">
             <input type="text" class="form-control" (input)="onQuickFilterChanged()" style="width: 30%; display: inline-block;"
