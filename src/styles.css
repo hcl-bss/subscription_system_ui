@@ -1379,4 +1379,4 @@ h5.detail_list_heading{     background: #f6f0f0;
 .upper_content{padding: 12px 0px;}
 .upper_content strong{color: #117a8b;}
 .col-lg-12.brd  p > a{text-decoration: underline;color: #117a8b;font-weight: bold;}
-
+.form-control:disabled, .form-control[readonly]{cursor: no-drop;}
