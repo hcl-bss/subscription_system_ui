@@ -8,15 +8,26 @@
 
   <h5 style="border-bottom: 2px solid #117a8b !important;color: #117a8b; text-transform: uppercase; margin-top: -10px;padding: 0 0 10px 0;" >
     Subscription Number: {{subscription_no}} 
+
+
+    <div [ngSwitch]="status" style="width:auto; display:inline-block;">
+      <div *ngSwitchCase="'ACTIVE'" style="width:auto; display:inline-block;"> 
       <button type="button" id="activrBtn" class="btn btn-success" style=" margin-left: 5px; line-height:17px; margin-top:-2px;">
       Active
-    </button>
-    <button type="button" class="btn btn-danger" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
+      </button>  
+      </div>
+      <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">
+      <button type="button" class="btn btn-danger" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
       Cancelled
-    </button>
-    <button type="button" class="btn btn-warning" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
+      </button>
+      </div>
+      <div *ngSwitchCase="'Yellow'" style="width:auto; display:inline-block;">
+      <button type="button" class="btn btn-warning" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
       On-Hold
-    </button>
+      </button>
+      </div>
+   </div>
+
     
     <button  class="btn btn-outline-warning float-right" style="margin:0 0 0 5px">
         Edit 
@@ -56,23 +67,27 @@
 
             <h5 class="detail_list_heading">Billing Address</h5>
             <ul class="detail_list">
-                <li><span>asdd</span></li>
-                <li><span>efwef</span></li>
-                <li><span>wefwefwef</span></li>
-              </ul>
+                <li><span>{{billingCity}}</span></li>
+                <li><span>{{billinfCountry}}</span></li>
+                <li><span>{{billingLine1}} {{billingLine2}}</span></li>
+                <li><span>{{billingstate}}</span></li>
+                <li><span>{{billingzipcode}}</span></li>               
+            </ul>
 
               <h5 class="detail_list_heading">Shipping Address</h5>
               <ul class="detail_list">
-                  <li><span>asdd</span></li>
-                  <li><span>efwef</span></li>
-                  <li><span>wefwefwef</span></li>
+                <li><span>{{shippingCity}}</span></li>
+                <li><span>{{shippingCountry}}</span></li>
+                <li><span>{{shippingLine1}} {{shippingLine2}}</span></li>
+                <li><span>{{shippingstate}}</span></li>
+                <li><span>{{shippingzipcode}}</span></li>
                 </ul>
 
                 <h5 class="detail_list_heading">Payment Details</h5>
                 <ul class="detail_list">
-                    <li><span>asdd</span></li>
+                    <!-- <li><span>asdd</span></li>
                     <li><span>efwef</span></li>
-                    <li><span>wefwefwef</span></li>
+                    <li><span>wefwefwef</span></li> -->
                   </ul>
                   <p><a href="#">asdfsdafsdf</a>  |  <a href="#">sddssdsd</a></p>
         </div>
@@ -87,19 +102,19 @@
               <div class="row">
                   <div class="col-lg-3 upper_content">
                     <strong>Subscription Amount</strong>
-                    <span>asdasdasd</span>
+                    <span></span>
                   </div>
                   <div class="col-lg-3 upper_content">
                       <strong>Next Billing Date</strong>
-                      <span>asdasdasd</span>
+                      <span> </span>
                     </div>
                     <div class="col-lg-3 upper_content">
                         <strong>Last Billing Date</strong>
-                        <span>asdasdasd</span>
+                        <span> </span>
                     </div>
                     <div class="col-lg-3 upper_content">
                         <strong>Cancel Date</strong>
-                        <span>asdasdasd</span>
+                        <span> </span>
                     </div>
 
 
@@ -109,41 +124,33 @@
                               <tr>
                                 <th>Plan & Add On Details</th>
                                 <th>Qty</th>
-                                <th>Email</th>
+                                <th>Rate</th>
                                 <th>Tax</th>
                                 <th>Amount</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td></td> <td></td>
+                              <tr  *ngFor="let values of productPlanArr">
+                                <td>{{values.productName}} {{values.rateplanDesc}}</td>
+                                <td>{{values.quantity}}</td>
+                                <td>{{values.rate}}</td>
+                                <td>{{values.tax}}</td>
+                                <td>{{values.quantity * values.rate}}</td>
                               </tr>
-                              <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td><td></td> <td></td>
-                              </tr>
-                              <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td><td></td> <td></td>
-                              </tr>
+                           
                             </tbody>
                           </table>
                     </div>
                     <div class="col-lg-12" style="border-top:1px solid #bababa; border-bottom: 1px solid #bababa; width: 100%;">
-                      <p style="text-align: right; margin:0px;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">234234234</span></p>
+                      <p style="text-align: right; margin:0px;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">{{total}}</span></p>
                     </div>
                    
                     <div class="col-lg-12" >
                       <div class="col-lg-4">
-                        <p style="text-align: left;" >Total <span style=" float: right; text-align: right;"><a href="#">ererer</a></span></p>
+                        <p style="text-align: left;" >Notes <span style=" float: right; text-align: right;"><a href="#">+ADD</a></span></p>
               
-                        <p>jhadjhavsdjhvasdjhvasjhdvasjhdv</p>
-                        <p style="text-align: right; font-style: italic;">awdasdsadsad</p>
+                        <p>This is note from sales agent</p>
+                        <p style="text-align: right; font-style: italic;">-UserName</p>
                       </div>
                      
                     </div>

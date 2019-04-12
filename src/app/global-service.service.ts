@@ -25,6 +25,7 @@ export class GlobalServiceService {
   subsData: any;
   emailsubscription: any;
   cnamesubscription: any;
+  subsciptionDetailsrlno: string;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -573,11 +574,7 @@ getStatusdropDown(){
     return response;
   }));
 }
-subscriptionDetailsData(subsData,email,cname){
-this.subsData=subsData;
-this.emailsubscription=email;
-this.cnamesubscription=cname;
-}
+
 
 fetchCurrencyValues(){
   return this.http.get(this.url + '/getCurrency',{
@@ -653,7 +650,31 @@ return this.http.post(this.url + '/ratePlan', this.newPlanData, {
   return response;
 }));
 }
+
+//subscription Detail
+subscriptionDetailsData(subsData,email,cname){
+  this.subsData=subsData;
+  this.emailsubscription=email;
+  this.cnamesubscription=cname;
+  }
+
+subscritionDetails(){  
+  this.subsciptionDetailsrlno = JSON.stringify(
+    {
+          "subscriptionId": this.subsData,
+    }
+  );  
+  return this.http.get(this.url + '/subscriptionDetail?subscriptionId='+this.subsData, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
 }
 
 
 
+//GET /getRateplanDropDown
