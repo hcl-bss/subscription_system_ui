@@ -18,6 +18,7 @@ import {
 
 import { NgbDateFRParserFormatter } from "../ngb-date-fr-parser-formatter";
 import { ChildMessageRendereredit } from "./child-message-renderer_btn.component";
+import { toggleFunctionality } from "./toggleFunctionality";
 @Component({
   selector: "app-product",
 
@@ -122,8 +123,9 @@ export class ProductComponent implements OnInit {
 
       {
         headerName: "Status",
+        cellRenderer: "toggleFunctionality",
         field: "status",
-        editable: true,unSortIcon: true
+        unSortIcon: true
       },
 
       {
@@ -149,7 +151,8 @@ export class ProductComponent implements OnInit {
     };
 
     this.frameworkComponents = {
-      ChildMessageRendereredit: ChildMessageRendereredit
+      ChildMessageRendereredit: ChildMessageRendereredit,
+      toggleFunctionality:toggleFunctionality
     };
 
     this.rowSelection = "multiple";

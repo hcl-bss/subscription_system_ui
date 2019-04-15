@@ -296,6 +296,48 @@ executeBatch(batchId) {
       return response;
     }));
   }
+  //toggleStatus start
+  toggleStatus(uidpk,name, description, sku, startDate, endDate, pCode,status){
+    if(name==undefined){
+      name="";
+    }
+    if(description==undefined){
+      description="";
+    }
+    if(sku==undefined){
+      sku="";
+    }
+    if(startDate==undefined){
+      startDate="";
+    }
+    if(endDate==undefined){
+      endDate="";
+    }
+    if(pCode==undefined){
+      pCode="";
+    }
+    this.editProductData = JSON.stringify(
+      {
+        "productDescription": description,
+        "productDispName": name,
+        "productExpDate": endDate,
+        "productStartDate": startDate,
+        "productType": pCode,
+        "sku": sku,
+        "uidpk":uidpk,
+        "status":status,
+      });
+
+    return this.http.post(this.url + '/updateProduct', this.editProductData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+  }
+  //toggleStatus end
   //search Subcription
   searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr,pageno) {
     this.searchSubcriptionData = JSON.stringify(
@@ -678,3 +720,4 @@ subscritionDetails(){
 
 
 //GET /getRateplanDropDown
+

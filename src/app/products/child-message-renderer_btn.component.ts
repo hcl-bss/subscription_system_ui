@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-b
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalServiceService } from '../global-service.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Ng4LoadingSpinnerService } from "ng4-loading-spinner";
 
 @Component({
   selector: 'child-cell',
@@ -176,7 +177,7 @@ export class ChildMessageRendereredit implements ICellRendererAngularComp {
   DrodownArray;
   P_code_Type;
   filterSearchFlag;
-  constructor(private modalService: NgbModal, private flashMessage: FlashMessagesService, private formBuilder: FormBuilder, private globalServiceService: GlobalServiceService,config: NgbModalConfig) {
+  constructor( private spinnerService: Ng4LoadingSpinnerService,private modalService: NgbModal, private flashMessage: FlashMessagesService, private formBuilder: FormBuilder, private globalServiceService: GlobalServiceService,config: NgbModalConfig) {
     config.backdrop = 'static';
       config.keyboard = false;
    }
@@ -296,7 +297,10 @@ ${reason}`;
     result => {
       let msg;
       msg=result;
+      this.spinnerService.show();
       this.flashMessage.show(msg.message, { cssClass: 'alert-success', timeout: 5000 });
+      this.spinnerService.show();
+      window.location.reload();
     },
     error => {
       this.flashMessage.show(error.error.message, { cssClass: 'alert-danger', timeout: 5000 });
