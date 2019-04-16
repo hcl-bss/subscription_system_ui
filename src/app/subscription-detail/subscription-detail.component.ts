@@ -30,6 +30,11 @@ subscription_no;
   productPlanArr;
   amount;
   total=0;
+  nextBillingDate;
+  lastBillDate;
+  totalAmount;
+  renewsForever;
+  remainingCycles;
   constructor(private globalServiceService: GlobalServiceService) { }
 
   ngOnInit() {
@@ -55,6 +60,14 @@ subscription_no;
       this.shippingLine1=this.shippingAddress.line1;
       this.shippingCountry=this.shippingAddress.country;
       this.productPlanArr=this.subscritiondata.subscriptionDto.productPlanList;
+      this.nextBillingDate=this.subscritiondata.subscriptionDto.nextBillDate;
+      this.lastBillDate=this.subscritiondata.subscriptionDto.lastBillDate;
+      if(this.lastBillDate==null){
+        this.lastBillDate="N/A"
+      }
+      this.totalAmount=this.subscritiondata.subscriptionDto.totalAmount;
+      this.renewsForever=this.subscritiondata.subscriptionDto.renewsForever;
+      this.remainingCycles=this.subscritiondata.subscriptionDto.remainingCycles;
      for(let i=0;i<this.productPlanArr.length;i++){
         this.amount=this.productPlanArr[i].quantity * this.productPlanArr[i].rate;
         this.total+=this.amount;

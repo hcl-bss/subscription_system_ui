@@ -1,169 +1,156 @@
 <div id="rightSideWrapper">
-  <div class="ContentBox" style="display: block;">
-    <main>
-      <!-- Subscription Number: {{subscription_no}} -->
-     
-    
-
-
-  <h5 style="border-bottom: 2px solid #117a8b !important;color: #117a8b; text-transform: uppercase; margin-top: -10px;padding: 0 0 10px 0;" >
-    Subscription Number: {{subscription_no}} 
-
-
-    <div [ngSwitch]="status" style="width:auto; display:inline-block;">
-      <div *ngSwitchCase="'ACTIVE'" style="width:auto; display:inline-block;"> 
-      <button type="button" id="activrBtn" class="btn btn-success" style=" margin-left: 5px; line-height:17px; margin-top:-2px;">
-      Active
-      </button>  
-      </div>
-      <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">
-      <button type="button" class="btn btn-danger" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
-      Cancelled
-      </button>
-      </div>
-      <div *ngSwitchCase="'Yellow'" style="width:auto; display:inline-block;">
-      <button type="button" class="btn btn-warning" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
-      On-Hold
-      </button>
-      </div>
-   </div>
-
-    
-    <button  class="btn btn-outline-warning float-right" style="margin:0 0 0 5px">
-        Edit 
-    <!-- <i _ngcontent-c3="" aria-hidden="true" class="fa fa-user-plus"></i> -->
-  </button>
-  <button  class="btn btn-outline-danger float-right" style="margin:0 0 0 5px">
-      Cancel 
-  <!-- <i _ngcontent-c3="" aria-hidden="true" class="fa fa-user-plus"></i> -->
-</button>
-  <button  class="btn btn-outline-info float-right" style="margin:0px 0 0 5px">
-    More 
-    <!-- <i _ngcontent-c3="" aria-hidden="true" class="fa fa-sellsy"></i> -->
-  </button></h5>
-
-
-
-
-  <div class="row" style="border-bottom: 1px solid #bababa;">
-    <div class="col-lg-3">
-      <div class="row" >
-        <div class="col-lg-12 brd">
-
-          <div style="width: 100%; display: table; min-height: 100px;">
-            <div style="width: 100%; display: table-cell; vertical-align: middle;">
-              <p>{{c_name}}</p>
-              <strong>{{email}}</strong>
+   <div class="ContentBox" style="display: block;">
+      <main>
+         <!-- Subscription Number: {{subscription_no}} -->
+         <h5 style="border-bottom: 2px solid #117a8b !important;color: #117a8b; text-transform: uppercase; margin-top: -10px;padding: 0 0 10px 0;" >
+            Subscription Number: {{subscription_no}} 
+            <div [ngSwitch]="status" style="width:auto; display:inline-block;">
+               <div *ngSwitchCase="'ACTIVE'" style="width:auto; display:inline-block;"> 
+                  <button type="button" id="activrBtn" class="btn btn-success" style=" margin-left: 5px; line-height:17px; margin-top:-2px;">
+                  Active
+                  </button>  
+               </div>
+               <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">
+                  <button type="button" class="btn btn-danger" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
+                  Cancelled
+                  </button>
+               </div>
+               <div *ngSwitchCase="'ONHOLD'" style="width:auto; display:inline-block;">
+                  <button type="button" class="btn btn-warning" style="margin-left: 5px; line-height:17px; margin-top: -2px;">
+                  On-Hold
+                  </button>
+               </div>
             </div>
-          </div>
-
-<!-- 
-            <h5 class="detail_list_heading">asdasdasd</h5>
-            <ul class="detail_list">
-              <li><span>asdd</span></li>
-              <li><span>efwef</span></li>
-              <li><span>wefwefwef</span></li>
-            </ul> -->
-
-            <h5 class="detail_list_heading">Billing Address</h5>
-            <ul class="detail_list">
-                <li><span>{{billingCity}}</span></li>
-                <li><span>{{billinfCountry}}</span></li>
-                <li><span>{{billingLine1}} {{billingLine2}}</span></li>
-                <li><span>{{billingstate}}</span></li>
-                <li><span>{{billingzipcode}}</span></li>               
-            </ul>
-
-              <h5 class="detail_list_heading">Shipping Address</h5>
-              <ul class="detail_list">
-                <li><span>{{shippingCity}}</span></li>
-                <li><span>{{shippingCountry}}</span></li>
-                <li><span>{{shippingLine1}} {{shippingLine2}}</span></li>
-                <li><span>{{shippingstate}}</span></li>
-                <li><span>{{shippingzipcode}}</span></li>
-                </ul>
-
-                <h5 class="detail_list_heading">Payment Details</h5>
-                <ul class="detail_list">
-                    <!-- <li><span>asdd</span></li>
-                    <li><span>efwef</span></li>
-                    <li><span>wefwefwef</span></li> -->
-                  </ul>
-                  <p><a href="#">asdfsdafsdf</a>  |  <a href="#">sddssdsd</a></p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-lg-9">
-        <div class="row mng">
-          <div class="col-lg-12">
-            
-              <div class="row">
-                  <div class="col-lg-3 upper_content">
-                    <strong>Subscription Amount</strong>
-                    <span></span>
+            <button  class="btn btn-outline-warning float-right" style="margin:0 0 0 5px">
+            Edit 
+            </button>
+            <button  class="btn btn-outline-danger float-right" style="margin:0 0 0 5px">
+            Cancel 
+            </button>
+            <button  class="btn btn-outline-info float-right" style="margin:0px 0 0 5px">
+            More 
+            </button>
+         </h5>
+         <div class="row" style="border-bottom: 1px solid #bababa;">
+            <div class="col-lg-3">
+               <div class="row" >
+                  <div class="col-lg-12 brd">
+                     <div style="width: 100%; display: table; min-height: 100px;">
+                        <div style="width: 100%; display: table-cell; vertical-align: middle;">
+                           <p>{{c_name}}</p>
+                           <strong>{{email}}</strong>
+                        </div>
+                     </div>
+                     <h5 class="detail_list_heading">Billing Address</h5>
+                     <ul class="detail_list">
+                        <li><span>{{billingCity}}</span></li>
+                        <li><span>{{billinfCountry}}</span></li>
+                        <li><span>{{billingLine1}} {{billingLine2}}</span></li>
+                        <li><span>{{billingstate}}</span></li>
+                        <li><span>{{billingzipcode}}</span></li>
+                     </ul>
+                     <h5 class="detail_list_heading">Shipping Address</h5>
+                     <ul class="detail_list">
+                        <li><span>{{shippingCity}}</span></li>
+                        <li><span>{{shippingCountry}}</span></li>
+                        <li><span>{{shippingLine1}} {{shippingLine2}}</span></li>
+                        <li><span>{{shippingstate}}</span></li>
+                        <li><span>{{shippingzipcode}}</span></li>
+                     </ul>
+                     <h5 class="detail_list_heading">Payment Details</h5>
+                     <ul class="detail_list">
+                     </ul>
+                     <p><a href="#">asdfsdafsdf</a>  |  <a href="#">sddssdsd</a></p>
                   </div>
-                  <div class="col-lg-3 upper_content">
-                      <strong>Next Billing Date</strong>
-                      <span> </span>
-                    </div>
-                    <div class="col-lg-3 upper_content">
-                        <strong>Last Billing Date</strong>
-                        <span> </span>
-                    </div>
-                    <div class="col-lg-3 upper_content">
-                        <strong>Cancel Date</strong>
-                        <span> </span>
-                    </div>
-
-
-                    <div class="col-lg-12">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th>Plan & Add On Details</th>
-                                <th>Qty</th>
-                                <th>Rate</th>
-                                <th>Tax</th>
-                                <th>Amount</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr  *ngFor="let values of productPlanArr">
-                                <td>{{values.productName}} {{values.rateplanDesc}}</td>
-                                <td>{{values.quantity}}</td>
-                                <td>{{values.rate}}</td>
-                                <td>{{values.tax}}</td>
-                                <td>{{values.quantity * values.rate}}</td>
-                              </tr>
-                           
-                            </tbody>
-                          </table>
-                    </div>
-                    <div class="col-lg-12" style="border-top:1px solid #bababa; border-bottom: 1px solid #bababa; width: 100%;">
-                      <p style="text-align: right; margin:0px;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">{{total}}</span></p>
-                    </div>
-                   
-                    <div class="col-lg-12" >
-                      <div class="col-lg-4">
-                        <p style="text-align: left;" >Notes <span style=" float: right; text-align: right;"><a href="#">+ADD</a></span></p>
-              
-                        <p>This is note from sales agent</p>
-                        <p style="text-align: right; font-style: italic;">-UserName</p>
-                      </div>
-                     
-                    </div>
-                </div>
-
-               
-
-
-
-          </div>
-        </div>
-      </div>
-  </div>
-    </main>
-  </div>
+               </div>
+            </div>
+            <div class="col-lg-9">
+               <div class="row mng">
+                  <div class="col-lg-12">
+                     <div class="row">
+                        <div class="col-lg-3 upper_content">
+                           <strong>Subscription Amount</strong>
+                           <span>{{totalAmount}}</span>
+                        </div>
+                        <div class="col-lg-3 upper_content">
+                           <strong>Next Billing Date</strong>
+                           <span>{{nextBillingDate}} </span>
+                        </div>
+                        <div class="col-lg-3 upper_content">
+                           <strong>Last Billing Date</strong>
+                           <span>{{lastBillDate}} </span>
+                        </div>
+                        <div [ngSwitch]="status" class="col-lg-3 upper_content">
+                           <div *ngSwitchCase="'ACTIVE'" style="width:auto; display:inline-block;">
+                              <div *ngIf="renewsForever; else elseBlock">
+                                 <strong>Renews Forever</strong>
+                                 <span> &infin; </span>                  
+                              </div>
+                              <ng-template #elseBlock>
+                                 <div>
+                                    <strong>Renewals Remaining</strong>
+                                    <span>{{remainingCycles}} </span>   
+                                 </div>
+                              </ng-template>
+                           </div>
+                           <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">                  
+                              <strong>Cancel Date</strong>
+                              <span> </span>                  
+                           </div>
+                           <div *ngSwitchCase="'ONHOLD'" style="width:auto; display:inline-block;">                 
+                              <strong>Renews Forever</strong>
+                              <span> </span>                  
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                           <table class="table">
+                              <thead>
+                                 <tr>
+                                    <th>Plan & Add On Details</th>
+                                    <th>Qty</th>
+                                    <th>Rate</th>
+                                    <th>Tax</th>
+                                    <th>Amount</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr  *ngFor="let values of productPlanArr">
+                                    <td>{{values.productName}} {{values.rateplanDesc}}</td>
+                                    <td>{{values.quantity}}</td>
+                                    <td>{{values.rate}}</td>
+                                    <td>{{values.tax}}</td>
+                                    <td>{{values.quantity * values.rate}}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="col-lg-12" style="border-top:1px solid #bababa; border-bottom: 1px solid #bababa; width: 100%;">
+                           <p style="text-align: right; margin:0px;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">{{total}}</span></p>
+                        </div>
+                        <div class="col-lg-12" > 
+                                  <div [ngSwitch]="status" style="width:100%; display:inline-block;">
+                                      <div *ngSwitchCase="'ACTIVE'" style="width:100%; display:inline-block;">                                
+                                        <p>There are no notes added for this subscription</p>
+                                        <p style="text-align:right;"><a href="javascript:void(0);">Add Note </a></p>                                        
+                                      </div>
+                                      <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">
+                                        <p style="text-align: left;" >Notes <span style=" float: right; text-align: right;"><a href="#">+ADD</a></span></p>
+                                        <p>This is note from sales agent</p>
+                                        <p style="text-align: right; font-style: italic;">-UserName</p>
+                                      </div>
+                                      <div *ngSwitchCase="'ONHOLD'" style="width:auto; display:inline-block;">
+                                         <p>There are no notes added for this subscription</p>
+                                        <p style="text-align:right;"><a href="javascript:void(0);">Add Note </a></p>
+                                      </div>
+                                </div>
+                              
+                         
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </main>
+   </div>
 </div>
