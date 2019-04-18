@@ -701,11 +701,11 @@ subscriptionDetailsData(subsData,email,cname){
   }
 
 subscritionDetails(){  
-  this.subsciptionDetailsrlno = JSON.stringify(
-    {
-          "subscriptionId": this.subsData,
-    }
-  );  
+  // this.subsciptionDetailsrlno = JSON.stringify(
+  //   {
+  //         "subscriptionId": this.subsData,
+  //   }
+  // );  
   return this.http.get(this.url + '/subscriptionDetail?subscriptionId='+this.subsData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -715,9 +715,21 @@ subscritionDetails(){
     return response;
   }));
 }
+
+//cancel subscription
+cancelSubscriptionData(){  
+
+  return this.http.put(this.url + '/cancelSubscription?subscriptionId='+this.subsData, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
 }
+}
+ 
 
 
-
-//GET /getRateplanDropDown
 

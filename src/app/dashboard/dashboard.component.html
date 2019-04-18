@@ -20,35 +20,15 @@
 
         </div> -->
 
-
         <div class="row">
             <!-- <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-chart text-warning"></i>
-                                </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="numbers">
-                                    <p class="card-category">Number</p>
-                                    <h4 class="card-title">150GB</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Update Now
-                        </div>
-                    </div>
-                </div>
+               
             </div> -->
+      
+
+
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats" class="widget_one" routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
                         <div class="row">
                             <!-- <div class="col-2">
@@ -77,7 +57,7 @@
             
             <!-- EXECUTE SCHEDULERS SECTION -->
             <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats" class="widget_one" style="
+                <div class="card card-stats widget_one box2"  style="
                 min-height: 168px;">
                     <div class="card-body" style="min-height: 116px; font-size: 13px;">
                         <div class="row">
@@ -165,7 +145,65 @@
         </div>
         <!-- dashboard end -->
         
-        
+        <div class="row">
+            <div class="col-lg-6">
+
+<div class="col-lg-6" style="float:left; margin:0;">
+<div class="form-group">
+      <label for="sel1">Duration :</label>
+      <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="duration" (change)="graphData1()">
+        <option>30 days </option>
+        <option>1 week</option>
+        <option>Last Month</option>
+        <option>1 year</option>
+      </select>
+</div>
+</div>
+<div class="col-lg-6" style="float:left; margin:0;">
+<div class="form-group">
+      <label for="sel1">Select list (select one):</label>
+      <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
+        <option>Activation vs Cancellation</option>
+        <option>Active Customer</option>
+        <option>New vs Renewal</option>
+       
+      </select>
+</div>
+</div>
+
+
+
+
+                    <div style="display: block; height:200px;">
+                            <canvas mdbChart
+                                [chartType]="chartType"
+                                [datasets]="chartDatasets"
+                                [labels]="chartLabels"
+                                [colors]="chartColors"
+                                [options]="chartOptions"
+                                [legend]="true"
+                                (chartHover)="chartHovered($event)"
+                                (chartClick)="chartClicked($event)">
+                            </canvas>
+                    </div>
+
+                    
+            </div>
+            <div class="col-lg-6">
+                    <div style="display: block; height:200px;">
+                            <canvas mdbChart
+                                [chartType]="chartType2"
+                                [datasets]="chartDatasets2"
+                                [labels]="chartLabels2"
+                                [colors]="chartColors2"
+                                [options]="chartOptions2"
+                                
+                                (chartHover)="chartHovered2($event)"
+                                (chartClick)="chartClicked2($event)">
+                            </canvas>
+                    </div>
+            </div>
+        </div>
 
 
       </div>

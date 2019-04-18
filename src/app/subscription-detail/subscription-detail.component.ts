@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactListComponent } from '../subscription/contact-list.component'
 import { GlobalServiceService } from '../global-service.service';
+import { ModalsService } from '../modal.service';
+import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-subscription-detail',
@@ -35,9 +38,12 @@ subscription_no;
   totalAmount;
   renewsForever;
   remainingCycles;
-  constructor(private globalServiceService: GlobalServiceService) { }
+  closeResult;
+  cancelDate
+  constructor(private globalServiceService: GlobalServiceService,private modalService: NgbModal,config: NgbModalConfig,private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
+    
     this.subscription_no = this.globalServiceService.subsData;
     this.email = this.globalServiceService.emailsubscription;
     this.c_name = this.globalServiceService.cnamesubscription;
@@ -62,6 +68,8 @@ subscription_no;
       this.productPlanArr=this.subscritiondata.subscriptionDto.productPlanList;
       this.nextBillingDate=this.subscritiondata.subscriptionDto.nextBillDate;
       this.lastBillDate=this.subscritiondata.subscriptionDto.lastBillDate;
+      this.cancelDate=this.subscritiondata.subscriptionDto.cancelDate;
+      //expireon
       if(this.lastBillDate==null){
         this.lastBillDate="N/A"
       }
@@ -80,5 +88,36 @@ subscription_no;
     )
 
   }
+ open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+  radioFunction(radioValue){
+    console.log("radioValue",radioValue);
+  }
+  cancelSubscription(){
+    this.globalServiceService.cancelSubscriptionData().subscribe(
+      result=>{        
+        this.flashMessage.show("Subscription Cancelled Successfully", { cssClass: 'alert-success', timeout: 10000 });       
+        
+      },
+      error=>{        
+        this.flashMessage.show(error.error.error, { cssClass: 'alert-danger', timeout: 10000 }); 
+            
+      }
+    )
 
+  }
 }

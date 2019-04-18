@@ -17,6 +17,93 @@ export class DashboardComponent implements OnInit {
   success;
   failed;
   date;
+  duration;
+  listOption;
+//line chart graph-1
+public chartType: string = 'line';
+  public chartDatasets: Array<any> = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
+  ];
+  public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public chartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(105, 0, 132, .2)',
+      borderColor: 'rgba(200, 99, 132, .7)',
+      borderWidth: 2,
+    },
+    {
+      backgroundColor: 'rgba(0, 137, 132, .2)',
+      borderColor: 'rgba(0, 10, 130, .7)',
+      borderWidth: 2,
+    }
+  ];
+  public chartOptions: any = {
+    responsive: true
+  };
+  public chartClicked(e: any): void { }
+  public chartHovered(e: any): void { }
+//line chart graph-1 end
+
+graphData1(){ 
+this.chartDatasets=[];
+this.chartType = 'line';
+if(this.duration!=undefined && this.listOption!=undefined){
+ this.chartDatasets.push(
+     { data: [65, 59, 80, 81, 56, 55], label: 'My First dataset' },
+    { data: [28, 48, 40, 19, 86, 27], label: 'My Second dataset' }
+   
+  )
+  
+}else 
+if(this.duration==undefined && this.listOption!=undefined){
+ this.chartDatasets.push(
+    { data: [65, 59], label: 'My First dataset' },
+    { data: [28, 48], label: 'My Second dataset' }
+  )
+}else 
+if(this.listOption==undefined && this.duration!=undefined){
+   this.chartDatasets.push(
+   { data: [65, 59, 80, 81], label: 'My First dataset' },
+    { data: [28, 48, 40, 19], label: 'My Second dataset' }
+  )
+}
+
+}
+//line chart graph-2
+
+
+public chartType2: string = 'line';
+
+  public chartDatasets2: Array<any> = [
+    { data: [1000,65, 59, 80, 81, 56, 55, 30,70,30, 10,60], label: 'My First dataset' },
+    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
+  ];
+
+  public chartLabels2: Array<any> = ['January', 'February', '', 'April', 'May', 'June', 'July', 'August','September','October','November', 'December' ];
+  //public chartLabels2: Array<any> = ['1', ];
+  public chartColors2: Array<any> = [
+    {
+      backgroundColor: 'rgba(105, 0, 132, .0)',
+      borderColor: 'rgba(200, 99, 132, .7)',
+      borderWidth: 2,
+    },
+    {
+      backgroundColor: 'rgba(0, 137, 132, .0)',
+      borderColor: 'rgba(0, 10, 130, .7)',
+      borderWidth: 2,
+    }
+  ];
+
+  public chartOptions2: any = {
+    responsive: true
+  };
+  public chartClicked2(e: any): void { }
+  public chartHovered2(e: any): void { }
+
+//line chart graph-2 end
+
+
 //   public pieChartOptions: ChartOptions = {
 //     responsive: true,
 //   };

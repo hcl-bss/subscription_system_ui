@@ -519,8 +519,8 @@ emptyRatePlanValues(){
       this.checkInput=false;
       (<HTMLInputElement>document.getElementById("saveAddPlan")).disabled = true;
     }else 
-      if(this.radioParam<0 || this.radioParam>100){
-        this.flashMessage.show('Billing cycles cant exceed 100 !!', {
+      if(this.radioParam<0 || this.radioParam>1000){
+        this.flashMessage.show('Billing cycles cant exceed 1000 !!', {
           cssClass: 'alert-danger',
           timeout: 2000
         });
@@ -536,41 +536,6 @@ emptyRatePlanValues(){
     console.log(this.radioParam);
   }
 
-  // freeTrialCheck(){
-  //   let freetrial = Number(this.freeTrial);
-  //   if(freetrial<0 || freetrial>100){
-  //     this.flashMessage.show('Free Trial cant be more than 100 days !!', {
-  //       cssClass: 'alert-danger',
-  //       timeout: 2000
-  //     });
-  //   }else{
-  //     //console.log("right",x);
-  //   }
-    
-  // }
-  // planNameCheck(){
-   
-  //   if(this.planName.length<0 || this.planName.length>10){
-  //     this.flashMessage.show('Plan name cant be more than 10 characters !!', {
-  //       cssClass: 'alert-danger',
-  //       timeout: 2000
-  //     });
-  //   }else{
-  //     //console.log("right",this.planName.length);
-  //   }
-    
-  // }
-  // planCodeCheck(){
-  //   if(this.planCode.length<0 || this.planCode.length>10){
-  //     this.flashMessage.show('Plan code cant be more than 10 characters !!', {
-  //       cssClass: 'alert-danger',
-  //       timeout: 2000
-  //     });
-  //   }else{
-  //     //console.log("right",this.planCode);
-  //   }
-    
-  // }
 
   
 }

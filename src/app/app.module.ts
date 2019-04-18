@@ -38,6 +38,9 @@ import { ChartsModule } from 'ng2-charts';
 import {GlobalPropertiesService} from './global-properties.service';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { toggleFunctionality } from './products/toggleFunctionality';
+
+//import {  NO_ERRORS_SCHEMA } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,9 +72,9 @@ import { toggleFunctionality } from './products/toggleFunctionality';
     AppRoutingModule,NgbModule.forRoot(),FlashMessagesModule.forRoot(),  
     AgGridModule.withComponents([ChildMessageRenderer,AssociateMappingComponent]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
     AgGridModule.withComponents([FileDownloadComponent,ChildMessageRendereredit,toggleFunctionality]) ,
-    [ Ng4LoadingSpinnerModule.forRoot() ] 
+    [ Ng4LoadingSpinnerModule.forRoot() ] , MDBBootstrapModule.forRoot()
   ],
- 
+  
   providers: [ NgbDateFRParserFormatter,GlobalPropertiesService, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent,toggleFunctionality],
   bootstrap: [AppComponent]
 })

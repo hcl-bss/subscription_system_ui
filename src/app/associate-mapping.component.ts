@@ -226,30 +226,7 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
   agInit(params: any): void {
     this.params = params;
     this.data = this.params.data.userId;
-    if(this.params.data.billingCycleTerm==undefined){
-      this.params.data.billingCycleTerm="N/A";     
-    }
-    if(this.params.data.freeTrail==undefined){
-      this.params.data.freeTrail="N/A";     
-    }
-    if(this.params.data.setUpFee==undefined){
-      this.params.data.setUpFee="N/A";     
-    }
-    if(this.params.data.name==undefined){
-      this.params.data.name="N/A";     
-    }
-    if(this.params.data.pricingScheme==undefined){
-      this.params.data.pricingScheme="N/A";     
-    }
-    if(this.params.data.billEvery==undefined){
-      this.params.data.billEvery="N/A";     
-    }
-    if(this.params.data.ratePlanId==undefined){
-      this.params.data.ratePlanId="N/A";     
-    }
-    if(this.params.data.name==undefined){
-      this.params.data.name="N/A";     
-    }
+    
   }
   public invokeParentMethod() {
     console.log(this.params.data);  

@@ -48,7 +48,7 @@ ul.dashboard_list li a{width:100%; display: inline-block; box-sizing: border-box
 	  opacity: 1;
 	}
   }
-  
+  main.page-content{ background:#eee;}
 ul.dashboard_list li a span{    font-size: 20px;
     width: 100%;
     display: inline-block;}

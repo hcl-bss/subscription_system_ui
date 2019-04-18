@@ -24,7 +24,7 @@
             <button  class="btn btn-outline-warning float-right" style="margin:0 0 0 5px">
             Edit 
             </button>
-            <button  class="btn btn-outline-danger float-right" style="margin:0 0 0 5px">
+            <button  class="btn btn-outline-danger float-right" style="margin:0 0 0 5px" (click)="open(addUser)">
             Cancel 
             </button>
             <button  class="btn btn-outline-info float-right" style="margin:0px 0 0 5px">
@@ -95,7 +95,7 @@
                            </div>
                            <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">                  
                               <strong>Cancel Date</strong>
-                              <span> </span>                  
+                              <span>{{cancelDate}}</span>                  
                            </div>
                            <div *ngSwitchCase="'ONHOLD'" style="width:auto; display:inline-block;">                 
                               <strong>Renews Forever</strong>
@@ -134,7 +134,7 @@
                                         <p style="text-align:right;"><a href="javascript:void(0);">Add Note </a></p>                                        
                                       </div>
                                       <div *ngSwitchCase="'CANCELLED'" style="width:auto; display:inline-block;">
-                                        <p style="text-align: left;" >Notes <span style=" float: right; text-align: right;"><a href="#">+ADD</a></span></p>
+                                        <p style="text-align: left;" >Notes <span style=" float: right; text-align: right;"><a href="javascript:void(0);">+ADD</a></span></p>
                                         <p>This is note from sales agent</p>
                                         <p style="text-align: right; font-style: italic;">-UserName</p>
                                       </div>
@@ -151,6 +151,49 @@
                </div>
             </div>
          </div>
+
+  <ng-template #addUser let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Cancel popup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+      <flash-messages></flash-messages>
+    
+  <div class="modal-body">
+    <form>
+    <label><input type="radio" name="indoor-outdoor" (click)="radioFunction('Immidiate Cancel')" checked> Immidiate Cancel</label><br/>
+    <label><input type="radio" name="indoor-outdoor" (click)="radioFunction('Cancel from next billing cycle')" disabled> Cancel from next billing cycle</label><br>     
+    </form>
+  </div>
+  <div class="modal-footer">     
+    <button type="button" class="btn btn-info" (click)="open(confirmationPopup);modal.close('Save click')">Yes, Cancel</button>
+    <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #confirmationPopup let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation Popup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+   <flash-messages></flash-messages>    
+  <div class="modal-body">
+    <form>
+      <p> Are you sure, you want to cancel</p>
+    </form>
+  </div>
+  <div class="modal-footer">     
+    <button type="button" class="btn btn-info" (click)="cancelSubscription()">Yes</button>
+    <button type="button" class="btn btn-info" (click)="modal.close('Save click')">No</button>
+    <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
       </main>
    </div>
 </div>

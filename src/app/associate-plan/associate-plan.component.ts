@@ -71,7 +71,7 @@ export class AssociatePlanComponent implements OnInit {
   ngOnInit() {
 
     this.onLoadData();
-
+    
   }
   onLoadData() {
     this.globalServiceService.getProducts().subscribe(data => {
@@ -100,6 +100,20 @@ export class AssociatePlanComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
     params.api.paginationGoToPage(1);
 
+    this.gridApi.forEachNode((node) => {
+          if (node.childIndex == 0) {
+              node.setSelected(true);
+          }
+          if (this.productList != undefined) {
+              for (let i = 0; i < this.associatedPlan.length; i++) {
+                  for (let j = 0; j < this.productList[0].ratePlans.length; j++) {
+                      if (this.productList[0].ratePlans[j].uidpk == this.associatedPlan[i].uidpk && node.data.uidpk == this.productList[0].ratePlans[j].uidpk) {
+                          node.setSelected(true);
+                      }
+                  }
+              }
+          }
+      });
   }
 
 
@@ -174,6 +188,10 @@ export class AssociatePlanComponent implements OnInit {
   }
   updateAssociation() {
     console.log(this.selecteddata);
+    if(this.selecteddata==undefined){
+      this.selecteddata=this.productList[0];
+    }
+    console.log(this.productList[0]);
     if (this.selecteddata == undefined || this.selecteddata=="") {
       this.gridApi.forEachNode((node) => {
         if (node.selected == true) {
@@ -186,12 +204,13 @@ export class AssociatePlanComponent implements OnInit {
         (data => {
           (<HTMLInputElement>document.getElementById("updateAsso")).disabled = true;
           this.selecteddata='';
-          this.onLoadData();
-          this.flashMessage.show('Successfully Associated product with Plan', { cssClass: 'alert-success', timeout: 5000 });
-      
+          //this.onLoadData();         
+          window.location.reload();
+           this.flashMessage.show('Successfully Associated product with Plan', { cssClass: 'alert-success', timeout: 5000 });
         },
           error => {
             this.flashMessage.show('Product Association with plan is unsuccessful', { cssClass: 'alert-danger', timeout: 5000 });
+       
           });
     }
   }
