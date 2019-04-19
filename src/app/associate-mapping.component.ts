@@ -73,51 +73,41 @@ import { FlashMessagesService } from 'angular2-flash-messages';
      <div class="col-lg-3">{{this.params.data.name}}</div>
   </div>
 
+  <div class="row" *ngIf="priceUnit">
+     <div class="col-lg-3">
+     <label>Price: </label>
+     </div>
+     <div class="col-lg-3">{{this.params.data.price}}</div>     
+  </div>
 
-  <div class="row" style="border-top:2px solid #117a8b !important; margin-top:10px;">
-  <div class="col-lg-12">
-  <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; font-size:13px; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
- </div>
- 
-
-    
-</div>  
-
-
-
-<!--<div class="row" style="background: lightblue;">
-    <div class="col-lg-2"><label>Start Qty: </label></div>
-    <div class="col-lg-2">{{this.params.data.price}}</div>
-
-    <div class="col-lg-2"> <label>End Qty: </label> </div>
-    <div class="col-lg-2">{{this.params.data.price}}</div>
-    <div class="col-lg-2"><label>Price: </label></div>  
-    <div class="col-lg-2">{{this.params.data.price}}</div>
-</div>  -->
-
-
+<div  *ngIf="volumeSection">
+    <div class="row" style="border-top:2px solid #117a8b !important; margin-top:10px;">
+      <div class="col-lg-12">
+      <label style="width:100%; padding:10px 0; margin-bottom:10px; color:#117a8b !important; font-size:13px; text-transform: uppercase; font-weight:bold;">Volume Details:- </label>
+    </div> 
+  </div>  
 
 <div class="row">
   <div class="col-lg-12">
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Start Qty:</th>
-            <th>End Qty:</th>
-            <th>Price:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>{{this.params.data.price}}</td>
-          </tr>
-        </tbody>
-    </table>
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                    <th>Start Qty:</th>
+                    <th>End Qty:</th>
+                    <th>Price:</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of volumeDetails">
+                  <td>{{data.startQty}}</td>
+                  <td>{{data.endQty}}</td>
+                  <td>{{data.price}}</td>
+                </tr>
+              </tbody>
+          </table>
   </div>
 </div>
-
+</div>
      </form>
   </div>
   <div class="modal-footer">
@@ -199,12 +189,23 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
   closeResult: string;
   registerForm: FormGroup;
   submitted = false;
+  volumeSection = false;
+  volumeDetails;
+  priceUnit;
   constructor(private modalService: NgbModal,config: NgbModalConfig, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { 
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit() {
+    if(this.params.data.pricingScheme == "VOLUME"){
+      this.volumeSection = true;
+      this.priceUnit=false;
+    }else{
+      this.volumeSection = false;
+      this.priceUnit=true;
+    }
+    
   }
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -229,7 +230,11 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
     
   }
   public invokeParentMethod() {
-    console.log(this.params.data);  
+    console.log(this.params.data); 
+    console.log("ratePlanVolumeDtoList",this.params.data.ratePlanVolumeDtoList) ;
+    if(this.params.data.ratePlanVolumeDtoList!= null || this.params.data.ratePlanVolumeDtoList!= undefined){
+      this.volumeDetails=this.params.data.ratePlanVolumeDtoList;
+    }
   }
 
   refresh(): boolean {
