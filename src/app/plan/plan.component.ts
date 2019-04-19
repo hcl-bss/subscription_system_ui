@@ -301,7 +301,7 @@ export class PlanComponent implements OnInit {
         this.volumeArr=this.invoiceForm.value.itemRows;
         if (planName == undefined || planCode == undefined || billEvery == undefined || billingTime == undefined || pricingSchemePlan == undefined || unitOfMeasureId == undefined || currencyType == undefined || this.radioParam == undefined) {
     
-          this.flashMessage.show('All fields are mandatory to add new plan!!', {
+          this.flashMessage.show('All * fields are mandatory to add new plan!!', {
             cssClass: 'alert-danger',
             timeout: 5000
           });
@@ -365,7 +365,7 @@ export class PlanComponent implements OnInit {
       }else{
         if (planName == undefined || planCode == undefined || billEvery == undefined || billingTime == undefined || pricingSchemePlan == undefined || unitOfMeasureId == undefined || currencyType == undefined || price==undefined || this.radioParam == undefined) {
     
-          this.flashMessage.show('All fields are mandatory to add new plan!!', {
+          this.flashMessage.show('All * fields are mandatory to add new plan!!', {
             cssClass: 'alert-danger',
             timeout: 5000
           });
