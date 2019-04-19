@@ -154,14 +154,14 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-lg-2 float-left">
-                    <label for="planName"> Plan Name*:</label>
+                    <label for="planName"> Plan Name <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="text" class="form-control form-control-sm col-lg-8" name="planName"
                       [(ngModel)]="planName" autocomplete="off"   (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
                   </div>
                   <div class="col-lg-2 float-left">
-                    <label for="pcode">Code*:</label>
+                    <label for="pcode">Code <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="text" class="form-control form-control-sm" name="planCode" [(ngModel)]="planCode" autocomplete="off" (input)="setupFeeCheck()">
@@ -171,7 +171,7 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-lg-2 float-left">
-                    <label for="billEvery">Bill Every*:</label>
+                    <label for="billEvery">Bill Every <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="text" maxlength="2" min="1" class="form-control form-control-sm dropselect float-left"
@@ -188,7 +188,7 @@
                     </select>
                   </div>
                   <div class="col-lg-2 float-left">
-                    <label for="freeTrial">Free Trial (in days):</label>
+                    <label for="freeTrial">Free Trial (in days)</label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="number" min="0" value="0" class="form-control form-control-sm" name="freeTrial"
@@ -199,14 +199,14 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-lg-2 float-left">
-                    <label for="setupFee">Setup Fee:</label>
+                    <label for="setupFee">Setup Fee</label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <input type="number" class="form-control form-control-sm col-lg-8" name="setupFee"
                       [(ngModel)]="setupFee" autocomplete="off" (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
                   </div>
                   <div class="col-lg-2 float-left">
-                    <label for="price">Price*:</label>
+                    <label for="price">Price<span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
   
@@ -227,33 +227,38 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-lg-2 float-left">
-                    <label for="billingCycles">Billing Cycles*:</label>
+                    <label for="billingCycles">Billing Cycles <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="autoRenew" value="AR" [(ngModel)]='AR' (change)="radio(999)">Autorenews
+                        <input type="radio" name="autoRenew" [value]="0" [(ngModel)]='AR' (change)="radio(999)">Autorenews
                         until cancelled.
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="autoRenew" value="EC" [(ngModel)]='EC' 
+                        <input type="radio"  name="autoRenew" [value]="1" [(ngModel)]='AR' 
                           (click)="radioinputboxfun()" checked=”checked”>Expires after specified no of billing cycles.
                       </label>
-                      <div *ngIf="radioinputbox">
-                        <input type="number"  (input)="radio(billingCyclesInput)" class="form-control form-control-sm " name="billingCyclesInput"
+                      <div style="width:100%;border: 1px solid #bababa; padding:5%; box-sizing:border-box; display:inline-block;" *ngIf="radioinputbox">
+                      <div >
+                        <input type="number"  (input)="radio(billingCyclesInput)" class="form-control form-control-sm box " style="width: 100%;" name="billingCyclesInput"
                           [(ngModel)]='billingCyclesInput' min="0" (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
+                          
                       </div>
+                      <p style="font-size:10px;width: 100%;opacity:0.6; margin:0px;">Number of times the customer will be billed for a subscription of this plan.</p>
+                    </div>
                     </div>
                   </div>
                   <div class="col-lg-2 float-left">
-                    <label for="unitOfMeasureId">UOM*:</label>
+                    <label for="unitOfMeasureId">UOM <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <select class="form-control form-control-sm" id="pricingScheme" name="unitOfMeasureId"
                     [(ngModel)]="unitOfMeasureId" style="width:40%">
                      <option [ngValue]="Select">Select</option> 
+                     <option [selected]="unitOfMeasureId == 'Select'"selected hidden>Select</option>
                     <option *ngFor="let values of dropdownUomValues">{{values.unitOfMeasure}}</option>  
                   </select>
                   </div>
@@ -264,7 +269,7 @@
               <div class="row">
                 <div class="form-group">
                   <div class="col-lg-2 float-left">
-                    <label for="pricingScheme">Pricing Scheme*:</label>
+                    <label for="pricingScheme">Pricing Scheme <span style="color:red;">*</span></label>
                   </div>
                   <div class="col-lg-4 float-left">
                     <select class="form-control form-control-sm" id="pricingScheme" name="pricingSchemePlan"
@@ -293,23 +298,15 @@
                   <div *ngIf="volumePricingScheme" class="volume_box" style="padding:2% 2% 0 2%;">
                     <div class="col-lg-12" style=" text-align: center; padding: 0px;">
                       <div class="form-group" style="width:100%; display:inline-block;">
-                        <div class="priSch text-center">
+                        <!-- <div class="priSch text-center">
                           <label for="pricingScheme" style="width:139px">Pricing Scheme:</label>
                           <input type="text" style="text-align:center;font-size:12px; width:28%;" placeholder="Volume"
                             readonly>
-                        </div>
-  
-  
-  
-  
-                     
-                   
-                        <button type="button" (click)="addNewRow()" style="margin-left:64%;margin-top:-7%" class="btn btn-primary">Add new Row</button>
-                        <form [formGroup]="invoiceForm" style="    margin-top: -3%">
+                        </div> -->
+                        
+                       
+                        <form [formGroup]="invoiceForm" >
                           <div formArrayName="itemRows"> 
-                            
-  
-  
                               <div>    
                                   <div class="row" style="text-align:center">              
                                   <div class="form-group" style="text-align:left;">
@@ -321,9 +318,10 @@
                                     </div>
                                     <div class="col-sm-3" style="display:inline-block">
                                     <label style="width:100%;">Price</label>
-                                    </div>                        
+                                    </div>  
+                                                         
                                 </div></div></div>
-  
+                               
   
   
                           <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">    
@@ -331,20 +329,27 @@
                           <div class="form-group" style="text-align:left;">
                             <div class="col-sm-3" style="display:inline-block">
                             
-                            <input type="number" formControlName="sqty" class="form-control form-control-sm" placeholder="0" min="0">
+                            <input type="number" formControlName="startQty" class="form-control form-control-sm" placeholder="0" min="0">
                           </div>
                           <div class="col-sm-3" style="display:inline-block">
                             
-                            <input type="number" formControlName="eqty" class="form-control form-control-sm" placeholder="0" min="0">
+                            <input type="number" formControlName="endQty" class="form-control form-control-sm" placeholder="0" min="0">
                             </div>
                             <div class="col-sm-3" style="display:inline-block">
                            
-                            <input type="number" formControlName="qty" class="form-control form-control-sm" placeholder="0" min="0">  
+                            <input type="number" formControlName="price" class="form-control form-control-sm" placeholder="0" min="0">  
                             </div>                        
                           <a *ngIf="invoiceForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" href="javascript:void(0)"><i class="fa fa-trash fa-2" aria-hidden="true"
                             style="color:red;"></i></a>
-                        </div></div></div>
+                           
+                        </div>
+                        
                       </div>
+                      
+                    </div>
+                    <button type="button" (click)="addNewRow()" style="position: absolute;right: 0;top: 32px;" class="btn btn-primary">Add new Row</button>
+                      </div>
+                      
                     </form>
                   
                       </div>

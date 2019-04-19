@@ -43,6 +43,7 @@ export class ContactListComponent implements OnInit {
   subscriptionNumber: any;
   emailDetail: any;
   cust_name: any;
+  exportData;
   constructor(private spinnerService: Ng4LoadingSpinnerService, private router : Router,private flashMessage: FlashMessagesService,private http: HttpClient, private modalService: ModalsService, private globalServiceService: GlobalServiceService,private childMessageRenderer: ChildMessageRenderer) {
 
     this.columnDefs = [
@@ -400,6 +401,20 @@ onCellClicked1(event: any) {
     this.router.navigate(['/subscriptionDetail']);
   } 
 
+}
+
+exportToCsv(){
+  this.globalServiceService.exportToCsvData('subscriptionlandingpage').subscribe(data => {
+    this.exportData = data;
+    let url =  this.exportData.url
+    window.location.href = url;
+
+  },
+  error=>{
+        let url = error.url
+        window.location.href = url;
+  }
+  );
 }
 
 } 

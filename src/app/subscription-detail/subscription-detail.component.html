@@ -174,7 +174,8 @@
   </div>
 </ng-template>
 
-<ng-template #confirmationPopup let-modal>
+<ng-template #confirmationPopup let-modal >
+
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmation Popup</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -184,14 +185,15 @@
    <flash-messages></flash-messages>    
   <div class="modal-body">
     <form>
-      <p> Are you sure, you want to cancel</p>
+      <p> Do you want to save your changes</p>
     </form>
   </div>
   <div class="modal-footer">     
     <button type="button" class="btn btn-info" (click)="cancelSubscription()">Yes</button>
     <button type="button" class="btn btn-info" (click)="modal.close('Save click')">No</button>
-    <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button>
+    <!-- <button type="button" class="btn btn-info" (click)="modal.close('Save click')">Close</button> -->
   </div>
+ 
 </ng-template>
 
       </main>

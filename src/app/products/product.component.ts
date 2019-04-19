@@ -70,6 +70,7 @@ export class ProductComponent implements OnInit {
   endDateMain: string;
   codeMain: string;
   P_code_Typesearch: any;
+  exportData;
   // flagMapping=false;
   // productMainPage: boolean=true;
 
@@ -717,4 +718,17 @@ ${reason}`;
   moveToAssociatePlan() {
     this.router.navigate(['/associateplan']);
   }
+  exportToCsv(){
+  this.globalServiceService.exportToCsvData('productlandingpage').subscribe(data => {
+    this.exportData = data;
+    let url =  this.exportData.url
+    window.location.href = url;
+
+  },
+  error=>{
+        let url = error.url
+        window.location.href = url;
+  }
+  );
+}
 }

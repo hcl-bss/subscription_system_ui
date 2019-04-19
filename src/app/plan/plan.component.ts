@@ -82,11 +82,13 @@ export class PlanComponent implements OnInit {
   checkInput: boolean;
   radiovalue: string;
   billingCyclesInput: string;
+  AR:number;
   
 
 
   constructor(private globalPropertiesService:GlobalPropertiesService,private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) 
     {
+      this.AR=0;
       this.columnDefs = [
         { headerName: 'Plan ID', field: 'planID', editable: true },
         { headerName: 'Name', field: 'planName', editable: true },
@@ -160,9 +162,9 @@ export class PlanComponent implements OnInit {
 
   initItemRows() {
     return this._fb.group({
-      sqty: [''],
-      eqty: [''],
-      qty: [''],
+      startQty: [''],
+      endQty: [''],
+      price: [''],
     });
   }
 
@@ -281,6 +283,10 @@ export class PlanComponent implements OnInit {
     if(pricingSchemePlan == undefined) {
       pricingSchemePlan = "UNIT"
     }
+
+    if(this.radioParam == undefined){
+      this.radioParam = "999";
+    }
 // if(this.volumePricingScheme == true)
     // if (planName == undefined || planCode == undefined || billEvery == undefined || billingTime == undefined || pricingSchemePlan == undefined || unitOfMeasureId == undefined || currencyType == undefined || price==undefined) {
     
@@ -301,7 +307,7 @@ export class PlanComponent implements OnInit {
           });
           this.validQty=false;
         } else  
-       if(this.invoiceForm.value.itemRows[0].sqty==""  || this.invoiceForm.value.itemRows[0].eqty==""  || this.invoiceForm.value.itemRows[0].qty==""){
+       if(this.invoiceForm.value.itemRows[0].startQty==""  || this.invoiceForm.value.itemRows[0].endQty==""  || this.invoiceForm.value.itemRows[0].price==""){
         this.flashMessage.show('Fill the Start Qty,End Qty and Price!!', {
           cssClass: 'alert-danger',
           timeout: 5000
@@ -310,8 +316,8 @@ export class PlanComponent implements OnInit {
        }
       else{      
         for(let x=0;x<this.invoiceForm.value.itemRows.length;x++){
-          if(this.invoiceForm.value.itemRows[x].sqty==""  || this.invoiceForm.value.itemRows[x].eqty==""  || this.invoiceForm.value.itemRows[x].qty=="" || 
-          this.invoiceForm.value.itemRows[x].sqty==null  || this.invoiceForm.value.itemRows[x].eqty==null  || this.invoiceForm.value.itemRows[x].qty==null){
+          if(this.invoiceForm.value.itemRows[x].startQty==""  || this.invoiceForm.value.itemRows[x].endQty==""  || this.invoiceForm.value.itemRows[x].price=="" || 
+          this.invoiceForm.value.itemRows[x].startQty==null  || this.invoiceForm.value.itemRows[x].endQty==null  || this.invoiceForm.value.itemRows[x].price==null){
             this.flashMessage.show('Fill the Start Qty,End Qty and Price!!', {
               cssClass: 'alert-danger',
               timeout: 5000
@@ -319,7 +325,7 @@ export class PlanComponent implements OnInit {
             this.validQty=false;
           break;
           }
-          else if(this.invoiceForm.value.itemRows[x].sqty>=this.invoiceForm.value.itemRows[x].eqty){ 
+          else if(this.invoiceForm.value.itemRows[x].startQty>=this.invoiceForm.value.itemRows[x].endQty){ 
             this.flashMessage.show('Starting quantity should be less than ending quantity!!', {
               cssClass: 'alert-danger',
               timeout: 5000
@@ -329,8 +335,8 @@ export class PlanComponent implements OnInit {
           }else{
            // for(let x=0;x<this.invoiceForm.value.itemRows.length;x++){
             if(this.invoiceForm.value.itemRows[x+1]!=undefined){
-              if(this.invoiceForm.value.itemRows[x+1].sqty==""  || this.invoiceForm.value.itemRows[x+1].eqty==""  || this.invoiceForm.value.itemRows[x+1].qty=="" || 
-              this.invoiceForm.value.itemRows[x+1].sqty==null  || this.invoiceForm.value.itemRows[x+1].eqty==null  || this.invoiceForm.value.itemRows[x+1].qty==null){
+              if(this.invoiceForm.value.itemRows[x+1].startQty==""  || this.invoiceForm.value.itemRows[x+1].endQty==""  || this.invoiceForm.value.itemRows[x+1].price=="" || 
+              this.invoiceForm.value.itemRows[x+1].startQty==null  || this.invoiceForm.value.itemRows[x+1].endQty==null  || this.invoiceForm.value.itemRows[x+1].price==null){
                 this.flashMessage.show('Fill the Start Qty,End Qty and Price!!', {
                   cssClass: 'alert-danger',
                   timeout: 5000
@@ -338,7 +344,7 @@ export class PlanComponent implements OnInit {
                 this.validQty=false;
               break;
               }
-              else if((this.invoiceForm.value.itemRows[x].eqty + 1)==this.invoiceForm.value.itemRows[x+1].sqty){
+              else if((this.invoiceForm.value.itemRows[x].endQty + 1)==this.invoiceForm.value.itemRows[x+1].startQty){
                 this.validQty=true;
               }
               else{
@@ -371,6 +377,7 @@ export class PlanComponent implements OnInit {
       }
      
       if(this.validQty==true && this.checkInput==true){
+        
         this.spinnerService.show();
         this.globalServiceService.addPlan(planName,planCode,billEvery,billingTime,pricingSchemePlan,this.volumeArr,currencyType,price,this.radioParam,freeTrial,setupFee,unitOfMeasureId).subscribe(
           data => {        
@@ -379,6 +386,22 @@ export class PlanComponent implements OnInit {
           this.volumeArr=[];
 
           this.flashMessage.show('New Plan added successfully!!', { cssClass: 'alert-success', timeout: 10000 });
+          this.planName="";
+          this.planCode="";
+          this.billEvery="";
+          this.billingTime="WEEK";
+          this.unitOfMeasureId="Select";
+          this.currencyType="INR";
+          this.price="";
+          this.pricingSchemePlan="UNIT";
+          this.freeTrial="";
+          this.setupFee="";
+          this.radioinputbox = false;
+          this.volumePricingScheme = false;
+          this.radioParam="";
+          this.radiovalue="";
+          this.billingCyclesInput="";
+          this.AR=0;
           },
         error=>{
      
@@ -431,8 +454,7 @@ removeValues(){
   this.radioParam="";
   this.radiovalue="";
   this.billingCyclesInput="";
-  //this.initItemRows();
-  
+  this.AR=0;  
 }
 
 emptyRatePlanValues(){
@@ -451,6 +473,7 @@ emptyRatePlanValues(){
   this.radioParam="";
   this.radiovalue="";
   this.billingCyclesInput="";
+  this.AR=0;
   
   //this.initItemRows();
 }
@@ -478,7 +501,7 @@ emptyRatePlanValues(){
     if(this.planName==undefined){
       this.planName="";
     }
-   
+
     if(setup<0 || setup>1000){
       this.flashMessage.show('Setup fees should be less than 1000 !!', {
         cssClass: 'alert-danger',
@@ -503,8 +526,8 @@ emptyRatePlanValues(){
         (<HTMLInputElement>document.getElementById("saveAddPlan")).disabled = true;
     }
     else 
-      if(this.planCode.length<0 || this.planCode.length>10){
-        this.flashMessage.show('Plan code cant exceed 10 characters !!', {
+      if(this.planCode.length<0 || this.planCode.length>50){
+        this.flashMessage.show('Plan code cant exceed 50 characters !!', {
           cssClass: 'alert-danger',
           timeout: 2000
         });
@@ -527,7 +550,7 @@ emptyRatePlanValues(){
         this.checkInput=false;
         (<HTMLInputElement>document.getElementById("saveAddPlan")).disabled = true;
       }
-    
+
     else{
       this.checkInput=true;
      
@@ -536,6 +559,41 @@ emptyRatePlanValues(){
     console.log(this.radioParam);
   }
 
+  // freeTrialCheck(){
+  //   let freetrial = Number(this.freeTrial);
+  //   if(freetrial<0 || freetrial>100){
+  //     this.flashMessage.show('Free Trial cant be more than 100 days !!', {
+  //       cssClass: 'alert-danger',
+  //       timeout: 2000
+  //     });
+  //   }else{
+  //     //console.log("right",x);
+  //   }
+    
+  // }
+  // planNameCheck(){
+   
+  //   if(this.planName.length<0 || this.planName.length>10){
+  //     this.flashMessage.show('Plan name cant be more than 10 characters !!', {
+  //       cssClass: 'alert-danger',
+  //       timeout: 2000
+  //     });
+  //   }else{
+  //     //console.log("right",this.planName.length);
+  //   }
+    
+  // }
+  // planCodeCheck(){
+  //   if(this.planCode.length<0 || this.planCode.length>10){
+  //     this.flashMessage.show('Plan code cant be more than 10 characters !!', {
+  //       cssClass: 'alert-danger',
+  //       timeout: 2000
+  //     });
+  //   }else{
+  //     //console.log("right",this.planCode);
+  //   }
+    
+  // }
 
   
 }

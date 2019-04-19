@@ -38,6 +38,7 @@ export class UsermanagementComponent implements OnInit {
   email;
   userProfile;
   password;
+  exportData;
   constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer,config: NgbModalConfig) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -284,5 +285,18 @@ export class UsermanagementComponent implements OnInit {
     }
 
   }
+    exportToCsv(){
+  this.globalServiceService.exportToCsvData('userlandingpage').subscribe(data => {
+    this.exportData = data;
+    let url =  this.exportData.url
+    window.location.href = url;
+
+  },
+  error=>{
+        let url = error.url
+        window.location.href = url;
+  }
+  );
+}
 }
 

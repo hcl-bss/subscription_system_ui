@@ -728,8 +728,18 @@ cancelSubscriptionData(){
     return response;
   }));
 }
+
+exportToCsvData(pageName){
+  return this.http.get(this.url + '/downloadRecord?tabName='+pageName,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
 }
  
-
-
 
