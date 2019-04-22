@@ -147,7 +147,7 @@ export class UsermanagementComponent implements OnInit {
     }
   }
   addUserData(firstName, middleName, lastName, email, userProfile, password) {
-    if(firstName == undefined || middleName == undefined || lastName == undefined || email == undefined || userProfile == undefined || password == undefined ){
+    if(firstName == undefined || email == undefined || userProfile == undefined || password == undefined ){
       this.flashMessage.show('All fiels are mandatory', { cssClass: 'alert-danger', timeout: 10000 });
     }else{
     this.globalServiceService.addUser(email, userProfile, firstName, middleName, lastName, password).subscribe(

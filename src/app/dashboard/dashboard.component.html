@@ -31,11 +31,6 @@
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
                         <div class="row">
-                            <!-- <div class="col-2">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="fa fa-lightbulb-o fa-5" aria-hidden="true"></i>
-                                </div>
-                            </div> -->
                             <div class="col-12">
                                 <div class="numbers" >
                                     <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
@@ -90,107 +85,144 @@
                     
                 </div>
             </div>    
-            
-            <!-- ENDS -->
-            <!-- <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
+
+<!-- widget-3 -->
+<div class="col-lg-3 col-sm-6">
+                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                    <div class="card-body " style="min-height: 119px; font-size: 13px;">
                         <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                            <div class="col-12">
+                                <div class="numbers" >
+                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
                                 </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="numbers">
-                                    <p class="card-category">Errors</p>
-                                    <h4 class="card-title">23</h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="card-footer ">
-                        <hr>
+                       
                         <div class="stats">
-                            <i class="fa fa-clock-o"></i> In the last hour
+                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
                         </div>
                     </div>
                 </div>
-            </div> -->
-            <!-- <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
+            </div>
+<!-- widget-4 -->
+<div class="col-lg-3 col-sm-6">
+                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                    <div class="card-body " style="min-height: 119px; font-size: 13px;">
                         <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-favourite-28 text-primary"></i>
+                            <div class="col-12">
+                                <div class="numbers" >
+                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
                                 </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="numbers">
-                                    <p class="card-category">Followers</p>
-                                    <h4 class="card-title">+45K</h4>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="card-footer ">
-                        <hr>
+                       
                         <div class="stats">
-                            <i class="fa fa-refresh"></i> Update now
+                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+            <!-- widget-5 -->
         </div>
         <!-- dashboard end -->
         
-        <div class="row">
+        <div class="row" style="padding-top:15px;">
             <div class="col-lg-6">
-
-<div class="col-lg-6" style="float:left; margin:0;">
-<div class="form-group">
-      <label for="sel1">Duration :</label>
-      <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="duration" (change)="graphData1()">
-        <option>30 days </option>
-        <option>1 week</option>
-        <option>Last Month</option>
-        <option>1 year</option>
-      </select>
-</div>
-</div>
-<div class="col-lg-6" style="float:left; margin:0;">
-<div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
-        <option>Activation vs Cancellation</option>
-        <option>Active Customer</option>
-        <option>New vs Renewal</option>
-       
-      </select>
-</div>
-</div>
-
-
-
-
-                    <div style="display: block; height:200px;">
-                            <canvas mdbChart
-                                [chartType]="chartType"
-                                [datasets]="chartDatasets"
-                                [labels]="chartLabels"
-                                [colors]="chartColors"
-                                [options]="chartOptions"
-                                [legend]="true"
-                                (chartHover)="chartHovered($event)"
-                                (chartClick)="chartClicked($event)">
-                            </canvas>
+                <div class="col-lg-6" style="float:left; margin:0;">
+                    <div class="form-group">
+                        <label for="sel1">Duration :</label>
+                        <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="duration" (change)="graphData1()">
+                            <option>30 days </option>
+                            <option>1 week</option>
+                            <option>Last Month</option>
+                            <option>1 year</option>
+                        </select>
                     </div>
-
+                </div>
+            <div class="col-lg-6" style="float:left; margin:0;">
+                <div class="form-group">
+                    <label for="sel1">Select list (select one):</label>
+                    <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
+                        <option>Activation vs Cancellation</option>
+                        <option>Active Customer</option>
+                        <option>New vs Renewal</option>
                     
+                    </select>
+                </div>
             </div>
+            <div style="display: block; height:200px;">
+                <canvas mdbChart
+                    [chartType]="chartType"
+                    [datasets]="chartDatasets"
+                    [labels]="chartLabels"
+                    [colors]="chartColors"
+                    [options]="chartOptions"
+                    [legend]="true"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+
             <div class="col-lg-6">
-                    <div style="display: block; height:200px;">
+                    <!-- widget-5 -->
+                    <div class="col-lg-6" style="float:left; margin:0;padding: 0 15px 0 0;">
+                        <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer; postion:relative;" >
+                           
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="numbers" >
+                                            <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                            <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                            <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                            
+                                <div class="stats">
+                                    <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- widget-6 -->
+                    <div class="col-lg-6" style="float:left; margin:0;padding: 0 0px 0 15px;">
+                        <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="numbers" >
+                                            <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                            <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                            <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                            
+                                <div class="stats">
+                                    <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div style="display: block; height:200px;float: left;width: 100%;padding: 10px 0 0 0;">
                             <canvas mdbChart
                                 [chartType]="chartType2"
                                 [datasets]="chartDatasets2"
@@ -201,7 +233,7 @@
                                 (chartHover)="chartHovered2($event)"
                                 (chartClick)="chartClicked2($event)">
                             </canvas>
-                    </div>
+                    </div> -->
             </div>
         </div>
 

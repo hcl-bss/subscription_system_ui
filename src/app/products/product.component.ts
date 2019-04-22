@@ -721,13 +721,13 @@ ${reason}`;
   exportToCsv(){
   this.globalServiceService.exportToCsvData('productlandingpage').subscribe(data => {
     this.exportData = data;
-    let url =  this.exportData.url
-    window.location.href = url;
+    // let url =  this.exportData.url
+    // window.location.href = url;
 
   },
   error=>{
-        let url = error.url
-        window.location.href = url;
+        // let url = error.url
+        // window.location.href = url;
   }
   );
 }
