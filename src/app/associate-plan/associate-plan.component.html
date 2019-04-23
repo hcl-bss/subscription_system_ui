@@ -26,7 +26,7 @@
                 (selectionChanged)='onSelectionChanged($event)' [frameworkComponents]="frameworkComponents">
               </ag-grid-angular>
             </div>
-            <div class="col-lg-9" style="max-height:490px;">
+            <div class="col-lg-9">
               <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham mng1"
                 [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" [suppressRowTransform]="true"
                 [rowData]="rowData" [rowSelection]="rowSelection" [rowMultiSelectWithClick]="true"

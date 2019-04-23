@@ -71,6 +71,8 @@ export class ProductComponent implements OnInit {
   codeMain: string;
   P_code_Typesearch: any;
   exportData;
+  associatePagedata1;
+  associatePagedata2;
   // flagMapping=false;
   // productMainPage: boolean=true;
 
@@ -183,6 +185,20 @@ export class ProductComponent implements OnInit {
       console.log(this.DrodownArraystatus);
 
     });
+    this.spinnerService.show();
+    this.globalServiceService.getProducts().subscribe(data => {
+      this.spinnerService.hide();
+      this.associatePagedata1 = data;     
+      this.associatePagedata1 = this.associatePagedata1.productList;      
+    })
+    this.spinnerService.show();
+    this.globalServiceService.getPlans().subscribe
+      (data => {
+        this.spinnerService.hide();
+        this. associatePagedata2 = data;     
+      });
+
+      
   }
 
   dropDown(producttype) {
@@ -716,6 +732,7 @@ ${reason}`;
 
   }
   moveToAssociatePlan() {
+    this.globalServiceService.associationDetails(this.associatePagedata1,this.associatePagedata2);
     this.router.navigate(['/associateplan']);
   }
   exportToCsv(){

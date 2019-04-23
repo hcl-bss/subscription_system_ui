@@ -23,29 +23,29 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="username">Name:</label>
-                      <input type="text" class="form-control form-control-sm" id="username_product" name="name"
-                        [(ngModel)]="nameMain">
+                      <input type="text" class="form-control form-control-sm" id="plan_name" name="plan_name"
+                        [(ngModel)]="plan_name">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="code">Code:</label>
-                      <input type="text" class="form-control form-control-sm" id="code_product" name="code"
-                        [(ngModel)]="codeMain">
+                      <input type="text" class="form-control form-control-sm" id="plan_code" name="plan_code"
+                        [(ngModel)]="plan_code">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="billEvery">Bill Every:</label>
-                      <input type="text" class="form-control form-control-sm" id="bill_Every" name="billEvery"
-                        [(ngModel)]="billEveryMain">
+                      <input type="text" class="form-control form-control-sm" id="bill_every_plan" name="bill_every_plan"
+                        [(ngModel)]="bill_every_plan">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="status">Status:</label>
-                      <select class="form-control form-control-sm" id="status_product" name="status_val"
-                        [(ngModel)]="status_valMain">
+                      <select class="form-control form-control-sm" id="plan_status" name="plan_status"
+                        [(ngModel)]="plan_status">
                         <option>Active</option>
                         <option>Inactive</option>
                       </select>
@@ -53,7 +53,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-3">
+                  <!-- <div class="col-lg-3">
                     <div class="form-group">
                       <label for="dateOfBirth" >{{x.sdate}}</label>
                       <div class="input-group">
@@ -66,8 +66,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-lg-3">
+                  </div> -->
+                  <!-- <div class="col-lg-3">
                     <div class="form-group">
                       <label for="dateOfBirth"> End Date:</label>
                       <div class="input-group">
@@ -80,6 +80,19 @@
                         </div>
                       </div>
                     </div>
+                  </div> -->
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="status">Type:</label>
+                      <select class="form-control form-control-sm" id="plan_type" name="plan_type"
+                        [(ngModel)]="plan_type">
+                        <option>A</option>
+                        <option>B</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-3">
                   </div>
                   <div class="col-lg-3">
                   </div>
@@ -126,9 +139,9 @@
   
               <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
                 [rowSelection]="rowSelection" [rowGroupPanelShow]="rowGroupPanelShow" [pivotPanelShow]="pivotPanelShow"
-                [enableRangeSelection]="true" [pagination]="true" [defaultColDef]="defaultColDef"
-                [suppressRowClickSelection]="true" [rowSelection]="rowSelection" [paginationPageSize]="paginationPageSize"
-                [enableSorting]="true" [enableFilter]="true" [pagination]="flase" [rowData]="rowData"
+                [enableRangeSelection]="true" [defaultColDef]="defaultColDef"
+                [suppressRowClickSelection]="true" [rowSelection]="rowSelection" 
+                [enableSorting]="true" [enableFilter]="true"  [rowData]="rowData"
                 [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents">
   
               </ag-grid-angular>

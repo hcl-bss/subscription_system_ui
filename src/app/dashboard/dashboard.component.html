@@ -1,5 +1,5 @@
 <div id="rightSideWrapper">
-  <div class="ContentBox">
+  <div class="ContentBox" style="padding-top:3%">
     <main>
       <!-- <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5> -->
       <div class="container-fluid">
@@ -30,6 +30,16 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                    <i class="fa fa-calendar-o" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #ff5252;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
@@ -55,18 +65,29 @@
                 <div class="card card-stats widget_one box2"  style="
                 min-height: 168px;">
                     <div class="card-body" style="min-height: 116px; font-size: 13px;">
+                    <i class="fa fa-calendar-o" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #f4a041!important;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
                                     
-                                     
+                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
                                   
-                                    <p class="card-category">
-                                        <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px"
+                                    <!-- <p class="card-category">
+                                        <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;margin-top: 3px;"
                                         (click)="executeScheduler(1)">Subscription Batch</button>
                                         <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;float:left;margin-top: 12px;"
                                         (click)="executeScheduler(2)">Renewal Batch</button>
-                                    </p>
+                                    </p> -->
                                    
                                    
                                     <!-- <h4 class="card-title">$ 1,345</h4> -->
@@ -90,6 +111,16 @@
 <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                    <i class="fa fa-calendar-o" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #417cf4!important;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
@@ -113,6 +144,16 @@
 <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                    <i class="fa fa-pie-chart" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #91f441!important;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
@@ -136,7 +177,7 @@
         </div>
         <!-- dashboard end -->
         
-        <div class="row" style="padding-top:15px;">
+        <div class="row" style="padding-top:5%;">
             <div class="col-lg-6">
                 <div class="col-lg-6" style="float:left; margin:0;">
                     <div class="form-group">
@@ -180,6 +221,16 @@
                         <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer; postion:relative;" >
                            
                             <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                            <i class="fa fa-line-chart" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #b841f4!important;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
@@ -202,7 +253,17 @@
                     <!-- widget-6 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 0px 0 15px;">
                         <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
-                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                            <div class="card-body " style="min-height: 119px; font-size: 13px; postion:relative;">
+                            <i class="fa fa-calendar-o" style="position: absolute;
+     
+    left: 8px;
+    font-size: 35px;
+    top: -38px;
+    padding: 6%;
+    background: #f44176!important;
+    color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
@@ -215,7 +276,6 @@
                                 </div>
                             </div>
                             <div class="card-footer ">
-                            
                                 <div class="stats">
                                     <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
                                 </div>

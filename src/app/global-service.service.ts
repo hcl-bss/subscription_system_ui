@@ -5,7 +5,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class GlobalServiceService {
-
+  plan_list: any;
+  p_list: any;
   url = 'http://localhost:8080';
   logindata;
   editdata;
@@ -701,11 +702,7 @@ subscriptionDetailsData(subsData,email,cname){
   }
 
 subscritionDetails(){  
-  // this.subsciptionDetailsrlno = JSON.stringify(
-  //   {
-  //         "subscriptionId": this.subsData,
-  //   }
-  // );  
+  
   return this.http.get(this.url + '/subscriptionDetail?subscriptionId='+this.subsData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -739,7 +736,10 @@ exportToCsvData(pageName){
     return response;
   }));
 }
-
+associationDetails(productList,associatedPlan){
+this.p_list=productList;
+this.plan_list=associatedPlan;
+}
 }
  
 
