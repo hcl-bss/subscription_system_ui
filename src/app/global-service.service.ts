@@ -27,6 +27,7 @@ export class GlobalServiceService {
   emailsubscription: any;
   cnamesubscription: any;
   subsciptionDetailsrlno: string;
+  graphData;
   constructor(private http: HttpClient) { }
 
   loginservice(username, password) {
@@ -133,10 +134,9 @@ sidebarsubmenu() {
       return response;
     }));
   }
-
+// dashboard service call start
   subreport(page) {
-   
-    //return this.http.get('/assets/report_sub.json', {
+      //return this.http.get('/assets/report_sub.json', {
       return this.http.get(this.url + '/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -146,8 +146,59 @@ sidebarsubmenu() {
       return response;
     }));
   }
-  
-  
+//graphperiod start
+  graphperiod() {
+    return this.http.get(this.url + '/getDashboardDropDown?statusId=graphperiod', {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+//graphperiod end
+//getRevenueData start
+ getRevenueData() {
+    return this.http.get(this.url + '/getRevenueData', {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+//getRevenueData end
+//graphtype start
+graphtype() {
+  return this.http.get(this.url + '/getDashboardDropDown?statusId=graphtype', {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+}).pipe(map((response: Response) => {
+  console.log(response);
+  return response;
+}));
+}
+//graphtype end
+//getValuesForGraph start
+dashboardGraph(timePeriod,typeOfGraph){
+  this.graphData = JSON.stringify({
+  "timePeriod": timePeriod,
+  "typeOfGraph": typeOfGraph
+  })
+  return this.http.post(this.url + '/getValuesForGraph', this.graphData, {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+//getValuesForGraph end
+// dashboard service call end  
 executeBatch(batchId) {
       return this.http.get(this.url + '/executeSchedulers?schedulerId='+batchId , {
       headers: new HttpHeaders({

@@ -1418,4 +1418,9 @@ h5.detail_list_heading {
 .orange_color_bg{ background: #f4a041;}
 .table.table-bordered.table-sm.mng tbody tr td{ padding:14px !important;}
 .table.table-bordered.table-sm.mng thead tr th{padding:7px 14px !important;}
-.card-body{padding-top: 50px !important;}
+.card-body {
+    padding-top: 28px !important;
+    padding-bottom: 5px !important;
+    min-height:120px !important;
+}
+p.card-category{margin-bottom:2px;}

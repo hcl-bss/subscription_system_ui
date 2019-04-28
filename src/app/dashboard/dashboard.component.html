@@ -21,25 +21,19 @@
         </div> -->
 
         <div class="row">
-            <!-- <div class="col-lg-3 col-sm-6">
-               
-            </div> -->
-      
-
-
             <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-calendar-o" style="position: absolute;
-     
-    left: 8px;
-    font-size: 35px;
-    top: -38px;
-    padding: 6%;
-    background: #ff5252;
-    color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
+                    <i class="fa fa-calendar-o" style="
+                    position: absolute;
+                    left: 8px;
+                    font-size: 35px;
+                    top: -38px;
+                    padding: 6%;
+                    background: #ff5252;
+                    color: #fff;
+                    border-radius: 3px;
+                    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
@@ -79,8 +73,8 @@
                             <div class="col-12">
                                 <div class="numbers" >
                                     
-                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                    <p class="card-category">Rs : <strong>{{success}}</strong></p>
+                                    
                                   
                                     <!-- <p class="card-category">
                                         <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;margin-top: 3px;"
@@ -100,7 +94,7 @@
                     
                     <div class="card-footer ">
                             <div class="stats">
-                                <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Execute Schedulers ! 
+                                <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
                             </div>
                         </div>
                     
@@ -124,19 +118,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
-                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                    <p class="card-category">Total - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Sucess - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Failure - <strong>{{success}}</strong></p>
                                 </div>
                                 
                             </div>
                         </div>
                     </div>
                     <div class="card-footer ">
-                       
                         <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Renewal Order 
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -157,18 +151,15 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
-                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                    <p class="card-category">Rs : <strong>{{success}}</strong></p>
                                 </div>
                                 
                             </div>
                         </div>
                     </div>
                     <div class="card-footer ">
-                       
                         <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
                         </div>
                     </div>
                 </div>
@@ -182,11 +173,8 @@
                 <div class="col-lg-6" style="float:left; margin:0;">
                     <div class="form-group">
                         <label for="sel1">Duration :</label>
-                        <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="duration" (change)="graphData1()">
-                            <option>30 days </option>
-                            <option>1 week</option>
-                            <option>Last Month</option>
-                            <option>1 year</option>
+                        <select class="form-control form-control-sm"  id="sel2" name="sellist2" [(ngModel)]="duration" (change)="graphData1()">
+                            <option *ngFor="let x of graphperiod_data">{{x}}</option>
                         </select>
                     </div>
                 </div>
@@ -194,9 +182,7 @@
                 <div class="form-group">
                     <label for="sel1">Select list (select one):</label>
                     <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
-                        <option>Activation vs Cancellation</option>
-                        <option>Active Customer</option>
-                        <option>New vs Renewal</option>
+                        <option *ngFor="let y of graphtype_data">{{y}}</option>
                     
                     </select>
                 </div>
@@ -209,12 +195,12 @@
                     [colors]="chartColors"
                     [options]="chartOptions"
                     [legend]="true"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)">
+                    >
                 </canvas>
             </div>
         </div>
-
+<!-- (chartHover)="chartHovered($event)" -->
+<!-- (chartClick)="chartClicked($event)" -->
             <div class="col-lg-6">
                     <!-- widget-5 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 15px 0 0;">
@@ -234,18 +220,17 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                            <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
-                                            <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                            <p class="card-category">This Month : Rs : <strong>{{success}}</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>{{success}}</strong></p>
+                                            <p class="card-category">This Year : <strong>{{success}}</strong></p>
                                         </div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer ">
-                            
                                 <div class="stats">
-                                    <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
                                 </div>
                             </div>
                         </div>
@@ -267,9 +252,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                            <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
-                                            <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                            <p class="card-category">This Month : Rs : <strong>{{success}}</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>{{success}}</strong></p>
+                                            <p class="card-category">This Year : <strong>{{success}}</strong></p>
                                         </div>
                                         
                                     </div>
@@ -277,7 +262,7 @@
                             </div>
                             <div class="card-footer ">
                                 <div class="stats">
-                                    <i class="fa fa-calendar-o"></i> Last day  <strong>{{date}}</strong>
+                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Recurring Revenue 
                                 </div>
                             </div>
                         </div>
