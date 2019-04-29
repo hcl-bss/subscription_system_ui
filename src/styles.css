@@ -1425,7 +1425,7 @@ h5.detail_list_heading {
 }
 p.card-category{margin-bottom:2px;}
 body{background-color: #f6f6f6;}
-.graph_container{    min-height: 310px;    padding: 2%;
+.graph_container{    min-height: 258px;    padding: 2%;
   /* border: 1px solid #bababa; */
   border-radius: 10px;
   /* color: #117a8b; */
