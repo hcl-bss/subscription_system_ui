@@ -36,9 +36,13 @@
                     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
+                                <!-- 
+                                    <strong>{{success}}</strong>
+                                    <strong>{{failed}}</strong>
+                                 -->
                                 <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>{{failed}}</strong> </p>
+                                    <p class="card-category">Sucess subscriptions - <strong>20</strong></p>
+                                    <p class="card-category">Faild Orders - <strong>80</strong> </p>
                                     <!-- <h4 class="card-title">$ 1,345</h4> -->
                                 </div>
                                 
@@ -59,7 +63,7 @@
                 <div class="card card-stats widget_one box2"  style="
                 min-height: 168px;">
                     <div class="card-body" style="min-height: 116px; font-size: 13px;">
-                    <i class="fa fa-calendar-o" style="position: absolute;
+                    <i class="fa fa-line-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -73,7 +77,7 @@
                             <div class="col-12">
                                 <div class="numbers" >
                                     
-                                    <p class="card-category">Rs : <strong>{{success}}</strong></p>
+                                    <p class="card-category">Rs : <strong>5200</strong></p>
                                     
                                   
                                     <!-- <p class="card-category">
@@ -94,7 +98,7 @@
                     
                     <div class="card-footer ">
                             <div class="stats">
-                                <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
+                                <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
                             </div>
                         </div>
                     
@@ -105,7 +109,7 @@
 <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-calendar-o" style="position: absolute;
+                    <i class="fa fa-line-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -118,9 +122,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Total - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Sucess - <strong>{{success}}</strong></p>
-                                    <p class="card-category">Failure - <strong>{{success}}</strong></p>
+                                    <p class="card-category">Total - <strong>200</strong></p>
+                                    <p class="card-category">Sucess - <strong>180</strong></p>
+                                    <p class="card-category">Failure - <strong>20</strong></p>
                                 </div>
                                 
                             </div>
@@ -138,7 +142,7 @@
 <div class="col-lg-3 col-sm-6">
                 <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-pie-chart" style="position: absolute;
+                    <i class="fa fa-line-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -151,7 +155,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Rs : <strong>{{success}}</strong></p>
+                                    <p class="card-category">Rs : <strong>5400</strong></p>
                                 </div>
                                 
                             </div>
@@ -159,7 +163,7 @@
                     </div>
                     <div class="card-footer ">
                         <div class="stats">
-                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
+                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
                         </div>
                     </div>
                 </div>
@@ -170,17 +174,18 @@
         
         <div class="row" style="padding-top:5%;">
             <div class="col-lg-6">
+                <div class="graph_container">
                 <div class="col-lg-6" style="float:left; margin:0;">
                     <div class="form-group">
-                        <label for="sel1">Duration :</label>
-                        <select class="form-control form-control-sm"  id="sel2" name="sellist2" [(ngModel)]="duration" (change)="graphData1()">
+                        <label for="sel1" class="graph_heading">Duration :</label>
+                        <select class="form-control form-control-sm"  id="sel2" name="sellist2" [(ngModel)]="duration" (change)="graphData1()" style="text-transform: uppercase;">
                             <option *ngFor="let x of graphperiod_data">{{x}}</option>
                         </select>
                     </div>
                 </div>
             <div class="col-lg-6" style="float:left; margin:0;">
                 <div class="form-group">
-                    <label for="sel1">Select list (select one):</label>
+                    <label for="sel1" class="graph_heading">Select list (select one):</label>
                     <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
                         <option *ngFor="let y of graphtype_data">{{y}}</option>
                     
@@ -198,6 +203,7 @@
                     >
                 </canvas>
             </div>
+        </div>
         </div>
 <!-- (chartHover)="chartHovered($event)" -->
 <!-- (chartClick)="chartClicked($event)" -->
@@ -220,9 +226,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">This Month : Rs : <strong>{{success}}</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>{{success}}</strong></p>
-                                            <p class="card-category">This Year : <strong>{{success}}</strong></p>
+                                            <p class="card-category">This Month : Rs : <strong>5200</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>110000</strong></p>
+                                            <p class="card-category">This Year : Rs : <strong>120000</strong></p>
                                         </div>
                                         
                                     </div>
@@ -230,7 +236,7 @@
                             </div>
                             <div class="card-footer ">
                                 <div class="stats">
-                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> New Reveneue 
+                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
                                 </div>
                             </div>
                         </div>
@@ -238,8 +244,8 @@
                     <!-- widget-6 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 0px 0 15px;">
                         <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
-                            <div class="card-body " style="min-height: 119px; font-size: 13px; postion:relative;">
-                            <i class="fa fa-calendar-o" style="position: absolute;
+                            <div class="card-body " style="min-height: 119px; font-size: 13px; position:relative;">
+                            <i class="fa fa-pie-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -252,9 +258,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">This Month : Rs : <strong>{{success}}</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>{{success}}</strong></p>
-                                            <p class="card-category">This Year : <strong>{{success}}</strong></p>
+                                            <p class="card-category">This Month : Rs : <strong>5200</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>450000</strong></p>
+                                            <p class="card-category">This Year : Rs : <strong>3300000</strong></p>
                                         </div>
                                         
                                     </div>

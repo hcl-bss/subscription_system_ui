@@ -166,9 +166,11 @@ graphData1(){
 
               
                this.chartType= 'line';
+               this.graphData.activSubValues = [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11];
+               this.graphData.cancelSubValues = [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64];
               this.chartDatasets = [
-                { data:  this.graphData.activSubValues, label: 'My First dataset' },
-                { data:  this.graphData.cancelSubValues, label: 'My Second dataset' }
+                { data:  this.graphData.activSubValues, label: 'LAST MONTH' },
+                { data:  this.graphData.cancelSubValues, label: 'ACTIVE VS CANCEL' }
               ];
               this.chartLabels = this.graphData.timePeriod;;
               this.chartColors = [];
