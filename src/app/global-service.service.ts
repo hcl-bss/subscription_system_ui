@@ -28,7 +28,11 @@ export class GlobalServiceService {
   cnamesubscription: any;
   subsciptionDetailsrlno: string;
   graphData;
+  token=localStorage.getItem('X-Auth-Token');
   constructor(private http: HttpClient) { }
+
+
+
 
   loginservice(username, password) {
 
@@ -42,6 +46,7 @@ export class GlobalServiceService {
       observe:'response',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: HttpResponse<any>) => {
       console.log(response);
@@ -129,6 +134,7 @@ sidebarsubmenu() {
     return this.http.get('/assets/dummy.json', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -141,6 +147,7 @@ sidebarsubmenu() {
       return this.http.get(this.url + '/dashboard/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -152,6 +159,7 @@ sidebarsubmenu() {
     return this.http.get(this.url + '/dashboard/getDashboardDropDown?statusId=graphperiod', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -164,6 +172,7 @@ sidebarsubmenu() {
     return this.http.get(this.url + '/dashboard/getRevenueData', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -176,6 +185,7 @@ graphtype() {
   return this.http.get(this.url + '/dashboard/getDashboardDropDown?statusId=graphtype', {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+     'X-Auth-Token':  this.token,
   })
 }).pipe(map((response: Response) => {
   console.log(response);
@@ -192,6 +202,7 @@ dashboardGraph(timePeriod,typeOfGraph){
   return this.http.post(this.url + '/dashboard/getValuesForGraph', this.graphData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -201,9 +212,10 @@ dashboardGraph(timePeriod,typeOfGraph){
 //getValuesForGraph end
 // dashboard service call end  
 executeBatch(batchId) {
-      return this.http.get(this.url + '/executeSchedulers?schedulerId='+batchId , {
+      return this.http.get(this.url + '/batch/executeSchedulers?schedulerId='+batchId , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -220,6 +232,7 @@ executeBatch(batchId) {
     return this.http.put(this.url + '/subscription/subscriptions', this.subscriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -241,9 +254,10 @@ executeBatch(batchId) {
       "lastBillDate": "",
       "nextBillDate": ""
     })
-    return this.http.put(this.url + '/subscriptions', this.subscriptionData, {
+    return this.http.put(this.url + '/subscription/subscriptions', this.subscriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -254,10 +268,11 @@ executeBatch(batchId) {
   //upload case
   uploadExpData(formData) {
 
-    return this.http.post(this.url + '/uploadProductData', formData, {
+    return this.http.post(this.url + '/upload/uploadProductData', formData, {
       headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data',
         'Accept': 'application/json',
+        'X-Auth-Token':  this.token,
 
       })
     }).pipe(map((response: Response) => {
@@ -272,6 +287,7 @@ executeBatch(batchId) {
     return this.http.get(this.url + '/getProducts/'+pageNumber, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -300,9 +316,10 @@ executeBatch(batchId) {
 
       });
 
-    return this.http.post(this.url + '/product', this.newProductData, {
+    return this.http.post(this.url + '/product/add', this.newProductData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -340,9 +357,10 @@ executeBatch(batchId) {
         "uidpk":uidpk
       });
 
-    return this.http.post(this.url + '/updateProduct', this.editProductData, {
+    return this.http.post(this.url + '/product/updateProduct', this.editProductData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -381,9 +399,10 @@ executeBatch(batchId) {
         "status":status,
       });
 
-    return this.http.post(this.url + '/updateProduct', this.editProductData, {
+    return this.http.post(this.url + '/product/updateProduct', this.editProductData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -407,6 +426,7 @@ executeBatch(batchId) {
     return this.http.put(this.url + '/subscription/subscriptions', this.searchSubcriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -426,9 +446,10 @@ executeBatch(batchId) {
         "attribute": password
       });
 
-    return this.http.post(this.url + '/user', this.addUserData, {
+    return this.http.post(this.url + '/users/user', this.addUserData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -447,9 +468,10 @@ executeBatch(batchId) {
         "userLastName": lastName,
       });
 
-    return this.http.put(this.url + '/user', this.editdata, {
+    return this.http.put(this.url + '/users/user', this.editdata, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -465,9 +487,10 @@ executeBatch(batchId) {
         "userId": userId
       });
 
-    return this.http.put(this.url + '/activate', this.activeDeactiveDta, {
+    return this.http.put(this.url + '/users/activate', this.activeDeactiveDta, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -483,9 +506,10 @@ executeBatch(batchId) {
         "newAttribute": newpwd,
       });
 
-    return this.http.put(this.url + '/reset', this.pwdResetData, {
+    return this.http.put(this.url + '/users/reset', this.pwdResetData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -503,6 +527,7 @@ executeBatch(batchId) {
     return this.http.put(this.url + '/users',this.userData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -526,6 +551,7 @@ executeBatch(batchId) {
     return this.http.put(this.url + '/users', this.searchData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -534,9 +560,10 @@ executeBatch(batchId) {
   }
   fetchdropdownvalues(){
   
-    return this.http.get(this.url + '/getProductType', {
+    return this.http.get(this.url + '/product/getProductType', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -556,9 +583,10 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
   "pageNo":filterPage
   });
    
-  return this.http.post(this.url + '/searchProducts', this.searchProductData, {
+  return this.http.post(this.url + '/product/searchProducts', this.searchProductData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -577,9 +605,10 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
     });
 
     
-  return this.http.post(this.url + '/batchRunLog', this.searchProductData, {
+  return this.http.post(this.url + '/batch/batchRunLog', this.searchProductData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -596,6 +625,7 @@ getProducts() {
   return this.http.get(this.url + '/getProducts/0', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
 
@@ -605,9 +635,10 @@ getProducts() {
 
 getPlans() {
 
-  return this.http.get(this.url + '/getRatePlan', {
+  return this.http.get(this.url + '/rate/getRatePlan', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
 
@@ -625,9 +656,10 @@ associatePlans(updatePlans, uidpk) {
       "ratePlan": updatePlans
     });
 
-  return this.http.post(this.url + '/associatePlan', this.associationPlans, {
+  return this.http.post(this.url + '/product/associatePlan', this.associationPlans, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
 
@@ -660,9 +692,10 @@ dateValidation(startDate, endDate){
 
 //get usermgmt status dropdown
 getStatusdropDown(){
-  return this.http.get(this.url + '/getDropDownList?dropDownCode=usrstatus',{
+  return this.http.get(this.url + '/users/getDropDownList?dropDownCode=usrstatus',{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -672,9 +705,10 @@ getStatusdropDown(){
 
 
 fetchCurrencyValues(){
-  return this.http.get(this.url + '/getCurrency',{
+  return this.http.get(this.url + '/rate/getCurrency',{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -683,9 +717,10 @@ fetchCurrencyValues(){
 }
 
 fetchPricingSchemeValues(){
-  return this.http.get(this.url + '/getRateplanDropDown?statusId=pricscheme',{
+  return this.http.get(this.url + '/rate/getRateplanDropDown?statusId=pricscheme',{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -694,9 +729,10 @@ fetchPricingSchemeValues(){
 }
 
 fetchBillEveryValues(){
-  return this.http.get(this.url + '/getRateplanDropDown?statusId=billfreq',{
+  return this.http.get(this.url + '/rate/getRateplanDropDown?statusId=billfreq',{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -706,9 +742,10 @@ fetchBillEveryValues(){
 
 fetchUomValues(){
   
-    return this.http.get(this.url + '/getUOM', {
+    return this.http.get(this.url + '/rate/getUOM', {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
       console.log(response);
@@ -736,9 +773,10 @@ addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArr
           "isActive": "INACTIVE"
     }
   );
-return this.http.post(this.url + '/ratePlan', this.newPlanData, {
+return this.http.post(this.url + '/rate/ratePlan', this.newPlanData, {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'X-Auth-Token':  this.token,
   })
 }).pipe(map((response: Response) => {
   console.log(response);
@@ -755,9 +793,10 @@ subscriptionDetailsData(subsData,email,cname){
 
 subscritionDetails(){  
   
-  return this.http.get(this.url + '/subscriptionDetail?subscriptionId='+this.subsData, {
+  return this.http.get(this.url + '/subscription/subscriptionDetail?subscriptionId='+this.subsData, {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -768,9 +807,10 @@ subscritionDetails(){
 //cancel subscription
 cancelSubscriptionData(){  
 
-  return this.http.put(this.url + '/cancelSubscription?subscriptionId='+this.subsData, {
+  return this.http.put(this.url + '/subscription/cancelSubscription?subscriptionId='+this.subsData, {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);
@@ -779,9 +819,10 @@ cancelSubscriptionData(){
 }
 
 exportToCsvData(pageName){
-  return this.http.get(this.url + '/downloadRecord?tabName='+pageName,{
+  return this.http.get(this.url + '/download/downloadRecord?tabName='+pageName,{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
     console.log(response);

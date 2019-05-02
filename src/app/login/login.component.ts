@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
      
         this.globalServiceService.loginservice(formBuilders.controls.email.value, formBuilders.controls.password.value)
         .subscribe(result => {
-          console.log(result);
-          localStorage.setItem('username',formBuilders.controls.email.value);
-          debugger;
-          console.log(result.headers.get('X-Auth-Token'));
-          debugger;
+          var succ= result;
+          localStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));     
+         
+          //console.log("Token Value",succ.headers.get('X-Auth-Token'));
+          
           this.routes.navigate(['/dashboard']);
         }, err => {
           console.log(err);
