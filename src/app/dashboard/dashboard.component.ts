@@ -84,24 +84,24 @@ graphData1(){
 //line chart graph-2
 
 
-// public chartType2: string = 'line';
+public chartType2: string = 'line';
 
-//   public chartDatasets2: Array<any> = [
-//     { data: [], label: 'My First dataset' },
-//     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
-//   ];
+  public chartDatasets2: Array<any> = [
+    { data: [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11], label: 'LAST MONTH' },
+     { data: [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64], label: 'ACTIVE VS CANCEL' }
+  ];
 
-//   public chartLabels2: Array<any> = [];
+  public chartLabels2: Array<any> = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,1,2,3,4];
   
-//   public chartColors2: Array<any> = [
+  public chartColors2: Array<any> = [
  
-//   ];
+  ];
 
-//   public chartOptions2: any = {
-//     responsive: true
-//   };
-//   public chartClicked2(e: any): void { }
-//   public chartHovered2(e: any): void { }
+  public chartOptions2: any = {
+    responsive: true
+  };
+  public chartClicked2(e: any): void { }
+  public chartHovered2(e: any): void { }
 
 //line chart graph-2 end
 

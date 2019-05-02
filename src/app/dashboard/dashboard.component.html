@@ -180,6 +180,7 @@
                         <label for="sel1" class="graph_heading">Duration :</label>
                         <select class="form-control form-control-sm"  id="sel2" name="sellist2" [(ngModel)]="duration" (change)="graphData1()" style="text-transform: uppercase;">
                             <option *ngFor="let x of graphperiod_data">{{x}}</option>
+                            <!-- <option>LAST MONTH</option> -->
                         </select>
                     </div>
                 </div>
@@ -188,6 +189,7 @@
                     <label for="sel1" class="graph_heading">Select list (select one):</label>
                     <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="listOption" (change)="graphData1()">
                         <option *ngFor="let y of graphtype_data">{{y}}</option>
+                        <!-- <option>ACTIVE VS CANCEL</option> -->
                     
                     </select>
                 </div>

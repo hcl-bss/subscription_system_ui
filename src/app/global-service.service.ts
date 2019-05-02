@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 import { Http, Headers, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
 
@@ -39,10 +39,11 @@ export class GlobalServiceService {
       });
 
     return this.http.post(this.url + '/login', this.logindata, {
+      observe:'response',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
-    }).pipe(map((response: Response) => {
+    }).pipe(map((response: HttpResponse<any>) => {
       console.log(response);
       return response;
     }));
@@ -137,7 +138,7 @@ sidebarsubmenu() {
 // dashboard service call start
   subreport(page) {
       //return this.http.get('/assets/report_sub.json', {
-      return this.http.get(this.url + '/lastBatchRunLog/'+page , {
+      return this.http.get(this.url + '/dashboard/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -148,7 +149,7 @@ sidebarsubmenu() {
   }
 //graphperiod start
   graphperiod() {
-    return this.http.get(this.url + '/getDashboardDropDown?statusId=graphperiod', {
+    return this.http.get(this.url + '/dashboard/getDashboardDropDown?statusId=graphperiod', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
@@ -160,7 +161,7 @@ sidebarsubmenu() {
 //graphperiod end
 //getRevenueData start
  getRevenueData() {
-    return this.http.get(this.url + '/getRevenueData', {
+    return this.http.get(this.url + '/dashboard/getRevenueData', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
@@ -172,7 +173,7 @@ sidebarsubmenu() {
 //getRevenueData end
 //graphtype start
 graphtype() {
-  return this.http.get(this.url + '/getDashboardDropDown?statusId=graphtype', {
+  return this.http.get(this.url + '/dashboard/getDashboardDropDown?statusId=graphtype', {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   })
@@ -188,7 +189,7 @@ dashboardGraph(timePeriod,typeOfGraph){
   "timePeriod": timePeriod,
   "typeOfGraph": typeOfGraph
   })
-  return this.http.post(this.url + '/getValuesForGraph', this.graphData, {
+  return this.http.post(this.url + '/dashboard/getValuesForGraph', this.graphData, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
@@ -216,7 +217,7 @@ executeBatch(batchId) {
      "pageNo": page
     })
    // return this.http.get('/assets/Subscription.json', {
-    return this.http.put(this.url + '/subscriptions', this.subscriptionData, {
+    return this.http.put(this.url + '/subscription/subscriptions', this.subscriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
@@ -403,7 +404,7 @@ executeBatch(batchId) {
         "pageNo": pageno
       });
 
-    return this.http.put(this.url + '/subscriptions', this.searchSubcriptionData, {
+    return this.http.put(this.url + '/subscription/subscriptions', this.searchSubcriptionData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })

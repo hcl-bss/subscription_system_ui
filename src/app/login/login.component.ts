@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 });
   ngOnInit() {
  
-        
+    
 
   }
 
@@ -38,6 +38,12 @@ export class LoginComponent implements OnInit {
   //     this.msg = 'Invalid username or password';
   //   }
   // }
+
+  // http
+  //   .get<any>('url', {observe: 'response'})
+  //   .subscribe(resp => {
+  //     console.log(resp.headers.get('X-Token'));
+  //   });
   get f() { return this.registerForm.controls; }
   onSubmit(formBuilders) {
     this.submitted = true;
@@ -52,6 +58,9 @@ export class LoginComponent implements OnInit {
         .subscribe(result => {
           console.log(result);
           localStorage.setItem('username',formBuilders.controls.email.value);
+          debugger;
+          console.log(result.headers.get('X-Auth-Token'));
+          debugger;
           this.routes.navigate(['/dashboard']);
         }, err => {
           console.log(err);
@@ -59,6 +68,7 @@ export class LoginComponent implements OnInit {
             this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
         }
         );
+        
       }
     }
 
