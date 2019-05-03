@@ -10,12 +10,20 @@ import { GlobalServiceService } from '../global-service.service';
 })
 export class SidebarnavigationComponent implements OnInit {
 
+
+  loginData;
+  mappingData;
   constructor(private globalServiceService: GlobalServiceService) { 
-    this.globalServiceService.sidebar();
-    this.globalServiceService.sidebarsubmenu();
+     this.globalServiceService.sidebar();
+     this.globalServiceService.sidebarsubmenu();
   }
 
   ngOnInit() {
+   
+    this.loginData=this.globalServiceService.loginResponse;
+   
+    this.mappingData=this.loginData.body.menuMap;
+   
     
   }
 

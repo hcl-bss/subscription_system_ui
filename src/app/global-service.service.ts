@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpResponse } from '@angular/common/http';
 import { Http, Headers, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class GlobalServiceService {
+  $isLOggedIn = new EventEmitter();
   plan_list: any;
   p_list: any;
   url = 'http://localhost:8080';
@@ -29,6 +30,7 @@ export class GlobalServiceService {
   subsciptionDetailsrlno: string;
   graphData;
   token=localStorage.getItem('X-Auth-Token');
+  loginResponse;
   constructor(private http: HttpClient) { }
 
 
@@ -50,6 +52,8 @@ export class GlobalServiceService {
       })
     }).pipe(map((response: HttpResponse<any>) => {
       console.log(response);
+      this.loginResponse= response;
+      
       return response;
     }));
   }
@@ -524,7 +528,8 @@ executeBatch(batchId) {
         "pageNo": page,
 
       });
-    return this.http.put(this.url + '/users',this.userData, {
+    //return this.http.put(this.url + '/users',this.userData, {
+      return this.http.put(this.url + '/users/userlist',this.userData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Auth-Token':  this.token,

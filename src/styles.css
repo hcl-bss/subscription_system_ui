@@ -1438,3 +1438,58 @@ body{background-color: #f6f6f6;}
   -moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
 }
+
+/* css3 icons start*/
+.element {
+  position: relative;
+}
+
+/*replace the content value with the
+corresponding value from the list below*/
+/* Dashboard icon */
+.sidebar-dropdown a i.fa:before {
+ 
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: #818896;
+  font-size: 12px;
+  padding-right: 0;
+  position: absolute;
+  top: 7px;
+  left: 29px;
+}
+/* Dashboard icon */
+.sidebar-dropdown a i.fa.Dashboard:before{
+  content: "\f0e4";
+}
+/* Products icon */
+.sidebar-dropdown a i.fa.Products:before{
+  content: "\f171";
+}
+/* Subscriptions icon */
+.sidebar-dropdown a i.fa.Subscriptions:before{
+  content: "\f1ce";
+}
+/* Plan icon */
+.sidebar-dropdown a i.fa.Plan:before{
+  content: "\f1d9";
+}
+/* User Management icon */
+.sidebar-dropdown a i.fa.User.Management:before{
+  content: "\f0c0";
+}
+/* icon call end */
+
+.sidebar-dropdown:hover a i.fa:before,.sidebar-dropdown.active a i.fa:before {
+    color: #16c7ff !important;
+    text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5) !important;
+}
+
+.sidebar-dropdown a span{
+  display: inline-block;
+  vertical-align: middle;
+  margin: -22px 0 0px 0;
+}
+/* css3 icons end */
