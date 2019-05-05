@@ -4,7 +4,6 @@
       <!-- <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5> -->
       <div class="container-fluid">
         <!-- <div class="row">
-         
           <div class="col-lg-4">
             <h6>Last Day Result</h6>
               <a  href="javascript:void(0)" class="widget_one" routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." >
@@ -15,9 +14,6 @@
             </div>
             </a>
           </div>
-
-         
-
         </div> -->
 
         <div class="row">
@@ -36,14 +32,10 @@
                     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                         <div class="row">
                             <div class="col-12">
-                                <!-- 
-                                    <strong>{{success}}</strong>
-                                    <strong>{{failed}}</strong>
-                                 -->
+                             
                                 <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>20</strong></p>
-                                    <p class="card-category">Faild Orders - <strong>80</strong> </p>
-                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
+                                    <p class="card-category">Sucess subscriptions - <strong>{{this.success}}</strong></p>
+                                    <p class="card-category">failed Orders - <strong>{{this.failed}}</strong> </p>
                                 </div>
                                 
                             </div>
@@ -52,7 +44,7 @@
                     <div class="card-footer ">
                        
                         <div class="stats">
-                            <i class="fa fa-sticky-note fa-2"></i> Last day  <strong>{{date}}</strong>
+                            <i class="fa fa-sticky-note fa-2"></i> Last day  
                         </div>
                     </div>
                 </div>
@@ -77,7 +69,7 @@
                             <div class="col-12">
                                 <div class="numbers" >
                                     
-                                    <p class="card-category">Rs : <strong>5200</strong></p>
+                                    <p class="card-category">Rs : <strong>{{this.lastBatchRevOfNewSub}}</strong></p>
                                     
                                   
                                     <!-- <p class="card-category">
@@ -107,7 +99,7 @@
 
 <!-- widget-3 -->
 <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                <div class="card card-stats widget_one box1">
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
                     <i class="fa fa-line-chart" style="position: absolute;
      
@@ -122,9 +114,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Total - <strong>200</strong></p>
-                                    <p class="card-category">Sucess - <strong>180</strong></p>
-                                    <p class="card-category">Failure - <strong>20</strong></p>
+                                    <p class="card-category">Total - <strong>{{this.LastBatchRenewalCount.total}}</strong></p>
+                                    <p class="card-category">Sucess - <strong>{{LastBatchRenewalCount.success}}</strong></p>
+                                    <p class="card-category">Failure - <strong>{{LastBatchRenewalCount.failed}}</strong></p>
                                 </div>
                                 
                             </div>
@@ -140,7 +132,7 @@
             </div>
 <!-- widget-4 -->
 <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                <div class="card card-stats widget_one box1">
                     <div class="card-body " style="min-height: 119px; font-size: 13px;">
                     <i class="fa fa-line-chart" style="position: absolute;
      
@@ -155,7 +147,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers" >
-                                    <p class="card-category">Rs : <strong>5400</strong></p>
+                                    <p class="card-category">Rs : <strong>{{this.lastBatchRevOfRenewSub}}</strong></p>
                                 </div>
                                 
                             </div>
@@ -212,7 +204,7 @@
             <div class="col-lg-6">
                     <!-- widget-5 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 15px 0 0;">
-                        <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer; postion:relative;" >
+                        <div class="card card-stats widget_one box1" style="postion:relative;" >
                            
                             <div class="card-body " style="min-height: 119px; font-size: 13px;">
                             <i class="fa fa-line-chart" style="position: absolute;
@@ -228,9 +220,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">This Month : Rs : <strong>5200</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>110000</strong></p>
-                                            <p class="card-category">This Year : Rs : <strong>120000</strong></p>
+                                            <p class="card-category">This Month : Rs : <strong>{{this.thisMonthRevOfNewSub}}</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>{{this.lastMonthRevOfNewSub}}</strong></p>
+                                            <p class="card-category">This Year : Rs : <strong>{{this.thisYearRevOfNewSub}}</strong></p>
                                         </div>
                                         
                                     </div>
@@ -245,7 +237,7 @@
                     </div>
                     <!-- widget-6 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 0px 0 15px;">
-                        <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                        <div class="card card-stats widget_one box1" >
                             <div class="card-body " style="min-height: 119px; font-size: 13px; position:relative;">
                             <i class="fa fa-pie-chart" style="position: absolute;
      
@@ -260,9 +252,9 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="numbers" >
-                                            <p class="card-category">This Month : Rs : <strong>5200</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>450000</strong></p>
-                                            <p class="card-category">This Year : Rs : <strong>3300000</strong></p>
+                                            <p class="card-category">This Month : Rs : <strong>{{this.thisMonthRevOfRenewSub}}</strong></p>
+                                            <p class="card-category">Pervious Month : Rs : <strong>{{this.lastMonthRevOfRenewSub}}</strong></p>
+                                            <p class="card-category">This Year : Rs : <strong>{{this.thisYearRevOfNewSub}}</strong></p>
                                         </div>
                                         
                                     </div>

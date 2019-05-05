@@ -13,10 +13,22 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 })
 export class DashboardComponent implements OnInit {
   page =0;
-  private rowData: any;
+  private LastBatch: any;
+   private rowData: any;
+  private getRevenueData: any; 
+  lastBatchRevOfNewSub;
+  LastBatchRenewalCount;
+  lastBatchRevOfRenewSub;
+  lastMonthRevOfNewSub;
+lastMonthRevOfRenewSub;
+thisMonthRevOfNewSub;
+thisMonthRevOfRenewSub;
+thisYearRevOfNewSub;
+thisYearRevOfRenewSub;
   success;
   failed;
   date;
+  total;
   duration="Last Month";
   listOption="ACTIVE VS CANCEL";
   graphperiod_data;
@@ -63,16 +75,22 @@ graphData1(){
                this.chartType= 'line';
                if(this.listOption === "ACTIVE VS CANCEL"){
                   this.chartDatasets = [
-                    { data:  this.graphData.activSubValues, label: 'My First dataset' },
-                    { data:  this.graphData.cancelSubValues, label: 'ACTIVE VS CANCEL' }
+                    { data:  this.graphData.activSubValues, label: this.duration },
+                    { data:  this.graphData.cancelSubValues, label: this.listOption }
                   ];
               }
               else{
                 this.chartDatasets = [
-                    { data:  this.graphData.newSubValues, label: 'My First dataset' },
-                    { data:  this.graphData.renewedSubValues, label: 'My Second dataset' }
+                    { data:  this.graphData.newSubValues, label: this.duration },
+                    { data:  this.graphData.renewedSubValues, label: this.listOption }
                   ];
               }
+              // public chartLabels: Array<any> = [
+              //   {
+              //     text-transform: 'uppercase';
+              //   }
+              // ];
+
               this.chartLabels = this.graphData.timePeriod;
               this.chartColors = [];
               this.chartOptions= {
@@ -84,24 +102,24 @@ graphData1(){
 //line chart graph-2
 
 
-public chartType2: string = 'line';
+// public chartType2: string = 'line';
 
-  public chartDatasets2: Array<any> = [
-    { data: [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11], label: 'LAST MONTH' },
-     { data: [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64], label: 'ACTIVE VS CANCEL' }
-  ];
+//   public chartDatasets2: Array<any> = [
+//     { data: [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11], label: 'LAST MONTH' },
+//      { data: [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64], label: 'ACTIVE VS CANCEL' }
+//   ];
 
-  public chartLabels2: Array<any> = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,1,2,3,4];
+//   public chartLabels2: Array<any> = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,1,2,3,4];
   
-  public chartColors2: Array<any> = [
+//   public chartColors2: Array<any> = [
  
-  ];
+//   ];
 
-  public chartOptions2: any = {
-    responsive: true
-  };
-  public chartClicked2(e: any): void { }
-  public chartHovered2(e: any): void { }
+//   public chartOptions2: any = {
+//     responsive: true
+//   };
+//   public chartClicked2(e: any): void { }
+//   public chartHovered2(e: any): void { }
 
 //line chart graph-2 end
 
@@ -131,10 +149,12 @@ public chartType2: string = 'line';
     this.page =1;
     this.globalServiceService.subreport(this.page).subscribe(
       data => {
+        debugger;
         this.rowData = data; 
         this.success = this.rowData.success;
         this.failed = this.rowData.failed;
-        this.date = this.rowData.date;
+       
+        debugger;
       });
       //graphperiod
       this.globalServiceService.graphperiod().subscribe(
@@ -158,19 +178,57 @@ public chartType2: string = 'line';
             console.log(this.getrevenue_data);
             console.log(this.getrevenue_data.lastBatchRevOfNewSub);
           });
+      //getLastBatchRenewalCount 
+        this.globalServiceService.getLastBatch().subscribe(
+          data => {
+            this.LastBatchRenewalCount = data; 
+            this.success = this.LastBatchRenewalCount.success;
+            this.failed = this.LastBatchRenewalCount.failed;
+            this.total = this.LastBatchRenewalCount.total;
+           
+            // console.log( 'getLastBatchRenewalCount **********'+this.LastBatchRenewalCount.failed);
+            //  console.log( 'getLastBatchRenewalCount **********'+this.LastBatchRenewalCount.success);
+            //   console.log( 'getLastBatchRenewalCount **********'+this.LastBatchRenewalCount.total);
+            //console.log(this.getrevenue_data.lastBatchRevOfNewSub);
+          });
+      //getRevenueData 
+        this.globalServiceService.getRevenueData().subscribe(
+          data => {
+            debugger;
+            this.getRevenueData = data; 
+            debugger;
+             this.lastBatchRevOfNewSub = this.getRevenueData.lastBatchRevOfNewSub;
+            this.lastBatchRevOfRenewSub = this.getRevenueData.lastBatchRevOfRenewSub;
+
+            this.lastMonthRevOfNewSub = this.getRevenueData.lastMonthRevOfNewSub;
+
+             this.lastMonthRevOfRenewSub = this.getRevenueData.lastMonthRevOfRenewSub;
+
+             this.thisMonthRevOfNewSub = this.getRevenueData.thisMonthRevOfNewSub;
+             this.thisMonthRevOfRenewSub = this.getRevenueData.thisMonthRevOfRenewSub;
+             this.thisYearRevOfNewSub = this.getRevenueData.thisYearRevOfNewSub;
+             this.thisYearRevOfRenewSub = this.getRevenueData.thisYearRevOfRenewSub;
+           
+           
+            //  console.log( 'getRevenueData **********'+this.lastBatchRevOfNewSub);
+             
+            //console.log(this.getrevenue_data.lastBatchRevOfNewSub);
+          });
+
+
       //dashboardGraph
           this.globalServiceService.dashboardGraph(this.duration,this.listOption).subscribe(
             data => {
-              console.log(data); 
+              // console.log(data); 
               this.graphData=data;
 
               
                this.chartType= 'line';
-               this.graphData.activSubValues = [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11];
-               this.graphData.cancelSubValues = [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64];
+              // this.graphData.activSubValues = [50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,20,30,40,50,60,70,80,90,10,87,54,32,76,54,21,11];
+              // this.graphData.cancelSubValues = [0,20,0,0,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,100,91,55,68,77,10,90,66,56,64];
               this.chartDatasets = [
-                { data:  this.graphData.activSubValues, label: 'LAST MONTH' },
-                { data:  this.graphData.cancelSubValues, label: 'ACTIVE VS CANCEL' }
+                { data:  this.graphData.activSubValues, label: this.duration  },
+                { data:  this.graphData.cancelSubValues, label: this.listOption }
               ];
               this.chartLabels = this.graphData.timePeriod;;
               this.chartColors = [];

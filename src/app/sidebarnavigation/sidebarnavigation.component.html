@@ -15,10 +15,13 @@
           alt="User picture">
       </div>
       <div class="user-info">
-        <span class="user-name">Jhon
+        <span class="user-name">{{this.userName}}</span>
+        <!-- <span class="user-name">Jhon
           <strong>Smith</strong>
-        </span>
-        <span class="user-role">Administrator</span>
+        </span> -->
+        <!-- <span class="user-role">Administrator</span> -->
+        <span class="user-role">{{this.roleName}}</span>
+        
         <span class="user-status">
           <i class="fa fa-circle"></i>
           <span>Online</span>
@@ -44,7 +47,15 @@
         <li class="header-menu">
           <span>Quick Links</span>
         </li>
+        <ul *ngFor="let x of a">
+        <li> {{x}}
+          <ul >
+            <!-- <li>{{mappingData[y]}}</li> *ngFor="let y in mappingData" -->
+          </ul>
+        </li>
+        </ul>
         <li class="sidebar-dropdown active" >
+       
           <a  href="javascript:void(0)" routerLink='/dashboard'>
             <i class="fa Dashboard" aria-hidden="true"></i>
           <span>Dashboard</span>

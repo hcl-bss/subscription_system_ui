@@ -218,12 +218,19 @@ export class PlanComponent implements OnInit {
       )
 
 
-    //   this.globalServiceService.getPlans().subscribe(
-    //       data => {
-    //           this.planAllData = data;
-    //           console.log("***********", this.planAllData);
-    //       },
-    //   )
+      this.globalServiceService.getPlans().subscribe(
+          data => {
+              this.planAllData = data;
+              console.log("***********", this.planAllData);
+          },
+      )
+
+    //   this.globalServiceService.getStatusdropDown().subscribe(data => {
+    //   this.DrodownArraystatus = data;
+    //   this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
+    //   console.log(this.DrodownArraystatus);
+
+    // });
 
   }
 

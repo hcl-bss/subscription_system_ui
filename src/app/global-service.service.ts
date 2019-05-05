@@ -48,13 +48,13 @@ export class GlobalServiceService {
       observe:'response',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-Auth-Token':  this.token,
+       // 'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: HttpResponse<any>) => {
       console.log(response);
       this.loginResponse= response;
       
-      return response;
+      return this.loginResponse;
     }));
   }
   sidebar() {
@@ -148,7 +148,7 @@ sidebarsubmenu() {
 // dashboard service call start
   subreport(page) {
       //return this.http.get('/assets/report_sub.json', {
-      return this.http.get(this.url + '/dashboard/lastBatchRunLog/'+page , {
+      return this.http.get(this.url + '/batch/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Auth-Token':  this.token,
@@ -172,17 +172,17 @@ sidebarsubmenu() {
 }
 //graphperiod end
 //getRevenueData start
- getRevenueData() {
-    return this.http.get(this.url + '/dashboard/getRevenueData', {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Auth-Token':  this.token,
-    })
-  }).pipe(map((response: Response) => {
-    console.log(response);
-    return response;
-  }));
-}
+//  getRevenueData() {
+//     return this.http.get(this.url + '/dashboard/getRevenueData', {
+//     headers: new HttpHeaders({
+//       'Content-Type': 'application/json',
+//       'X-Auth-Token':  this.token,
+//     })
+//   }).pipe(map((response: Response) => {
+//     console.log(response);
+//     return response;
+//   }));
+// }
 //getRevenueData end
 //graphtype start
 graphtype() {
@@ -197,6 +197,33 @@ graphtype() {
 }));
 }
 //graphtype end
+//getLastBatchRenewalCount start
+getLastBatch() {
+  
+  return this.http.get(this.url + '/dashboard/getLastBatchRenewalCount', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+}
+//getLastBatchRenewalCount end
+//getRevenueData start
+getRevenueData() {
+  return this.http.get(this.url + '/dashboard/getRevenueData', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
+      })
+    }).pipe(map((response: Response) => {
+      console.log(response);
+      return response;
+    }));
+}
+//getRevenueData end
 //getValuesForGraph start
 dashboardGraph(timePeriod,typeOfGraph){
   this.graphData = JSON.stringify({
@@ -640,7 +667,7 @@ getProducts() {
 
 getPlans() {
 
-  return this.http.get(this.url + '/rate/getRatePlan', {
+  return this.http.get(this.url +'/rate/getRatePlan', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Auth-Token':  this.token,

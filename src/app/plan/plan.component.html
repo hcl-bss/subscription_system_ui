@@ -46,8 +46,8 @@
                       <label for="status">Status:</label>
                       <select class="form-control form-control-sm" id="plan_status" name="plan_status"
                         [(ngModel)]="plan_status">
-                        <option>Active</option>
-                        <option>Inactive</option>
+                        <option>Select</option>
+                       <!-- <option *ngFor="let values of DrodownArraystatus">{{values}}</option>  -->
                       </select>
                     </div>
                   </div>
@@ -84,10 +84,9 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="status">Type:</label>
-                      <select class="form-control form-control-sm" id="plan_type" name="plan_type"
-                        [(ngModel)]="plan_type">
-                        <option>A</option>
-                        <option>B</option>
+                      <select class="form-control form-control-sm" id="plan_type" name="plan_type" [(ngModel)]="plan_type">
+                      <option>Select</option>
+                       <!-- <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  -->
                       </select>
                     </div>
                   </div>
