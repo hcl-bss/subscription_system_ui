@@ -190,6 +190,8 @@ body {
 
 .sidebar-wrapper .sidebar-header .user-info > span {
   display: block;
+  text-transform: capitalize;
+  font-weight: bold;
 }
 
 .sidebar-wrapper .sidebar-header .user-info .user-role {
@@ -1493,3 +1495,4 @@ corresponding value from the list below*/
   margin: -22px 0 0px 0;
 }
 /* css3 icons end */
+.sidebar-submenu > ul > li.sidebar-submenu-list > a > span{margin-top:-5px;}

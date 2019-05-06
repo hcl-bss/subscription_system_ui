@@ -56,14 +56,9 @@ export class LoginComponent implements OnInit {
      
         this.globalServiceService.loginservice(formBuilders.controls.email.value, formBuilders.controls.password.value)
         .subscribe(result => {
-          var succ= result;
-          localStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));     
-         
-          //console.log("Token Value",succ.headers.get('X-Auth-Token'));
-          
           this.routes.navigate(['/dashboard']);
         }, err => {
-          console.log(err);
+          //console.log(err);
           let msg=err.error.error;
             this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
         }

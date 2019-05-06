@@ -15,12 +15,12 @@
           alt="User picture">
       </div>
       <div class="user-info">
-        <span class="user-name">{{this.userName}}</span>
+        <span class="user-name">{{userNameLogin}}</span>
         <!-- <span class="user-name">Jhon
           <strong>Smith</strong>
         </span> -->
         <!-- <span class="user-role">Administrator</span> -->
-        <span class="user-role">{{this.roleName}}</span>
+        <span class="user-role">{{roleNameLogin}}</span>
         
         <span class="user-status">
           <i class="fa fa-circle"></i>
@@ -43,17 +43,18 @@
     </div> -->
     <!-- sidebar-search  -->
     <div class="sidebar-menu">
-      <ul>
+       <ul>
         <li class="header-menu">
           <span>Quick Links</span>
         </li>
-        <ul *ngFor="let x of a">
+       <!-- <ul *ngFor="let x of a">
         <li> {{x}}
           <ul >
-            <!-- <li>{{mappingData[y]}}</li> *ngFor="let y in mappingData" -->
+           <li>{{mappingData[y]}}</li> *ngFor="let y in mappingData" 
           </ul>
         </li>
-        </ul>
+        </ul> -->
+      
         <li class="sidebar-dropdown active" >
        
           <a  href="javascript:void(0)" routerLink='/dashboard'>
@@ -116,7 +117,7 @@
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
       </a>
-      <a href="#">
+      <a href="javascript:void(0)" (click)="logOut()" routerLink='/login'>
         <i class="fa fa-power-off"></i>
       </a>
     </div>

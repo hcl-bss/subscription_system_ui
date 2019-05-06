@@ -70,7 +70,7 @@ thisYearRevOfRenewSub;
 graphData1(){ 
       this.globalServiceService.dashboardGraph(this.duration,this.listOption).subscribe(
             data => {
-              console.log(data); 
+              //console.log(data); 
               this.graphData=data;              
                this.chartType= 'line';
                if(this.listOption === "ACTIVE VS CANCEL"){
@@ -161,22 +161,22 @@ graphData1(){
         data => {
           this.graphperiod_data = data;
           this.graphperiod_data = this.graphperiod_data.dropDownList; 
-          console.log(this.graphperiod_data);
+          //console.log(this.graphperiod_data);
         });
       //graphtype
         this.globalServiceService.graphtype().subscribe(
           data => {
             this.graphtype_data = data;
             this.graphtype_data = this.graphtype_data.dropDownList; 
-            console.log(this.graphtype_data);
+           // console.log(this.graphtype_data);
           });
       //getRevenueData 
         this.globalServiceService.getRevenueData().subscribe(
           data => {
             this.getrevenue_data = data;
             this.getrevenue_data = this.getrevenue_data; 
-            console.log(this.getrevenue_data);
-            console.log(this.getrevenue_data.lastBatchRevOfNewSub);
+            // console.log(this.getrevenue_data);
+            // console.log(this.getrevenue_data.lastBatchRevOfNewSub);
           });
       //getLastBatchRenewalCount 
         this.globalServiceService.getLastBatch().subscribe(

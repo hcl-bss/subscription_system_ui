@@ -8,6 +8,7 @@ export class GlobalServiceService {
   $isLOggedIn = new EventEmitter();
   plan_list: any;
   p_list: any;
+  //10.97.191.204
   url = 'http://localhost:8080';
   logindata;
   editdata;
@@ -29,8 +30,10 @@ export class GlobalServiceService {
   cnamesubscription: any;
   subsciptionDetailsrlno: string;
   graphData;
-  token=localStorage.getItem('X-Auth-Token');
+  token;
   loginResponse;
+  loginData;
+
   constructor(private http: HttpClient) { }
 
 
@@ -51,11 +54,20 @@ export class GlobalServiceService {
        // 'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: HttpResponse<any>) => {
-      console.log(response);
-      this.loginResponse= response;
-      
-      return this.loginResponse;
+     // //console.log(response);
+      this.loginData= response;
+       var succ= response;
+      sessionStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));     
+      this.token=sessionStorage.getItem('X-Auth-Token');
+     // //console.log("*****",response.body.userName);
+     // //console.log("*****",response.body.roleNameSet[0]);    
+       
+      return response;
     }));
+  }
+  logout(){
+  sessionStorage.removeItem('X-Auth-Token'); 
+ //  //console.log("*****",this.token); 
   }
   sidebar() {
     jQuery(function ($) {
@@ -141,7 +153,7 @@ sidebarsubmenu() {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+     // //console.log(response);
       return response;
     }));
   }
@@ -154,7 +166,7 @@ sidebarsubmenu() {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+    //  //console.log(response);
       return response;
     }));
   }
@@ -166,7 +178,7 @@ sidebarsubmenu() {
        'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+   // //console.log(response);
     return response;
   }));
 }
@@ -179,7 +191,7 @@ sidebarsubmenu() {
 //       'X-Auth-Token':  this.token,
 //     })
 //   }).pipe(map((response: Response) => {
-//     console.log(response);
+//     //console.log(response);
 //     return response;
 //   }));
 // }
@@ -192,7 +204,7 @@ graphtype() {
      'X-Auth-Token':  this.token,
   })
 }).pipe(map((response: Response) => {
-  console.log(response);
+ // //console.log(response);
   return response;
 }));
 }
@@ -206,7 +218,7 @@ getLastBatch() {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+     // //console.log(response);
       return response;
     }));
 }
@@ -219,7 +231,7 @@ getRevenueData() {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+     // //console.log(response);
       return response;
     }));
 }
@@ -236,7 +248,7 @@ dashboardGraph(timePeriod,typeOfGraph){
        'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+   // //console.log(response);
     return response;
   }));
 }
@@ -249,7 +261,7 @@ executeBatch(batchId) {
          'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+    //  //console.log(response);
       return response;
     }));
   }
@@ -266,7 +278,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+    //  //console.log(response);
       return response;
     }));
   }
@@ -291,7 +303,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+     // //console.log(response);
       return response;
     }));
   }
@@ -307,7 +319,7 @@ executeBatch(batchId) {
 
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -321,7 +333,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -353,7 +365,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -394,7 +406,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -436,7 +448,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -460,7 +472,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -483,7 +495,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -505,7 +517,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
 
@@ -524,7 +536,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -543,7 +555,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -562,7 +574,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -586,7 +598,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -598,7 +610,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -621,7 +633,7 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -643,7 +655,7 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -679,7 +691,7 @@ getPlans() {
 }
 
 associatePlans(updatePlans, uidpk) {
-  console.log(updatePlans);
+  //console.log(updatePlans);
   this.associationPlans = JSON.stringify(
     {
       "product": {
@@ -730,7 +742,7 @@ getStatusdropDown(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -743,7 +755,7 @@ fetchCurrencyValues(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -755,7 +767,7 @@ fetchPricingSchemeValues(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -767,7 +779,7 @@ fetchBillEveryValues(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -780,7 +792,7 @@ fetchUomValues(){
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     }));
   }
@@ -811,7 +823,7 @@ return this.http.post(this.url + '/rate/ratePlan', this.newPlanData, {
     'X-Auth-Token':  this.token,
   })
 }).pipe(map((response: Response) => {
-  console.log(response);
+  //console.log(response);
   return response;
 }));
 }
@@ -831,7 +843,7 @@ subscritionDetails(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -845,7 +857,7 @@ cancelSubscriptionData(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
@@ -857,7 +869,7 @@ exportToCsvData(pageName){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    console.log(response);
+    //console.log(response);
     return response;
   }));
 }
