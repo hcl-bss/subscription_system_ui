@@ -1,5 +1,5 @@
 <div id="rightSideWrapper">
-  <div class="ContentBox" style="padding-top:3%">
+  <div class="ContentBox">
     <main>
       <!-- <h5 class="text-center">WELCOME TO YOUR DASHBOARD</h5> -->
       <div class="container-fluid">
@@ -17,91 +17,83 @@
         </div> -->
 
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
-                    <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-calendar-o" style="
-                    position: absolute;
-                    left: 8px;
-                    font-size: 35px;
-                    top: -38px;
-                    padding: 6%;
-                    background: #ff5252;
-                    color: #fff;
-                    border-radius: 3px;
-                    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
-                        <div class="row">
-                            <div class="col-12">
-                             
-                                <div class="numbers" >
-                                    <p class="card-category">Sucess subscriptions - <strong>{{this.success}}</strong></p>
-                                    <p class="card-category">failed Orders - <strong>{{this.failed}}</strong> </p>
+            <div class="col-lg-6 col-sm-6" >
+                <div class="dashboard_box">
+                    <div class="col-lg-6 float_left">
+                        <div class="card card-stats widget_one box1"  routerLink='/subscriptions/report' data-toggle="tooltip" title="Click Me For More Info.." style="cursor: pointer;" >
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                            <i class="fa fa-calendar-o" style="
+                            position: absolute;
+                            left: 8px;
+                            font-size: 35px;
+                            top: -38px;
+                            padding: 6%;
+                            background: #ff5252;
+                            color: #fff;
+                            border-radius: 3px;
+                            box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
+                                <div class="row">
+                                    <div class="col-12">
+                                    
+                                        <div class="numbers" >
+                                            <p class="card-category">Success subscriptions - <strong>{{this.success}}</strong></p>
+                                            <p class="card-category">Failed Orders - <strong>{{this.failed}}</strong> </p>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
-                                
+                            </div>
+                            <div class="card-footer ">
+                            
+                                <div class="stats">
+                                    <i class="fa fa-sticky-note fa-2"></i> Last day  
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer ">
-                       
-                        <div class="stats">
-                            <i class="fa fa-sticky-note fa-2"></i> Last day  
+                      <div class="col-lg-6 float_left">
+                        <div class="card card-stats widget_one box1" >
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                            <i class="fa fa-line-chart" style="
+                            position: absolute;
+                            left: 8px;
+                            font-size: 35px;
+                            top: -38px;
+                            padding: 6%;
+                            background: #f4a041;
+                            color: #fff;
+                            border-radius: 3px;
+                            box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
+                                <div class="row">
+                                    <div class="col-12">
+                                    
+                                         <div class="numbers" >
+                                             <p class="card-category">Rs : <strong>{{this.lastBatchRevOfNewSub}}</strong></p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                            
+                               <div class="stats">
+                                     <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Revenue  
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <strong class="heading_dashboard">Heading</strong>
                 </div>
             </div>
             
+        
             <!-- EXECUTE SCHEDULERS SECTION -->
-            <div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box2"  style="
-                min-height: 168px;">
-                    <div class="card-body" style="min-height: 116px; font-size: 13px;">
-                    <i class="fa fa-line-chart" style="position: absolute;
-     
-    left: 8px;
-    font-size: 35px;
-    top: -38px;
-    padding: 6%;
-    background: #f4a041!important;
-    color: #fff;
-    border-radius: 3px;
-    box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="numbers" >
-                                    
-                                    <p class="card-category">Rs : <strong>{{this.lastBatchRevOfNewSub}}</strong></p>
-                                    
-                                  
-                                    <!-- <p class="card-category">
-                                        <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;margin-top: 3px;"
-                                        (click)="executeScheduler(1)">Subscription Batch</button>
-                                        <button type="button" id="uploadbtn" class="btn btn-info" style="margin-left:10px;float:left;margin-top: 12px;"
-                                        (click)="executeScheduler(2)">Renewal Batch</button>
-                                    </p> -->
-                                   
-                                   
-                                    <!-- <h4 class="card-title">$ 1,345</h4> -->
-                                </div>
-                               
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-footer ">
-                            <div class="stats">
-                                <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
-                            </div>
-                        </div>
-                    
-                </div>
-            </div>    
-
-<!-- widget-3 -->
-<div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box1">
-                    <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-line-chart" style="position: absolute;
+           <div class="col-lg-6 col-sm-6" >
+                <div class="dashboard_box">
+                    <div class="col-lg-6 float_left">
+                        <div class="card card-stats widget_one box1">
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                            <i class="fa fa-line-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -111,30 +103,30 @@
     color: #fff;
     border-radius: 3px;
     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="numbers" >
+                                <div class="row">
+                                    <div class="col-12">
+                                    
+                                        <div class="numbers" >
                                     <p class="card-category">Total - <strong>{{this.LastBatchRenewalCount.total}}</strong></p>
-                                    <p class="card-category">Sucess - <strong>{{LastBatchRenewalCount.success}}</strong></p>
+                                    <p class="card-category">Success - <strong>{{LastBatchRenewalCount.success}}</strong></p>
                                     <p class="card-category">Failure - <strong>{{LastBatchRenewalCount.failed}}</strong></p>
                                 </div>
-                                
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                            
+                                <div class="stats">
+                                   <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Renewal Order 
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer ">
-                        <div class="stats">
-                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Renewal Order 
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-<!-- widget-4 -->
-<div class="col-lg-3 col-sm-6">
-                <div class="card card-stats widget_one box1">
-                    <div class="card-body " style="min-height: 119px; font-size: 13px;">
-                    <i class="fa fa-line-chart" style="position: absolute;
+                      <div class="col-lg-6 float_left">
+                        <div class="card card-stats widget_one box1" >
+                            <div class="card-body " style="min-height: 119px; font-size: 13px;">
+                             <i class="fa fa-line-chart" style="position: absolute;
      
     left: 8px;
     font-size: 35px;
@@ -144,27 +136,41 @@
     color: #fff;
     border-radius: 3px;
     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="numbers" >
-                                    <p class="card-category">Rs : <strong>{{this.lastBatchRevOfRenewSub}}</strong></p>
+                                <div class="row">
+                                    <div class="col-12">
+                                    
+                                         <div class="numbers" >
+                                            
+                                             <p class="card-category">Rs : <strong>{{this.lastBatchRevOfRenewSub}}</strong></p>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
-                                
+                            </div>
+                            <div class="card-footer ">
+                            
+                               <div class="stats">
+                                     <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Revenue  
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer ">
-                        <div class="stats">
-                            <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
-                        </div>
-                    </div>
+                     <strong class="heading_dashboard">Heading</strong>
                 </div>
             </div>
+            
+   
+            
+
+<!-- widget-3 -->
+
+<!-- widget-4 -->
+
             <!-- widget-5 -->
         </div>
         <!-- dashboard end -->
         
-        <div class="row" style="padding-top:5%;">
+        <div class="row" style="padding-top:3%;">
             <div class="col-lg-6">
                 <div class="graph_container">
                 <div class="col-lg-6" style="float:left; margin:0;">
@@ -186,7 +192,7 @@
                     </select>
                 </div>
             </div>
-            <div style="display: block;">
+            <div style="display: block;text-transform: uppercase !important;">
                 <canvas mdbChart
                     [chartType]="chartType"
                     [datasets]="chartDatasets"
@@ -201,7 +207,7 @@
         </div>
 <!-- (chartHover)="chartHovered($event)" -->
 <!-- (chartClick)="chartClicked($event)" -->
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="padding-top:3%;">
                     <!-- widget-5 -->
                     <div class="col-lg-6" style="float:left; margin:0;padding: 0 15px 0 0;">
                         <div class="card card-stats widget_one box1" style="postion:relative;" >
@@ -219,9 +225,9 @@
     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="numbers" >
+                                        <div class="numbers" style="padding-top:3%;">
                                             <p class="card-category">This Month : Rs : <strong>{{this.thisMonthRevOfNewSub}}</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>{{this.lastMonthRevOfNewSub}}</strong></p>
+                                            <p class="card-category">Previous Month : Rs : <strong>{{this.lastMonthRevOfNewSub}}</strong></p>
                                             <p class="card-category">This Year : Rs : <strong>{{this.thisYearRevOfNewSub}}</strong></p>
                                         </div>
                                         
@@ -230,7 +236,7 @@
                             </div>
                             <div class="card-footer ">
                                 <div class="stats">
-                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Reveneue 
+                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Net Revenue
                                 </div>
                             </div>
                         </div>
@@ -251,9 +257,9 @@
     box-shadow: 0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19);"></i>
                                 <div class="row">
                                     <div class="col-12">
-                                        <div class="numbers" >
+                                        <div class="numbers" style="padding-top:3%;">
                                             <p class="card-category">This Month : Rs : <strong>{{this.thisMonthRevOfRenewSub}}</strong></p>
-                                            <p class="card-category">Pervious Month : Rs : <strong>{{this.lastMonthRevOfRenewSub}}</strong></p>
+                                            <p class="card-category">Previous Month : Rs : <strong>{{this.lastMonthRevOfRenewSub}}</strong></p>
                                             <p class="card-category">This Year : Rs : <strong>{{this.thisYearRevOfNewSub}}</strong></p>
                                         </div>
                                         
@@ -262,7 +268,7 @@
                             </div>
                             <div class="card-footer ">
                                 <div class="stats">
-                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Recurring Revenue 
+                                    <i class="fa fa-sticky-note fa-2" aria-hidden="true"></i> Recurring Revenue
                                 </div>
                             </div>
                         </div>

@@ -1496,3 +1496,21 @@ corresponding value from the list below*/
 }
 /* css3 icons end */
 .sidebar-submenu > ul > li.sidebar-submenu-list > a > span{margin-top:-5px;}
+canvas.chartjs-size-monitor {text-transform: uppercase !important;}
+/* e2eded */
+
+.dashboard_box{
+  background:#E2EDDB; width:100%; padding:8%; 
+  float:left; 
+  box-shadow:0 2px 9px 0 rgba(0,0,0,.2), 0 2px 13px 0 rgba(0,0,0,.19); 
+  border-radius:10px;
+  position:relative;
+}
+.float_left{ float:left;}
+.card-body{padding: 1.4em 0.8rem !important;}
+.heading_dashboard{
+  color: #117a8b;
+    text-transform: uppercase;
+    line-height: 40px;
+    position:absolute; left:43%; bottom:0; font-weight:bold;
+}

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.registerForm.controls; }
   onSubmit(formBuilders) {
     this.submitted = true;
-    if(formBuilders.controls.email.value=='admin@hcl.com' && formBuilders.controls.password.value=='admin'){
+    if(formBuilders.controls.email.value=='adin@hcl.com' && formBuilders.controls.password.value=='admin'){
       this.routes.navigate(['/dashboard']);
     }
   

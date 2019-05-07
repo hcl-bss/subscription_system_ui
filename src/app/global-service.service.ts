@@ -8,7 +8,6 @@ export class GlobalServiceService {
   $isLOggedIn = new EventEmitter();
   plan_list: any;
   p_list: any;
-  //10.97.191.204
   url = 'http://localhost:8080';
   logindata;
   editdata;
@@ -57,11 +56,9 @@ export class GlobalServiceService {
      // //console.log(response);
       this.loginData= response;
        var succ= response;
-      sessionStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));     
+      sessionStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));          
       this.token=sessionStorage.getItem('X-Auth-Token');
-     // //console.log("*****",response.body.userName);
-     // //console.log("*****",response.body.roleNameSet[0]);    
-       
+      sessionStorage.setItem('username',this.loginData.body.userName);        
       return response;
     }));
   }

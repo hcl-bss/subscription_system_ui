@@ -16,12 +16,7 @@
       </div>
       <div class="user-info">
         <span class="user-name">{{userNameLogin}}</span>
-        <!-- <span class="user-name">Jhon
-          <strong>Smith</strong>
-        </span> -->
-        <!-- <span class="user-role">Administrator</span> -->
-        <span class="user-role">{{roleNameLogin}}</span>
-        
+        <!-- <span class="user-role">{{roleNameLogin}}</span> -->
         <span class="user-status">
           <i class="fa fa-circle"></i>
           <span>Online</span>
@@ -29,18 +24,6 @@
       </div>
     </div>
     <!-- sidebar-header  -->
-    <!-- <div class="sidebar-search">
-      <div>
-        <div class="input-group">
-          <input type="text" class="form-control search-menu" placeholder="Search...">
-          <div class="input-group-append">
-            <span class="input-group-text">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <!-- sidebar-search  -->
     <div class="sidebar-menu">
        <ul>
@@ -53,10 +36,8 @@
            <li>{{mappingData[y]}}</li> *ngFor="let y in mappingData" 
           </ul>
         </li>
-        </ul> -->
-      
-        <li class="sidebar-dropdown active" >
-       
+        </ul> -->   
+        <li class="sidebar-dropdown active" > 
           <a  href="javascript:void(0)" routerLink='/dashboard'>
             <i class="fa Dashboard" aria-hidden="true"></i>
           <span>Dashboard</span>
@@ -75,8 +56,7 @@
           </li>
         </ul>
       </div>
-        </li>
-        
+    </li>     
         <li class="sidebar-dropdown" >
           <a  href="javascript:void(0)" routerLink='/subscriptions'>
             <i class="fa Subscriptions" aria-hidden="true"></i>
