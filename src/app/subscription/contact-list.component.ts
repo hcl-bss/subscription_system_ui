@@ -87,7 +87,7 @@ export class ContactListComponent implements OnInit {
     this.globalServiceService.getStatusdropDown().subscribe(data => {
       this.DrodownArraystatus = data;
       this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
-      console.log(this.DrodownArraystatus);
+      //console.log(this.DrodownArraystatus);
 
     });
    }
@@ -110,7 +110,7 @@ export class ContactListComponent implements OnInit {
     // }
     // else{
       let date=this.globalServiceService.dateValidation(fromDateStr,toDateStr);
-      console.log("********",date);
+     // console.log("********",date);
       if(date==true){
         if(fromDateStr!=undefined){
            sDate = fromDateStr.day + "/" + fromDateStr.month + "/" + fromDateStr.year;

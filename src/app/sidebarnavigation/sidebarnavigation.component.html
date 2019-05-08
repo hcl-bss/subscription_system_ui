@@ -25,18 +25,24 @@
     </div>
     <!-- sidebar-header  -->
     <!-- sidebar-search  -->
+
     <div class="sidebar-menu">
+<!-- side navigation code start -->
+            <!-- <ul style="color:#fff">
+              <li *ngFor="let f of keys()">{{f}}
+                <ul>
+                  <li *ngFor="let d of mappingData[f]">{{d}}</li>
+                </ul>
+              </li> 
+            </ul> -->
+<!-- side navigation code end -->
+
+
+            
        <ul>
         <li class="header-menu">
           <span>Quick Links</span>
         </li>
-       <!-- <ul *ngFor="let x of a">
-        <li> {{x}}
-          <ul >
-           <li>{{mappingData[y]}}</li> *ngFor="let y in mappingData" 
-          </ul>
-        </li>
-        </ul> -->   
         <li class="sidebar-dropdown active" > 
           <a  href="javascript:void(0)" routerLink='/dashboard'>
             <i class="fa Dashboard" aria-hidden="true"></i>
@@ -89,14 +95,14 @@
   </div>
   <!-- sidebar-content  -->
   <div class="sidebar-footer">
-      <a href="javascript:void(0)">
+      <!-- <a href="javascript:void(0)">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
       </a>
       <a href="javascript:void(0)">
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
-      </a>
+      </a> -->
       <a href="javascript:void(0)" (click)="logOut()" routerLink='/login'>
         <i class="fa fa-power-off"></i>
       </a>

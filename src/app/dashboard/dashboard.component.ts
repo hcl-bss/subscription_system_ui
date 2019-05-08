@@ -41,6 +41,9 @@ thisYearRevOfRenewSub;
      chartOptions;
      graphData;
      length:any;
+     success_data;
+     failed_data;
+     total_data;
 //line chart graph-1
 // public chartType: string = 'line';
 //   public chartDatasets: Array<any> = [
@@ -149,12 +152,12 @@ graphData1(){
     this.page =1;
     this.globalServiceService.subreport(this.page).subscribe(
       data => {
-        debugger;
+      
         this.rowData = data; 
         this.success = this.rowData.success;
         this.failed = this.rowData.failed;
        
-        debugger;
+        
       });
       //graphperiod
       this.globalServiceService.graphperiod().subscribe(
@@ -185,9 +188,9 @@ graphData1(){
         this.globalServiceService.getLastBatch().subscribe(
           data => {
             this.LastBatchRenewalCount = data; 
-            this.success = this.LastBatchRenewalCount.success;
-            this.failed = this.LastBatchRenewalCount.failed;
-            this.total = this.LastBatchRenewalCount.total;
+            this.success_data = this.LastBatchRenewalCount.success;
+            this.failed_data = this.LastBatchRenewalCount.failed;
+            this.total_data = this.LastBatchRenewalCount.total;
            
             // console.log( 'getLastBatchRenewalCount **********'+this.LastBatchRenewalCount.failed);
             //  console.log( 'getLastBatchRenewalCount **********'+this.LastBatchRenewalCount.success);
@@ -197,9 +200,9 @@ graphData1(){
       //getRevenueData 
         this.globalServiceService.getRevenueData().subscribe(
           data => {
-            debugger;
+           
             this.getRevenueData = data; 
-            debugger;
+            
              this.lastBatchRevOfNewSub = this.getRevenueData.lastBatchRevOfNewSub;
             this.lastBatchRevOfRenewSub = this.getRevenueData.lastBatchRevOfRenewSub;
 

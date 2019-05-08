@@ -32,11 +32,14 @@ export class GlobalServiceService {
   token;
   loginResponse;
   loginData;
-
-  constructor(private http: HttpClient) { }
-
-
-
+menuMap;
+currentUserData;
+  constructor(private http: HttpClient) { 
+    this.currentUserData=JSON.parse(sessionStorage.getItem('currentUser'));
+    this.token=sessionStorage.getItem('X-Auth-Token');  
+    console.log("inside this.loginData **********",this.currentUserData);
+    console.log("******",this.token);
+  }
 
   loginservice(username, password) {
 
@@ -54,11 +57,19 @@ export class GlobalServiceService {
       })
     }).pipe(map((response: HttpResponse<any>) => {
      // //console.log(response);
-      this.loginData= response;
+     
        var succ= response;
       sessionStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));          
-      this.token=sessionStorage.getItem('X-Auth-Token');
-      sessionStorage.setItem('username',this.loginData.body.userName);        
+      this.token=sessionStorage.getItem('X-Auth-Token');   
+
+      if (response) {
+        sessionStorage.setItem('currentUser', JSON.stringify(response));       
+      }
+       this.loginData=sessionStorage.getItem('currentUser');
+        this.currentUserData=JSON.parse(this.loginData);
+       console.log(this.currentUserData);
+        console.log(this.token);   
+
       return response;
     }));
   }
@@ -300,7 +311,6 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-     // //console.log(response);
       return response;
     }));
   }
@@ -324,7 +334,7 @@ executeBatch(batchId) {
   
   usermanagementCalling(pageNumber) {
 
-    return this.http.get(this.url + '/getProducts/'+pageNumber, {
+    return this.http.get(this.url + '/product/getProducts/'+pageNumber, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Auth-Token':  this.token,
@@ -662,8 +672,7 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
 
 
 getProducts() {
-
-  return this.http.get(this.url + '/getProducts/0', {
+  return this.http.get(this.url + '/product/getProducts/0', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Auth-Token':  this.token,
@@ -697,7 +706,7 @@ associatePlans(updatePlans, uidpk) {
       "ratePlan": updatePlans
     });
 
-  return this.http.post(this.url + '/product/associatePlan', this.associationPlans, {
+  return this.http.post(this.url + '/product/associatePlan  ', this.associationPlans, {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Auth-Token':  this.token,

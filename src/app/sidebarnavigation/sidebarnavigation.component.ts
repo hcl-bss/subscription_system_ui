@@ -15,8 +15,6 @@ export class SidebarnavigationComponent implements OnInit {
   mappingData;
   userName;
   username;
-  a;
-  b=[];
   userNameLogin;
   roleNameLogin;
   constructor(private globalServiceService: GlobalServiceService) { 
@@ -28,48 +26,24 @@ export class SidebarnavigationComponent implements OnInit {
             this.globalServiceService.logout()
             
       }
+      keys() : Array<string>
+      {
+        return Object.keys(this.mappingData);
+      }
   ngOnInit() {
    
-    this.loginData=this.globalServiceService.loginData;
-    debugger;
-    this.username = sessionStorage.getItem('username');
+    this.loginData=this.globalServiceService.currentUserData;
+    
+    this.username = this.globalServiceService.currentUserData.body.userName;
     this.username;
     //  this.userNameLogin= this.loginData.body.userName;
-  debugger;
-    // if(this.loginData.body.roleNameSet[0] === "ROLE_Admin")
-    // {
-    //   this.roleNameLogin = "ADMIN"
-    // }
-    // else{
-    //   this.roleNameLogin= this.loginData.body.roleNameSet[0];
-    // }
    
-    // this.mappingData=this.loginData.body.menuMap;
+    this.mappingData=this.loginData.body.menuMap;
+   // console.log("cool : ",this.mappingData);
     // this.userName = this.loginData.body.userFirstName;
 
     // this.roleName = this.loginData.body.roleNameSet[0];
-
-
-
-
-
-
-
-
-    // this.a= Object.keys(this.mappingData);
-    // for(let prop of this.a){
-    //   this.b.push(this.a[prop]);
-    //   console.log("bbbbbbbbbbbb",this.b);
     }
-    
-    // console.log("*****",this.a);
-    
-    // console.log('navigation---------------- '+ this.mappingData);
-    // logOut(){
-    //   this.globalServiceService.logout();
-    // }
     
   }
 
-
-//}

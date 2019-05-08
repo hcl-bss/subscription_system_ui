@@ -153,7 +153,7 @@ export class UsermanagementComponent implements OnInit {
     this.globalServiceService.addUser(email, userProfile, firstName, middleName, lastName, password).subscribe(
       result => {
         let msg;
-        console.log(result);
+        //console.log(result);
         msg = result;
         msg = msg.message;
         this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
@@ -162,7 +162,7 @@ export class UsermanagementComponent implements OnInit {
       //  window.location.reload();
       },
       error => {
-        console.log(error.status );
+        //console.log(error.status );
         if (error.status === 200) {
           this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
         }

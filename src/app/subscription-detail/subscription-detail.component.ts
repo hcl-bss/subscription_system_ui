@@ -82,7 +82,7 @@ subscription_no;
      }
       },
       error => {
-      console.log("************",error);
+    //  console.log("************",error);
       }
 
     )
@@ -105,7 +105,7 @@ subscription_no;
     }
   }
   radioFunction(radioValue){
-    console.log("radioValue",radioValue);
+   // console.log("radioValue",radioValue);
   }
   cancelSubscription(){
     this.globalServiceService.cancelSubscriptionData().subscribe(

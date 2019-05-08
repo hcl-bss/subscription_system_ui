@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
           this.routes.navigate(['/dashboard']);
         }, err => {
           //console.log(err);
-          let msg=err.error.error;
-            this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
+          // let msg=err.error.error;
+          // this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
         }
         );
         

@@ -251,15 +251,15 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     this.params = params;
    
     if(this.params.data.status=="Active"){
-      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
+    //  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=true;
     }
     if(this.params.data.status=="Inactive"){
-      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
+     // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=false;
     }
     this.data = this.params.data.userId;
-    console.log(this.data);
+   // console.log(this.data);
   }
   // public invokeParentMethod() {
   //   console.log(this.params.data);
@@ -311,7 +311,7 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
      this.globalServiceService.editUser(userId,profile,firstName,middleName,lastName).subscribe(
       result => {
         let msg;
-        console.log(result);
+       // console.log(result);
         msg=result;
         msg=msg.message;
         this.flashMessage.show(msg, { cssClass: 'alert-success', timeout: 10000 });  
@@ -329,7 +329,7 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
      );
   }
   ActivateDeactivate(id){
-    console.log("*****",id);
+    //console.log("*****",id);
     this.globalServiceService.activeDeactive(id).subscribe(
       result => {
         let msg;
@@ -340,7 +340,7 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
         if(msg.message=="User deactivated successfully!"){
           this.chekedFlag=false;
         }
-        console.log(result);
+       // console.log(result);
       }
      );
   }

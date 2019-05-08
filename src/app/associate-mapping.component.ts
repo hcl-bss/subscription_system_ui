@@ -230,8 +230,8 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
     
   }
   public invokeParentMethod() {
-    console.log(this.params.data); 
-    console.log("ratePlanVolumeDtoList",this.params.data.ratePlanVolumeDtoList) ;
+    //console.log(this.params.data); 
+    //console.log("ratePlanVolumeDtoList",this.params.data.ratePlanVolumeDtoList) ;
     if(this.params.data.ratePlanVolumeDtoList!= null || this.params.data.ratePlanVolumeDtoList!= undefined){
       this.volumeDetails=this.params.data.ratePlanVolumeDtoList;
     }

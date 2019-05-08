@@ -182,7 +182,7 @@ export class ProductComponent implements OnInit {
     this.globalServiceService.getStatusdropDown().subscribe(data => {
       this.DrodownArraystatus = data;
       this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
-      console.log(this.DrodownArraystatus);
+     // console.log(this.DrodownArraystatus);
 
     });
     this.spinnerService.show();
@@ -202,7 +202,7 @@ export class ProductComponent implements OnInit {
   }
 
   dropDown(producttype) {
-    console.log(producttype);
+   // console.log(producttype);
     for (let i = 0; i < this.DrodownArray.length; i++) {
       if (this.DrodownArray[i].productType == producttype) {
         this.P_code_Type = this.DrodownArray[i].productTypeCode;
@@ -386,7 +386,7 @@ ${reason}`;
               .addProduct(name, description, sku, sDate, eDate, this.P_code_Type)
               .subscribe(
                 data => {
-                  console.log(data);
+                 // console.log(data);
 
                   this.rowData = [];
 
