@@ -167,6 +167,9 @@ graphData1(){
         this.globalServiceService.graphtype().subscribe(
           data => {
             this.graphtype_data = data;
+            // sessionStorage.setItem('graphperiod_data',this.graphperiod_data.dropDownList);
+            // this.graphperiod_dataa = sessionStorage.getItem('graphperiod_data');
+            // this.graphperiod_dataaa = this.graphperiod_dataa;
             this.graphtype_data = this.graphtype_data.dropDownList; 
            // console.log(this.graphtype_data);
           });

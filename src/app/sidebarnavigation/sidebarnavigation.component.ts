@@ -14,6 +14,7 @@ export class SidebarnavigationComponent implements OnInit {
   loginData;
   mappingData;
   userName;
+  username;
   a;
   b=[];
   userNameLogin;
@@ -30,21 +31,30 @@ export class SidebarnavigationComponent implements OnInit {
   ngOnInit() {
    
     this.loginData=this.globalServiceService.loginData;
-    
-    this.userNameLogin= this.loginData.body.userName;
-   // this.roleNameLogin= this.loginData.body.roleNameSet[0];
-    if(this.loginData.body.roleNameSet[0] === "ROLE_Admin")
-    {
-      this.roleNameLogin = "ADMIN"
-    }
-    else{
-      this.roleNameLogin= this.loginData.body.roleNameSet[0];
-    }
+    debugger;
+    this.username = sessionStorage.getItem('username');
+    this.username;
+    //  this.userNameLogin= this.loginData.body.userName;
+  debugger;
+    // if(this.loginData.body.roleNameSet[0] === "ROLE_Admin")
+    // {
+    //   this.roleNameLogin = "ADMIN"
+    // }
+    // else{
+    //   this.roleNameLogin= this.loginData.body.roleNameSet[0];
+    // }
    
-    this.mappingData=this.loginData.body.menuMap;
-    this.userName = this.loginData.body.userFirstName;
+    // this.mappingData=this.loginData.body.menuMap;
+    // this.userName = this.loginData.body.userFirstName;
 
-    this.roleName = this.loginData.body.roleNameSet[0];
+    // this.roleName = this.loginData.body.roleNameSet[0];
+
+
+
+
+
+
+
 
     // this.a= Object.keys(this.mappingData);
     // for(let prop of this.a){
