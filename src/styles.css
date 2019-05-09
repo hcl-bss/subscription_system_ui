@@ -1382,7 +1382,7 @@ h5.detail_list_heading{     background: #f6f0f0;
 .upper_content{ margin-bottom: 30px;}
 .row.mng{ min-height: auto; height: auto; }
 .detail_list{padding:0px; margin:0px;}
-.detail_list li span{font-size: 12px; line-height: 16px;}
+.detail_list li span{font-size: 12px; line-height: 16px; text-transform: capitalize;}
 .upper_content{padding: 12px 0px;}
 .upper_content strong{color: #117a8b;}
 .col-lg-12.brd  p > a{text-decoration: underline;color: #117a8b;font-weight: bold;}
@@ -1514,3 +1514,4 @@ canvas.chartjs-size-monitor {text-transform: uppercase !important;}
     line-height: 40px;
     position:absolute; left:43%; bottom:0; font-weight:bold;
 }
+p.card-category span{     width: 70%; float: left;}
