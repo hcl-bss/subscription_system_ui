@@ -13,7 +13,9 @@ import { ProductComponent } from './products/product.component';
 import { SubscriptionreportComponent } from './subscriptionreport/subscriptionreport.component';
 import { AssociatePlanComponent } from './associate-plan/associate-plan.component';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
-
+import {UserprofileComponent} from './userprofile/userprofile.component';
+import {UserdeleteComponent} from './userdelete/userdelete.component';
+import {UserupdateComponent} from './userupdate/userupdate.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -41,6 +43,9 @@ const routes: Routes = [
   { path: 'subscriptionDetail', component: SubscriptionDetailComponent, canActivate :[AuthGuard] },  
   { path: 'transactions', component: TransactionsComponent, canActivate :[AuthGuard] },
   { path: 'plan', component: PlanComponent, canActivate :[AuthGuard] },
+  { path: 'userprofile', component: UserprofileComponent, canActivate :[AuthGuard] },
+  { path: 'userprofile/userdelete', component: UserdeleteComponent, canActivate :[AuthGuard] },
+  { path: 'userprofile/userupdate', component: UserupdateComponent, canActivate :[AuthGuard] },
   { path: '**', redirectTo: '' },
   { path: '', redirectTo: ' ', pathMatch: 'full' },
 

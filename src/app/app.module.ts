@@ -39,6 +39,9 @@ import {GlobalPropertiesService} from './global-properties.service';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { toggleFunctionality } from './products/toggleFunctionality';
 
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UserdeleteComponent } from './userdelete/userdelete.component';
+import { UserupdateComponent } from './userupdate/userupdate.component';
 //import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
@@ -63,7 +66,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AssociatePlanComponent,
     AssociateMappingComponent,
     SubscriptionDetailComponent,
-    toggleFunctionality
+    toggleFunctionality,
+    UserprofileComponent,
+    UserdeleteComponent,
+    UserupdateComponent
 
   ],
 

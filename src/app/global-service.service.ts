@@ -34,11 +34,14 @@ export class GlobalServiceService {
   loginData;
 menuMap;
 currentUserData;
+newProfile: string;
+deleteProfile: string;
+roleMenulist: string;
   constructor(private http: HttpClient) { 
     this.currentUserData=JSON.parse(sessionStorage.getItem('currentUser'));
     this.token=sessionStorage.getItem('X-Auth-Token');  
-    console.log("inside this.loginData **********",this.currentUserData);
-    console.log("******",this.token);
+    //console.log("inside this.loginData **********",this.currentUserData);
+   // console.log("******",this.token);
   }
 
   loginservice(username, password) {
@@ -883,6 +886,88 @@ associationDetails(productList,associatedPlan){
 this.p_list=productList;
 this.plan_list=associatedPlan;
 }
+
+//To get the list for menus and submenus for profiles {{User Profile}}
+menuSubmenuList(roleName) {
+
+  this.roleMenulist = JSON.stringify(
+    {
+          "roleName": roleName,          
+    }
+  );
+  return this.http.put(this.url + '/users/profile',this.roleMenulist,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })
+  }).pipe(map((response: Response) => {
+    //console.log(response);
+    return response;
+  }));
+}
+// get All User Profiles 
+getUserProfiles(){
+  
+  return this.http.get(this.url + '/users/profile', {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+//Delete User Prfile
+deleteSelectedProfile(roleName) {
+  
+  this.deleteProfile = JSON.stringify(
+    {
+     "roleName": roleName
+    }
+  );
+ 
+  return this.http.put(this.url + '/user/profile',this.deleteProfile,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+//create user Profile
+createNewProfile(description,menuList,roleName) {
+  if(description==undefined || description==null){
+    description="";
+  }
+  this.newProfile = JSON.stringify(
+    
+      {
+        "description": description,
+        "menuList": menuList,
+        "roleName":roleName
+      }
+          
+    
+  );
+  return this.http.post(this.url + '/user/profile/mapping',this.newProfile,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
+
+
+
+
 }
  
 

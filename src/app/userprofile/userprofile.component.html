@@ -1,0 +1,68 @@
+<div id="rightSideWrapper">
+  <div class="ContentBox">
+    <main>
+     
+      <h5 class="border_btm" *ngIf="isValid()" >User profile</h5>
+      <router-outlet></router-outlet>
+      <flash-messages></flash-messages>
+      
+      <div class="userProfile" *ngIf="isValid()" style="font-size:12px">
+        <div class="row clearfix">
+          <label for="createProfile">Add Profile:</label>
+          <div class="roleValue">
+            <input type="text" class="form-control form-control-sm" name="roleName" [(ngModel)]="roleName"
+              placeholder="Enter profile name" autocomplete="off" />
+          </div>
+          <!-- <button type="button" class="btn btn-outline-info" (click)="addProfile(roleName,description)">Add
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button> -->
+          <br>
+          <div>
+            <input type="text" id="description_id" [(ngModel)]="description" class="form-control form-control-sm" style="opacity: 0.5;
+              width: 49%;
+              border: 1px solid grey;
+              margin-top: 20px;
+              margin-left: 126px;
+              height: 89px;
+              word-wrap: break-word" placeholder="Enter the description">
+          </div>
+        </div>
+
+
+        <!-- Mapping User Profile dropdown  -->
+        <!-- <div class="row clearfix">
+          <label>Map User Profile:</label>
+          <div class="roleValue">
+            <select class="form-control form-control-sm" (change)="mainSubMenu()" [(ngModel)]="selectedrole">
+              <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+              <option *ngFor="let role of dropdownData">{{role}}</option>
+            </select>
+          </div>
+        </div> -->
+
+        <div class="row clearfix">
+          <div class="col-lg-6" style="float:left">
+            <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+              [columnDefs]="columnDefs" [rowSelection]="rowSelection" [rowData]="rowData"
+              (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)"
+              (rowClicked)='onRowClicked($event)'></ag-grid-angular>
+          </div>
+          <div *ngIf="listSubmenuItems" class="col-lg-6" style="float:left">
+            <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+              [columnDefs]="columnDefsMultiple" [rowSelection]="rowSelectionMultiple" [rowMultiSelectWithClick]="true"
+              [rowData]="rowDataMultiple" (gridReady)="onGridReadyMultiple($event)"
+              (rowClicked)='onRowClickedSubmenu($event)'></ag-grid-angular>
+          </div>
+        </div>
+        <div class="row clearfix">
+          <div class="col-lg-12" style="text-align:center;padding:2px">
+            <button type="button" id="createProfilebtn" disabled  class="btn btn-outline-info" style="margin-right:10px"
+              (click)="mappedValues(roleName)" >Create Profile</button>
+            <!-- <button type="button" id="updateMapping" disabled class="btn btn-info" style="margin-right:10px" (click)="updateValues()">Update</button>
+            <button type="button" id="deleteProfile" disabled class="btn btn-info" (click)="deleteProfile()">Delete</button> -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

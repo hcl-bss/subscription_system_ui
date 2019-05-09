@@ -1512,6 +1512,12 @@ canvas.chartjs-size-monitor {text-transform: uppercase !important;}
   color: #417cf4;
     text-transform: uppercase;
     line-height: 40px;
-    position:absolute; left:43%; bottom:0; font-weight:bold;
+    position:absolute; left:35%; bottom:0; font-weight:bold;
 }
 p.card-category span{     width: 70%; float: left;}
+#createProfilebtn:disabled {
+  color: #fff;
+  background-color: #bababa !important;
+  cursor: no-drop;
+  border-color: #bababa !important;
+} 

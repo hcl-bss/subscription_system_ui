@@ -21,6 +21,9 @@
           <i class="fa fa-circle"></i>
           <span>Online</span>
         </span>
+        <a href="javascript:void(0)" (click)="logOut()" routerLink='/login' style="color:red;">
+          <i class="fa fa-power-off"></i>
+        </a>
       </div>
     </div>
     <!-- sidebar-header  -->
@@ -89,22 +92,45 @@
               <span>User Management</span>
             </a>
         </li>
+
+<!-- ravi code  -->
+<li class="sidebar-dropdown" >
+  <a  href="javascript:void(0)" routerLink='/userprofile'>
+    <i class="fa Products" aria-hidden="true"></i>
+  <span>User Profile</span>
+</a>
+<div class="sidebar-submenu">
+<ul>
+  <li class="sidebar-submenu-list">
+    <a href="javascript:void(0)" routerLink='userprofile/userupdate'>
+      <span>User Update</span></a>
+  </li>
+  <li class="sidebar-submenu-list">
+    <a href="javascript:void(0)" routerLink='userprofile/userdelete'>
+      <span>User Delete</span></a>
+  </li>
+</ul>
+</div>
+</li>
+<!-- ravi -->
+
+
       </ul>
     </div>
     <!-- sidebar-menu  -->
   </div>
   <!-- sidebar-content  -->
-  <div class="sidebar-footer">
-      <!-- <a href="javascript:void(0)">
+ <!-- <div class="sidebar-footer">
+       <a href="javascript:void(0)">
         <i class="fa fa-bell"></i>
         <span class="badge badge-pill badge-warning notification">3</span>
       </a>
       <a href="javascript:void(0)">
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>
-      </a> -->
+      </a> 
       <a href="javascript:void(0)" (click)="logOut()" routerLink='/login'>
         <i class="fa fa-power-off"></i>
       </a>
-    </div>
+    </div>-->
 </nav>
