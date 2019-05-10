@@ -22,14 +22,29 @@ export class SidebarnavigationComponent implements OnInit {
      this.globalServiceService.sidebarsubmenu();
      
   }
- logOut(){
-            this.globalServiceService.logout()
-            
+//  logOut(){
+//             this.globalServiceService.logout()     
+//       }
+
+
+  logOut(){
+    this.globalServiceService.logout().subscribe(data=>{
+      let res:any=data;
+      if(res==true){
+        sessionStorage.removeItem('X-Auth-Token'); 
+      }else{
+
       }
-      keys() : Array<string>
-      {
-        return Object.keys(this.mappingData);
-      }
+    });
+  }
+
+ 
+
+
+keys() : Array<string>
+{
+  return Object.keys(this.mappingData);
+}
   ngOnInit() {
    
     this.loginData=this.globalServiceService.currentUserData;

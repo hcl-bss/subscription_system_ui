@@ -132,34 +132,34 @@ export class ImportPlanComponent implements OnInit {
     window.location.reload();
     //this.router.navigate(['/product/import']);
   }
-  fileChange() {
+  // fileChange() {
 
-    if (this.inputvalue == true) {
-      if (this.flag == true) {
+  //   if (this.inputvalue == true) {
+  //     if (this.flag == true) {
        
-        let formData: FormData = new FormData();
-        formData.append('uploadFile', this.file, this.filename);
-        let headers = new Headers();
-        headers.append('Content-Type', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-        document.getElementById("productGrid").style.display = "block";
-        this.globalServiceService.uploadExpData(formData).subscribe(
+  //       let formData: FormData = new FormData();
+  //       formData.append('uploadFile', this.file, this.filename);
+  //       let headers = new Headers();
+  //       headers.append('Content-Type', 'multipart/form-data');
+  //       headers.append('Accept', 'application/json');
+  //       let options = new RequestOptions({ headers: headers });
+  //       document.getElementById("productGrid").style.display = "block";
+  //       this.globalServiceService.uploadExpData(formData).subscribe(
 
-          result => {
+  //         result => {
 
-          },
-          err => {
+  //         },
+  //         err => {
 
-          });
+  //         });
 
-      }
-    }
-    else {
-      this.showFlash();
-    }
+  //     }
+  //   }
+  //   else {
+  //     this.showFlash();
+  //   }
 
-  }
+  // }
 
 
 
@@ -187,8 +187,13 @@ export class ImportPlanComponent implements OnInit {
     let formData = new FormData();
     formData.append('file', this.fileToUpload1, this.fileToUpload1.name);
     this.spinnerService.show();
-    
-    this.http.post(this.globalServiceService.url + '/uploadProductData', formData).subscribe((val) => { 
+
+
+
+
+
+      this.globalServiceService.uploadExpData(formData).subscribe((val) => { 
+      //this.http.post(this.globalServiceService.url + '/upload/uploadProductData', formData).subscribe((val) => { 
       this.rowData=[];    
       this.spinnerService.hide();
       this.valarr=[];

@@ -77,9 +77,41 @@ roleMenulist: string;
     }));
   }
   logout(){
-  sessionStorage.removeItem('X-Auth-Token'); 
- //  //console.log("*****",this.token); 
+  //
+     return this.http.get(this.url + '/logout?sessionID='+this.token, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Auth-Token':  this.token,
+      })      
+    }).pipe(map((response: Response) => {
+      
+      return response;
+    }));
+ 
   }
+
+
+  //  logout(){
+  //  // sessionStorage.removeItem('X-Auth-Token'); 
+  //   this.subscriptionData = JSON.stringify({
+  //     'sessionID':  this.token
+  //    })
+
+  //   return this.http.get(this.url + '/logout?sessionID='+this.token, {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       'X-Auth-Token':  this.token,
+  //     //  'sessionID':  this.token
+  //     })
+      
+  //   }).pipe(map((response: Response) => {
+  //     return response;
+  //   }));
+    
+  // }
+
+
+
   sidebar() {
     jQuery(function ($) {
       $(".sidebar-dropdown > a").click(function () {

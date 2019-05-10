@@ -8,38 +8,27 @@
       
       <div class="userProfile" *ngIf="isValid()" style="font-size:12px">
         <div class="row clearfix">
-          <label for="createProfile">Add Profile:</label>
+          <label for="createProfile" style="color:#117a8b">Add Profile:</label>
           <div class="roleValue">
-            <input type="text" class="form-control form-control-sm" name="roleName" [(ngModel)]="roleName"
+            <input type="text-area" class="form-control form-control-sm" style="opacity: 0.5;border: 1px solid grey" name="roleName" [(ngModel)]="roleName"
               placeholder="Enter profile name" autocomplete="off" />
           </div>
-          <!-- <button type="button" class="btn btn-outline-info" (click)="addProfile(roleName,description)">Add
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </button> -->
+         
           <br>
           <div>
-            <input type="text" id="description_id" [(ngModel)]="description" class="form-control form-control-sm" style="opacity: 0.5;
-              width: 49%;
-              border: 1px solid grey;
-              margin-top: 20px;
-              margin-left: 126px;
-              height: 89px;
-              word-wrap: break-word" placeholder="Enter the description">
+            
+
+<textarea id="description_id" [(ngModel)]="description" class="form-control form-control-sm" style="opacity: 0.5;
+width: 49%;
+border: 1px solid grey;
+margin-top: 20px;
+margin-left: 126px;
+height: 8vh;
+word-wrap: break-word" placeholder="Enter the description">
+                 
+  </textarea>  
           </div>
         </div>
-
-
-        <!-- Mapping User Profile dropdown  -->
-        <!-- <div class="row clearfix">
-          <label>Map User Profile:</label>
-          <div class="roleValue">
-            <select class="form-control form-control-sm" (change)="mainSubMenu()" [(ngModel)]="selectedrole">
-              <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
-              <option *ngFor="let role of dropdownData">{{role}}</option>
-            </select>
-          </div>
-        </div> -->
-
         <div class="row clearfix">
           <div class="col-lg-6" style="float:left">
             <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
@@ -49,7 +38,7 @@
           </div>
           <div *ngIf="listSubmenuItems" class="col-lg-6" style="float:left">
             <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
-              [columnDefs]="columnDefsMultiple" [rowSelection]="rowSelectionMultiple" [rowMultiSelectWithClick]="true"
+              [columnDefs]="columnDefsMultiple"  [enableCellChangeFlash]="true" [rowSelection]="rowSelectionMultiple" [rowMultiSelectWithClick]="true"
               [rowData]="rowDataMultiple" (gridReady)="onGridReadyMultiple($event)"
               (rowClicked)='onRowClickedSubmenu($event)'></ag-grid-angular>
           </div>

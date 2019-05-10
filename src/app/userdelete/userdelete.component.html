@@ -6,27 +6,20 @@
       <router-outlet></router-outlet>
       <flash-messages></flash-messages>
       
-      <div class="userProfile" style="font-size:12px">
-        <div class="row clearfix">
-        </div>
-
-        <div class="row clearfix">
-          <label>User Profiles:</label>
+      <div class="user-delete-wrapper">
+    
+       
+          <div class="delete_section">
+          <label style="margin-top: 5px;">User Profiles:</label>
           <div class="roleValue">
             <select class="form-control form-control-sm"  [(ngModel)]="selectedrole">
               <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
               <option *ngFor="let role of dropdownData">{{role}}</option>
             </select>
           </div>
+          <button type="button" id="deleteProfile" class="btn btn-outline-danger" (click)="deleteProfile()">Delete</button>
         </div>
 
-        <div class="row clearfix">
-          <div class="col-lg-12" style="text-align:center;padding:2px">
-            
-            
-            <button type="button" id="deleteProfile" class="btn btn-info" (click)="deleteProfile()">Delete</button>
-          </div>
-        </div>
       </div>
     </main>
   </div>

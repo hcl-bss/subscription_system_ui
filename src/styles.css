@@ -1521,3 +1521,8 @@ p.card-category span{     width: 70%; float: left;}
   cursor: no-drop;
   border-color: #bababa !important;
 } 
+.user-delete-wrapper{
+  font-size:12px;border: 2px solid rgb(186, 186, 186);border-radius: 5px;margin-top: 5%;padding:20px;    width: 80%;
+      margin-left: 8%; text-align: center;
+}
+.delete_section{ display: inline-block;     width: 60%;}
