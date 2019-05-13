@@ -38,7 +38,7 @@ import { ChartsModule } from 'ng2-charts';
 import {GlobalPropertiesService} from './global-properties.service';
 import { SubscriptionDetailComponent } from './subscription-detail/subscription-detail.component';
 import { toggleFunctionality } from './products/toggleFunctionality';
-
+import {EditPlanComponent} from './plan/edit_plan_data'
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UserdeleteComponent } from './userdelete/userdelete.component';
 import { UserupdateComponent } from './userupdate/userupdate.component';
@@ -69,6 +69,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     toggleFunctionality,
     UserprofileComponent,
     UserdeleteComponent,
+    EditPlanComponent,
     UserupdateComponent
 
   ],
@@ -76,12 +77,12 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
   imports: [
     BrowserModule,FormsModule,HttpClientModule,HttpModule,GridModule,ReactiveFormsModule,ChartsModule,
     AppRoutingModule,NgbModule.forRoot(),FlashMessagesModule.forRoot(),  
-    AgGridModule.withComponents([ChildMessageRenderer,AssociateMappingComponent]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
+    AgGridModule.withComponents([ChildMessageRenderer,AssociateMappingComponent,EditPlanComponent]),NgbPaginationModule, NgbAlertModule,AgGridModule.withComponents([ErrorDownloadComponent])  ,
     AgGridModule.withComponents([FileDownloadComponent,ChildMessageRendereredit,toggleFunctionality]) ,
     [ Ng4LoadingSpinnerModule.forRoot() ] , MDBBootstrapModule.forRoot()
   ],
   
-  providers: [ NgbDateFRParserFormatter,GlobalPropertiesService, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent,toggleFunctionality],
+  providers: [ NgbDateFRParserFormatter,GlobalPropertiesService, GlobalServiceService, ModalsService, PageService, SortService, FilterService, GroupService,ChildMessageRenderer, AuthGuard,ChildMessageRendereredit,AssociateMappingComponent,toggleFunctionality,EditPlanComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

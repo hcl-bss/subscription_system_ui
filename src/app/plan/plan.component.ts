@@ -43,6 +43,7 @@ import {
 import {
   GlobalPropertiesService
 } from "../global-properties.service";
+import {EditPlanComponent} from './edit_plan_data'
 
 @Component({
   selector: 'app-plan',
@@ -120,54 +121,57 @@ export class PlanComponent implements OnInit {
   billingCyclesInput: string;
   AR: number;
   planAllData;
+  page=0;
+    landingData: any;
 
-
-  constructor(private globalPropertiesService: GlobalPropertiesService, private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) {
+  constructor(private editPlanComponent:EditPlanComponent,private globalPropertiesService: GlobalPropertiesService, private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) {
       this.AR = 0;
-      this.columnDefs = [{
-              headerName: 'Plan ID',
-              field: 'ratePlanId',
-              editable: true
-          },
-          {
-              headerName: 'Name',
-              field: 'name',
-              editable: true
-          },
-          {
-              headerName: 'Plan Code',
-              field: 'ratePlanId',
-              editable: true
-          },
-          {
-              headerName: 'Bill Every',
-              field: 'billEvery',
-              editable: true
-          },
-          {
-              headerName: 'Type',
-              field: 'pricingScheme',
-              editable: true
-          },
-          {
-              headerName: 'Status',
-              field: 'isActive',
-              editable: true
-          },
-          {
-              headerName: 'Details',
-              field: 'planDetails',
-              editable: true
-          },
+      this.columnDefs = [
+        {
+            headerName: 'Name',
+            field: 'name',
+            editable: true
+        },
+        {
+            headerName: 'Plan Code',
+            field: 'ratePlanId',
+            editable: true
+        },
+        {
+            headerName: 'Bill Every',
+            field:  'newEntry',
+            editable: true
+        },
+        {
+            headerName: 'Type',
+            field: 'pricingScheme',
+            editable: true
+        },
+        {
+            headerName: 'Status',
+            field: 'isActive',
+            editable: true
+        },
+        {
+            headerName: 'Details',
+            field: '',
+            editable: true
+        },
+        {
+            headerName: 'Edit',
+            cellRenderer: "editPlanComponent", colId: "params", width: 250
+        },
 
       ];
-      // this.rowData = this.createRowData();
+      
       this.context = {
           componentParent: this
       };
       this.frameworkComponents = {
-          childMessageRenderer: ChildMessageRenderer
+          childMessageRenderer: ChildMessageRenderer,
+          editPlanComponent: EditPlanComponent
       };
+     
       this.rowSelection = "multiple";
       this.rowGroupPanelShow = "always";
       this.pivotPanelShow = "always";
@@ -218,19 +222,12 @@ export class PlanComponent implements OnInit {
       )
 
 
-      this.globalServiceService.getPlans().subscribe(
-          data => {
-              this.planAllData = data;
-              console.log("***********", this.planAllData);
-          },
-      )
-
-    //   this.globalServiceService.getStatusdropDown().subscribe(data => {
-    //   this.DrodownArraystatus = data;
-    //   this.DrodownArraystatus = this.DrodownArraystatus.dropDownList
-    //   console.log(this.DrodownArraystatus);
-
-    // });
+    //   this.globalServiceService.getPlans().subscribe(
+    //       data => {
+    //           this.planAllData = data;
+    //           console.log("***********", this.planAllData);
+    //       },
+    //   )
 
   }
 
@@ -296,9 +293,17 @@ export class PlanComponent implements OnInit {
   onGridReady(params) {
       this.gridApi = params.api;
       this.gridColumnApi = params.columnApi;
-      this.globalServiceService.getPlans().subscribe(
+      this.globalServiceService.getPlans(this.page).subscribe(
           data => {
-              this.rowData = data;
+              this.landingData = data;
+              this.rowData= this.landingData.ratePlanList;
+              console.log("***",this.rowData);
+            //   billEvery: "MONTH"
+            //   billingCycleTerm: 1
+            for(let i=0;i<this.rowData.length;i++){
+                this.rowData[i].newEntry=this.rowData[i].billingCycleTerm + ' ' + this.rowData[i].billEvery;
+                
+            }
           });
   }
   onQuickFilterChanged() {

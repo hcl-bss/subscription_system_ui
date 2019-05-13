@@ -36,57 +36,55 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <label for="billEvery">Bill Every:</label>
-                      <input type="text" class="form-control form-control-sm" id="bill_every_plan" name="bill_every_plan"
-                        [(ngModel)]="bill_every_plan">
+                    <label for="billEvery">Bill Every:</label>
+                    <div class="row">
+                        <div class="col-lg-3" style="padding-right:0px">
+                            <input type="text" maxlength="2" min="1" class="form-control form-control-sm"
+                              onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
+                              [(ngModel)]="billEvery" autocomplete="off">
+                            </div>
+                        <div class="col-lg-9" style="padding-left:5px">
+                    <select class="form-control form-control-sm"
+                        id="billingTime" name="billingTime" [(ngModel)]="billingTime">
+                        <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
+                        <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
+                      </select>
+                        </div>
                     </div>
-                  </div>
+                     <!-- <div class="col-lg-3">
+                      <input type="text" maxlength="2" min="1" class="form-control form-control-sm"
+                        onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
+                        [(ngModel)]="billEvery" autocomplete="off">
+                      </div>
+                      <div class="col-lg-9">
+                      <select class="form-control form-control-sm"
+                        id="billingTime" name="billingTime" [(ngModel)]="billingTime">
+                        <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
+                        <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
+                      </select>
+                    </div> -->
+                    </div>
+                    </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="status">Status:</label>
                       <select class="form-control form-control-sm" id="plan_status" name="plan_status"
                         [(ngModel)]="plan_status">
-                        <option>Select</option>
-                       <!-- <option *ngFor="let values of DrodownArraystatus">{{values}}</option>  -->
+                        <option>Active</option>
+                        <option>Inactive</option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <!-- <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="dateOfBirth" >{{x.sdate}}</label>
-                      <div class="input-group">
-                        <input id="startDateId" class="form-control" placeholder="DD-MM-YYYY" name="startDate"
-                          [(ngModel)]="startDateMain" ngbDatepicker #startdate="ngbDatepicker">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary calendar" (click)="startdate.toggle()" type="button">
-                            <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="dateOfBirth"> End Date:</label>
-                      <div class="input-group">
-                        <input id="endDateId" class="form-control" placeholder="DD-MM-YYYY" name="endDate"
-                          [(ngModel)]="endDateMain" ngbDatepicker #enddate="ngbDatepicker">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary calendar" (click)="enddate.toggle()" type="button">
-                            <i class="fa fa-calendar fa-2" aria-hidden="true"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
+                  
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label for="status">Type:</label>
-                      <select class="form-control form-control-sm" id="plan_type" name="plan_type" [(ngModel)]="plan_type">
-                      <option>Select</option>
-                       <!-- <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  -->
+                      <select class="form-control form-control-sm" id="plan_type" name="plan_type"
+                        [(ngModel)]="plan_type">
+                        <option [selected]="plan_type == 'Select'"selected hidden>Select</option>
+                        <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  
                       </select>
                     </div>
                   </div>

@@ -192,7 +192,7 @@ export class ProductComponent implements OnInit {
       this.associatePagedata1 = this.associatePagedata1.productList;      
     })
     this.spinnerService.show();
-    this.globalServiceService.getPlans().subscribe
+    this.globalServiceService.getPlans(0).subscribe
       (data => {
         this.spinnerService.hide();
         this. associatePagedata2 = data;     

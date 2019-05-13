@@ -89,7 +89,7 @@ export class AssociatePlanComponent implements OnInit {
       
     })
     this.spinnerService.show();
-    this.globalServiceService.getPlans().subscribe
+    this.globalServiceService.getPlans(0).subscribe
       (data => {
         this.spinnerService.hide();
         this.rowData = data;

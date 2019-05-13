@@ -31,18 +31,48 @@ export class GlobalServiceService {
   graphData;
   token;
   loginResponse;
+  roleMenulist: string;
+  getPlansLandingData: string;
   loginData;
-menuMap;
-currentUserData;
-newProfile: string;
-deleteProfile: string;
-roleMenulist: string;
-  constructor(private http: HttpClient) { 
-    this.currentUserData=JSON.parse(sessionStorage.getItem('currentUser'));
-    this.token=sessionStorage.getItem('X-Auth-Token');  
-    //console.log("inside this.loginData **********",this.currentUserData);
-   // console.log("******",this.token);
-  }
+  newProfile: string;
+  deleteProfile: string;
+  getProductLandingData: string;
+  editRatePlan: string;
+  menuMap;
+  currentUserData;
+
+
+    constructor(private http: HttpClient) { 
+      this.currentUserData=JSON.parse(sessionStorage.getItem('currentUser'));
+      this.token=sessionStorage.getItem('X-Auth-Token');  
+      //console.log("inside this.loginData **********",this.currentUserData);
+     // console.log("******",this.token);
+    }
+
+
+
+
+  // loginservice(username, password) {
+
+  //   this.logindata = JSON.stringify(
+  //     {
+  //       "userId": username,
+  //       "password": password
+  //     });
+
+  //   return this.http.post(this.url + '/login', this.logindata, {
+  //     observe:'response',
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+        
+  //     })
+  //   }).pipe(map((response: HttpResponse<any>) => {
+  //     console.log(response);
+  //     //this.loginResponse= response;
+      
+  //     return response;
+  //   }));
+  // }
 
   loginservice(username, password) {
 
@@ -203,13 +233,13 @@ sidebarsubmenu() {
 // dashboard service call start
   subreport(page) {
       //return this.http.get('/assets/report_sub.json', {
-      return this.http.get(this.url + '/batch/lastBatchRunLog/'+page , {
+        return this.http.get(this.url + '/batch/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-    //  //console.log(response);
+   //  //console.log(response);
       return response;
     }));
   }
@@ -221,7 +251,7 @@ sidebarsubmenu() {
        'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-   // //console.log(response);
+    // //console.log(response);
     return response;
   }));
 }
@@ -640,7 +670,7 @@ executeBatch(batchId) {
         'X-Auth-Token':  this.token,
       })
     }).pipe(map((response: Response) => {
-      //console.log(response);
+     //console.log(response);
       return response;
     }));
   }
@@ -706,7 +736,7 @@ reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
 
 
 
-getProducts() {
+getProducts() { 
   return this.http.get(this.url + '/product/getProducts/0', {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -718,9 +748,12 @@ getProducts() {
   }));
 }
 
-getPlans() {
-
-  return this.http.get(this.url +'/rate/getRatePlan', {
+getPlans(page) {
+ this.getPlansLandingData = JSON.stringify(
+    {
+  "pageNo":page,
+    });
+  return this.http.post(this.url + '/rate/getRatePlan',this.getPlansLandingData,{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Auth-Token':  this.token,
@@ -820,7 +853,7 @@ fetchBillEveryValues(){
       'X-Auth-Token':  this.token,
     })
   }).pipe(map((response: Response) => {
-    //console.log(response);
+   //console.log(response);
     return response;
   }));
 }
@@ -997,9 +1030,39 @@ createNewProfile(description,menuList,roleName) {
   }));
 }
 
-
-
-
+//update plan
+updateRatePlan(billEvery,billingCycleTerm,currencyCode,expireAfter,freeTrail,isActive,name,price,pricingScheme,ratePlanId,ratePlanVolumeDtoList,setUpFee,transactionFlag,type,uidpk){
+  this.editRatePlan = JSON.stringify(    
+    {
+      "billEvery": billEvery,
+      "billingCycleTerm": billingCycleTerm,
+      "currencyCode": currencyCode,
+      "expireAfter": expireAfter,
+      "freeTrail": freeTrail,
+      "isActive": isActive,
+      "name": name,
+      "price": price,
+      "pricingScheme": pricingScheme,
+      "ratePlanId": ratePlanId,
+      "ratePlanVolumeDtoList":ratePlanVolumeDtoList,
+      "setUpFee": setUpFee,
+      "transactionFlag": transactionFlag,
+      "type": type,
+      "uidpk": uidpk
+    } 
+  
+);
+return this.http.post(this.url + '/updateRatePlan',this.editRatePlan,{
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-Auth-Token':  this.token,
+  })
+}).pipe(map((response: Response) => {
+  console.log(response);
+  return response;
+}));
+}
 }
  
 
+ 
