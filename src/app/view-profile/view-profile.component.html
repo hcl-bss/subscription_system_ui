@@ -1,0 +1,53 @@
+<div id="rightSideWrapper">
+  <div class="ContentBox" style="display: block;">
+     <main>
+        <div class="container-fluid custom_search" style="padding: 0px;">
+      
+  
+            <div class="col-lg-12 search_box" style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
+       <h5 > view profile
+          <button class="btn btn-outline-info float-right" style="margin:-12px 0 0 5px" (click)="callingDeleteProfile()">Delete Profile
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </button>
+        
+          <button class="btn btn-outline-info float-right" style="margin:-12px 0 0 5px" routerLink='/userprofile/userupdate' >Update Profile
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </button>
+
+            <button class="btn btn-outline-info float-right" style="margin:-12px 0 0 5px" routerLink='/userprofile' >Create Profile
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+              </button> 
+          
+        </h5>
+
+
+       <div class="row clearfix">
+            <div  style="float:left;">
+              <ag-grid-angular 
+              style="width: 100%; " 
+              class="ag-theme-balham"
+              [rowData]="rowData" 
+              [columnDefs]="columnDefs"
+              >
+              </ag-grid-angular>
+            </div>
+           
+          </div>
+          <div style="float:right; margin-top: 10px;">
+              <strong class="total_page">
+                 Page {{pageNo + 1}} of {{totalPages}}
+              </strong>
+
+              <!-- <strong class="total_page">
+                Page  {{this.filterPage+1}} of {{totalPages}}
+              </strong>       
+             -->
+              <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality()">Prev</button>
+
+              <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()" >Next</button>
+            </div>
+       </div>  
+        </div> 
+     </main>
+  </div>
+</div>  

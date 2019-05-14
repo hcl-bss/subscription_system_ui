@@ -16,7 +16,7 @@ import { SubscriptionDetailComponent } from './subscription-detail/subscription-
 import {UserprofileComponent} from './userprofile/userprofile.component';
 import {UserdeleteComponent} from './userdelete/userdelete.component';
 import {UserupdateComponent} from './userupdate/userupdate.component';
-
+import {ViewProfileComponent} from './view-profile/view-profile.component'
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'header', component: HeaderComponent, canActivate :[AuthGuard] },
@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'userprofile', component: UserprofileComponent, canActivate :[AuthGuard] },
   { path: 'userprofile/userdelete', component: UserdeleteComponent, canActivate :[AuthGuard] },
   { path: 'userprofile/userupdate', component: UserupdateComponent, canActivate :[AuthGuard] },
+  { path: 'viewProfile', component: ViewProfileComponent, canActivate :[AuthGuard] },
   { path: '**', redirectTo: '' },
   { path: '', redirectTo: ' ', pathMatch: 'full' },
 

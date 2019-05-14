@@ -921,6 +921,7 @@ subscritionDetails(){
     return response;
   }));
 }
+//
 
 //cancel subscription
 cancelSubscriptionData(){  
@@ -1029,7 +1030,19 @@ createNewProfile(description,menuList,roleName) {
     return response;
   }));
 }
+//To get all role name and discription ist
+viewProfileList(pageno) {
 
+  return this.http.get(this.url + '/users/roles/'+pageno,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })
+  }).pipe(map((response: Response) => {
+    console.log(response);
+    return response;
+  }));
+}
 //update plan
 updateRatePlan(billEvery,billingCycleTerm,currencyCode,expireAfter,freeTrail,isActive,name,price,pricingScheme,ratePlanId,ratePlanVolumeDtoList,setUpFee,transactionFlag,type,uidpk){
   this.editRatePlan = JSON.stringify(    

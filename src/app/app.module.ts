@@ -44,6 +44,7 @@ import { UserdeleteComponent } from './userdelete/userdelete.component';
 import { UserupdateComponent } from './userupdate/userupdate.component';
 //import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     UserprofileComponent,
     UserdeleteComponent,
     EditPlanComponent,
-    UserupdateComponent
+    UserupdateComponent,
+    ViewProfileComponent
 
   ],
 
