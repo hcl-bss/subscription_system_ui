@@ -45,6 +45,7 @@ import { UserupdateComponent } from './userupdate/userupdate.component';
 //import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { UsercreateComponent } from './usercreate/usercreate.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +73,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
     UserdeleteComponent,
     EditPlanComponent,
     UserupdateComponent,
+    UsercreateComponent,
     ViewProfileComponent
 
   ],

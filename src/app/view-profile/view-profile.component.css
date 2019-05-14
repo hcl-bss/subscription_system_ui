@@ -1,0 +1,50 @@
+.modal-body{ width:100%;}
+.user-delete-wrapper {
+    font-size: 12px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-top: 0%;
+    padding: 20px;
+    width: auto;
+    margin-left: 0%;
+    text-align: left;
+    border:0px solid #fff;
+   
+}
+.delete_section {
+    display: inline-block;
+    width: 100%;
+}
+.margin_5t{ margin-top: -5px;}
+.user-delete-wrapper .delete_section label{
+    color: #117a8b;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 16px !important;
+    font-size: 12px;
+    width:100%;
+    display:inline-block;
+}
+.user-delete-wrapper .delete_section .roleValue{ 
+    width: 80%;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 11px;
+}
+ .modal.fade.show.d-block {
+    max-width: 50% !important;
+    margin: 0 auto;
+}
+/*.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 65% !important;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+    margin: 0 auto;
+} */

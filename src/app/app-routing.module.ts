@@ -17,6 +17,7 @@ import {UserprofileComponent} from './userprofile/userprofile.component';
 import {UserdeleteComponent} from './userdelete/userdelete.component';
 import {UserupdateComponent} from './userupdate/userupdate.component';
 import {ViewProfileComponent} from './view-profile/view-profile.component'
+import { UsercreateComponent } from './usercreate/usercreate.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'header', component: HeaderComponent, canActivate :[AuthGuard] },
@@ -44,8 +45,9 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionsComponent, canActivate :[AuthGuard] },
   { path: 'plan', component: PlanComponent, canActivate :[AuthGuard] },
   { path: 'userprofile', component: UserprofileComponent, canActivate :[AuthGuard] },
-  { path: 'userprofile/userdelete', component: UserdeleteComponent, canActivate :[AuthGuard] },
-  { path: 'userprofile/userupdate', component: UserupdateComponent, canActivate :[AuthGuard] },
+  // { path: 'viewProfile/userdelete', component: UserdeleteComponent, canActivate :[AuthGuard] },
+  { path: 'viewProfile/userupdate', component: UserupdateComponent, canActivate :[AuthGuard] },
+    { path: 'viewProfile/usercreate', component: UsercreateComponent, canActivate :[AuthGuard] },
   { path: 'viewProfile', component: ViewProfileComponent, canActivate :[AuthGuard] },
   { path: '**', redirectTo: '' },
   { path: '', redirectTo: ' ', pathMatch: 'full' },

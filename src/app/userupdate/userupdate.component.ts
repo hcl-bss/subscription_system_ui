@@ -25,6 +25,8 @@ export class UserupdateComponent implements OnInit {
   private columnDefsMultiple;
   private rowSelectionMultiple;
   private rowDataMultiple;
+  mergedData: any;
+  MappedUnMappedData: any;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -33,7 +35,7 @@ export class UserupdateComponent implements OnInit {
       this.columnDefs = [
         {
           headerName: "Main Menu",
-          field: "menuName",
+          field: "mappedMenuMap",
           width: 233
         }
       ];
@@ -55,8 +57,14 @@ export class UserupdateComponent implements OnInit {
      });    
   }
   mainSubMenu(){
+    this.globalServiceService.menuSubmenuList("").subscribe(data => {      
+      console.log("******default Menus**********",data);
+      
+    });  
     this.globalServiceService.menuSubmenuList(this.selectedrole).subscribe(data => {
-     // console.log(data);
+      this.MappedUnMappedData= data;
+      console.log("****************",this.MappedUnMappedData);
+      
     });    
   }
   onRowClicked(event: any) {

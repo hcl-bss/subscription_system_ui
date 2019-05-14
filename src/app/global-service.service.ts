@@ -10,6 +10,7 @@ export class GlobalServiceService {
   p_list: any;
   url = 'http://localhost:8080';
   logindata;
+  menuCreate;
   editdata;
   getUserIdprofile;
   addUserData;
@@ -410,7 +411,26 @@ executeBatch(batchId) {
     }));
   }
 
+//create ravi
 
+menuSubmenuListCreate() {
+
+  this.menuCreate = JSON.stringify(
+    {
+      "roleName": ""
+    }
+    );
+  return this.http.put(this.url + '/users/profile',this.menuCreate,{
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Auth-Token':  this.token,
+    })      
+  }).pipe(map((response: Response) => {
+    
+    return response;
+  }));
+
+}
 
 
   //addProduct 

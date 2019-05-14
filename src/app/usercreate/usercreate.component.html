@@ -1,0 +1,57 @@
+<div id="rightSideWrapper">
+    <div class="ContentBox">
+      <main>
+       
+        <h5 class="border_btm" *ngIf="isValid()" >User Profile Create</h5>
+        <router-outlet></router-outlet>
+        <flash-messages></flash-messages>
+        
+        <div class="userProfile" *ngIf="isValid()" style="font-size:12px">
+          <div class="row clearfix">
+            <label for="createProfile" style="color:#117a8b">Add Profile:</label>
+            <div class="roleValue">
+              <input type="text-area" class="form-control form-control-sm" style="opacity: 0.5;border: 1px solid grey" name="roleName" [(ngModel)]="roleName"
+                placeholder="Enter profile name" autocomplete="off" />
+            </div>
+           
+            <br>
+            <div>
+              
+  
+  <textarea id="description_id" [(ngModel)]="description" class="form-control form-control-sm" style="opacity: 0.5;
+  width: 49%;
+  border: 1px solid grey;
+  margin-top: 20px;
+  margin-left: 126px;
+  height: 8vh;
+  word-wrap: break-word" placeholder="Enter the description">
+                   
+    </textarea>  
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-lg-6" style="float:left">
+              <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+                [columnDefs]="columnDefs" [rowSelection]="rowSelection" [rowData]="rowData"
+                (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)"
+                (rowClicked)='onRowClicked($event)'></ag-grid-angular>
+            </div>
+            <div *ngIf="listSubmenuItems" class="col-lg-6" style="float:left">
+              <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+                [columnDefs]="columnDefsMultiple"  [enableCellChangeFlash]="true" [rowSelection]="rowSelectionMultiple" [rowMultiSelectWithClick]="true"
+                [rowData]="rowDataMultiple" (gridReady)="onGridReadyMultiple($event)"
+                (rowClicked)='onRowClickedSubmenu($event)'></ag-grid-angular>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-lg-12" style="text-align:center;padding:2px">
+              <button type="button" id="createProfilebtn" disabled  class="btn btn-outline-info" style="margin-right:10px"
+                (click)="mappedValues(roleName)" >Create Profile</button>
+              <!-- <button type="button" id="updateMapping" disabled class="btn btn-info" style="margin-right:10px" (click)="updateValues()">Update</button>
+              <button type="button" id="deleteProfile" disabled class="btn btn-info" (click)="deleteProfile()">Delete</button> -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>

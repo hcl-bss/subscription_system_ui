@@ -2,7 +2,7 @@
   <div class="ContentBox">
     <main>
      
-      <h5 class="border_btm">User Update</h5>
+      <h5 class="border_btm">User Profile Update</h5>
       <router-outlet></router-outlet>
       <flash-messages></flash-messages>
       
@@ -15,7 +15,7 @@
         <div class="row clearfix">
           <label>User Profiles:</label>
           <div class="roleValue">
-            <select class="form-control form-control-sm" (change)="mainSubMenu()" [(ngModel)]="selectedrole">
+            <select class="form-control form-control-sm" id="selectedrole" name="selectedrole"  (change)="mainSubMenu(selectedrole)" [(ngModel)]="selectedrole">
               <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
               <option *ngFor="let role of dropdownData">{{role}}</option>
             </select>
