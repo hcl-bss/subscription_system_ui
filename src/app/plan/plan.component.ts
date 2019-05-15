@@ -43,7 +43,8 @@ import {
 import {
   GlobalPropertiesService
 } from "../global-properties.service";
-import {EditPlanComponent} from './edit_plan_data'
+import {EditPlanComponent} from './edit_plan_data';
+import { AssociateMappingComponent } from '../associate-mapping.component';
 
 @Component({
   selector: 'app-plan',
@@ -124,7 +125,7 @@ export class PlanComponent implements OnInit {
   page=0;
     landingData: any;
 
-  constructor(private editPlanComponent:EditPlanComponent,private globalPropertiesService: GlobalPropertiesService, private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) {
+  constructor(private associateMappingComponent: AssociateMappingComponent,private editPlanComponent:EditPlanComponent,private globalPropertiesService: GlobalPropertiesService, private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) {
       this.AR = 0;
       this.columnDefs = [
         {
@@ -154,8 +155,9 @@ export class PlanComponent implements OnInit {
         },
         {
             headerName: 'Details',
-            field: '',
-            editable: true
+            
+            
+            cellRenderer: "associateMappingComponent", colId: "params", width: 250 
         },
         {
             headerName: 'Edit',
@@ -169,9 +171,10 @@ export class PlanComponent implements OnInit {
       };
       this.frameworkComponents = {
           childMessageRenderer: ChildMessageRenderer,
-          editPlanComponent: EditPlanComponent
+          editPlanComponent: EditPlanComponent,
+          associateMappingComponent: AssociateMappingComponent
       };
-     
+      
       this.rowSelection = "multiple";
       this.rowGroupPanelShow = "always";
       this.pivotPanelShow = "always";

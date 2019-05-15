@@ -114,7 +114,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     
   </div>
 </ng-template>
-<span><button style="height: 20px; font-size:12px;padding: 0 10px;" (click)="open(content)" (click)="invokeParentMethod()" class="btn btn-info">More Details</button></span>`,
+<span><a (click)="open(content)" style="color:blue;text-decoration:underline" (click)="invokeParentMethod()">More..</a></span>`,
   styles: [
     `
     .modal-body .row .col-lg-3 label, .modal-body .row .col-lg-2 label{ font-weight:bold;}
@@ -177,6 +177,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
       .onoffswitch {
         width: 55px;
       }
+     
 
       `
   ]
