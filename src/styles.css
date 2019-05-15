@@ -1514,7 +1514,7 @@ canvas.chartjs-size-monitor {text-transform: uppercase !important;}
     line-height: 40px;
     position:absolute; left:35%; bottom:0; font-weight:bold;
 }
-p.card-category span{     width: 70%; float: left;}
+p.card-category span{     width: 66%; float: left;}
 #createProfilebtn:disabled {
   color: #fff;
   background-color: #bababa !important;
@@ -1526,3 +1526,4 @@ p.card-category span{     width: 70%; float: left;}
       margin-left: 8%; text-align: center;
 }
 .delete_section{ display: inline-block;     width: 60%;}
+ul li.sidebar-submenu-list a{ padding-left:51px !important;}

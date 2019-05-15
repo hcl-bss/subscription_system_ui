@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit {
         .subscribe(result => {
           this.routes.navigate(['/dashboard']);
         }, err => {
-          //console.log(err);
-          // let msg=err.error.error;
-          // this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
+          console.log(err);
+          let msg=err.error.exception;
+          this.flashMessage.show(msg, { cssClass: 'alert-danger', timeout: 10000 });
         }
         );
         

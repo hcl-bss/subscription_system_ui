@@ -114,7 +114,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     
   </div>
 </ng-template>
-<span><a (click)="open(content)" style="color:blue;text-decoration:underline" (click)="invokeParentMethod()">More..</a></span>`,
+<span><a (click)="open(content)" style="color:blue;text-decoration:underline; cursor:pointer" (click)="invokeParentMethod()">More..</a></span>`,
   styles: [
     `
     .modal-body .row .col-lg-3 label, .modal-body .row .col-lg-2 label{ font-weight:bold;}

@@ -37,6 +37,7 @@ export class AssociatePlanComponent implements OnInit {
   associatedPlan;
   plans = [];
   updatePlans = [];
+  page=0;
   constructor(config: NgbModalConfig, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private flashMessage: FlashMessagesService, private associateMappingComponent: AssociateMappingComponent, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -77,6 +78,29 @@ export class AssociatePlanComponent implements OnInit {
  
 
   }
+  // onLoadData() {
+  //   this.spinnerService.show();
+  //   this.globalServiceService.getProducts().subscribe(data => {
+  //     this.spinnerService.hide();
+  //     this.rowData1 = data;
+  //     this.rowData1 = this.rowData1.productList;
+  //     if(this.productList == undefined){
+  //       this.productList = this.rowData1;
+  //     }
+      
+  //   })
+  //   this.spinnerService.show();
+  //   this.globalServiceService.getPlans(this.page).subscribe
+  //     (data => {
+  //       this.spinnerService.hide();
+  //       this.rowData = data;
+  //       if(this.associatedPlan == undefined){
+  //         this.associatedPlan = this.rowData;
+  //       }
+      
+
+  //     });
+  // }
   onLoadData() {
     this.spinnerService.show();
     this.globalServiceService.getProducts().subscribe(data => {
@@ -93,6 +117,7 @@ export class AssociatePlanComponent implements OnInit {
       (data => {
         this.spinnerService.hide();
         this.rowData = data;
+        this.rowData = this.rowData.ratePlanList;
         if(this.associatedPlan == undefined){
           this.associatedPlan = this.rowData;
         }

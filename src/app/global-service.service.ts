@@ -9,19 +9,19 @@ export class GlobalServiceService {
   plan_list: any;
   p_list: any;
   url = 'http://localhost:8080';
-  logindata;
-  menuCreate;
-  editdata;
-  getUserIdprofile;
-  addUserData;
-  searchSubcriptionData;
-  activeDeactiveDta;
-  pwdResetData;
-  searchData;
-  newProductData;
-  subscriptionData;
-  searchProductData;
-  newPlanData;
+  logindata: string;
+  menuCreate: string;
+  editdata: string;
+  getUserIdprofile: any;
+  addUserData: string;
+  searchSubcriptionData: string;
+  activeDeactiveDta: string;
+  pwdResetData: string;
+  searchData: string;
+  newProductData: string;
+  subscriptionData: string;
+  searchProductData: string;
+  newPlanData: string;
   associationPlans: any;
   editProductData: string;
   userData: any;
@@ -29,18 +29,18 @@ export class GlobalServiceService {
   emailsubscription: any;
   cnamesubscription: any;
   subsciptionDetailsrlno: string;
-  graphData;
-  token;
-  loginResponse;
+  graphData: string;
+  token: string | string[];
+  loginResponse: any;
   roleMenulist: string;
   getPlansLandingData: string;
-  loginData;
+  loginData: string;
   newProfile: string;
   deleteProfile: string;
   getProductLandingData: string;
   editRatePlan: string;
-  menuMap;
-  currentUserData;
+  menuMap: any;
+  currentUserData: { body: { userName: any; }; };
 
 
     constructor(private http: HttpClient) { 
@@ -75,7 +75,7 @@ export class GlobalServiceService {
   //   }));
   // }
 
-  loginservice(username, password) {
+  loginservice(username: any, password: any) {
 
     this.logindata = JSON.stringify(
       {
@@ -87,10 +87,10 @@ export class GlobalServiceService {
       observe:'response',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-       // 'X-Auth-Token':  this.token,
+        'X-Auth-Token':  '57657657676',
       })
     }).pipe(map((response: HttpResponse<any>) => {
-     // //console.log(response);
+    // //console.log(response);
      
        var succ= response;
       sessionStorage.setItem('X-Auth-Token',succ.headers.get('X-Auth-Token'));          
@@ -232,7 +232,7 @@ sidebarsubmenu() {
     }));
   }
 // dashboard service call start
-  subreport(page) {
+  subreport(page: string | number) {
       //return this.http.get('/assets/report_sub.json', {
         return this.http.get(this.url + '/batch/lastBatchRunLog/'+page , {
       headers: new HttpHeaders({
@@ -311,7 +311,7 @@ getRevenueData() {
 }
 //getRevenueData end
 //getValuesForGraph start
-dashboardGraph(timePeriod,typeOfGraph){
+dashboardGraph(timePeriod: string,typeOfGraph: string){
   this.graphData = JSON.stringify({
   "timePeriod": timePeriod,
   "typeOfGraph": typeOfGraph
@@ -328,7 +328,7 @@ dashboardGraph(timePeriod,typeOfGraph){
 }
 //getValuesForGraph end
 // dashboard service call end  
-executeBatch(batchId) {
+executeBatch(batchId: string) {
       return this.http.get(this.url + '/batch/executeSchedulers?schedulerId='+batchId , {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -341,7 +341,7 @@ executeBatch(batchId) {
   }
 
 
-  SubscriptionCalling(page) {
+  SubscriptionCalling(page: number) {
     this.subscriptionData = JSON.stringify({
      "pageNo": page
     })
@@ -382,7 +382,7 @@ executeBatch(batchId) {
   }
 
   //upload case
-  uploadExpData(formData) {
+  uploadExpData(formData: FormData) {
 
     return this.http.post(this.url + '/upload/uploadProductData', formData, {
       headers: new HttpHeaders({
@@ -398,7 +398,7 @@ executeBatch(batchId) {
   }
 
   
-  usermanagementCalling(pageNumber) {
+  usermanagementCalling(pageNumber: string | number) {
 
     return this.http.get(this.url + '/product/getProducts/'+pageNumber, {
       headers: new HttpHeaders({
@@ -435,7 +435,7 @@ menuSubmenuListCreate() {
 
   //addProduct 
 
-  addProduct(name, description, sku, startDate, endDate, pCode) {
+  addProduct(name: any, description: any, sku: any, startDate: string, endDate: string, pCode: any) {
     this.newProductData = JSON.stringify(
       {
 
@@ -462,7 +462,7 @@ menuSubmenuListCreate() {
     }));
   }
   //edit product
-  editProduct(uidpk,name, description, sku, startDate, endDate, pCode){
+  editProduct(uidpk: any,name: string, description: string, sku: string, startDate: string, endDate: string, pCode: string){
     if(name==undefined){
       name="";
     }
@@ -503,7 +503,7 @@ menuSubmenuListCreate() {
     }));
   }
   //toggleStatus start
-  toggleStatus(uidpk,name, description, sku, startDate, endDate, pCode,status){
+  toggleStatus(uidpk: any,name: string, description: string, sku: string, startDate: string, endDate: string, pCode: string,status: any){
     if(name==undefined){
       name="";
     }
@@ -546,7 +546,7 @@ menuSubmenuListCreate() {
   }
   //toggleStatus end
   //search Subcription
-  searchSubcription(subscriptionId,customerName,planName,status,fromDateStr,toDateStr,pageno) {
+  searchSubcription(subscriptionId: any,customerName: any,planName: any,status: any,fromDateStr: any,toDateStr: any,pageno: number) {
     this.searchSubcriptionData = JSON.stringify(
       {
         "subscriptionId": subscriptionId,
@@ -570,7 +570,7 @@ menuSubmenuListCreate() {
   }
 
   //add user
-  addUser(userId, profile, firstName, middleName, lastName, password) {
+  addUser(userId: any, profile: any, firstName: any, middleName: any, lastName: any, password: any) {
     this.addUserData = JSON.stringify(
       {
         "userId": userId,
@@ -593,7 +593,7 @@ menuSubmenuListCreate() {
   }
 
   //edit user of usermgmt
-  editUser(userId, profile, firstName, middleName, lastName) {
+  editUser(userId: any, profile: any, firstName: any, middleName: any, lastName: any) {
     this.editdata = JSON.stringify(
       {
         "userId": userId,
@@ -616,7 +616,7 @@ menuSubmenuListCreate() {
   }
 
   //active-deactive user
-  activeDeactive(userId) {
+  activeDeactive(userId: any) {
     this.activeDeactiveDta = JSON.stringify(
       {
         "userId": userId
@@ -634,7 +634,7 @@ menuSubmenuListCreate() {
   }
 
   //pwd reset user
-  resetPwd(userId, newpwd) {
+  resetPwd(userId: any, newpwd: any) {
     this.pwdResetData = JSON.stringify(
       {
         "userId": userId,
@@ -653,7 +653,7 @@ menuSubmenuListCreate() {
   }
 
   //All user data
-  getUserData(page) {
+  getUserData(page: number) {
     this.userData = JSON.stringify(
       {
         "pageNo": page,
@@ -672,7 +672,7 @@ menuSubmenuListCreate() {
   }
 
   //search user data
-  searchUserData(user_profile, user_name, first_name, status_val,page) {
+  searchUserData(user_profile: any, user_name: any, first_name: any, status_val: any,page: number) {
 
     this.searchData = JSON.stringify(
       {
@@ -706,7 +706,7 @@ menuSubmenuListCreate() {
       return response;
     }));
   }
-productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain,filterPage){
+productSearch(nameMain: any,codeMain: any,skuMain: any,status_valMain: any,startDateMain: any,endDateMain: any,filterPage: number){
   this.searchProductData = JSON.stringify(
     {
        
@@ -731,7 +731,7 @@ productSearch(nameMain,codeMain,skuMain,status_valMain,startDateMain,endDateMain
 }
 
 // report search start
-reportSearch(startDateMain,endDateMain,filterPage,status_valMain){
+reportSearch(startDateMain: any,endDateMain: any,filterPage: number,status_valMain: any){
   this.searchProductData = JSON.stringify(
     {
   "startDate": startDateMain,    
@@ -768,7 +768,7 @@ getProducts() {
   }));
 }
 
-getPlans(page) {
+getPlans(page: number) {
  this.getPlansLandingData = JSON.stringify(
     {
   "pageNo":page,
@@ -784,7 +784,7 @@ getPlans(page) {
   }));
 }
 
-associatePlans(updatePlans, uidpk) {
+associatePlans(updatePlans: any[], uidpk: any) {
   //console.log(updatePlans);
   this.associationPlans = JSON.stringify(
     {
@@ -807,7 +807,7 @@ associatePlans(updatePlans, uidpk) {
 
 //date validation start
 
-dateValidation(startDate, endDate){
+dateValidation(startDate: { month: string; day: string; year: string; }, endDate: { month: string; day: string; year: string; }){
   if(startDate!=undefined && endDate!=undefined){
     let sDatevalidate =  startDate.month + "/" + startDate.day + "/" + startDate.year;
     let eDatevalidate =  endDate.month + "/" + endDate.day + "/" + endDate.year;
@@ -891,7 +891,7 @@ fetchUomValues(){
     }));
   }
 
-addPlan(planName, planCode, billEvery, billingTime, pricingSchemePlan, uniqueArray, currencyType, price, radioParam, freeTrial, setupFee, unitOfMeasureId) {
+addPlan(planName: any, planCode: any, billEvery: any, billingTime: any, pricingSchemePlan: any, uniqueArray: any[], currencyType: any, price: any, radioParam: any, freeTrial: any, setupFee: any, unitOfMeasureId: any) {
 
 
   this.newPlanData = JSON.stringify(
@@ -923,7 +923,7 @@ return this.http.post(this.url + '/rate/ratePlan', this.newPlanData, {
 }
 
 //subscription Detail
-subscriptionDetailsData(subsData,email,cname){
+subscriptionDetailsData(subsData: any,email: any,cname: any){
   this.subsData=subsData;
   this.emailsubscription=email;
   this.cnamesubscription=cname;
@@ -957,7 +957,7 @@ cancelSubscriptionData(){
   }));
 }
 
-exportToCsvData(pageName){
+exportToCsvData(pageName: string){
   return this.http.get(this.url + '/download/downloadRecord?tabName='+pageName,{
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -968,13 +968,13 @@ exportToCsvData(pageName){
     return response;
   }));
 }
-associationDetails(productList,associatedPlan){
+associationDetails(productList: any,associatedPlan: any){
 this.p_list=productList;
 this.plan_list=associatedPlan;
 }
 
 //To get the list for menus and submenus for profiles {{User Profile}}
-menuSubmenuList(roleName) {
+menuSubmenuList(roleName: string) {
 
   this.roleMenulist = JSON.stringify(
     {
@@ -1006,7 +1006,7 @@ getUserProfiles(){
 }
 
 //Delete User Prfile
-deleteSelectedProfile(roleName) {
+deleteSelectedProfile(roleName: any) {
   
   this.deleteProfile = JSON.stringify(
     {
@@ -1026,7 +1026,7 @@ deleteSelectedProfile(roleName) {
 }
 
 //create user Profile
-createNewProfile(description,menuList,roleName) {
+createNewProfile(description: string,menuList: { menuName: any; subMenuList: any; }[] | { menuName: any; subMenuList: any; }[],roleName: any) {
   if(description==undefined || description==null){
     description="";
   }
@@ -1051,7 +1051,7 @@ createNewProfile(description,menuList,roleName) {
   }));
 }
 //To get all role name and discription ist
-viewProfileList(pageno) {
+viewProfileList(pageno: string | number) {
 
   return this.http.get(this.url + '/users/roles/'+pageno,{
     headers: new HttpHeaders({
@@ -1064,7 +1064,7 @@ viewProfileList(pageno) {
   }));
 }
 //update plan
-updateRatePlan(billEvery,billingCycleTerm,currencyCode,expireAfter,freeTrail,isActive,name,price,pricingScheme,ratePlanId,ratePlanVolumeDtoList,setUpFee,transactionFlag,type,uidpk){
+updateRatePlan(billEvery: any,billingCycleTerm: any,currencyCode: any,expireAfter: any,freeTrail: any,isActive: any,name: any,price: any,pricingScheme: any,ratePlanId: any,ratePlanVolumeDtoList: any,setUpFee: any,transactionFlag: any,type: any,uidpk: any){
   this.editRatePlan = JSON.stringify(    
     {
       "billEvery": billEvery,
