@@ -254,7 +254,7 @@ else{
   }
 
   downloadSample(){
-    let url = this.globalServiceService.url + '/downloadFile/UPLOAD.csv';
+    let url = this.globalServiceService.url + '/upload/downloadFile/UPLOAD.csv';
     window.location.href = url;
 
   }
