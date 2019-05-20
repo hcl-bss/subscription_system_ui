@@ -1,0 +1,32 @@
+{
+"roleName": "ROLE_Admin",
+"allmenu":[
+            {
+            "user1":true,
+            "submenu":[
+                        {
+                            "useredit1":true
+                        },
+                        {
+                            "userupdate1":false
+                        }
+                      ]
+            },
+            {
+            "user2":false,
+            "submenu":[
+                        {
+                            "useredit2":true
+                        },
+                        {
+                            "userupdate3":false
+                        }
+                      ]
+            }
+        ]
+} 
+  
+ 
+
+    
+
