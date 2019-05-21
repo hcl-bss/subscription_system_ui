@@ -41,6 +41,7 @@ export class GlobalServiceService {
   editRatePlan: string;
   menuMap: any;
   currentUserData: { body: { userName: any; }; };
+  filterRate: string;
 
 
     constructor(private http: HttpClient) { 
@@ -574,7 +575,9 @@ menuSubmenuListCreate() {
     this.addUserData = JSON.stringify(
       {
         "userId": userId,
-        "userProfile": profile,
+        "userProfileSet": [
+          profile
+        ],
         "userFirstName": firstName,
         "userMiddleName": middleName,
         "userLastName": lastName,
@@ -597,7 +600,9 @@ menuSubmenuListCreate() {
     this.editdata = JSON.stringify(
       {
         "userId": userId,
-        "userProfile": profile,
+        "userProfileSet": [
+          profile
+        ],
         "userFirstName": firstName,
         "userMiddleName": middleName,
         "userLastName": lastName,
@@ -676,15 +681,24 @@ menuSubmenuListCreate() {
 
     this.searchData = JSON.stringify(
       {
-        "userProfile": user_profile,
-        "userId": user_name,
+        // "userProfile": user_profile,
+        // "userId": user_name,
+        // "userFirstName": first_name,
+        // "status": status_val,
+        // "pageNo": page
+
+        "status":status_val,
         "userFirstName": first_name,
-        "status": status_val,
+        "userId": user_name,
+        "userProfileSet": [
+          user_profile
+        ],
         "pageNo": page
 
-      });
+      },
+      );
 
-    return this.http.put(this.url + '/users', this.searchData, {
+    return this.http.put(this.url + '/users/userlist', this.searchData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Auth-Token':  this.token,
@@ -1095,6 +1109,35 @@ return this.http.post(this.url + '/updateRatePlan',this.editRatePlan,{
   return response;
 }));
 }
+
+planSearch(plan_name,plan_code,billEvery,billingTime,plan_status,plan_type,page){
+  
+
+  this.filterRate = JSON.stringify(    
+    
+    {
+      "billCycleTerm": billEvery,
+      "billFreq": billingTime,
+      "pageNo": page,
+      "planCode": plan_code,
+      "planName": plan_name,
+      "planType": plan_type,
+      "status": plan_status
+    }
+    
+  
+);
+return this.http.post(this.url +'/rate/getRatePlan',this.filterRate,{
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-Auth-Token':  this.token,
+  })
+}).pipe(map((response: Response) => {
+  console.log(response);
+  return response;
+}));
+}
+
 }
  
 

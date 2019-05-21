@@ -34,7 +34,7 @@ export class FileDownloadComponent implements ICellRendererAngularComp {
 
     // Download Functionality
     downloadToCsv() {
-        let url = this.globalServiceService.url + '/downloadFile/' + this.fileName;
+        let url = this.globalServiceService.url + '/upload/downloadFile/' + this.fileName;
         window.location.href = url;
 
     }

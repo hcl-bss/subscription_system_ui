@@ -21,10 +21,11 @@
                           <div class="form-group">
                             <label for="sel1">User Profile:</label>
                             <select class="form-control form-control-sm" id="sel1" name="sellist1" [(ngModel)]="user_profile">
-							                <option  [ngValue]="Select" >Select</option> 
+							                <!-- <option  [ngValue]="Select" >Select</option> 
                               <option>Admin</option>
-                              <option>Normal</option>
-                           
+                              <option>Normal</option> -->
+                              <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+                              <option *ngFor="let role of dropdownData">{{role}}</option>
                             </select>
                           </div>
                         </div>
@@ -177,9 +178,11 @@
             <!-- <input type="text" class="form-control"  name="userProfile" [(ngModel)]="userProfile"
              > -->
              <select class="form-control form-control-sm" id="sel1" name="userProfile" [(ngModel)]="userProfile">
-                <option  [ngValue]="Select" hidden>Select</option> 
+                <!-- <option  [ngValue]="Select" hidden>Select</option> 
                 <option>Admin</option>
-                <option>Normal</option>             
+                <option>Normal</option>              -->
+                <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+                <option *ngFor="let role of dropdownData">{{role}}</option>
               </select>
           </div>
         </div>

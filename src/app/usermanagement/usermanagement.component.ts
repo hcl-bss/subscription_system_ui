@@ -39,12 +39,13 @@ export class UsermanagementComponent implements OnInit {
   userProfile;
   password;
   exportData;
+  dropdownData: any;
   constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer,config: NgbModalConfig) {
     config.backdrop = 'static';
     config.keyboard = false;
 
     this.columnDefs = [
-      { headerName: 'User Profile', field: 'userProfile',unSortIcon: true },
+      { headerName: 'User Profile', field: 'userProfileSet',unSortIcon: true },
       { headerName: 'First Name', field: 'userFirstName',unSortIcon: true },
       { headerName: 'Middle Name', field: 'userMiddleName',unSortIcon: true},
       { headerName: 'Last Name', field: 'userLastName',unSortIcon: true },
@@ -75,6 +76,10 @@ export class UsermanagementComponent implements OnInit {
       error => {
         // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
       });
+
+      this.globalServiceService.getUserProfiles().subscribe(data => {
+        this.dropdownData = data;
+      });    
   }
   onPageSizeChanged(newPageSize) {
     var inputElement = <HTMLInputElement>document.getElementById("page-size");
@@ -167,8 +172,9 @@ export class UsermanagementComponent implements OnInit {
           this.flashMessage.show('User created successfully!!', { cssClass: 'alert-success', timeout: 10000 });
         }
         else {
-
-          this.flashMessage.show('User creation  failed !!', { cssClass: 'alert-danger', timeout: 10000 });
+          let msg;
+          msg=error;
+          this.flashMessage.show(msg.error.message, { cssClass: 'alert-danger', timeout: 10000 });
         }
       });
   }

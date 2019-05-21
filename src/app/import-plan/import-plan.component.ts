@@ -190,10 +190,14 @@ export class ImportPlanComponent implements OnInit {
 
 
 
-
-
-      this.globalServiceService.uploadExpData(formData).subscribe((val) => { 
-      //this.http.post(this.globalServiceService.url + '/upload/uploadProductData', formData).subscribe((val) => { 
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('X-Auth-Token', this.globalServiceService.token,
+    // );
+    // let options:any = new RequestOptions({ headers: headers });
+    
+    this.http.post(this.globalServiceService.url + '/upload/uploadProductData', formData).subscribe((val) => { 
+    this.rowData=[];  
       this.rowData=[];    
       this.spinnerService.hide();
       this.valarr=[];
@@ -256,6 +260,5 @@ else{
   downloadSample(){
     let url = this.globalServiceService.url + '/upload/downloadFile/UPLOAD.csv';
     window.location.href = url;
-
   }
 }

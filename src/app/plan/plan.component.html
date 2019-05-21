@@ -1,382 +1,366 @@
 <div *ngFor="let x of fetchValues">
-<div id="rightSideWrapper">
-    <div class="ContentBox">
-      <main>
-        <div class="container-fluid custom_search" style="padding: 0px;">
-          <div class="col-lg-12 search_box"
-            style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
-            <h5 *ngIf="isValid()">Plan
-              <button class="btn btn-outline-info float-right" style="margin:-12px 0 0 5px" (click)="open(addPlan)">Add
-                Plan
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-              </button>
-              <button class="btn btn-outline-danger float-right" style="margin:-12px 0 0 5px">Associate
-                <i class="fa fa-sellsy" aria-hidden="true"></i>
-              </button>
-            </h5>
-            <router-outlet></router-outlet>
-  
-            <div *ngIf="isValid()" class="col-lg-12"
-              style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
-              <form action="#">
-                <div class="row">
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="username">Name:</label>
-                      <input type="text" class="form-control form-control-sm" id="plan_name" name="plan_name"
-                        [(ngModel)]="plan_name">
-                    </div>
-                  </div>
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="code">Code:</label>
-                      <input type="text" class="form-control form-control-sm" id="plan_code" name="plan_code"
-                        [(ngModel)]="plan_code">
-                    </div>
-                  </div>
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                    <label for="billEvery">Bill Every:</label>
-                    <div class="row">
-                        <div class="col-lg-3" style="padding-right:0px">
-                            <input type="text" maxlength="2" min="1" class="form-control form-control-sm"
-                              onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
-                              [(ngModel)]="billEvery" autocomplete="off">
-                            </div>
-                        <div class="col-lg-9" style="padding-left:5px">
-                    <select class="form-control form-control-sm"
-                        id="billingTime" name="billingTime" [(ngModel)]="billingTime">
-                        <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
-                        <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
-                      </select>
-                        </div>
-                    </div>
-                     <!-- <div class="col-lg-3">
-                      <input type="text" maxlength="2" min="1" class="form-control form-control-sm"
-                        onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
-                        [(ngModel)]="billEvery" autocomplete="off">
+  <div id="rightSideWrapper">
+      <div class="ContentBox">
+        <main>
+          <div class="container-fluid custom_search" style="padding: 0px;">
+            <div class="col-lg-12 search_box"
+              style="padding: 0px;color: #117a8b; text-transform: uppercase; line-height: 40px;">
+              <h5 *ngIf="isValid()">Plan
+                <button class="btn btn-outline-info float-right" style="margin:-12px 0 0 5px" (click)="open(addPlan)">Add
+                  Plan
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-outline-danger float-right" style="margin:-12px 0 0 5px">Associate
+                  <i class="fa fa-sellsy" aria-hidden="true"></i>
+                </button>
+              </h5>
+              <router-outlet></router-outlet>
+    
+              <div *ngIf="isValid()" class="col-lg-12"
+                style="border:2px solid #bababa; border-radius: 5px; padding:0px 10px; text-transform: none; margin-top:0px;">
+                <form action="#">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="username">Name:</label>
+                        <input type="text" class="form-control form-control-sm" id="plan_name" name="plan_name"
+                          [(ngModel)]="plan_name">
                       </div>
-                      <div class="col-lg-9">
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="code">Code:</label>
+                        <input type="text" class="form-control form-control-sm" id="plan_code" name="plan_code"
+                          [(ngModel)]="plan_code">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                      <label for="billEvery">Bill Every:</label>
+                      <div class="row">
+                          <div class="col-lg-3" style="padding-right:0px">
+                              <input type="text" maxlength="2" min="1" class="form-control form-control-sm"
+                                onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
+                                [(ngModel)]="billEvery" autocomplete="off">
+                              </div>
+                          <div class="col-lg-9" style="padding-left:5px">
                       <select class="form-control form-control-sm"
-                        id="billingTime" name="billingTime" [(ngModel)]="billingTime">
-                        <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
-                        <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
-                      </select>
-                    </div> -->
+                          id="billingTime" name="billingTime" [(ngModel)]="billingTime">
+                          <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+                          <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
+                        </select>
+                          </div>
+                      </div>
+                      
+                      </div>
+                      </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select class="form-control form-control-sm" id="plan_status" name="plan_status"
+                          [(ngModel)]="plan_status">
+                          <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+                          <option *ngFor="let values of DrodownArraystatus">{{values}}</option>
+                        </select>
+                      </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="status">Type:</label>
+                        <select class="form-control form-control-sm" id="plan_type" name="plan_type"
+                          [(ngModel)]="plan_type">
+                          <option [selected]="Select == 'Select'" [ngValue]="select" selected>Select</option>
+                          <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  
+                        </select>
+                      </div>
                     </div>
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="status">Status:</label>
-                      <select class="form-control form-control-sm" id="plan_status" name="plan_status"
-                        [(ngModel)]="plan_status">
-                        <option>Active</option>
-                        <option>Inactive</option>
-                      </select>
+  
+                   <div class="col-lg-3">
+                    </div>
+                    <div class="col-lg-3">
+                    </div>
+                    <div class="col-lg-3">
+                      <label style="width: 100%;"></label>
+                      <button type="button" id="searchBtn" class="btn btn-info float-right"
+                        style=" margin-left: 5px; line-height:17px;">
+    
+                        Export to Csv
+    
+                        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+    
+                      </button>
+    
+                      <button type="button" (click)="searchPlan(plan_name,plan_code,billEvery,billingTime,plan_status,plan_type)" id="searchBtn" class="btn btn-info float-right"
+                        style=" margin-left: 5px; line-height:17px;">
+    
+                        Search
+    
+                        <i class="fa fa-search" aria-hidden="true"
+                          style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
+    
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div *ngIf="isValid()" id="productGrid" style="position: relative;">
+              <div style="height: 100%; padding-top: 63px; box-sizing: border-box; width: auto;">
+                <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
+                  [rowSelection]="rowSelection" [rowGroupPanelShow]="rowGroupPanelShow" [pivotPanelShow]="pivotPanelShow"
+                  [enableRangeSelection]="true" [defaultColDef]="defaultColDef"
+                  [suppressRowClickSelection]="true" [rowSelection]="rowSelection" 
+                  [enableSorting]="true" [enableFilter]="true"  [rowData]="rowData"
+                  [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents">
+                </ag-grid-angular>
+  
+                <!-- PAGINATION PLAN STARTS-->
+                <div style="float:right; margin-top: 10px;">
+                  <strong *ngIf="!filterSearchFlag" class="total_page">
+                     Page {{this.page+1}} of {{totalPages}}
+                  </strong>
+    
+                  <strong *ngIf="filterSearchFlag" class="total_page">
+                    Page  {{this.filterPage+1}} of {{totalPages}}
+                  </strong>
+                 
+    
+                  
+                  <button type="button" id="prev" disabled class="btn btn-info" style="margin-right: 7px;" (click)="previousFuntionality()">Prev</button>
+    
+                  <button type="button" id="next" class="btn btn-info" (click)="nextFuntionality()">Next</button>
+                </div>
+    
+  
+                <!-- PAGINATION PLAN ENDS-->
+              </div>
+    
+            </div>
+    
+          </div>
+    
+    
+          <ng-template #addPlan let-modal>
+            <div class="modal-header" style="position: relative;">
+                <flash-messages style="position:absolute;top:0;left:0;width:100%;"></flash-messages>
+              <h4 class="modal-title" id="modal-basic-title">Add Plan</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" (click)="emptyRatePlanValues()">
+                <span aria-hidden="true" >&times;</span>
+              </button>
+            </div>
+            
+            <div class="modal-body mng">
+              <form>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-lg-2 float-left">
+                      <label for="planName"> Plan Name <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <input type="text" class="form-control form-control-sm col-lg-8" name="planName"
+                        [(ngModel)]="planName" autocomplete="off"   (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
+                    </div>
+                    <div class="col-lg-2 float-left">
+                      <label for="pcode">Code <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <input type="text" class="form-control form-control-sm" name="planCode" [(ngModel)]="planCode" autocomplete="off" (input)="setupFeeCheck()">
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                      <label for="status">Type:</label>
-                      <select class="form-control form-control-sm" id="plan_type" name="plan_type"
-                        [(ngModel)]="plan_type">
-                        <option [selected]="plan_type == 'Select'"selected hidden>Select</option>
+                  <div class="form-group">
+                    <div class="col-lg-2 float-left">
+                      <label for="billEvery">Bill Every <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <input type="text" maxlength="2" min="1" class="form-control form-control-sm dropselect float-left"
+                        onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
+                        [(ngModel)]="billEvery" autocomplete="off">
+                      <select class="form-control form-control-sm dropSelectTime float-left" style="margin-left:5px;"
+                        id="billingTime" name="billingTime" [(ngModel)]="billingTime">
+                        <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
+                        <!-- <option [ngValue]="Month">Month(s)</option>
+                        <option>Week(s)</option>
+                        <option>Year(s)</option> -->
+                        <!-- <option [selected]="pricingSchemePlan == 'Unit'" [ngValue]="Unit" selected>Unit</option> -->
+                        <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
+                      </select>
+                    </div>
+                    <div class="col-lg-2 float-left">
+                      <label for="freeTrial">Free Trial (in days)</label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <input type="number" min="0" value="0" class="form-control form-control-sm" name="freeTrial"
+                        [(ngModel)]="freeTrial" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-lg-2 float-left">
+                      <label for="setupFee">Setup Fee</label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <input type="number" class="form-control form-control-sm col-lg-8" name="setupFee"
+                        [(ngModel)]="setupFee" autocomplete="off" (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
+                    </div>
+                    <div class="col-lg-2 float-left">
+                      <label for="price">Price<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+    
+    
+                     
+                      <select class="form-control form-control-sm dropselectCurrency float-left" id="pricingScheme"
+                        name="currencyType" [(ngModel)]="currencyType">
+                       <!-- <option [ngValue]="Select">Select</option>  -->
+                      <option [selected]="currencyType == 'INR'" [ngValue]="INR" selected hidden>INR</option>
+                      <option *ngFor="let values of dropdownCurrencyValues">{{values}}</option>  
+                      </select>
+                      <input type="number"  id="price_unit" class="form-control form-control-sm float-left"
+                        style="width:55%; margin-left:5px;" name="price" [(ngModel)]="price" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
+    
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-lg-2 float-left">
+                      <label for="billingCycles">Billing Cycles <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="autoRenew" [value]="0" [(ngModel)]='AR' (change)="radio(9999)">Autorenews
+                          until cancelled.
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="autoRenew" [value]="1" [(ngModel)]='AR' 
+                            (click)="radioinputboxfun()" checked=”checked”>Expires after specified no of billing cycles.
+                        </label>
+                        <div style="width:100%;border: 1px solid #bababa; padding:5%; box-sizing:border-box; display:inline-block;" *ngIf="radioinputbox">
+                        <div >
+                          <input type="number"  (input)="radio(billingCyclesInput)" class="form-control form-control-sm box " style="width: 100%;" name="billingCyclesInput"
+                            [(ngModel)]='billingCyclesInput' min="0" (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
+                            
+                        </div>
+                        <p style="font-size:10px;width: 100%;opacity:0.6; margin:0px;">Number of times the customer will be billed for a subscription of this plan.</p>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 float-left">
+                      <label for="unitOfMeasureId">UOM <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <select class="form-control form-control-sm" id="pricingScheme" name="unitOfMeasureId"
+                      [(ngModel)]="unitOfMeasureId" style="width:40%">
+                       <option [ngValue]="Select">Select</option> 
+                       <option [selected]="unitOfMeasureId == 'Select'"selected hidden>Select</option>
+                      <option *ngFor="let values of dropdownUomValues">{{values.unitOfMeasure}}</option>  
+                    </select>
+                    </div>
+                  </div>
+                </div>
+    
+    
+                <div class="row">
+                  <div class="form-group">
+                    <div class="col-lg-2 float-left">
+                      <label for="pricingScheme">Pricing Scheme <span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-lg-4 float-left">
+                      <select class="form-control form-control-sm" id="pricingScheme" name="pricingSchemePlan"
+                        [(ngModel)]="pricingSchemePlan" (change)="pricingSchemeBox(pricingSchemePlan)" style="width:46%">
+                        
+    
+                        <option [selected]="pricingSchemePlan == 'UNIT'" [ngValue]="UNIT" selected hidden>UNIT</option>
                         <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  
                       </select>
                     </div>
-                  </div>
-
-                  <div class="col-lg-3">
-                  </div>
-                  <div class="col-lg-3">
-                  </div>
-                  <div class="col-lg-3">
-                    <label style="width: 100%;"></label>
-                    <button type="button" id="searchBtn" class="btn btn-info float-right"
-                      style=" margin-left: 5px; line-height:17px;">
-  
-                      Export to Csv
-  
-                      <i class="fa fa-cloud-download" aria-hidden="true"></i>
-  
-                    </button>
-  
-                    <button type="button" id="searchBtn" class="btn btn-info float-right"
-                      style=" margin-left: 5px; line-height:17px;">
-  
-                      Search
-  
-                      <i class="fa fa-search" aria-hidden="true"
-                        style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
-  
-                    </button>
-  
-                    <!-- <button class="btn btn-info" style="margin-top: 41px;">Search <i class="fa fa-search" aria-hidden="true" style="color:#ffffff;margin-top: -4px;margin-left: 5px; "></i>
+                    <div class="col-lg-2 float-left">
     
-    </button> -->
-  
-                  </div>
-  
-                </div>
-  
-              </form>
-  
-            </div>
-  
-          </div>
-  
-          <div *ngIf="isValid()" id="productGrid" style="position: relative;">
-  
-            <div style="height: 100%; padding-top: 63px; box-sizing: border-box; width: auto;">
-  
-              <!-- <button class="btn btn-info" (click)="openModal('addUser')">Add User</button> -->
-  
-              <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" class="ag-theme-balham"
-                [rowSelection]="rowSelection" [rowGroupPanelShow]="rowGroupPanelShow" [pivotPanelShow]="pivotPanelShow"
-                [enableRangeSelection]="true" [defaultColDef]="defaultColDef"
-                [suppressRowClickSelection]="true" [rowSelection]="rowSelection" 
-                [enableSorting]="true" [enableFilter]="true"  [rowData]="rowData"
-                [columnDefs]="columnDefs" (gridReady)="onGridReady($event)" [frameworkComponents]="frameworkComponents">
-  
-              </ag-grid-angular>
-  
-            </div>
-  
-          </div>
-  
-        </div>
-  
-  
-        <ng-template #addPlan let-modal>
-          <div class="modal-header" style="position: relative;">
-              <flash-messages style="position:absolute;top:0;left:0;width:100%;"></flash-messages>
-            <h4 class="modal-title" id="modal-basic-title">Add Plan</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" (click)="emptyRatePlanValues()">
-              <span aria-hidden="true" >&times;</span>
-            </button>
-          </div>
-          
-          <div class="modal-body mng">
-            <form>
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-lg-2 float-left">
-                    <label for="planName"> Plan Name <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <input type="text" class="form-control form-control-sm col-lg-8" name="planName"
-                      [(ngModel)]="planName" autocomplete="off"   (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
-                  </div>
-                  <div class="col-lg-2 float-left">
-                    <label for="pcode">Code <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <input type="text" class="form-control form-control-sm" name="planCode" [(ngModel)]="planCode" autocomplete="off" (input)="setupFeeCheck()">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-lg-2 float-left">
-                    <label for="billEvery">Bill Every <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <input type="text" maxlength="2" min="1" class="form-control form-control-sm dropselect float-left"
-                      onkeypress='return event.charCode>=49 && event.charCode<=57' name="billEvery" min="1"
-                      [(ngModel)]="billEvery" autocomplete="off">
-                    <select class="form-control form-control-sm dropSelectTime float-left" style="margin-left:5px;"
-                      id="billingTime" name="billingTime" [(ngModel)]="billingTime">
-                      <option [selected]="billingTime == 'WEEK'" [ngValue]="WEEK" selected hidden>WEEK</option>
-                      <!-- <option [ngValue]="Month">Month(s)</option>
-                      <option>Week(s)</option>
-                      <option>Year(s)</option> -->
-                      <!-- <option [selected]="pricingSchemePlan == 'Unit'" [ngValue]="Unit" selected>Unit</option> -->
-                      <option *ngFor="let values of dropdownBillValues">{{values}}</option>  
-                    </select>
-                  </div>
-                  <div class="col-lg-2 float-left">
-                    <label for="freeTrial">Free Trial (in days)</label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <input type="number" min="0" value="0" class="form-control form-control-sm" name="freeTrial"
-                      [(ngModel)]="freeTrial" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-lg-2 float-left">
-                    <label for="setupFee">Setup Fee</label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <input type="number" class="form-control form-control-sm col-lg-8" name="setupFee"
-                      [(ngModel)]="setupFee" autocomplete="off" (input)="setupFeeCheck()"  (change)="setupFeeCheck()">
-                  </div>
-                  <div class="col-lg-2 float-left">
-                    <label for="price">Price<span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-  
-  
-                   
-                    <select class="form-control form-control-sm dropselectCurrency float-left" id="pricingScheme"
-                      name="currencyType" [(ngModel)]="currencyType">
-                      <!-- <option [ngValue]="Select">Select</option>  -->
-                    <option [selected]="currencyType == 'INR'" [ngValue]="INR" selected hidden>INR</option>
-                    <option *ngFor="let values of dropdownCurrencyValues">{{values}}</option>  
-                    </select>
-                    <input type="number"  id="price_unit" class="form-control form-control-sm float-left"
-                      style="width:55%; margin-left:5px;" name="price" [(ngModel)]="price" autocomplete="off"  (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
-  
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-lg-2 float-left">
-                    <label for="billingCycles">Billing Cycles <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="autoRenew" [value]="0" [(ngModel)]='AR' (change)="radio(999)">Autorenews
-                        until cancelled.
-                      </label>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio"  name="autoRenew" [value]="1" [(ngModel)]='AR' 
-                          (click)="radioinputboxfun()" checked=”checked”>Expires after specified no of billing cycles.
-                      </label>
-                      <div style="width:100%;border: 1px solid #bababa; padding:5%; box-sizing:border-box; display:inline-block;" *ngIf="radioinputbox">
-                      <div >
-                        <input type="number"  (input)="radio(billingCyclesInput)" class="form-control form-control-sm box " style="width: 100%;" name="billingCyclesInput"
-                          [(ngModel)]='billingCyclesInput' min="0" (input)="setupFeeCheck()"  (change)="setupFeeCheck()" >
-                          
-                      </div>
-                      <p style="font-size:10px;width: 100%;opacity:0.6; margin:0px;">Number of times the customer will be billed for a subscription of this plan.</p>
-                    </div>
+                    <div class="col-lg-4 float-left">
+    
                     </div>
                   </div>
-                  <div class="col-lg-2 float-left">
-                    <label for="unitOfMeasureId">UOM <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <select class="form-control form-control-sm" id="pricingScheme" name="unitOfMeasureId"
-                    [(ngModel)]="unitOfMeasureId" style="width:40%">
-                     <option [ngValue]="Select">Select</option> 
-                     <option [selected]="unitOfMeasureId == 'Select'"selected hidden>Select</option>
-                    <option *ngFor="let values of dropdownUomValues">{{values.unitOfMeasure}}</option>  
-                  </select>
-                  </div>
                 </div>
-              </div>
-  
-  
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-lg-2 float-left">
-                    <label for="pricingScheme">Pricing Scheme <span style="color:red;">*</span></label>
-                  </div>
-                  <div class="col-lg-4 float-left">
-                    <select class="form-control form-control-sm" id="pricingScheme" name="pricingSchemePlan"
-                      [(ngModel)]="pricingSchemePlan" (change)="pricingSchemeBox(pricingSchemePlan)" style="width:46%">
-                      
-  
-                      <option [selected]="pricingSchemePlan == 'UNIT'" [ngValue]="UNIT" selected hidden>UNIT</option>
-                      <option *ngFor="let values of dropdownPricingValues">{{values}}</option>  
-                      <!-- <option>Volume</option>
-                      <option>Tier</option>
-                      <option>Package</option> -->
-                    </select>
-                  </div>
-                  <div class="col-lg-2 float-left">
-  
-                  </div>
-                  <div class="col-lg-4 float-left">
-  
-                  </div>
-                </div>
-              </div>
-  
-              
-              <div class="row">
-                <div class="col-lg-12">
-                  <div *ngIf="volumePricingScheme" class="volume_box" style="padding:2% 2% 0 2%;">
-                    <div class="col-lg-12" style=" text-align: center; padding: 0px;">
-                      <div class="form-group" style="width:100%; display:inline-block;">
-                        <!-- <div class="priSch text-center">
-                          <label for="pricingScheme" style="width:139px">Pricing Scheme:</label>
-                          <input type="text" style="text-align:center;font-size:12px; width:28%;" placeholder="Volume"
-                            readonly>
-                        </div> -->
-                        
-                       
-                        <form [formGroup]="invoiceForm" >
-                          <div formArrayName="itemRows"> 
-                              <div>    
-                                  <div class="row" style="text-align:center">              
-                                  <div class="form-group" style="text-align:left;">
-                                    <div class="col-sm-3" style="display:inline-block">
-                                    <label style="width:100%;">Starting Qty</label>
-                                  </div>
-                                  <div class="col-sm-3" style="display:inline-block">
-                                    <label style="width:100%;">Ending Qty</label>
+    
+                
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div *ngIf="volumePricingScheme" class="volume_box" style="padding:2% 2% 0 2%;">
+                      <div class="col-lg-12" style=" text-align: center; padding: 0px;">
+                        <div class="form-group" style="width:100%; display:inline-block;">
+                          <form [formGroup]="invoiceForm" >
+                            <div formArrayName="itemRows"> 
+                                <div>    
+                                    <div class="row" style="text-align:center">              
+                                    <div class="form-group" style="text-align:left;">
+                                      <div class="col-sm-3" style="display:inline-block">
+                                      <label style="width:100%;">Starting Qty</label>
                                     </div>
                                     <div class="col-sm-3" style="display:inline-block">
-                                    <label style="width:100%;">Price</label>
-                                    </div>  
-                                                         
-                                </div></div></div>
-                               
-  
-  
-                          <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">    
-                          <div class="row" style="text-align:center">              
-                          <div class="form-group" style="text-align:left;">
-                            <div class="col-sm-3" style="display:inline-block">
-                            
-                            <input type="number" formControlName="startQty" class="form-control form-control-sm" placeholder="0" min="0">
-                          </div>
-                          <div class="col-sm-3" style="display:inline-block">
-                            
-                            <input type="number" formControlName="endQty" class="form-control form-control-sm" placeholder="0" min="0">
+                                      <label style="width:100%;">Ending Qty</label>
+                                      </div>
+                                      <div class="col-sm-3" style="display:inline-block">
+                                      <label style="width:100%;">Price</label>
+                                      </div>  
+                                                           
+                                  </div></div></div>
+                                 
+    
+    
+                            <div *ngFor="let itemrow of invoiceForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">    
+                            <div class="row" style="text-align:center">              
+                            <div class="form-group" style="text-align:left;">
+                              <div class="col-sm-3" style="display:inline-block">
+                              
+                              <input type="number" formControlName="startQty" class="form-control form-control-sm" placeholder="0" min="0">
                             </div>
                             <div class="col-sm-3" style="display:inline-block">
-                           
-                            <input type="number" formControlName="price" class="form-control form-control-sm" placeholder="0" min="0">  
-                            </div>                        
-                          <a *ngIf="invoiceForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" href="javascript:void(0)"><i class="fa fa-trash fa-2" aria-hidden="true"
-                            style="color:red;"></i></a>
-                           
+                              
+                              <input type="number" formControlName="endQty" class="form-control form-control-sm" placeholder="0" min="0">
+                              </div>
+                              <div class="col-sm-3" style="display:inline-block">
+                             
+                              <input type="number" formControlName="price" class="form-control form-control-sm" placeholder="0" min="0">  
+                              </div>                        
+                            <a *ngIf="invoiceForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" href="javascript:void(0)"><i class="fa fa-trash fa-2" aria-hidden="true"
+                              style="color:red;"></i></a>
+                             
+                          </div>
+                          
                         </div>
                         
                       </div>
-                      
-                    </div>
-                    <button type="button" (click)="addNewRow()" style="position: absolute;right: 0;top: 32px;" class="btn btn-primary">Add new Row</button>
-                      </div>
-                      
-                    </form>
-                  
+                      <button type="button" (click)="addNewRow()" style="position: absolute;right: 0;top: 32px;" class="btn btn-primary">Add new Row</button>
+                        </div>
+                        
+                      </form>
+                    
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-info" disabled id="saveAddPlan"
-              (click)="addPlanData(planName,planCode,billEvery,billingTime,unitOfMeasureId,currencyType,price,pricingSchemePlan,freeTrial,setupFee)">Save</button>
-            <button type="button" class="btn btn-info" (click)="removeValues();modal.close('Save click')">Close</button>
-  
-          </div>
-        </ng-template>
-      </main>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" disabled id="saveAddPlan"
+                (click)="addPlanData(planName,planCode,billEvery,billingTime,unitOfMeasureId,currencyType,price,pricingSchemePlan,freeTrial,setupFee)">Save</button>
+              <button type="button" class="btn btn-info" (click)="removeValues();modal.close('Save click')">Close</button>
+    
+            </div>
+          </ng-template>
+        </main>
+      </div>
     </div>
   </div>
-</div>
+  

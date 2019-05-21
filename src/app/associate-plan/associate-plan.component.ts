@@ -76,7 +76,20 @@ export class AssociatePlanComponent implements OnInit {
     this.associatedPlan = this.globalServiceService.plan_list;
     this.onLoadData();
  
-
+    this.gridApi.forEachNode((node) => {
+      // if (node.childIndex == 0) {
+      //   node.setSelected(true);
+      // }
+      // if (this.productList != undefined) {
+      //   for (let i = 0; i < this.associatedPlan.length; i++) {
+      //     for (let j = 0; j < this.productList[0].ratePlans.length; j++) {
+      //       if (this.productList[0].ratePlans[j].uidpk == this.associatedPlan[i].uidpk && node.data.uidpk == this.productList[0].ratePlans[j].uidpk) {
+      //         node.setSelected(true);
+      //       }
+      //     }
+      //   }
+      // }
+    });
   }
   // onLoadData() {
   //   this.spinnerService.show();
@@ -137,21 +150,29 @@ export class AssociatePlanComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     params.api.paginationGoToPage(1);
-
+    
     this.gridApi.forEachNode((node) => {
       if (node.childIndex == 0) {
         node.setSelected(true);
       }
-      if (this.productList != undefined) {
-        for (let i = 0; i < this.associatedPlan.length; i++) {
-          for (let j = 0; j < this.productList[0].ratePlans.length; j++) {
-            if (this.productList[0].ratePlans[j].uidpk == this.associatedPlan[i].uidpk && node.data.uidpk == this.productList[0].ratePlans[j].uidpk) {
-              node.setSelected(true);
-            }
+      // if (this.productList != undefined) {
+      //   for (let i = 0; i < this.associatedPlan.length; i++) {
+      //     for (let j = 0; j < this.productList[0].ratePlans.length; j++) {
+      //       if (this.productList[0].ratePlans[j].uidpk == this.associatedPlan[i].uidpk && node.data.uidpk == this.productList[0].ratePlans[j].uidpk) {
+      //         node.setSelected(true);
+      //       }
+      //     }
+      //   }
+      // }
+      for (let i = 0; i < this.productList[0].ratePlans.length; i++) {
+        for (let j = 0; j < this.associatedPlan.length; j++) {
+          if (this.productList[0].ratePlans[i].uidpk == this.associatedPlan[j].uidpk && node.data.uidpk == this.productList[0].ratePlans[i].uidpk) {
+            node.setSelected(true);
           }
         }
       }
     });
+
   }
 
 
@@ -235,8 +256,10 @@ export class AssociatePlanComponent implements OnInit {
       });
       this.flashMessage.show('Select a product', { cssClass: 'alert-danger', timeout: 5000 });
     } else {
+      this.spinnerService.show();
       this.globalServiceService.associatePlans(this.updatePlans, this.selecteddata.uidpk).subscribe
         (data => {
+          this.spinnerService.hide();
           (<HTMLInputElement>document.getElementById("updateAsso")).disabled = true;
          
           for(let i=0;i<this.productList.length;i++){
@@ -257,6 +280,7 @@ export class AssociatePlanComponent implements OnInit {
           this.flashMessage.show('Successfully Associated product with Plan', { cssClass: 'alert-success', timeout: 5000 });
         },
         error => {
+          this.spinnerService.show();
           this.flashMessage.show('Product Association with plan is unsuccessful', { cssClass: 'alert-danger', timeout: 5000 });
 
         });
