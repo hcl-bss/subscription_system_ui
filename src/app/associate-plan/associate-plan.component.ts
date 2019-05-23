@@ -74,8 +74,7 @@ export class AssociatePlanComponent implements OnInit {
   ngOnInit() {
     this.productList = this.globalServiceService.p_list;
     this.associatedPlan = this.globalServiceService.plan_list;
-    this.onLoadData();
- 
+    this.onLoadData(); 
     this.gridApi.forEachNode((node) => {
       // if (node.childIndex == 0) {
       //   node.setSelected(true);
@@ -150,7 +149,6 @@ export class AssociatePlanComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     params.api.paginationGoToPage(1);
-    
     this.gridApi.forEachNode((node) => {
       if (node.childIndex == 0) {
         node.setSelected(true);

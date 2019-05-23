@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 import { ChildMessageRenderer } from "../child-message-renderer.component";
 import { NgbModal, ModalDismissReasons,NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from "@angular/router";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 @Component({
   selector: 'app-usermanagement',
   templateUrl: './usermanagement.component.html',
@@ -40,7 +41,11 @@ export class UsermanagementComponent implements OnInit {
   password;
   exportData;
   dropdownData: any;
-  constructor(private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer,config: NgbModalConfig) {
+  user_profile: string;
+  user_name: string;
+  status_val: string;
+  first_name: string;
+  constructor(private spinnerService: Ng4LoadingSpinnerService,private router:Router,private flashMessage: FlashMessagesService, private modalService: NgbModal, private http: HttpClient, private globalServiceService: GlobalServiceService, private childMessageRenderer: ChildMessageRenderer,config: NgbModalConfig) {
     config.backdrop = 'static';
     config.keyboard = false;
 
@@ -68,16 +73,19 @@ export class UsermanagementComponent implements OnInit {
 
 
   ngOnInit() {
+    this.spinnerService.show();
     this.globalServiceService.getStatusdropDown().subscribe(
       data => {
+        this.spinnerService.hide();
         this.dropdownArray = data;
         this.dropdownArray = this.dropdownArray.dropDownList;
       },
       error => {
         // this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 2000 });
       });
-
+      this.spinnerService.show();
       this.globalServiceService.getUserProfiles().subscribe(data => {
+        this.spinnerService.hide();
         this.dropdownData = data;
       });    
   }
@@ -94,9 +102,10 @@ export class UsermanagementComponent implements OnInit {
     params.api.paginationGoToPage(1);
   }
   dataOnLoad(){
-   
+    this.spinnerService.show();
     this.globalServiceService.getUserData(this.page).subscribe(
       data => {
+        this.spinnerService.hide();
         this.rowData = data;
         this.totalpage = this.rowData.totalPages;
         if (this.rowData.lastPage == true) {
@@ -155,8 +164,10 @@ export class UsermanagementComponent implements OnInit {
     if(firstName == undefined || email == undefined || userProfile == undefined || password == undefined ){
       this.flashMessage.show('All fiels are mandatory', { cssClass: 'alert-danger', timeout: 10000 });
     }else{
+      this.spinnerService.show();
     this.globalServiceService.addUser(email, userProfile, firstName, middleName, lastName, password).subscribe(
       result => {
+        this.spinnerService.hide();
         let msg;
         //console.log(result);
         msg = result;
@@ -184,10 +195,13 @@ export class UsermanagementComponent implements OnInit {
     this.filterPage=0; 
     (document.getElementById("prev") as HTMLInputElement).disabled = true;
     this.filterSearchFlag = true;
+    this.spinnerService.show();
     this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
       data => {
+        this.spinnerService.hide();
         this.rowData=[];
         this.rowData=data;
+        this.flashMessage.show(this.rowData.message, { cssClass: 'alert-success', timeout: 5000 });
         this.totalpage = this.rowData.totalPages;
         if (this.rowData.lastPage == true) {
           (document.getElementById("next") as HTMLInputElement).disabled = true;
@@ -201,14 +215,14 @@ export class UsermanagementComponent implements OnInit {
       this.flashMessage.show('Record not found !!', { cssClass: 'alert-danger', timeout: 10000 });
     });
   }
-  // resetValues(user_profile, user_name, first_name, status_val){
+  resetValues(user_profile, user_name, first_name, status_val){
  
-  //   this.user_profile = "";
-  //   this.user_name = "";
-  //   this.first_name= "";
-  //   this.status_val= "";
+    this.user_profile ="Select";
+    this.user_name = "";
+    this.first_name= "";
+    this.status_val="Select";
   
-  // }
+  }
   previousFuntionality(user_profile, user_name, first_name, status_val) {
     this.page = this.page - 1;
     if (this.page == 0) {
@@ -221,9 +235,10 @@ export class UsermanagementComponent implements OnInit {
         (document.getElementById("prev") as HTMLInputElement).disabled = true;
       }
      
-
+      this.spinnerService.show();
         this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
           data => {
+            this.spinnerService.hide();
             this.rowData=[];
             this.rowData=data;
             this.totalpage = this.rowData.totalPages;
@@ -236,8 +251,10 @@ export class UsermanagementComponent implements OnInit {
           });
     }
     else {
+      this.spinnerService.show();
       this.globalServiceService.getUserData(this.page).subscribe(
         data => {
+          this.spinnerService.hide();
           this.rowData = data;
           this.totalpage = this.rowData.totalPages;
           if (this.rowData.lastPage == true) {
@@ -258,9 +275,10 @@ export class UsermanagementComponent implements OnInit {
     this.page = this.page + 1;
     if (this.filterSearchFlag == true) {
       this.filterPage = this.filterPage + 1;
-
+      this.spinnerService.show();
         this.globalServiceService.searchUserData(user_profile, user_name, first_name, status_val, this.filterPage).subscribe(
           data => {
+            this.spinnerService.hide();
             this.rowData=[];
             this.rowData=data;
             this.totalpage = this.rowData.totalPages;
@@ -273,8 +291,10 @@ export class UsermanagementComponent implements OnInit {
           });
     }
     else {   
+      this.spinnerService.show();
         this.globalServiceService.getUserData(this.page).subscribe(
           data => {
+            this.spinnerService.hide();
             this.rowData = data;
             this.totalpage = this.rowData.totalPages;
             if (this.rowData.lastPage == true) {
@@ -292,7 +312,9 @@ export class UsermanagementComponent implements OnInit {
 
   }
     exportToCsv(){
+      this.spinnerService.show();
   this.globalServiceService.exportToCsvData('userlandingpage').subscribe(data => {
+    this.spinnerService.hide();
     this.exportData = data;
     let url =  this.exportData.url
     window.location.href = url;

@@ -69,7 +69,8 @@
                      <div class="row">
                         <div class="col-lg-3 upper_content">
                            <strong>Subscription Amount</strong>
-                           <span>{{totalAmount}}</span>
+                           <span>{{totalAmount}}</span><br/>
+                           <span style="opacity: 0.5;">{{subscriptionDuration}}</span>
                         </div>
                         <div class="col-lg-3 upper_content">
                            <strong>Next Billing Date</strong>
@@ -113,20 +114,29 @@
                                  </tr>
                               </thead>
                               <tbody>
-                                 <tr  *ngFor="let values of productPlanArr">
+                                 <tr  *ngFor="let values of productPlanArrParent">
                                     <td style="font-weight:bold;">{{values.productName}}<br /> <span style="font-style:italic; font-weight:normal;">{{values.rateplanDesc}}</span></td>
                                     <td>{{values.quantity}}</td>
                                     <td>{{values.rate}}</td>
                                     <td>{{values.tax}}</td>
-                                    <td>{{values.quantity * values.rate}}</td>
+                                    <td>{{values.amount}}</td>
+                                    <!-- <td>{{totalAmount}}</td> -->
+                                 </tr>
+                                 <tr  *ngFor="let values of productPlanArrChild">
+                                    <td style="font-weight:bold;padding-left: 42px !important;">{{values.productName}}<br /> <span style="font-style:italic; font-weight:normal;">{{values.rateplanDesc}}</span></td>
+                                    <td>{{values.quantity}}</td>
+                                    <td>{{values.rate}}</td>
+                                    <td>{{values.tax}}</td>
+                                    <td>{{values.amount}}</td>
+                                    <!-- <td>{{totalAmount}}</td> -->
                                  </tr>
                               </tbody>
                            </table>
                         </div>
                         <div class="col-lg-12" style="border-top:1px solid #bababa; border-bottom: 1px solid #bababa; width: 100%; text-align:right;padding-top: 10px;
     padding-bottom: 10px;">
-                           <p style="margin: 0 122px 0 0;font-weight: bold;text-transform: uppercase;
-   font-size: 13px; display:inline-block; width:auto;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">{{total}}</span></p>
+                           <p style="margin: 0 72px 0 0;font-weight: bold;text-transform: uppercase;
+   font-size: 13px; display:inline-block; width:auto;" >Total <span style="display: inline-block; margin-left:10px; font-weight:bold;">{{totalAmount}}</span></p>
                         </div>
                         <div class="col-lg-12" > 
                                   <div [ngSwitch]="status" style="width:100%; display:inline-block;">

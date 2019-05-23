@@ -11,6 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./subscription-detail.component.css']
 })
 export class SubscriptionDetailComponent implements OnInit {
+  subscriptionDuration: any;
 subscription_no;
   email: any;
   c_name: any;
@@ -40,6 +41,8 @@ subscription_no;
   remainingCycles;
   closeResult;
   cancelDate
+  productPlanArrParent=[];
+  productPlanArrChild=[];
   constructor(private globalServiceService: GlobalServiceService,private modalService: NgbModal,config: NgbModalConfig,private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
@@ -66,9 +69,20 @@ subscription_no;
       this.shippingLine1=this.shippingAddress.line1;
       this.shippingCountry=this.shippingAddress.country;
       this.productPlanArr=this.subscritiondata.subscriptionDto.productPlanList;
+        for(let i=0;i<this.productPlanArr.length;i++){
+          if( this.productPlanArr[i].isParent==true){
+            this.productPlanArrParent.push(this.productPlanArr[i]);
+          }else{
+            this.productPlanArrChild.push(this.productPlanArr[i]);
+          }
+        }
+       if(this.productPlanArrChild==undefined){
+        this.productPlanArrChild=[];
+       }
       this.nextBillingDate=this.subscritiondata.subscriptionDto.nextBillDate;
       this.lastBillDate=this.subscritiondata.subscriptionDto.lastBillDate;
       this.cancelDate=this.subscritiondata.subscriptionDto.cancelDate;
+      this.subscriptionDuration=this.subscritiondata.subscriptionDto.subscriptionDuration;
       //expireon
       if(this.lastBillDate==null){
         this.lastBillDate="N/A"
@@ -82,7 +96,7 @@ subscription_no;
      }
       },
       error => {
-    //  console.log("************",error);
+     // console.log("************",error);
       }
 
     )
@@ -105,7 +119,7 @@ subscription_no;
     }
   }
   radioFunction(radioValue){
-   // console.log("radioValue",radioValue);
+    //console.log("radioValue",radioValue);
   }
   cancelSubscription(){
     this.globalServiceService.cancelSubscriptionData().subscribe(

@@ -195,7 +195,8 @@ export class ProductComponent implements OnInit {
     this.globalServiceService.getPlans(0).subscribe
       (data => {
         this.spinnerService.hide();
-        this. associatePagedata2 = data;     
+        this. associatePagedata2 = data; 
+        this. associatePagedata2=this. associatePagedata2.ratePlanList    
       });
 
       
@@ -655,16 +656,6 @@ ${reason}`;
     }
   }
   filterSearch(nameMain, skuMain, status_valMain, startDateMain, endDateMain) {
-    // let sDate;
-    // let eDate;
-    // this.filterSearchFlag = true;
-    // if((startDateMain != undefined && endDateMain == undefined) || (startDateMain != "" && endDateMain == "")){
-    //   sDate = startDateMain.day + "/" + startDateMain.month + "/" + startDateMain.year;
-    //   eDate = "31/12/9999";
-    // }else if((startDateMain == undefined && endDateMain != undefined) || (startDateMain == "" && endDateMain != "")){
-    //   eDate = endDateMain.day + "/" + endDateMain.month + "/" + endDateMain.year;
-    //   sDate = "31/1/1990"
-    // }
 
     let sDate;
     let eDate, datearray, newenddate, newestartdate;

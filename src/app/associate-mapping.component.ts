@@ -33,7 +33,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
           <div class="col-lg-3">
           <label>Bill Every: </label>
           </div>
-          <div class="col-lg-3">{{this.params.data.billEvery}}</div>
+          <div class="col-lg-3">{{this.params.data.billingCycleTerm}} {{this.params.data.billEvery}}</div>
           <div class="col-lg-3">
           <label>Pricing Scheme: </label>
           </div>
@@ -53,7 +53,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
      <div class="col-lg-3">
      <label>Billing Cycle: </label>
      </div>
-     <div class="col-lg-3">{{this.params.data.billingCycleTerm}}</div>
+     <div class="col-lg-3">{{billingCycleValue}}</div>
 
      <div class="col-lg-3">
      <label>Free Trial: </label>
@@ -193,6 +193,7 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
   volumeSection = false;
   volumeDetails;
   priceUnit;
+  billingCycleValue;
   constructor(private modalService: NgbModal,config: NgbModalConfig, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService) { 
     config.backdrop = 'static';
     config.keyboard = false;
@@ -231,8 +232,11 @@ export class AssociateMappingComponent implements ICellRendererAngularComp, OnIn
     
   }
   public invokeParentMethod() {
-    //console.log(this.params.data); 
-    //console.log("ratePlanVolumeDtoList",this.params.data.ratePlanVolumeDtoList) ;
+    if(this.params.data.expireAfter=="9999"){
+      this.billingCycleValue="EverGreen";
+    }else{
+      this.billingCycleValue=this.params.data.expireAfter;
+    }
     if(this.params.data.ratePlanVolumeDtoList!= null || this.params.data.ratePlanVolumeDtoList!= undefined){
       this.volumeDetails=this.params.data.ratePlanVolumeDtoList;
     }

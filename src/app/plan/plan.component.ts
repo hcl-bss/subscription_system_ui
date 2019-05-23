@@ -129,6 +129,10 @@ import {
       totalPages: any;
       DrodownArraystatus: any;
       filterSearchFlag=false;
+    plan_name: string;
+    plan_code: string;
+    plan_status: string;
+    plan_type: string;
     constructor(private associateMappingComponent: AssociateMappingComponent,private editPlanComponent:EditPlanComponent,private globalPropertiesService: GlobalPropertiesService, private _fb: FormBuilder, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private modalService: NgbModal, private flashMessage: FlashMessagesService, private childMessageRenderer: ChildMessageRenderer, private globalServiceService: GlobalServiceService) {
         this.AR = 0;
         this.columnDefs = [
@@ -800,6 +804,15 @@ import {
                 }
               });
       }
+  }
+
+  resetValues(){
+    this.plan_name="";
+    this.plan_code="";
+    this.billEvery="";
+    this.billingTime="";
+    this.plan_status="";
+    this.plan_type="";
   }
 }
   

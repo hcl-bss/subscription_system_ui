@@ -55,10 +55,12 @@ import { Router } from "@angular/router";
         <label for="userProfile">userProfile:</label>
         <!--<input type="text" class="form-control"  placeholder={{params.data.userProfile}} name="userProfile" [(ngModel)]="params.data.userProfile">-->
 
-        <select class="form-control form-control-sm"  name="userProfile" [(ngModel)]="params.data.userProfile">
-        <option  [ngValue]="Select" hidden>Select</option> 
+        <select class="form-control form-control-sm"  name="userProfile" [(ngModel)]="params.data.userProfileSet[0]" (change)="profile(params.data.userProfileSet[0])">
+       <!-- <option  [ngValue]="Select" hidden>Select</option> 
         <option>Admin</option>
-        <option>Normal</option>             
+        <option>Normal</option>  -->
+        <option [selected]="Select == 'Select'" [ngValue]="select" selected >Select</option>
+        <option *ngFor="let role of dropdownData">{{role}}</option>  
       </select>
 
 
@@ -214,6 +216,8 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
   submitted = false;
   chekedFlag;
   editrowData;
+  dropdownData;
+  profileuser;
   constructor(private router:Router,private modalService: NgbModal, private flashMessage: FlashMessagesService,private formBuilder: FormBuilder, private globalServiceService:GlobalServiceService,config: NgbModalConfig) { 
     config.backdrop = 'static';
     config.keyboard = false;
@@ -227,6 +231,10 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     }, {
         validator: MustMatch('password', 'confirmPassword')
       });
+
+      this.globalServiceService.getUserProfiles().subscribe(data => {
+        this.dropdownData = data;
+      });   
   }
 
 
@@ -248,22 +256,15 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
   }
 
   agInit(params: any): void {
-    this.params = params;
-   
+    this.params = params;    
     if(this.params.data.status=="Active"){
-    //  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=true;
     }
     if(this.params.data.status=="Inactive"){
-     // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%",this.params.data.status);
       this.chekedFlag=false;
     }
     this.data = this.params.data.userId;
-   // console.log(this.data);
   }
-  // public invokeParentMethod() {
-  //   console.log(this.params.data);
-  // }
 
   refresh(): boolean {
     return false;
@@ -307,8 +308,14 @@ export class ChildMessageRenderer implements ICellRendererAngularComp, OnInit {
     //do APi calling 
 
   }
-  editData(firstName,middleName,lastName,userId,profile){
-     this.globalServiceService.editUser(userId,profile,firstName,middleName,lastName).subscribe(
+  profile(x){
+    this.profileuser=x;
+  }
+  editData(firstName,middleName,lastName,userId,profile,isLocked){
+    if(this.profileuser==undefined ){
+      this.profileuser=this.params.data.userProfileSet[0];
+    }
+     this.globalServiceService.editUser(userId,this.profileuser,firstName,middleName,lastName).subscribe(
       result => {
         let msg;
        // console.log(result);
